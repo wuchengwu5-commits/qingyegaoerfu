@@ -3,7 +3,7 @@
   <view class="home-scene-wash" aria-hidden="true"/>
   <view class="home-opening">
     <image class="home-wordmark" src="/assets/wordmark.webp" mode="aspectFit" aria-label="青野高尔夫"/>
-    <view class="home-heading">走进绿意，<view/>把心放慢。</view>
+    <view class="home-heading"><view>走进绿意，</view><view>把心放慢。</view></view>
     <view class="home-subtitle">把这一刻，留给球场。</view>
   </view>
   <view class="home-bottom-panel">
