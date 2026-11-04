@@ -1,0 +1,12 @@
+const P=require('./privacy');let fix=null,status='idle',error='',inflight=null,listeners=[];
+function state(){return {fix,status,error};}function emit(){listeners.forEach(fn=>fn(state()));}
+function subscribe(fn){listeners.push(fn);return()=>listeners=listeners.filter(x=>x!==fn);}
+function request(force=false){if(inflight)return inflight;if(!force&&fix&&Date.now()-fix.time<5*60*1000)return Promise.resolve(fix);
+status='locating';error='';emit();inflight=P.ensure().then(()=>new Promise((resolve,reject)=>wx.getLocation({type:'gcj02',isHighAccuracy:false,success:r=>{if(!Number.isFinite(r.latitude)||!Number.isFinite(r.longitude))return reject(Error('定位返回无效'));resolve({latitude:r.latitude,longitude:r.longitude,accuracy:r.accuracy,time:Date.now(),system:'gcj02'});},fail:reject}))).then(v=>{fix=v;status='ready';return fix;}).catch(e=>{fix=null;status=/auth|deny|denied|privacy/i.test(e.errMsg||e.message||'')?'denied':'unavailable';error=status==='denied'?'未开启定位，可手动选择地区':'暂时无法定位，请检查手机定位服务';return null;}).finally(()=>{inflight=null;emit();});return inflight;}
+function settings(){return new Promise(resolve=>{wx.openSetting({success:r=>{if(r.authSetting['scope.userLocation']){fix=null;request(true).then(resolve);}else resolve(null);},fail:()=>resolve(null)});});}
+function radians(n){return n*Math.PI/180;}
+function valid(lat,lon){return typeof lat==='number'&&typeof lon==='number'&&Number.isFinite(lat)&&Number.isFinite(lon)&&Math.abs(lat)<=90&&Math.abs(lon)<=180&&!(lat===0&&lon===0);}
+function distance(a,b){if(!a||!b||!valid(a.latitude,a.longitude)||!valid(b.latitude,b.longitude))return null;const x=radians(b.latitude-a.latitude),y=radians(b.longitude-a.longitude),q=Math.sin(x/2)**2+Math.cos(radians(a.latitude))*Math.cos(radians(b.latitude))*Math.sin(y/2)**2;return 6371*2*Math.atan2(Math.sqrt(q),Math.sqrt(Math.max(0,1-q)));}
+function locateCourse(c,origin){const km=distance(origin,c),approx=!!(km!==null&&(c.coordinateSystem!=='gcj02'||c.coordinateStatus!=='verified'));return {...c,distanceKm:km,approximate:approx,distanceText:km===null?'距离待补充':(approx?'约 ':'')+(km<1?Math.round(km*1000/10)*10+' 米':km.toFixed(km<10?1:0)+' 公里')};}
+function sort(courses,origin){return courses.map(c=>locateCourse(c,origin)).sort((a,b)=>(a.distanceKm===null?Infinity:a.distanceKm)-(b.distanceKm===null?Infinity:b.distanceKm)||a.name.localeCompare(b.name,'zh-CN'));}
+module.exports={state,request,settings,subscribe,distance,valid,locateCourse,sort};

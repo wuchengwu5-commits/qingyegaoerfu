@@ -1,0 +1,1612 @@
+[
+  {
+    "path": "/assets/arrow-light.png",
+    "cloudName": "assets__arrow-light.png",
+    "size": 405,
+    "sha256": "0e614c80a566794a9b0c9918ea3b0242c50404097b9bc625e31c7368e1a94218",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/book-active.png",
+    "cloudName": "assets__book-active.png",
+    "size": 2140,
+    "sha256": "55598ad7f8dfac58c222cd3f0972ebd1e772b5ca5683a2ea317a50ed5e451753",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/book.png",
+    "cloudName": "assets__book.png",
+    "size": 1968,
+    "sha256": "3e8abf70909f4e17cf543f544d2bc0a2697e202b53cfff5da861776cd0f03a65",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/chevron.png",
+    "cloudName": "assets__chevron.png",
+    "size": 359,
+    "sha256": "b79e02e3bfc80760873c4242fe339a19d3d547aec4c0d91507bbde82c30bb03e",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/course-0.jpg",
+    "cloudName": "assets__course-0.jpg",
+    "size": 9393,
+    "sha256": "9b44a2720a23e533cbd7ff2a7855c0a06f4d0f6054713660a20bd228663c2d4a",
+    "keepBundled": false
+  },
+  {
+    "path": "/assets/course-1.jpg",
+    "cloudName": "assets__course-1.jpg",
+    "size": 13237,
+    "sha256": "f3e2fe70df52c5e86a6bc9579083ff1f2a5290c42901469c0dbe21b01d8b2286",
+    "keepBundled": false
+  },
+  {
+    "path": "/assets/course-2.jpg",
+    "cloudName": "assets__course-2.jpg",
+    "size": 16179,
+    "sha256": "259d2765f49659aeb2aa06cb5375b32cc0e6976bf9d0f16383dc106a0b51301f",
+    "keepBundled": false
+  },
+  {
+    "path": "/assets/flag-active.png",
+    "cloudName": "assets__flag-active.png",
+    "size": 830,
+    "sha256": "9a73e8cb04f7a5fcf6dd315f0e889f604b72fe3ef20bf7a61d982ec3865c294c",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/flag-white.png",
+    "cloudName": "assets__flag-white.png",
+    "size": 1208,
+    "sha256": "580e7e3311c392da87f89d19be39e7066a152496594fc0adadf40d2079aa176a",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/flag.png",
+    "cloudName": "assets__flag.png",
+    "size": 832,
+    "sha256": "cb233821908799cc75bfeaf40249503cad0de30efb3b504e6f9145693cbd1537",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/history-active.png",
+    "cloudName": "assets__history-active.png",
+    "size": 1150,
+    "sha256": "cefef697167cb39e7d325756f33cb025f94929bfd986397087904a0a97178427",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/history.png",
+    "cloudName": "assets__history.png",
+    "size": 1140,
+    "sha256": "0daab0215a4cb037d1d081a958027133b2e0615a4407015cea825e3fc48ac1b3",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/home-active.png",
+    "cloudName": "assets__home-active.png",
+    "size": 1151,
+    "sha256": "00dcf0fc976421c0295d60e69400aa04c4ac808cb50b3402435131d4001aa393",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/home.png",
+    "cloudName": "assets__home.png",
+    "size": 1139,
+    "sha256": "739daade551f0112311d0f769da85097ae42c59f79503e73652f83e9f59a66e3",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/info.png",
+    "cloudName": "assets__info.png",
+    "size": 1711,
+    "sha256": "dd49104a79b8026027f678a79565e7d4850949d86a7dbe8db12fac5039e4ffc3",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/mail.png",
+    "cloudName": "assets__mail.png",
+    "size": 779,
+    "sha256": "9844a52730c779908a005710cd21c88c1919674c995ce66e92867cebd6906d86",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/nav-book.png",
+    "cloudName": "assets__nav-book.png",
+    "size": 1512,
+    "sha256": "68ba1e2767b4317eebcfd856e9b26d78d48ae496c3df9604886147c8acd1fb39",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/nav-home.png",
+    "cloudName": "assets__nav-home.png",
+    "size": 1020,
+    "sha256": "108645a30a81cbbabea56bd734d972e521ffdd5352bf3b9cb7dcdec5cf5007f6",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/nav-pin.png",
+    "cloudName": "assets__nav-pin.png",
+    "size": 2209,
+    "sha256": "88c81070fddc4e904e96ee76295ed154d3229e8e02444d8be847653c752e9d59",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/nav-profile.png",
+    "cloudName": "assets__nav-profile.png",
+    "size": 1786,
+    "sha256": "fc5611a4105a96577b723ca4144de8e60e564db449d0ff33f27ef6560eb4d8a7",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/pin-active.png",
+    "cloudName": "assets__pin-active.png",
+    "size": 1961,
+    "sha256": "5138084f9e5db94a4179909f22e3ae877846d3b359a96c106dbd2d2b69723068",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/pin.png",
+    "cloudName": "assets__pin.png",
+    "size": 1960,
+    "sha256": "bde49d11317e9426c8fa99d6b537be2243cd5636bf34284c249213443d098c8a",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/profile-active.png",
+    "cloudName": "assets__profile-active.png",
+    "size": 1527,
+    "sha256": "72e36090ff97d344efa37be524bca3c7e11c761fb26fa8fed818947cd8e204a4",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/profile.png",
+    "cloudName": "assets__profile.png",
+    "size": 1520,
+    "sha256": "05597e3161831032db869116e1bf58d781cdc4094e04a75c5fe2882c4152ceae",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/retreat.jpg",
+    "cloudName": "assets__retreat.jpg",
+    "size": 39187,
+    "sha256": "3299ec910ee67928121f49a8820444ba90a2d4a9cddd817f7f5272fa4f5eb3f6",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/search.png",
+    "cloudName": "assets__search.png",
+    "size": 1401,
+    "sha256": "d593a1d24525e582d6191ff9324dced2f1932411e3b9b6d7d7c70d2124b0eb19",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/spring-lake.webp",
+    "cloudName": "assets__spring-lake.webp",
+    "size": 126862,
+    "sha256": "5880d18664843de1098ff2286d03721be38c9ed845ac50b20f762363bdbffbd6",
+    "keepBundled": false
+  },
+  {
+    "path": "/assets/star-active.png",
+    "cloudName": "assets__star-active.png",
+    "size": 1233,
+    "sha256": "e5e4a85e391c454c2296b8b93c4fe4396c21914fe80e5d28367b4a10058c59e5",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/star.png",
+    "cloudName": "assets__star.png",
+    "size": 1887,
+    "sha256": "d8e8927f0de0dd75fb42a60221ca95f76b642f76d27f0b68e3c54aab440be7aa",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/stats-active.png",
+    "cloudName": "assets__stats-active.png",
+    "size": 620,
+    "sha256": "559dd710113b0ce051e74f53b8b8c51342ffe500ddd8886e0899ec8f5d982ec6",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/stats.png",
+    "cloudName": "assets__stats.png",
+    "size": 616,
+    "sha256": "4988940425e94b00ac93d537eed3704990ea878df0a9eabb22b4a6114c5d0eb7",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/users.png",
+    "cloudName": "assets__users.png",
+    "size": 1890,
+    "sha256": "eba1de3f9b4d713f63c35d47f7f0dfd955290766512be1fcb593ae436a59cbea",
+    "keepBundled": true
+  },
+  {
+    "path": "/assets/wordmark.webp",
+    "cloudName": "assets__wordmark.webp",
+    "size": 13328,
+    "sha256": "1af17e2c5a26a0e65357857149152d88be7d485de7dd032b935ade043cb8f832",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-01.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-01.jpg",
+    "size": 73724,
+    "sha256": "7cc9f6c5da9c805432a3f65fa67eee1f5cd76f606cf0a208440de54058de4216",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-02.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-02.jpg",
+    "size": 80493,
+    "sha256": "1a32bdf55481c6b8c246bcb32caabed0ef3cf792bbf2c2c5d4f5625a18930c7d",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-03.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-03.jpg",
+    "size": 85418,
+    "sha256": "a1843213461abd7c5920b4766facad1678f1bc3699ed4d5b46e90662a73ea200",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-04.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-04.jpg",
+    "size": 72411,
+    "sha256": "a718230539801ed36c451bfc17f534b02e9ebefa043f22643405e676362acf01",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-05.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-05.jpg",
+    "size": 77976,
+    "sha256": "3f398bed3b5be924aa6543a1e2e9530039cd8b9b70223019a286b30c222908c8",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-06.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-06.jpg",
+    "size": 89026,
+    "sha256": "92c0039e2280262107381dfaa168da2d4ff5d538c7d755eaa5256e0ec3842756",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-07.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-07.jpg",
+    "size": 87612,
+    "sha256": "db7da2d2edc2f54cd33f2944af661cd0593925569f03898c2a8ca4c0828364a3",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-08.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-08.jpg",
+    "size": 87031,
+    "sha256": "4194ecca3d57c2b49b5584623ddb3936ae77c06d001ae27412beb6af7c2d3d20",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-09.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-09.jpg",
+    "size": 81347,
+    "sha256": "36c997d405634c64eeb3a198d24058269ad96b9b6745d4cd655c775a8e4aeda4",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-10.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-10.jpg",
+    "size": 81487,
+    "sha256": "c72942d407f2bdb4b1772b1a883f10a5d6c9a55973d3782854553de6494255ac",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-11.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-11.jpg",
+    "size": 74731,
+    "sha256": "25f08802ceb4c419c64493b19036c39f17f50a32cb24e25a1a07702aa120183a",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-12.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-12.jpg",
+    "size": 73699,
+    "sha256": "5fd6d3eb5d54e422c3288d7597e4e2cf5622db865379860cafc23f5deddaeadb",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-13.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-13.jpg",
+    "size": 86438,
+    "sha256": "f18b6ccaeda1eec9c1e2b3364b122f843f0da8be356a504fa4ff22fd48d40c60",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-14.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-14.jpg",
+    "size": 80240,
+    "sha256": "d4c0355b4c492e652a91e4355d466798e9f27dd9992b10376ed136497d6531a0",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-15.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-15.jpg",
+    "size": 77483,
+    "sha256": "6242fba79c6ce2ee5737df17aade1e9df6ec42879419f58729136bea648d183b",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-16.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-16.jpg",
+    "size": 68715,
+    "sha256": "a73ca23c6c2f1d421d02fca795fa38134abf13da6a7d6b94f6c33cf139b10046",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-17.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-17.jpg",
+    "size": 63573,
+    "sha256": "806bded703be9e63fcd8e0039e1a33390116738ab2f96adb9d4bc17c1f1df93d",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/hole-18.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__hole-18.jpg",
+    "size": 67212,
+    "sha256": "2383b7758382a0b73934c55aca72f9a37a145d35462124644b1bfa4cdb6e8fb7",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/overview_sina.jpg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__overview_sina.jpg",
+    "size": 136560,
+    "sha256": "75279ad50ecd31300b0c3cc6e5a78733d1c2a56ed735f6dddb65d11876aeb166",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/course-guide/assets/maps/cn_bg_585/overview_sohu.jpeg",
+    "cloudName": "packages__course-guide__assets__maps__cn_bg_585__overview_sohu.jpeg",
+    "size": 141993,
+    "sha256": "99f4b7ce7eb972c210cb600bebc6ed41dd5b93bc05814da9b00460dc6ff148f5",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/0-0.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__0-0.jpg",
+    "size": 175516,
+    "sha256": "54b22aaf0a3a90e40c5115d29ee832a8472c98587952c9ff8ad294a3ee17e75d",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/0-1024.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__0-1024.jpg",
+    "size": 190172,
+    "sha256": "bfbabb721bcf6302856f5c1ed00a37619c447c419b028fa597e09995c83eda66",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/1024-0.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__1024-0.jpg",
+    "size": 116193,
+    "sha256": "8c3549d51e977d37fa86986722d8e528352365545e858f7b566e520ed83b8ec0",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/1024-1024.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__1024-1024.jpg",
+    "size": 187209,
+    "sha256": "7d6c35851a51e224f7cd16500930d5e99410fcc49c9ec06592ea1814daa7fd61",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/1024-512.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__1024-512.jpg",
+    "size": 88510,
+    "sha256": "d1764305d7e313b00d8358145afc8b11776bb4e24a16c8f9b3d2b5cf687a07a7",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/1536-0.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__1536-0.jpg",
+    "size": 115341,
+    "sha256": "5f33f156da10f44d48b1e43760e12b80520057a4f88ab5e642145c5a1efadb31",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/1536-1024.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__1536-1024.jpg",
+    "size": 116897,
+    "sha256": "98b00c51bea90305d771db8c65f66ebcec549b32c5edbbcd93f66fd195cec9cd",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/1536-1536.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__1536-1536.jpg",
+    "size": 103079,
+    "sha256": "1e1d17c019ae33707f16b758ddd89223ba3ff53b131fe364f770af6533f6afca",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/1536-512.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__1536-512.jpg",
+    "size": 99587,
+    "sha256": "60383caec064a14221f67ed401e17955240844a654689b1b504b36ded62e7ad8",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/512-0.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__512-0.jpg",
+    "size": 117473,
+    "sha256": "896448ba027af5533ce6ad9a871f329502b87f33f292986cae24eaec1b52a227",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/512-1024.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__512-1024.jpg",
+    "size": 187251,
+    "sha256": "05bd6ade85318160a3cc209b8536333c06dfad882a1798e88bcbe3549917a1ec",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/course-overview-tiles/512-512.jpg",
+    "cloudName": "packages__hole-map__course-overview-tiles__512-512.jpg",
+    "size": 90406,
+    "sha256": "0e9f813d5cd9516ef2c3384c12097c711a7c2e056d5eefc224e5ced6f51d0e1e",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/icons/arrows-out-simple.png",
+    "cloudName": "packages__hole-map__icons__arrows-out-simple.png",
+    "size": 578,
+    "sha256": "750106a110481a304300f9f9e4840853f50c7dd1a59075ce248321af04b56332",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/hole-map/icons/crosshair.png",
+    "cloudName": "packages__hole-map__icons__crosshair.png",
+    "size": 2372,
+    "sha256": "c33d9377a76be246c7bc695e883594615aca93338d1fcb534fc6cff348a740d3",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/hole-map/icons/dots-three-vertical.png",
+    "cloudName": "packages__hole-map__icons__dots-three-vertical.png",
+    "size": 463,
+    "sha256": "b56780e1e229890a40e077573ffd722403dfee5cc98d4ecbe621f25e9861e572",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/hole-map/icons/flag-light.png",
+    "cloudName": "packages__hole-map__icons__flag-light.png",
+    "size": 1208,
+    "sha256": "580e7e3311c392da87f89d19be39e7066a152496594fc0adadf40d2079aa176a",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/hole-map/icons/flag.png",
+    "cloudName": "packages__hole-map__icons__flag.png",
+    "size": 1482,
+    "sha256": "bf08657f8ecd55b312f9b8c58f8fe176c52db1ce16eb75df0e878c01a6b227a8",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/hole-map/icons/minus.png",
+    "cloudName": "packages__hole-map__icons__minus.png",
+    "size": 228,
+    "sha256": "cd2dc01e466341d5ff9be56613679349488d0bdd1281d0ecb71e7604f7c0b6f5",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/hole-map/icons/navigation-arrow.png",
+    "cloudName": "packages__hole-map__icons__navigation-arrow.png",
+    "size": 2090,
+    "sha256": "7c0cd3d157557c01fc691a2c222fb30e816f097100201e6a31e867b57ad74cd0",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/hole-map/icons/plus.png",
+    "cloudName": "packages__hole-map__icons__plus.png",
+    "size": 409,
+    "sha256": "ef7b6e2c31ce7f7c019778047bc7a277841f8b22ff7f5ad2103098ef77e3ab08",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/hole-map/icons/x.png",
+    "cloudName": "packages__hole-map__icons__x.png",
+    "size": 590,
+    "sha256": "e2cb141831144a7672914b74344151d7ad17e5b038c720ac76c2d62028caf776",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/hole-map/satellite-tiles/0-0.jpg",
+    "cloudName": "packages__hole-map__satellite-tiles__0-0.jpg",
+    "size": 189571,
+    "sha256": "3abc5860be0352e8f0dc8a68b96845bd8caeab82df492c7e4ea96a0c945894f3",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/hole-map/satellite-tiles/0-1024.jpg",
+    "cloudName": "packages__hole-map__satellite-tiles__0-1024.jpg",
+    "size": 109813,
+    "sha256": "6d8d432712674c9df0ca29f4e89259631fa158b49d60a135fb69b6ca6b02bc52",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/0-0.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__0-0.jpg",
+    "size": 182387,
+    "sha256": "c56cc7822b6a74a51bfa57099c08efc0bb07b30805225ff1569a9f19b6687949",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/0-1024.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__0-1024.jpg",
+    "size": 162776,
+    "sha256": "6f33c8b15e0d97bc5e156ff58a6192dc5cce790fc441b8221ba414976debc637",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/0-2048.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__0-2048.jpg",
+    "size": 92785,
+    "sha256": "610166c3baf8939aebbd93e62e21438b1c3bde72f68ec00b199f8eba798292aa",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/1024-0.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__1024-0.jpg",
+    "size": 165397,
+    "sha256": "96f4d85d53626027ac9cc279735be5cfdad754f8c5bd48887f78c380e707d83b",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/1024-1024.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__1024-1024.jpg",
+    "size": 128071,
+    "sha256": "edaa392d7db83bcfc51afb9cbf7ae4c5ce071add42a5148ebbd220f1f1726a3c",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/1024-2048.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__1024-2048.jpg",
+    "size": 99579,
+    "sha256": "504d2abed87e59c56951f4b083cd28cdfa9a1caac417d8e9f224fb161c42d622",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/2048-0.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__2048-0.jpg",
+    "size": 153033,
+    "sha256": "ec6c2bc66003f0bc153ab6fe9338aa8465788e873a04fe6fda542509b4f097e1",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/2048-1024.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__2048-1024.jpg",
+    "size": 124937,
+    "sha256": "764343b38225b26d89eafca22c71a9876fb42dccd12c1c5eff55bcf55b59ca29",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/2048-2048.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__2048-2048.jpg",
+    "size": 129766,
+    "sha256": "677cfcfe9be37006fafed0c66eae227d10af774593829a7b6040f04e2a9627f9",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/3072-0.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__3072-0.jpg",
+    "size": 84192,
+    "sha256": "ca4595acf09ad1f185ab1d347559fd4a267afe9936ad8d8ac56de3e01c8077a0",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/3072-1024.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__3072-1024.jpg",
+    "size": 77887,
+    "sha256": "010d5a14288ea807ce31ddb5cfcb7bee0bcd528292ce23270b61daa002940be0",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/course-overview-tiles/3072-2048.jpg",
+    "cloudName": "packages__huakai-map__course-overview-tiles__3072-2048.jpg",
+    "size": 72446,
+    "sha256": "cb6bf493581798b6f0b369f5e6f26ec67be6ff7a7d8f0c2bd1bc3ba2a00a061b",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/huakai-map/icons/arrows-out-simple.png",
+    "cloudName": "packages__huakai-map__icons__arrows-out-simple.png",
+    "size": 578,
+    "sha256": "750106a110481a304300f9f9e4840853f50c7dd1a59075ce248321af04b56332",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/huakai-map/icons/crosshair.png",
+    "cloudName": "packages__huakai-map__icons__crosshair.png",
+    "size": 2372,
+    "sha256": "c33d9377a76be246c7bc695e883594615aca93338d1fcb534fc6cff348a740d3",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/huakai-map/icons/dots-three-vertical.png",
+    "cloudName": "packages__huakai-map__icons__dots-three-vertical.png",
+    "size": 463,
+    "sha256": "b56780e1e229890a40e077573ffd722403dfee5cc98d4ecbe621f25e9861e572",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/huakai-map/icons/flag-light.png",
+    "cloudName": "packages__huakai-map__icons__flag-light.png",
+    "size": 1208,
+    "sha256": "580e7e3311c392da87f89d19be39e7066a152496594fc0adadf40d2079aa176a",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/huakai-map/icons/flag.png",
+    "cloudName": "packages__huakai-map__icons__flag.png",
+    "size": 1482,
+    "sha256": "bf08657f8ecd55b312f9b8c58f8fe176c52db1ce16eb75df0e878c01a6b227a8",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/huakai-map/icons/minus.png",
+    "cloudName": "packages__huakai-map__icons__minus.png",
+    "size": 228,
+    "sha256": "cd2dc01e466341d5ff9be56613679349488d0bdd1281d0ecb71e7604f7c0b6f5",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/huakai-map/icons/navigation-arrow.png",
+    "cloudName": "packages__huakai-map__icons__navigation-arrow.png",
+    "size": 2090,
+    "sha256": "7c0cd3d157557c01fc691a2c222fb30e816f097100201e6a31e867b57ad74cd0",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/huakai-map/icons/plus.png",
+    "cloudName": "packages__huakai-map__icons__plus.png",
+    "size": 409,
+    "sha256": "ef7b6e2c31ce7f7c019778047bc7a277841f8b22ff7f5ad2103098ef77e3ab08",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/huakai-map/icons/x.png",
+    "cloudName": "packages__huakai-map__icons__x.png",
+    "size": 590,
+    "sha256": "e2cb141831144a7672914b74344151d7ad17e5b038c720ac76c2d62028caf776",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/0-0.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__0-0.jpg",
+    "size": 151711,
+    "sha256": "68bf3c69ff5cb102443b4f83d63def2be1a2e41a530a3aaae39c462ca3f3809d",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/0-1024.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__0-1024.jpg",
+    "size": 155478,
+    "sha256": "97533212227c906d0fc78adc2b4ceda1086962479f004a16bb646265dede4f6a",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/0-2048.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__0-2048.jpg",
+    "size": 177476,
+    "sha256": "6b7070716241ed9c9f8842e22268219a94498b313c754ae99d480cbab7f778fe",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/0-3072.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__0-3072.jpg",
+    "size": 103159,
+    "sha256": "7bea82fc8632c913c2538045253bda64b0c4824e311c7defd35999862b16740f",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/1024-0.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__1024-0.jpg",
+    "size": 129152,
+    "sha256": "0bfdcb65275b5bc96541b73fd3ef8289a3e4d3ebe193c7e3250731cbc2812c05",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/1024-1024.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__1024-1024.jpg",
+    "size": 179206,
+    "sha256": "d52ef693bb7d3eaaff932c892dd7c4f4ce44df28230b6bd36681f75b93cb97f8",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/1024-2048.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__1024-2048.jpg",
+    "size": 141470,
+    "sha256": "5f762caa3c4b9085a365d310b45c551aeafefe11a51ed18adc9a0b96a7b4d614",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/1024-3072.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__1024-3072.jpg",
+    "size": 74859,
+    "sha256": "3ad030f162384e47503876f74b98b0700d1e3c953a1ef2cfd3bced998b697a54",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/2048-0.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__2048-0.jpg",
+    "size": 106672,
+    "sha256": "3f11282bb4d6b252265721166be13b92f1f5897b176c942378c2b5ced945726e",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/2048-1024.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__2048-1024.jpg",
+    "size": 129294,
+    "sha256": "1492bbafc45a9dccaa8b76d03440aa3a441a61698a148bf7a1c5b64752dbcc98",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/2048-2048.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__2048-2048.jpg",
+    "size": 138710,
+    "sha256": "e699fb5fee25603ad553cef05309f1f826d0b68460bc7302c9a8a6bca64a2260",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/2048-3072.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__2048-3072.jpg",
+    "size": 82291,
+    "sha256": "b1f50983c162fa8081de7072eb2dee672ef0fae45966d4de9b98c347321eb913",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/3072-0.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__3072-0.jpg",
+    "size": 13969,
+    "sha256": "220b36e18336200aae9cdb0eb7988aa4346a626c8aae2d15e4c2eb7bd07f8202",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/3072-1024.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__3072-1024.jpg",
+    "size": 14476,
+    "sha256": "4f82a9a3fdc727bfde1bef3d939b015bc676ed64605f260df9ad3a0792f4d6aa",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/3072-2048.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__3072-2048.jpg",
+    "size": 17293,
+    "sha256": "873dc241fb23f8a18cc0666d78a829054cbf5b180a623803c61cd4be029a0386",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/course-overview-tiles/3072-3072.jpg",
+    "cloudName": "packages__links-map__course-overview-tiles__3072-3072.jpg",
+    "size": 10425,
+    "sha256": "499a69927ebe19d71e36196ba74865a4bd0aa4c0b332eca512a083373a880b3a",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/links-map/icons/arrows-out-simple.png",
+    "cloudName": "packages__links-map__icons__arrows-out-simple.png",
+    "size": 578,
+    "sha256": "750106a110481a304300f9f9e4840853f50c7dd1a59075ce248321af04b56332",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/links-map/icons/crosshair.png",
+    "cloudName": "packages__links-map__icons__crosshair.png",
+    "size": 2372,
+    "sha256": "c33d9377a76be246c7bc695e883594615aca93338d1fcb534fc6cff348a740d3",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/links-map/icons/dots-three-vertical.png",
+    "cloudName": "packages__links-map__icons__dots-three-vertical.png",
+    "size": 463,
+    "sha256": "b56780e1e229890a40e077573ffd722403dfee5cc98d4ecbe621f25e9861e572",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/links-map/icons/flag-light.png",
+    "cloudName": "packages__links-map__icons__flag-light.png",
+    "size": 1208,
+    "sha256": "580e7e3311c392da87f89d19be39e7066a152496594fc0adadf40d2079aa176a",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/links-map/icons/flag.png",
+    "cloudName": "packages__links-map__icons__flag.png",
+    "size": 1482,
+    "sha256": "bf08657f8ecd55b312f9b8c58f8fe176c52db1ce16eb75df0e878c01a6b227a8",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/links-map/icons/minus.png",
+    "cloudName": "packages__links-map__icons__minus.png",
+    "size": 228,
+    "sha256": "cd2dc01e466341d5ff9be56613679349488d0bdd1281d0ecb71e7604f7c0b6f5",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/links-map/icons/navigation-arrow.png",
+    "cloudName": "packages__links-map__icons__navigation-arrow.png",
+    "size": 2090,
+    "sha256": "7c0cd3d157557c01fc691a2c222fb30e816f097100201e6a31e867b57ad74cd0",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/links-map/icons/plus.png",
+    "cloudName": "packages__links-map__icons__plus.png",
+    "size": 409,
+    "sha256": "ef7b6e2c31ce7f7c019778047bc7a277841f8b22ff7f5ad2103098ef77e3ab08",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/links-map/icons/x.png",
+    "cloudName": "packages__links-map__icons__x.png",
+    "size": 590,
+    "sha256": "e2cb141831144a7672914b74344151d7ad17e5b038c720ac76c2d62028caf776",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/0-0.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__0-0.jpg",
+    "size": 168855,
+    "sha256": "ebdaf19f0eee4169045e1da58c8b247fd6d9319a2c80883a28f9e0936a2e758c",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/0-1024.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__0-1024.jpg",
+    "size": 111633,
+    "sha256": "c9e386a7e706389386991d4e890a8bc87f65f5602570850634431738577a2518",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/0-2048.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__0-2048.jpg",
+    "size": 115701,
+    "sha256": "57fc205083722bcf899d4cceed8455d59de637dbe89e7a5ae74374414bb1111b",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/0-3072.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__0-3072.jpg",
+    "size": 99281,
+    "sha256": "a79cbcc845bdf3834493e0dec4c1a12e529519d12ff308ff4877a4b706605163",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/1024-0.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__1024-0.jpg",
+    "size": 183961,
+    "sha256": "9b994e28d10d18eda3bd0eeb2c9a242ce01b2ce8c9a87499f81ae36d7290bf9c",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/1024-1024.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__1024-1024.jpg",
+    "size": 170520,
+    "sha256": "c5ebd76c7ff6f21fe8993b33a57a40f9d68c707ab4f248392102dd389ba8cf71",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/1024-2048.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__1024-2048.jpg",
+    "size": 150911,
+    "sha256": "185fafc9dc4253f42f7ddd844481f4eaa746d01f0aec711d8f043ad075cddb72",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/1024-3072.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__1024-3072.jpg",
+    "size": 86504,
+    "sha256": "88f5fed9881ef0234d1e21823d3e16d67ff1e9d5accd9dff7901bdcfe579c51e",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/2048-0.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__2048-0.jpg",
+    "size": 84431,
+    "sha256": "a693a6b29ae1a5945910067a3ed8c7fff9659f7b1299cff9117ab97cd5357e7c",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/2048-1024.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__2048-1024.jpg",
+    "size": 78182,
+    "sha256": "0e06d3356da72205f40a13cbf3a159306c7d7baf79bbc69411786ea11db5050d",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/2048-2048.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__2048-2048.jpg",
+    "size": 83376,
+    "sha256": "1947e5604a228dd0f68284b095b754b72cddb0ef7e1834adb4754d83a553692e",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/2048-3072.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__2048-3072.jpg",
+    "size": 46101,
+    "sha256": "6b5bf5e345d60862eed4271c4ed5dc582c78512e91d5260d7a86ddde1af0c97e",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/512-1024.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__512-1024.jpg",
+    "size": 98663,
+    "sha256": "56493196527e491be1133aff0a0f9e2ab465d148245f93336b518c50e753a968",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/course-overview-tiles/512-2048.jpg",
+    "cloudName": "packages__meilan-masters-map__course-overview-tiles__512-2048.jpg",
+    "size": 105811,
+    "sha256": "879889de6fc78135ca5578a64d1598868952bf8eb329c6588c0e641349f55aec",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-masters-map/icons/arrows-out-simple.png",
+    "cloudName": "packages__meilan-masters-map__icons__arrows-out-simple.png",
+    "size": 578,
+    "sha256": "750106a110481a304300f9f9e4840853f50c7dd1a59075ce248321af04b56332",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-masters-map/icons/crosshair.png",
+    "cloudName": "packages__meilan-masters-map__icons__crosshair.png",
+    "size": 2372,
+    "sha256": "c33d9377a76be246c7bc695e883594615aca93338d1fcb534fc6cff348a740d3",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-masters-map/icons/dots-three-vertical.png",
+    "cloudName": "packages__meilan-masters-map__icons__dots-three-vertical.png",
+    "size": 463,
+    "sha256": "b56780e1e229890a40e077573ffd722403dfee5cc98d4ecbe621f25e9861e572",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-masters-map/icons/flag-light.png",
+    "cloudName": "packages__meilan-masters-map__icons__flag-light.png",
+    "size": 1208,
+    "sha256": "580e7e3311c392da87f89d19be39e7066a152496594fc0adadf40d2079aa176a",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-masters-map/icons/flag.png",
+    "cloudName": "packages__meilan-masters-map__icons__flag.png",
+    "size": 1482,
+    "sha256": "bf08657f8ecd55b312f9b8c58f8fe176c52db1ce16eb75df0e878c01a6b227a8",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-masters-map/icons/minus.png",
+    "cloudName": "packages__meilan-masters-map__icons__minus.png",
+    "size": 228,
+    "sha256": "cd2dc01e466341d5ff9be56613679349488d0bdd1281d0ecb71e7604f7c0b6f5",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-masters-map/icons/navigation-arrow.png",
+    "cloudName": "packages__meilan-masters-map__icons__navigation-arrow.png",
+    "size": 2090,
+    "sha256": "7c0cd3d157557c01fc691a2c222fb30e816f097100201e6a31e867b57ad74cd0",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-masters-map/icons/plus.png",
+    "cloudName": "packages__meilan-masters-map__icons__plus.png",
+    "size": 409,
+    "sha256": "ef7b6e2c31ce7f7c019778047bc7a277841f8b22ff7f5ad2103098ef77e3ab08",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-masters-map/icons/x.png",
+    "cloudName": "packages__meilan-masters-map__icons__x.png",
+    "size": 590,
+    "sha256": "e2cb141831144a7672914b74344151d7ad17e5b038c720ac76c2d62028caf776",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/0-0.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__0-0.jpg",
+    "size": 168855,
+    "sha256": "ebdaf19f0eee4169045e1da58c8b247fd6d9319a2c80883a28f9e0936a2e758c",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/0-1024.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__0-1024.jpg",
+    "size": 111633,
+    "sha256": "c9e386a7e706389386991d4e890a8bc87f65f5602570850634431738577a2518",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/0-2048.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__0-2048.jpg",
+    "size": 115701,
+    "sha256": "57fc205083722bcf899d4cceed8455d59de637dbe89e7a5ae74374414bb1111b",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/0-3072.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__0-3072.jpg",
+    "size": 99281,
+    "sha256": "a79cbcc845bdf3834493e0dec4c1a12e529519d12ff308ff4877a4b706605163",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/1024-0.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__1024-0.jpg",
+    "size": 183961,
+    "sha256": "9b994e28d10d18eda3bd0eeb2c9a242ce01b2ce8c9a87499f81ae36d7290bf9c",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/1024-1024.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__1024-1024.jpg",
+    "size": 170520,
+    "sha256": "c5ebd76c7ff6f21fe8993b33a57a40f9d68c707ab4f248392102dd389ba8cf71",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/1024-2048.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__1024-2048.jpg",
+    "size": 150911,
+    "sha256": "185fafc9dc4253f42f7ddd844481f4eaa746d01f0aec711d8f043ad075cddb72",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/1024-3072.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__1024-3072.jpg",
+    "size": 86504,
+    "sha256": "88f5fed9881ef0234d1e21823d3e16d67ff1e9d5accd9dff7901bdcfe579c51e",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/2048-0.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__2048-0.jpg",
+    "size": 84431,
+    "sha256": "a693a6b29ae1a5945910067a3ed8c7fff9659f7b1299cff9117ab97cd5357e7c",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/2048-1024.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__2048-1024.jpg",
+    "size": 78182,
+    "sha256": "0e06d3356da72205f40a13cbf3a159306c7d7baf79bbc69411786ea11db5050d",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/2048-2048.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__2048-2048.jpg",
+    "size": 83376,
+    "sha256": "1947e5604a228dd0f68284b095b754b72cddb0ef7e1834adb4754d83a553692e",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/2048-3072.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__2048-3072.jpg",
+    "size": 46101,
+    "sha256": "6b5bf5e345d60862eed4271c4ed5dc582c78512e91d5260d7a86ddde1af0c97e",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/512-1024.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__512-1024.jpg",
+    "size": 98663,
+    "sha256": "56493196527e491be1133aff0a0f9e2ab465d148245f93336b518c50e753a968",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/course-overview-tiles/512-2048.jpg",
+    "cloudName": "packages__meilan-nicklaus-map__course-overview-tiles__512-2048.jpg",
+    "size": 105811,
+    "sha256": "879889de6fc78135ca5578a64d1598868952bf8eb329c6588c0e641349f55aec",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/icons/arrows-out-simple.png",
+    "cloudName": "packages__meilan-nicklaus-map__icons__arrows-out-simple.png",
+    "size": 578,
+    "sha256": "750106a110481a304300f9f9e4840853f50c7dd1a59075ce248321af04b56332",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/icons/crosshair.png",
+    "cloudName": "packages__meilan-nicklaus-map__icons__crosshair.png",
+    "size": 2372,
+    "sha256": "c33d9377a76be246c7bc695e883594615aca93338d1fcb534fc6cff348a740d3",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/icons/dots-three-vertical.png",
+    "cloudName": "packages__meilan-nicklaus-map__icons__dots-three-vertical.png",
+    "size": 463,
+    "sha256": "b56780e1e229890a40e077573ffd722403dfee5cc98d4ecbe621f25e9861e572",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/icons/flag-light.png",
+    "cloudName": "packages__meilan-nicklaus-map__icons__flag-light.png",
+    "size": 1208,
+    "sha256": "580e7e3311c392da87f89d19be39e7066a152496594fc0adadf40d2079aa176a",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/icons/flag.png",
+    "cloudName": "packages__meilan-nicklaus-map__icons__flag.png",
+    "size": 1482,
+    "sha256": "bf08657f8ecd55b312f9b8c58f8fe176c52db1ce16eb75df0e878c01a6b227a8",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/icons/minus.png",
+    "cloudName": "packages__meilan-nicklaus-map__icons__minus.png",
+    "size": 228,
+    "sha256": "cd2dc01e466341d5ff9be56613679349488d0bdd1281d0ecb71e7604f7c0b6f5",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/icons/navigation-arrow.png",
+    "cloudName": "packages__meilan-nicklaus-map__icons__navigation-arrow.png",
+    "size": 2090,
+    "sha256": "7c0cd3d157557c01fc691a2c222fb30e816f097100201e6a31e867b57ad74cd0",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/icons/plus.png",
+    "cloudName": "packages__meilan-nicklaus-map__icons__plus.png",
+    "size": 409,
+    "sha256": "ef7b6e2c31ce7f7c019778047bc7a277841f8b22ff7f5ad2103098ef77e3ab08",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/meilan-nicklaus-map/icons/x.png",
+    "cloudName": "packages__meilan-nicklaus-map__icons__x.png",
+    "size": 590,
+    "sha256": "e2cb141831144a7672914b74344151d7ad17e5b038c720ac76c2d62028caf776",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/qizhong-map/course-overview-tiles/0-0.jpg",
+    "cloudName": "packages__qizhong-map__course-overview-tiles__0-0.jpg",
+    "size": 183660,
+    "sha256": "0280fad855ed46d91578967e8d9820d60e39af5385f7256c042b499e358c5b1a",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/qizhong-map/course-overview-tiles/0-1024.jpg",
+    "cloudName": "packages__qizhong-map__course-overview-tiles__0-1024.jpg",
+    "size": 158145,
+    "sha256": "a8ff098d22394febcfb2ea170e84dfe9ac6985ee993d24f1d0424b13366a645d",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/qizhong-map/course-overview-tiles/0-2048.jpg",
+    "cloudName": "packages__qizhong-map__course-overview-tiles__0-2048.jpg",
+    "size": 148611,
+    "sha256": "70c191d285b0f75e0cc6a3c107ab5a30a4f9ba72e27b1d42744abc35cca27d52",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/qizhong-map/course-overview-tiles/1024-0.jpg",
+    "cloudName": "packages__qizhong-map__course-overview-tiles__1024-0.jpg",
+    "size": 179887,
+    "sha256": "65fb6b95af39bbdeda18de893cea7aae646b3abbf9952c5ce1dc169421b2cce3",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/qizhong-map/course-overview-tiles/1024-1024.jpg",
+    "cloudName": "packages__qizhong-map__course-overview-tiles__1024-1024.jpg",
+    "size": 137464,
+    "sha256": "45be95f7b1090455189a647823dc86293011d4935905af55e7057302ee551887",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/qizhong-map/course-overview-tiles/1024-2048.jpg",
+    "cloudName": "packages__qizhong-map__course-overview-tiles__1024-2048.jpg",
+    "size": 150998,
+    "sha256": "cb2c81411b46bcbd10e3bf133ea7802620ecbc8c535e74ba3db6aeae818f0450",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/qizhong-map/course-overview-tiles/2048-0.jpg",
+    "cloudName": "packages__qizhong-map__course-overview-tiles__2048-0.jpg",
+    "size": 181061,
+    "sha256": "2cf9342996a32916800dce4fd43b02c73797080e3f9b69333d7437a43ca162f4",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/qizhong-map/course-overview-tiles/2048-1024.jpg",
+    "cloudName": "packages__qizhong-map__course-overview-tiles__2048-1024.jpg",
+    "size": 180023,
+    "sha256": "6f2b1936a3878e1c086f57e002eda7ca2e5960c63242c9d585f9b31f195afbcd",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/qizhong-map/course-overview-tiles/2048-2048.jpg",
+    "cloudName": "packages__qizhong-map__course-overview-tiles__2048-2048.jpg",
+    "size": 177547,
+    "sha256": "35e3f5f03fb31a7cc4a62e3b33c9df7620e39dd5f78ee8f12cf78c7ee090ba03",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/qizhong-map/icons/arrows-out-simple.png",
+    "cloudName": "packages__qizhong-map__icons__arrows-out-simple.png",
+    "size": 578,
+    "sha256": "750106a110481a304300f9f9e4840853f50c7dd1a59075ce248321af04b56332",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/qizhong-map/icons/crosshair.png",
+    "cloudName": "packages__qizhong-map__icons__crosshair.png",
+    "size": 2372,
+    "sha256": "c33d9377a76be246c7bc695e883594615aca93338d1fcb534fc6cff348a740d3",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/qizhong-map/icons/dots-three-vertical.png",
+    "cloudName": "packages__qizhong-map__icons__dots-three-vertical.png",
+    "size": 463,
+    "sha256": "b56780e1e229890a40e077573ffd722403dfee5cc98d4ecbe621f25e9861e572",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/qizhong-map/icons/flag-light.png",
+    "cloudName": "packages__qizhong-map__icons__flag-light.png",
+    "size": 1208,
+    "sha256": "580e7e3311c392da87f89d19be39e7066a152496594fc0adadf40d2079aa176a",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/qizhong-map/icons/flag.png",
+    "cloudName": "packages__qizhong-map__icons__flag.png",
+    "size": 1482,
+    "sha256": "bf08657f8ecd55b312f9b8c58f8fe176c52db1ce16eb75df0e878c01a6b227a8",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/qizhong-map/icons/minus.png",
+    "cloudName": "packages__qizhong-map__icons__minus.png",
+    "size": 228,
+    "sha256": "cd2dc01e466341d5ff9be56613679349488d0bdd1281d0ecb71e7604f7c0b6f5",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/qizhong-map/icons/navigation-arrow.png",
+    "cloudName": "packages__qizhong-map__icons__navigation-arrow.png",
+    "size": 2090,
+    "sha256": "7c0cd3d157557c01fc691a2c222fb30e816f097100201e6a31e867b57ad74cd0",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/qizhong-map/icons/plus.png",
+    "cloudName": "packages__qizhong-map__icons__plus.png",
+    "size": 409,
+    "sha256": "ef7b6e2c31ce7f7c019778047bc7a277841f8b22ff7f5ad2103098ef77e3ab08",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/qizhong-map/icons/x.png",
+    "cloudName": "packages__qizhong-map__icons__x.png",
+    "size": 590,
+    "sha256": "e2cb141831144a7672914b74344151d7ad17e5b038c720ac76c2d62028caf776",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/sheshan-map/course-overview-tiles/0-0.jpg",
+    "cloudName": "packages__sheshan-map__course-overview-tiles__0-0.jpg",
+    "size": 150795,
+    "sha256": "ec4adc9c4296cb670e660365310118e3448c2388cd72dca1e6f3f7742390b9b4",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/sheshan-map/course-overview-tiles/0-1024.jpg",
+    "cloudName": "packages__sheshan-map__course-overview-tiles__0-1024.jpg",
+    "size": 137902,
+    "sha256": "f0265ebbecdc7d98a11b2ae79d387617761fe5cd547eeeea07d7c7c907fcaae3",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/sheshan-map/course-overview-tiles/1024-0.jpg",
+    "cloudName": "packages__sheshan-map__course-overview-tiles__1024-0.jpg",
+    "size": 141400,
+    "sha256": "fe886bd285cc4ec37ac05d92ac57aaf2c6c121ec82597866569d2fce6de5a9b5",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/sheshan-map/course-overview-tiles/1024-1024.jpg",
+    "cloudName": "packages__sheshan-map__course-overview-tiles__1024-1024.jpg",
+    "size": 151501,
+    "sha256": "47863a3b53e412dabe4249ad1d1ad07825604bb80a03b22d541c7ba5f08d25b5",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/sheshan-map/course-overview-tiles/1536-0.jpg",
+    "cloudName": "packages__sheshan-map__course-overview-tiles__1536-0.jpg",
+    "size": 140714,
+    "sha256": "91cab674e62b89a31be65063b62a77585589cd249cdc9b33e212104dae2dc646",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/sheshan-map/course-overview-tiles/2048-0.jpg",
+    "cloudName": "packages__sheshan-map__course-overview-tiles__2048-0.jpg",
+    "size": 149026,
+    "sha256": "101130075049bbfac9eda15423088747e967c2943042a8e4ab4c4fd2a8202c12",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/sheshan-map/course-overview-tiles/2048-1024.jpg",
+    "cloudName": "packages__sheshan-map__course-overview-tiles__2048-1024.jpg",
+    "size": 93961,
+    "sha256": "5b22263e7b013a15c4eebfd72081ad83eefa7021ed112be09df3add8cf9ef04b",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/sheshan-map/course-overview-tiles/512-0.jpg",
+    "cloudName": "packages__sheshan-map__course-overview-tiles__512-0.jpg",
+    "size": 158266,
+    "sha256": "6872d5b46a86270851ce78c2d6d5350f96996163104318cf2f3fc36a7a03a60c",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/sheshan-map/icons/arrows-out-simple.png",
+    "cloudName": "packages__sheshan-map__icons__arrows-out-simple.png",
+    "size": 578,
+    "sha256": "750106a110481a304300f9f9e4840853f50c7dd1a59075ce248321af04b56332",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/sheshan-map/icons/crosshair.png",
+    "cloudName": "packages__sheshan-map__icons__crosshair.png",
+    "size": 2372,
+    "sha256": "c33d9377a76be246c7bc695e883594615aca93338d1fcb534fc6cff348a740d3",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/sheshan-map/icons/dots-three-vertical.png",
+    "cloudName": "packages__sheshan-map__icons__dots-three-vertical.png",
+    "size": 463,
+    "sha256": "b56780e1e229890a40e077573ffd722403dfee5cc98d4ecbe621f25e9861e572",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/sheshan-map/icons/flag-light.png",
+    "cloudName": "packages__sheshan-map__icons__flag-light.png",
+    "size": 1208,
+    "sha256": "580e7e3311c392da87f89d19be39e7066a152496594fc0adadf40d2079aa176a",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/sheshan-map/icons/flag.png",
+    "cloudName": "packages__sheshan-map__icons__flag.png",
+    "size": 1482,
+    "sha256": "bf08657f8ecd55b312f9b8c58f8fe176c52db1ce16eb75df0e878c01a6b227a8",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/sheshan-map/icons/minus.png",
+    "cloudName": "packages__sheshan-map__icons__minus.png",
+    "size": 228,
+    "sha256": "cd2dc01e466341d5ff9be56613679349488d0bdd1281d0ecb71e7604f7c0b6f5",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/sheshan-map/icons/navigation-arrow.png",
+    "cloudName": "packages__sheshan-map__icons__navigation-arrow.png",
+    "size": 2090,
+    "sha256": "7c0cd3d157557c01fc691a2c222fb30e816f097100201e6a31e867b57ad74cd0",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/sheshan-map/icons/plus.png",
+    "cloudName": "packages__sheshan-map__icons__plus.png",
+    "size": 409,
+    "sha256": "ef7b6e2c31ce7f7c019778047bc7a277841f8b22ff7f5ad2103098ef77e3ab08",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/sheshan-map/icons/x.png",
+    "cloudName": "packages__sheshan-map__icons__x.png",
+    "size": 590,
+    "sha256": "e2cb141831144a7672914b74344151d7ad17e5b038c720ac76c2d62028caf776",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/0-0.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__0-0.jpg",
+    "size": 161601,
+    "sha256": "6f3c483a646cd7884b6303b97f8fbc600efb8eae4837fa117c0cc7f5c16e20c2",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/0-1024.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__0-1024.jpg",
+    "size": 139059,
+    "sha256": "cf53cd8937a5f33cd5209eda2d7251de91cb9c40c99993bdc0693cc784c264b3",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/0-2048.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__0-2048.jpg",
+    "size": 164508,
+    "sha256": "605c26099999198219c9d1ed2f2f5c6966c5dbea35afcbe9512cf4a51bf2ceef",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/0-3072.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__0-3072.jpg",
+    "size": 63087,
+    "sha256": "fb24a8fc4d5a20117a912490ba8099dd16613903b9a7a57a13e04c685b1dcf0c",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/1024-0.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__1024-0.jpg",
+    "size": 151200,
+    "sha256": "895134235ed793f58326732f85dc315c4ea211940e12cbdbc42efdf4d63b05ee",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/1024-1024.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__1024-1024.jpg",
+    "size": 118126,
+    "sha256": "433d7acbaa714fc2885318c8c659c3a10cb36c518c4c205a25846c0cece5c388",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/1024-2048.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__1024-2048.jpg",
+    "size": 135931,
+    "sha256": "1e3ba3177fc8fd09e5d7c894fd3c1f58cf6dfee081c027ecce64b38b1fb38114",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/1024-3072.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__1024-3072.jpg",
+    "size": 66911,
+    "sha256": "56bea4136ba7596e882144a1eb638567b8dba04ef0ece23e953f93b8ca1e61fa",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/2048-0.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__2048-0.jpg",
+    "size": 157740,
+    "sha256": "e5e72a1418b5502dc07e8d1113ac69d593f11d02ae1ccf31a70470305fb6b35f",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/2048-1024.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__2048-1024.jpg",
+    "size": 115263,
+    "sha256": "6929ed858f1b82340a9c6ffe61aba10e47fbc3955878347dda75b092246635d4",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/2048-2048.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__2048-2048.jpg",
+    "size": 144802,
+    "sha256": "3b599a90c76cf93477cce701b697b9c4937f00cf6a2717f24752eee754beb573",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/2048-3072.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__2048-3072.jpg",
+    "size": 54726,
+    "sha256": "ca09ca06c8c662991974f5b57266a7cdebbb8d23395e409fdaf62c942ab00d0f",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/3072-0.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__3072-0.jpg",
+    "size": 69246,
+    "sha256": "e55cb22ad104a3e128d603d8757f57fe36529162d413a8518765bb39f84874ee",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/3072-1024.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__3072-1024.jpg",
+    "size": 69446,
+    "sha256": "d0b4ed362cd7c2236ed4cb63d50627614fc698868ba3acae0af7908afd79bf75",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/3072-2048.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__3072-2048.jpg",
+    "size": 68157,
+    "sha256": "ad936e5a035d31a3f0a5d002399130ebb2d497b30cf7e5518ca2017e7b0382d5",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/course-overview-tiles/3072-3072.jpg",
+    "cloudName": "packages__tianma-map__course-overview-tiles__3072-3072.jpg",
+    "size": 25636,
+    "sha256": "c10d444b4b61fac0ffd033f608003de9698e5fef170d18e7b7583b29fca2f7c6",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/icons/arrows-out-simple.png",
+    "cloudName": "packages__tianma-map__icons__arrows-out-simple.png",
+    "size": 578,
+    "sha256": "750106a110481a304300f9f9e4840853f50c7dd1a59075ce248321af04b56332",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/tianma-map/icons/crosshair.png",
+    "cloudName": "packages__tianma-map__icons__crosshair.png",
+    "size": 2372,
+    "sha256": "c33d9377a76be246c7bc695e883594615aca93338d1fcb534fc6cff348a740d3",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/tianma-map/icons/dots-three-vertical.png",
+    "cloudName": "packages__tianma-map__icons__dots-three-vertical.png",
+    "size": 463,
+    "sha256": "b56780e1e229890a40e077573ffd722403dfee5cc98d4ecbe621f25e9861e572",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/tianma-map/icons/flag-light.png",
+    "cloudName": "packages__tianma-map__icons__flag-light.png",
+    "size": 1208,
+    "sha256": "580e7e3311c392da87f89d19be39e7066a152496594fc0adadf40d2079aa176a",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/tianma-map/icons/flag.png",
+    "cloudName": "packages__tianma-map__icons__flag.png",
+    "size": 1482,
+    "sha256": "bf08657f8ecd55b312f9b8c58f8fe176c52db1ce16eb75df0e878c01a6b227a8",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/tianma-map/icons/minus.png",
+    "cloudName": "packages__tianma-map__icons__minus.png",
+    "size": 228,
+    "sha256": "cd2dc01e466341d5ff9be56613679349488d0bdd1281d0ecb71e7604f7c0b6f5",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/tianma-map/icons/navigation-arrow.png",
+    "cloudName": "packages__tianma-map__icons__navigation-arrow.png",
+    "size": 2090,
+    "sha256": "7c0cd3d157557c01fc691a2c222fb30e816f097100201e6a31e867b57ad74cd0",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/tianma-map/icons/plus.png",
+    "cloudName": "packages__tianma-map__icons__plus.png",
+    "size": 409,
+    "sha256": "ef7b6e2c31ce7f7c019778047bc7a277841f8b22ff7f5ad2103098ef77e3ab08",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/tianma-map/icons/x.png",
+    "cloudName": "packages__tianma-map__icons__x.png",
+    "size": 590,
+    "sha256": "e2cb141831144a7672914b74344151d7ad17e5b038c720ac76c2d62028caf776",
+    "keepBundled": true
+  },
+  {
+    "path": "/packages/tianma-map/old1-satellite-tiles/0-0.jpg",
+    "cloudName": "packages__tianma-map__old1-satellite-tiles__0-0.jpg",
+    "size": 164646,
+    "sha256": "9eec8ba60ac2c586fe95f6cb8545f537a21391a3db9307f03a70f9ad3efaf9b2",
+    "keepBundled": false
+  },
+  {
+    "path": "/packages/tianma-map/old1-satellite-tiles/0-1024.jpg",
+    "cloudName": "packages__tianma-map__old1-satellite-tiles__0-1024.jpg",
+    "size": 72837,
+    "sha256": "fb36285cdb40b101c2aa0c69f9fe8ba886e8211e4950243f227b444f86b604d7",
+    "keepBundled": false
+  }
+]

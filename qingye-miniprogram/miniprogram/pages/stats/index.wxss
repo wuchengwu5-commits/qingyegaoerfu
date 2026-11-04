@@ -1,0 +1,3 @@
+.chart{display:flex;align-items:flex-end;height:330rpx;gap:12rpx}.bar-group{flex:1;min-width:0;text-align:center}.bar-track{height:210rpx;display:flex;align-items:flex-end;justify-content:center;margin:12rpx 0}.bar{width:32rpx;border-radius:10rpx 10rpx 0 0;background:linear-gradient(#a9c29b,#216d47)}.tiny{font-size:17rpx;color:#809086;white-space:nowrap}
+
+.handicap-big{font-size:76rpx;font-weight:600;color:#49603f}.handicap-panel .row{gap:18rpx}.handicap-panel .note{line-height:1.65}.card>input{margin-top:18rpx;padding:18rpx;box-sizing:border-box;background:#f0f3eb;border-radius:16rpx}

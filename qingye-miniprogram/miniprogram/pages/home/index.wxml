@@ -1,0 +1,23 @@
+<view class="page home-immersive" style="padding-top:{{topInset}}px">
+  <image class="home-scene" src="cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/media-v1/assets__spring-lake.webp" mode="aspectFill" aria-hidden="true"/>
+  <view class="home-scene-wash" aria-hidden="true"/>
+  <view class="home-opening">
+    <image class="home-wordmark" src="/assets/wordmark.webp" mode="aspectFit" aria-label="青野高尔夫"/>
+    <view class="home-heading">走进绿意，<view/>把心放慢。</view>
+    <view class="home-subtitle">把这一刻，留给球场。</view>
+  </view>
+  <view class="home-bottom-panel">
+    <view class="home-feature-link" data-id="{{featured.id}}" bindtap="course" aria-label="查看球场详情">
+      <view class="home-course-copy">
+        <view class="home-course-kicker"><text class="home-status-dot {{active?'is-active':''}}"/><text>{{active?'正在进行':'今日推荐'}}</text></view>
+        <view class="home-course-name">{{featured.name}}</view>
+        <view class="home-course-meta">{{featured.meta}}</view>
+      </view>
+      <view class="home-feature-arrow"><image src="/assets/chevron.png" mode="aspectFit"/></view>
+    </view>
+    <button class="primary home-start" bindtap="start"><image class="home-start-icon" src="/assets/flag-white.png"/><text>{{active?'继续这一场好球':'开始一场好球'}}</text><image class="home-start-arrow" src="/assets/arrow-light.png" mode="aspectFit"/></button>
+    <view class="home-support" bindtap="about">木圣 AI <text class="home-support-dot">·</text> 让技术服务热爱</view>
+  </view>
+  <view class="home-scene-credit">AI 意境 · 春日山湖</view>
+</view>
+<privacy-panel/>

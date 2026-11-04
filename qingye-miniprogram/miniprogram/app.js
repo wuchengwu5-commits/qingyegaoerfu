@@ -1,0 +1,2 @@
+const S=require('./services/store'),L=require('./services/location'),P=require('./services/privacy');
+App({onLaunch(){P.init();try{require('./services/media').init();require('./services/account').init();require('./services/remote').cached();S.init();if(wx.onNetworkStatusChange)wx.onNetworkStatusChange(x=>{if(x.isConnected)require('./services/cloud-sync').flush();});}catch(e){wx.showToast({title:'数据升级未完成，原记录已保留',icon:'none'});}},onShow(){this.enteredAt=Date.now();},requestNearby(){return L.request();}});

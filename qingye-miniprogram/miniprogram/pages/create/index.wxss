@@ -1,0 +1,1 @@
+.tee-picker{min-height:88rpx;min-width:180rpx;justify-content:center;gap:14rpx;padding:16rpx 20rpx;font-size:28rpx}.tee-dot{width:18rpx;height:18rpx;border-radius:50%;flex:none;box-shadow:0 0 0 1rpx rgba(23,62,52,.12)}

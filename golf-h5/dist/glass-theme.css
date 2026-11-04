@@ -1,0 +1,58 @@
+/* Qingye / mist glass — shared surfaces, without changing scoring semantics. */
+:root{--green:#3c754a;--deep:#193c2c;--light:#e6f0e2;--bg:#edf4ec;--ink:#203d30;--muted:#647969;--line:#dce7d9;--glass:rgba(250,253,248,.76);--glass-solid:#f5f9f2;--glass-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 #d8e5d657,0 7px 22px #21472e0c,0 1px 3px #244e3210;--shadow:var(--glass-shadow)}
+body{background:#e8f0e7;color:var(--ink)}
+.app-shell{isolation:isolate;background:#edf4ec;box-shadow:0 0 70px #24452c0b}
+.app-shell::before{content:'';position:fixed;inset:0;margin:auto;max-width:460px;background:url('assets/glass/retreat.jpg') center/cover no-repeat;filter:blur(20px) saturate(.45);opacity:.065;z-index:-1;pointer-events:none}
+.page{background:transparent;padding-top:20px}
+.topbar{background:#f2f7efb8;border-bottom:1px solid #ffffffb8;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.brand{gap:0}.brand img{width:92px;height:62px;object-fit:cover;object-position:50% 65%}.brand>div{display:none}
+.topbar.secondary{box-shadow:0 4px 18px #254d2e06;background:#f0f6edf0}
+.title-block{margin-bottom:22px}.title-block .eyebrow{display:none}.title-block h1{font-family:'Songti SC','STSong','Noto Serif SC',serif;font-size:28px;font-weight:600;letter-spacing:.2px;color:var(--deep)}
+.title-block p{font-size:14px;line-height:1.7;color:var(--muted);margin-top:7px}
+:is(.card,.stat-card,.directory-region-trigger,.quiet-support,.notice,.lounge-menu-list,.lounge-paused,.guide-topic-list,.v3-rules-preview,.side-setting){background:var(--glass);border:1px solid #ffffffde;border-radius:19px;box-shadow:var(--glass-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.card{padding:18px;margin-bottom:16px}.metric{background:#fbfdf77d}.card .metric{box-shadow:none}
+:is(input,select,textarea,.search,.tee-trigger,.picker-trigger){background:#f9fcf5c7;border:1px solid #ffffffde;border-radius:16px;box-shadow:inset 0 1px 2px #fff,0 4px 14px #25442e08;color:var(--ink)}
+input:focus,select:focus,textarea:focus{border-color:#82a77c;box-shadow:0 0 0 3px #81a77c20,inset 0 1px 0 #fff}
+.search{min-height:46px;padding:0 15px;gap:11px;display:flex;align-items:center}.search input{background:transparent;border:0;box-shadow:none;padding:12px 0;font-size:15px}.search .icon{position:static;transform:none;color:#486457}
+.btn,.chip,.tee-trigger,.player-tab,.segment button,.step-btn,.icon-btn.soft,.province-option{border:1px solid #ffffffda;background:#eef5e7cb;box-shadow:inset 0 1px 1px #fff,0 3px 9px #24482f09;transition:transform .12s,box-shadow .12s,background .12s}
+.btn{min-height:48px;border-radius:17px;font-size:15px;font-weight:550}
+.btn.primary,.chip.active,.province-option.active,.step-btn.plus{color:#fff;background:#3c754a;border-color:#9ec79c;box-shadow:inset 0 1px 2px #d7efca91,inset 0 -2px 3px #21462b52,0 5px 12px #244d3021}
+.btn.secondary,.btn.outline{background:#f7fcf0b5;border-color:#ffffffdf;color:#365e3d}
+.btn:active,.chip:active,.step-btn:active,.province-option:active{transform:translateY(1px);box-shadow:inset 0 2px 4px #24432c1a}
+.btn:disabled{transform:none;box-shadow:none}.chip{min-height:42px;padding:9px 18px;font-size:14px;border-radius:24px;color:#4e6854}
+.chips{gap:8px;margin:16px 0}.segment{background:#deeadc94;border:1px solid #ffffffb8;border-radius:16px;padding:4px;box-shadow:inset 0 1px 3px #34563b09}
+.segment button{border-color:transparent;background:transparent;box-shadow:none;border-radius:12px;min-height:40px;font-size:14px}.segment button.active{background:#fcfef9e8;color:#2e5738;box-shadow:0 2px 5px #294a3210,inset 0 1px 0 #fff}
+.bottom-nav{width:calc(100% - 12px);max-width:448px;bottom:5px;border:1px solid #ffffffec;border-radius:25px;background:#f4faeef0;padding:9px 12px calc(9px + env(safe-area-inset-bottom));box-shadow:inset 0 1px 1px #fff,0 -5px 20px #294e2f09;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.bottom-nav button{font-size:12px;color:#607467;min-height:48px}.bottom-nav button.active{color:#254b31}.bottom-nav .icon{width:23px;height:23px}
+.glass-courses .topbar:not(.secondary){display:none}.glass-courses .page{padding-top:34px}.glass-courses .title-block{margin-bottom:20px}.directory-banner{display:none}
+.glass-location{width:100%;min-height:62px;display:flex;align-items:center;gap:12px;padding:12px 16px;margin:0 0 12px;text-align:left;border-radius:19px;background:var(--glass);border:1px solid #ffffffde;box-shadow:var(--glass-shadow)}
+.glass-location>.icon:first-child{background:#e3eddc;width:36px;height:36px;padding:7px;border-radius:50%;color:#315d3c}.glass-location>span{flex:1}.glass-location b{display:block;font-size:15px;font-weight:600}.glass-location small{display:block;font-size:12px;color:#647969;margin-top:3px}.glass-location>.icon:last-child{width:17px;height:17px}
+.directory-region-trigger{margin:12px 0 4px;min-height:44px;padding:10px 14px;font-size:13px}.course-count{font-size:12px;color:#6b806e;margin:13px 0 10px}
+#course-list{padding:0;border-radius:20px}.directory-card.compact-course{padding:0;overflow:hidden;border:1px solid #ffffffd9;border-radius:18px;margin-bottom:10px;box-shadow:var(--glass-shadow)}
+.course-open{min-height:112px;padding:13px 50px 13px 13px;gap:12px;background:transparent;border-radius:18px;align-items:center}.course-open:hover{background:#f4f9ef9e}.course-open:active{background:#e7f1dfd9}
+.course-thumbnail{width:64px;height:70px;object-fit:cover;border-radius:12px;box-shadow:0 1px 3px #244a3010;flex:none}.course-copy{min-width:0}.course-copy strong{font-size:15px;font-weight:600;line-height:1.55}.course-meta,.course-segments{font-size:12px;line-height:1.65;color:#647969}.course-meta{margin-top:3px}.course-segments{margin-top:3px}
+.course-arrow{display:none}.course-favorite{right:4px;top:9px;width:42px;height:42px}.course-nav-shortcut{right:4px;bottom:7px;width:42px;height:42px}.saved-star{color:#587e43}
+.course-directory-note{font-size:12px;color:#6c806e;line-height:1.8;margin-top:16px}
+.glass-course-list{padding:0 13px;margin-bottom:15px;background:var(--glass);border:1px solid #ffffffdf;border-radius:20px;box-shadow:var(--glass-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.glass-course-list .directory-card.compact-course{border:0;border-bottom:1px solid #dce7d8;border-radius:0;margin:0;box-shadow:none;background:transparent;backdrop-filter:none}.glass-course-list .directory-card.compact-course:last-child{border-bottom:0}
+.glass-course-list .course-open{padding-left:0;min-height:108px}.glass-course-list .course-favorite,.glass-course-list .course-nav-shortcut{right:-8px}
+.dock{background:#f3f9edf2;border-top:1px solid #fff;box-shadow:0 -4px 22px #264c2d0b;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.scoring-workspace .card,.scoring-workspace .scorecard-table,.compact-score-panel.card{background:#f8fbf5f0;backdrop-filter:none}.scoring-workspace .compact-score-panel.card{box-shadow:var(--glass-shadow);border-color:#fff}
+.scorecard-table thead th{background:#406d4a;color:#f6fbf2}.scorecard-table .par-row{background:#e8f0e1}.scoring-workspace .step-btn{border-radius:16px;width:44px;height:44px}.scoring-workspace .score-value{box-shadow:none;border:0;background:transparent}
+.scoring-workspace .compact-player-tabs .player-tab.active{background:#dfeeda;border-color:#dfeeda;box-shadow:none}.score-mark.birdie,.score-mark.eagle{border-radius:50%;aspect-ratio:1;flex-shrink:0}
+.scoring-workspace .score-map-button,.score-map-button{background:#f6fbf0dc;border:1px solid #fff;border-radius:18px;min-height:38px;padding:7px 10px;box-shadow:var(--glass-shadow);font-size:12px}
+.scoring-workspace .entry-caption,.scoring-workspace .current-hole-title{color:#264c32}.scoring-workspace .tiny{color:#657a67}
+.profile-card,.profile-top,.menu-row{background:transparent}.menu-row{border-color:#dce7d8;min-height:56px;font-size:15px}.menu-row:last-child{border-bottom:0}.profile-head .avatar,.avatar{background:#dcebd4;color:#426847}.metric span,.tiny,.muted{color:var(--muted)}
+.lounge-menu-list{padding:0 14px}.lounge-menu{background:transparent;padding:14px 0;min-height:78px}.lounge-menu-icon{border:1px solid #fff;box-shadow:inset 0 1px 0 #fff;background:#e8f1dfc9}.lounge-paused{padding:0}.lounge-signoff{color:#647d5c}
+.hero,.retreat-hero{border:1px solid #ffffffb8;box-shadow:0 7px 20px #244e2e0a}.home-retreat-hero{height:300px}.quiet-support{padding:12px 14px}
+.modal-backdrop{background:#1b3b2c5c;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.modal:not(.course-map-modal){background:#f1f7eff5;border:1px solid #fff;box-shadow:inset 0 1px 1px #fff,0 20px 70px #122e2a2b;border-radius:25px}
+.modal:not(.course-map-modal)>.row,.modal:not(.course-map-modal) .modal-actions{background:#f1f7eff5;border-color:#dbe6d5}
+.province-option{border-radius:14px;min-height:60px}.course-map-modal{background:#f0f6ed}.course-map-modal .map-image-stage{background:transparent;box-shadow:none;border:0;border-radius:0}.course-map-modal .map-view-controls .btn{border-radius:13px}
+.guide-article,.about-story{line-height:1.85}.feedback-record,.journal-player{background:#f8fcf2cc}.notice.warning,.readonly{background:#f4f1df;color:#78643c}.demo-strip{background:#e8eedfac;color:#64715c}
+.desktop-note{color:#526b54}.desktop-mark{font-family:'Songti SC',serif}.desktop-line{background:#b9ceb0}
+@media(max-width:370px){.glass-courses .page{padding-top:24px}.course-thumbnail{width:54px;height:64px}.course-open{padding-left:10px;padding-right:44px;gap:9px}.course-copy strong{font-size:14px}.card{padding:14px}.title-block h1{font-size:26px}}
+@media(prefers-reduced-transparency:reduce){.card,.modal,.bottom-nav,.dock,.search{background:#f5f9f1;backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+/* Desktop preview stays at one natural mobile content width. */
+.app-shell{max-width:390px}.app-shell::before{max-width:390px}.topbar{padding-left:18px;padding-right:18px}.page{padding-left:18px;padding-right:18px}.bottom-nav{max-width:378px}.dock{max-width:390px}.modal:not(.course-map-modal){max-width:390px}.glass-course-list{padding:0 12px}.course-open{gap:11px}.glass-courses .title-block p{font-size:13px}

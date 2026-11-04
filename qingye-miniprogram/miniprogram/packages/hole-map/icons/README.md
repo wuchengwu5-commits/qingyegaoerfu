@@ -1,0 +1,1 @@
+Phosphor Icons regular assets, MIT. Source: https://github.com/phosphor-icons/core . Rendered at 96px in Qingye colors.

@@ -1,0 +1,6 @@
+const fs=require('fs'),path=require('path'),root=path.resolve(__dirname,'../..'),base=root+'/qingye-miniprogram/miniprogram/packages/sheshan-map';
+const {createCanvas,loadImage}=require('/Users/wuchengwu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@napi-rs/canvas');
+const M=require(base+'/map-core'),all=Object.values(require(base+'/satellite-holes').holes);
+(async()=>{const photo=await loadImage(base+'/course-overview.jpg'),w=390,h=758,c=createCanvas(w*6,h*3),q=c.getContext('2d');
+for(let i=0;i<all.length;i++){const d=all[i],p=createCanvas(w,h),ctx=p.getContext('2d'),s={origin:d.defaultOrigin,target:d.defaultTarget,layer:'satellite',unit:'yd',camera:M.focusFit(w,h,d,all),focusSatellite:M.focusSurface(photo,d,createCanvas,false)};M.draw(ctx,photo,w,h,s,d);ctx.fillStyle='#35482e';ctx.font='bold 22px sans-serif';ctx.fillText('Hole '+d.number,18,42);ctx.font='15px sans-serif';ctx.fillText('Par '+d.par,18,69);ctx.fillText(M.value(M.measure(s,d).center,'yd')+' yd',18,220);q.drawImage(p,i%6*w,Math.floor(i/6)*h);fs.writeFileSync(root+'/outputs/sheshan-gps/qa/hole-'+d.number+'.png',p.toBuffer('image/png'));}
+fs.writeFileSync(root+'/outputs/sheshan-gps/qa/18-holes.jpg',c.toBuffer('image/jpeg',85));})();

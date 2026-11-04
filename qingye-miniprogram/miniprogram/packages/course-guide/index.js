@@ -1,0 +1,1 @@
+Page({onLoad(o={}){const query=['course','round','hole'].filter(k=>o[k]).map(k=>k+'='+encodeURIComponent(o[k])).join('&');wx.redirectTo({url:require('../../services/course-map-route').route(o.course)+(query?'?'+query:'')});}});

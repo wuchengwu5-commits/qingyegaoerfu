@@ -1,0 +1,1 @@
+module.exports={"width":2552,"height":3584,"extent":{"xmin":13509449.91645643,"ymin":3684075.7667053016,"xmax":13511575.896091599,"ymax":3687062.053600245,"spatialReference":{"wkid":102100,"latestWkid":3857}},"frame":{"x":0,"y":0,"width":2552,"height":3584},"source":"Esri / Vantor / GIS User Community","retrievedOn":"2026-11-02","northUp":true,"fillViewport":true,"maxZoom":12};

@@ -1,0 +1,33 @@
+<view class="page account-page">
+ <image class="page-backdrop" src="cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/media-v1/assets__spring-lake.webp" mode="aspectFill" aria-hidden="true"/>
+ <view class="eyebrow">PLAY TOGETHER</view>
+ <view class="title">让每一轮，都属于你。</view>
+ <view class="sub">{{loggedIn?'完善资料，让同组球友认出你。':'验证手机号，保存你的球局，与球友再约下一场。'}}</view>
+ <view wx:if="{{!loggedIn}}" class="card spaced login-card">
+  <view class="section">手机号快捷登录</view>
+  <view class="note space">点击下方按钮，在微信弹窗中选择并允许使用手机号。验证成功后才会完成登录。</view>
+  <view class="note space">手机号用于账号验证，不会向球友展示。头像和昵称可在登录后自行选择。</view>
+  <button class="primary spaced" open-type="getPhoneNumber" bindgetphonenumber="phoneLogin" disabled="{{busy}}" loading="{{busy}}">{{busy?'正在验证…':'手机号快捷登录'}}</button>
+ </view>
+ <view wx:else>
+  <view class="verified spaced"><text>手机号已验证</text><text>{{phoneMasked}}</text></view>
+  <form bindsubmit="save">
+   <view class="card spaced">
+    <button class="avatar-picker" open-type="chooseAvatar" bindchooseavatar="chooseAvatar" disabled="{{busy}}" aria-label="选择头像">
+     <image wx:if="{{avatarUrl}}" class="account-avatar" src="{{avatarUrl}}" mode="aspectFill"/>
+     <view wx:else class="avatar-placeholder">＋</view>
+     <text class="avatar-label">{{avatarUrl?'更换头像':'选择头像'}}</text>
+    </button>
+    <view class="section space">球友看到的昵称</view>
+    <input name="nickname" type="nickname" maxlength="16" value="{{name}}" bindinput="name" placeholder="点击填写微信昵称" disabled="{{busy}}"/>
+    <view class="note space">加入活动后，同组成员可查看你的昵称和本次成绩。</view>
+   </view>
+   <button class="primary spaced" form-type="submit" disabled="{{busy}}" loading="{{busy}}">{{busy?'正在保存…':'保存资料'}}</button>
+  </form>
+ </view>
+ <view wx:if="{{error}}" class="note account-error spaced" role="alert">{{error}}</view>
+ <view wx:if="{{notice}}" class="note account-notice spaced">{{notice}}</view>
+ <button wx:if="{{loggedIn}}" class="logout-button" bindtap="logout" disabled="{{busy}}">退出登录</button>
+ <view class="privacy-link" bindtap="policy">查看隐私保护指引</view>
+ <view class="quiet-link" bindtap="back">继续浏览球场 ›</view>
+</view><privacy-panel/>

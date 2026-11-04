@@ -1,0 +1,25 @@
+const R=require('./rules'),C=require('./catalog'),V=require('./service'),catalog=require('./courses-data');
+const KEY='greenGolf.v3',OLD='greenGolf.v1',BACKUP='greenGolf.pre-v3',MARK='greenGolf.activeVersion';
+const courses=catalog.courses;let editing=null,storageError='';
+const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const date=t=>new Date(t).toISOString().slice(0,10).replace(/-/g,'.');
+function initial(){return {version:3,profile:{id:'me',name:'高球爱好者',goal:'享受每次挥杆'},friends:[{id:'f1',name:'林一'},{id:'f2',name:'小夏'}],rounds:[],settings:{unit:'yd',technical:false},favorites:[],templates:[],courses:[],dbRevision:0};}
+function write(d){const data=R.clone(d);data.courses=(data.courses||[]).filter(c=>!c.publicData);const previous=wx.getStorageSync(KEY);try{wx.setStorageSync(KEY,data);const saved=wx.getStorageSync(KEY);if(JSON.stringify(saved)!==JSON.stringify(data))throw Error('存储校验不一致');}catch(e){if(previous)try{wx.setStorageSync(KEY,previous);}catch(ignore){}throw Error('保存失败，原记录保留：'+e.message);}return d;}
+function init(){if(wx.getStorageSync(MARK)===3&&wx.getStorageSync(KEY))return;const existing=wx.getStorageSync(KEY);if(existing){R.migrateV1(existing);wx.setStorageSync(MARK,3);return;}const old=wx.getStorageSync(OLD);if(old)wx.setStorageSync(BACKUP,R.clone(old));const d=old?R.migrateV1(old):initial();write(d);R.migrateV1(wx.getStorageSync(KEY));wx.setStorageSync(MARK,3);}
+function read(){try{init();const d=V.hydrate(wx.getStorageSync(KEY),courses);storageError='';return d;}catch(e){storageError='升级未完成，暂时只读：'+e.message;const old=wx.getStorageSync(OLD)||wx.getStorageSync(BACKUP);if(old)return V.hydrate(old,courses);throw e;}}
+function storageStatus(){return storageError;}
+function retryUpgrade(){init();storageError='';return read();}
+function mutate(fn){const d=read();if(storageError)throw Error(storageError);const ret=fn(d);d.dbRevision=(d.dbRevision||0)+1;write(d);return ret;}
+function active(){return read().rounds.find(r=>r.status==='active');}
+function getRound(rid){return editing?.id===rid?R.clone(editing.copy):read().rounds.find(r=>r.id===rid);}
+function replace(r){if(editing?.id===r.id){editing.copy=R.clone(r);return r;}return mutate(d=>{const i=d.rounds.findIndex(x=>x.id===r.id);if(i<0)throw Error('球局不存在');d.rounds[i]=R.clone(r);return r;});}
+function create(opts){return mutate(d=>{if(d.rounds.some(r=>r.status==='active'))throw Error('请先结束进行中的球局');const c=courses.find(c=>c.id===opts.courseId);if(!c)throw Error('请选择球场');const players=opts.players||[d.profile,...d.friends.filter(p=>(opts.friendIds||[]).includes(p.id))].map(p=>({...p,tee:opts.tee||c.tees[0]}));const r=V.newRound(c,players,{...opts,id:id(),now:Date.now(),date:new Date().toISOString().slice(0,10),time:'08:30',holes:opts.mode||'all'});d.rounds.unshift(r);d.draft=null;return r;});}
+function operate(rid,op){const r=getRound(rid),n=R.applyOperation(r,{...op,operationId:op.operationId||id(),baseRevision:op.baseRevision??r.revision,time:Date.now()});return replace(n);}
+function saveScore(rid,pid,n,s){return operate(rid,{type:'score',playerId:pid,holeNumber:n,score:s?{...s,grossStrokes:s.strokes??s.grossStrokes}:null});}
+function finish(rid){return replace(V.finishRound(getRound(rid),Date.now()));}
+function startEdit(rid){const r=read().rounds.find(r=>r.id===rid);editing={id:rid,original:R.clone(r),copy:{...R.clone(r),status:'active'}};return getRound(rid);}
+function commitEdit(reason){if(!editing)throw Error('未进入更正模式');const e=editing,n=R.applyOperation(e.original,{type:'correction',operationId:id(),baseRevision:e.original.revision,time:Date.now(),reason,changes:{scores:e.copy.scores,events:e.copy.events,awards:e.copy.awards,ruleSnapshot:e.copy.ruleSnapshot,holes:e.copy.holes,players:e.copy.players}});mutate(d=>{const i=d.rounds.findIndex(r=>r.id===e.id);if(d.rounds[i].revision!==e.original.revision)throw Error('球局已有其他变更');d.rounds[i]=n;});editing=null;return n;}
+function cancelEdit(){editing=null;}function isEditing(rid){return editing?.id===rid;}
+function stats(filter='strict',size=18){const s=V.stats(read(),size,0,Date.now(),filter);return {...s,best:s.best??'—',avg:s.average==null?'—':s.average.toFixed(1),putts:s.puttN?(s.putts/s.puttN).toFixed(1):'—',fwRate:s.fwN?Math.round(s.fw/s.fwN*100)+'%':'—',girRate:s.girN?Math.round(s.gir/s.girN*100)+'%':'—',trend:s.trend.map(x=>({...x,score:x.total,shortDate:x.date.slice(5),played:size,height:Math.max(10,Math.min(100,x.total/size/8*100))}))};}
+function importData(raw){const next=V.hydrate(JSON.parse(raw),courses);const previous=wx.getStorageSync(KEY);wx.setStorageSync('greenGolf.beforeImport',previous);write(next);}
+module.exports={KEY,init,read,write,storageStatus,retryUpgrade,mutate,courses,getRound,active,create,replace,saveScore,finish,stats,date,importData,id,operate,startEdit,commitEdit,cancelEdit,isEditing};

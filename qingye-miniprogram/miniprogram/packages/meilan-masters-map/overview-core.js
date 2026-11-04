@@ -1,0 +1,4 @@
+const Default=require('./course-config').overview;
+function fit(w,h,D=Default){const f=D.frame;if(D.northUp){const scale=D.fillViewport?Math.max(w/f.width,h/f.height):Math.min((w-24)/f.width,(h-220)/f.height);return {scale,x:w/2-(f.x+f.width/2-D.width/2)*scale,y:h/2-(f.y+f.height/2-D.height/2)*scale,angle:0};}const scale=Math.min((w-30)/f.height,(h-190)/f.width),cx=f.x+f.width/2-D.width/2,cy=f.y+f.height/2-D.height/2;return {scale,x:w/2+cy*scale,y:(h+60)/2-cx*scale,angle:Math.PI/2};}
+function draw(ctx,image,w,h,c,D=Default){ctx.clearRect(0,0,w,h);if(!image?.width)return;const f=D.frame;ctx.save();ctx.translate(c.x,c.y);ctx.scale(c.scale,c.scale);ctx.rotate(c.angle||0);ctx.translate(-D.width/2,-D.height/2);require('./raster-image').draw(ctx,image,f.x,f.y,f.width,f.height,f.x,f.y,f.width,f.height);ctx.restore();}
+module.exports={data:Default,fit,draw};

@@ -1,0 +1,8 @@
+const {test}=require('node:test'),A=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
+const C=require('../shared-golf/catalog'),S=require('../shared-golf/service'),courses=require('../shared-golf/courses.json').courses;
+const seed=require('../golf-h5/dist/course-maps.json'),c=courses.find(c=>c.id==='cn_bg_585');
+const noop=()=>'';
+function context(){const ctx={GolfMapSeed:seed,GolfCourseData:{courses},Golf:{},db:{courses},C,courseDetail:noop,scorePage:noop,settingsPage:noop,handleAction:noop,window:{addEventListener:noop},document:{addEventListener:noop,hidden:false},setInterval:noop,fetch:async()=>({ok:false}),render:noop};vm.runInNewContext(fs.readFileSync(require.resolve('../golf-h5/dist/maps-ui.js'),'utf8'),ctx);return ctx;}
+test('后九9洞：本轮第1洞绑定银涛B1来源图，不按本轮编号误用A1',()=>{const ctx=context(),r=S.newRound(c,[{id:'me',name:'测试'}],{id:'back',now:1,date:'2026-10-24',segmentIds:[c.segments[1].id]});const h=ctx.mapHoles(c,r)[0];A.equal(h.number,1);A.equal(h.mapId,c.segments[1].holes[0].id);A.ok(seed.items.find(i=>i.holeId===h.mapId).url.endsWith('hole-10.jpg'));});
+test('B+A顺序保留逐洞源ID，图片对应不随前后九互换而变化',()=>{const ctx=context(),r=S.newRound(c,[{id:'me',name:'测试'}],{id:'reverse',now:1,date:'2026-10-24',segmentIds:[c.segments[1].id,c.segments[0].id]});const h=ctx.mapHoles(c,r);A.ok(seed.items.find(i=>i.holeId===h[0].mapId).url.endsWith('hole-10.jpg'));A.ok(seed.items.find(i=>i.holeId===h[9].mapId).url.endsWith('hole-01.jpg'));A.equal(r.players[0].holePars[1],4);});
+test('其他球场每个球洞都有稳定预留ID，不显示银涛的图冒充',()=>{const ctx=context(),other=courses.find(c=>c.id==='cn_bg_511'),hs=ctx.mapHoles(other,null);A.equal(hs.length,18);A.ok(hs.every(h=>h.mapId.startsWith(other.id)));A.equal(seed.items.filter(i=>i.courseId===other.id).length,0);});

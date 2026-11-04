@@ -1,0 +1,142 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/courses/index",
+    "pages/create/index",
+    "pages/score/index",
+    "pages/result/index",
+    "pages/history/index",
+    "pages/stats/index",
+    "pages/friends/index",
+    "pages/profile/index",
+    "pages/rules/index",
+    "pages/adjust/index",
+    "pages/play/index",
+    "pages/course/index",
+    "pages/guide/index",
+    "pages/about/index",
+    "pages/feedback/index",
+    "pages/share/index",
+    "pages/account/index",
+    "pages/groups/index",
+    "pages/knowledge/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "青野 · GOLF",
+    "navigationBarBackgroundColor": "#edf4ec",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#edf4ec"
+  },
+  "tabBar": {
+    "color": "#617567",
+    "selectedColor": "#346740",
+    "backgroundColor": "#f3f9ef",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "assets/nav-home.png",
+        "selectedIconPath": "assets/nav-home.png"
+      },
+      {
+        "pagePath": "pages/courses/index",
+        "text": "球场",
+        "iconPath": "assets/nav-pin.png",
+        "selectedIconPath": "assets/nav-pin.png"
+      },
+      {
+        "pagePath": "pages/knowledge/index",
+        "text": "知识",
+        "iconPath": "assets/nav-book.png",
+        "selectedIconPath": "assets/nav-book.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "assets/nav-profile.png",
+        "selectedIconPath": "assets/nav-profile.png"
+      }
+    ],
+    "custom": true
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于展示附近球场，以及您主动使用球道测距时的位置参考"
+    },
+    "scope.writePhotosAlbum": {
+      "desc": "用于保存您主动生成的球场分享图片"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "usingComponents": {
+    "privacy-panel": "/components/privacy-panel/index"
+  },
+  "subPackages": [
+    {
+      "root": "packages/course-guide",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/hole-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/knowledge",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/sheshan-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/tianma-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/huakai-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/links-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/meilan-masters-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/meilan-nicklaus-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/qizhong-map",
+      "pages": [
+        "index"
+      ]
+    }
+  ],
+  "lazyCodeLoading": "requiredComponents"
+}

@@ -1,0 +1,211 @@
+{
+  "course": "上海银涛高尔夫俱乐部",
+  "overview_original": "原始图/总览_新浪2009.jpg",
+  "overview_source_published_on": "2009-03-03",
+  "holes": [
+    {
+      "hole_number": 1,
+      "source_label": "A1",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s1_h01",
+      "par": 4,
+      "original_image": "原始图/洞01.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false,
+      "style_sample": "整理样张/银涛_第01洞美化样张.png"
+    },
+    {
+      "hole_number": 2,
+      "source_label": "A2",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s1_h02",
+      "par": 4,
+      "original_image": "原始图/洞02.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 3,
+      "source_label": "A3",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s1_h03",
+      "par": 3,
+      "original_image": "原始图/洞03.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 4,
+      "source_label": "A4",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s1_h04",
+      "par": 5,
+      "original_image": "原始图/洞04.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 5,
+      "source_label": "A5",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s1_h05",
+      "par": 3,
+      "original_image": "原始图/洞05.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 6,
+      "source_label": "A6",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s1_h06",
+      "par": 4,
+      "original_image": "原始图/洞06.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 7,
+      "source_label": "A7",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s1_h07",
+      "par": 4,
+      "original_image": "原始图/洞07.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 8,
+      "source_label": "A8",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s1_h08",
+      "par": 5,
+      "original_image": "原始图/洞08.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 9,
+      "source_label": "A9",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s1_h09",
+      "par": 4,
+      "original_image": "原始图/洞09.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 10,
+      "source_label": "B1",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s2_h01",
+      "par": 4,
+      "original_image": "原始图/洞10.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 11,
+      "source_label": "B2",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s2_h02",
+      "par": 4,
+      "original_image": "原始图/洞11.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 12,
+      "source_label": "B3",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s2_h03",
+      "par": 3,
+      "original_image": "原始图/洞12.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 13,
+      "source_label": "B4",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s2_h04",
+      "par": 5,
+      "original_image": "原始图/洞13.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 14,
+      "source_label": "B5",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s2_h05",
+      "par": 4,
+      "original_image": "原始图/洞14.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 15,
+      "source_label": "B6",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s2_h06",
+      "par": 4,
+      "original_image": "原始图/洞15.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 16,
+      "source_label": "B7",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s2_h07",
+      "par": 3,
+      "original_image": "原始图/洞16.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 17,
+      "source_label": "B8",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s2_h08",
+      "par": 4,
+      "original_image": "原始图/洞17.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    },
+    {
+      "hole_number": 18,
+      "source_label": "B9",
+      "course_id": "cn_bg_585",
+      "hole_id": "cn_bg_585_s2_h09",
+      "par": 5,
+      "original_image": "原始图/洞18.jpg",
+      "source_url": "https://w.baigolf.com/course.php?act=detail&golf_course_id=585&lan=zh_cn",
+      "image_effective_on": null,
+      "current_layout_verified": false
+    }
+  ],
+  "prepared_on": "2026-10-23",
+  "source_images_downloaded_on": "2026-10-20",
+  "overview_style_sample": "整理样张/银涛_总览整理样张.png",
+  "source_maps_are_georeferenced": false,
+  "style_sample_policy": "内置图像工具生成的视觉样张，非测绘数据；默认仍关联来源原图。"
+}

@@ -1,0 +1,27 @@
+/* Faithful scene-led home, 2026-10-28. Other pages keep readable glass layers. */
+.app-shell::before{background-image:url('assets/glass/mist-background.jpg');opacity:.86;filter:none;transform:none}
+:root{--glass:rgba(250,253,248,.66)}
+.glass-course-list{background:rgba(250,253,248,.64)}
+:is(.card,.glass-course-list,.glass-location,.directory-region-trigger,.search){backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.scoring-workspace .compact-score-panel.card,.scoring-workspace .scorecard-table{background:rgba(250,253,246,.91)}
+.glass-home .topbar,.glass-home .demo-strip{display:none}
+.glass-home .app-shell{background:#dce7d5;overflow:hidden}
+.glass-home .app-shell::before{display:none}
+.glass-home .page{padding:0;min-height:100dvh}
+.home-immersive{position:relative;isolation:isolate;min-height:100dvh;display:flex;flex-direction:column;padding:30px 26px calc(88px + env(safe-area-inset-bottom));overflow:hidden}
+.home-scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-1;pointer-events:none}
+.home-opening{position:relative;color:#102f24}
+.home-wordmark{display:block;width:124px;height:88px;object-fit:cover;object-position:50% 60%;margin-left:-4px}
+.home-opening h1{font-family:'Songti SC','STSong','Noto Serif SC',serif;font-size:31px;font-weight:600;line-height:1.5;letter-spacing:0;margin:38px 0 6px;white-space:nowrap}
+.home-opening p{font-family:'Songti SC','STSong',serif;font-size:16px;line-height:1.8;color:#2b4439}
+.home-bottom-panel{margin-top:auto;position:relative;border:1px solid rgba(255,255,255,.86);border-radius:23px;padding:16px 16px 10px;background:rgba(249,253,240,.52);box-shadow:inset 0 1px 1px #fff,0 8px 26px #193f3022;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.home-feature-link{width:100%;display:flex;align-items:center;gap:12px;text-align:left;min-height:56px;padding:0 4px;color:#13382b}
+.home-feature-copy{flex:1;min-width:0}.home-feature-copy strong{display:block;font-size:16px;line-height:1.5;font-weight:600}.home-feature-copy small{display:block;font-size:13px;color:#4f6658;line-height:1.6;margin-top:5px}
+.home-feature-arrow{width:32px;height:32px;flex-shrink:0;border-radius:50%;background:#f5fce970;display:grid;place-items:center;border:1px solid #fff9}.home-feature-arrow .icon{width:17px;height:17px}
+.home-start.btn.primary{margin-top:28px;border-radius:28px;min-height:52px;display:flex;align-items:center;justify-content:center;gap:11px;background:rgba(56,112,62,.83);border-color:#e6f5cd9c;box-shadow:inset 0 1px 2px #e2f6ce88,0 5px 12px #254e3321;font-size:17px;letter-spacing:.3px}.home-start>.icon:last-child{position:absolute;right:29px;width:18px;height:18px}.home-start>.icon:first-child{width:21px;height:21px}
+.home-support{display:block;width:100%;min-height:28px;margin-top:4px;font-size:12px;color:#314f38;letter-spacing:.2px}
+.home-demo{display:block;width:100%;font-size:11px;line-height:1.5;min-height:24px;color:#405a45}
+.home-scene-credit{position:absolute;right:30px;bottom:calc(78px + env(safe-area-inset-bottom));font-size:10px;color:#254b35;background:#f8fbe74d;border-radius:4px;padding:2px 5px}
+.glass-home .bottom-nav{width:100%;max-width:390px;bottom:0;border-radius:27px 27px 0 0;background:rgba(247,251,235,.7);min-height:72px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));box-shadow:inset 0 1px 1px #fff,0 -4px 20px #36542a09;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+@media(max-width:370px){.home-immersive{padding-left:21px;padding-right:21px}.home-opening h1{font-size:26px;margin-top:30px}.home-opening p{font-size:14px}.home-wordmark{width:112px;height:80px}.home-feature-copy strong{font-size:15px}.home-bottom-panel{padding:14px 13px 8px}.home-start.btn.primary{margin-top:20px;font-size:16px}}
+@media(max-height:700px){.home-immersive{padding-top:18px;min-height:670px}.home-wordmark{height:72px;width:106px}.home-opening h1{margin-top:20px}.home-start.btn.primary{margin-top:16px}.home-bottom-panel{margin-top:100px}}

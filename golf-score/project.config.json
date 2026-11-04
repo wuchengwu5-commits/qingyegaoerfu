@@ -1,0 +1,15 @@
+{
+  "description": "青野 · 高尔夫记分",
+  "miniprogramRoot": "miniprogram/",
+  "projectname": "green-golf-score",
+  "appid": "touristappid",
+  "compileType": "miniprogram",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "urlCheck": true
+  },
+  "libVersion": "latest"
+}

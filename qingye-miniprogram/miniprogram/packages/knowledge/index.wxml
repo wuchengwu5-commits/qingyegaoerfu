@@ -1,0 +1,13 @@
+<view class="page knowledge-reader"><image class="page-backdrop" src="cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/media-v1/assets__spring-lake.webp" mode="aspectFill" aria-hidden="true"/>
+ <block wx:if="{{article}}">
+  <view class="reader-meta">{{article.categoryName}}<text>约 {{article.minutes}} 分钟</text></view>
+  <view class="title reader-title">{{article.title}}</view>
+  <view class="reader-lead">{{article.lead}}</view>
+  <view class="card reader-body"><view wx:for="{{article.sections}}" wx:key="title" class="reader-section"><view class="reader-section-title"><text class="section-dot"/>{{item.title}}</view><view class="reader-paragraph" user-select="true">{{item.body}}</view></view></view>
+  <view class="reader-takeaway"><view class="takeaway-label">记住这一点</view><view>{{article.takeaway}}</view></view>
+  <view class="reader-sources"><view class="source-heading">延伸阅读 · 官方来源</view><button wx:for="{{article.sources}}" wx:key="url" class="source-link" data-index="{{index}}" bindtap="source"><text>{{item.title}}</text><text class="source-copy">复制链接</text></button><view class="note source-note">规则要点核对：{{reviewed}}。入门阅读未列出所有例外，实际比赛请结合现行规则、当地规则与裁判指引。</view></view>
+  <button class="reader-all" bindtap="library">返回知识目录</button>
+ </block>
+ <block wx:elif="{{category}}"><view class="eyebrow">QINGYE JOURNAL</view><view class="title">{{category.id==='rules'?'高尔夫规则':category.name}}</view><view class="sub category-intro">{{category.description}}<text class="category-count">{{items.length}} 篇入门阅读</text></view><view class="card category-list"><view wx:for="{{items}}" wx:key="id" class="category-article" data-id="{{item.id}}" bindtap="article" role="button" aria-label="{{item.title}}"><view class="grow"><view class="category-meta">{{item.number}} / 约 {{item.minutes}} 分钟</view><view class="category-title">{{item.title}}</view><view class="sub">{{item.summary}}</view></view><image src="/assets/chevron.png" mode="aspectFit"/></view></view><button bindtap="library">浏览全部知识</button></block>
+ <view wx:else class="empty"><view>这篇文章暂未收录</view><button class="space" bindtap="library">查看知识目录</button></view>
+</view><privacy-panel/>

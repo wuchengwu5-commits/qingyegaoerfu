@@ -1,0 +1,3 @@
+const {S,run,go,tab,confirm}=require('../../services/ui');
+const E=require('../../services/engine');
+Page({data:{},onShow(){run(()=>{const d=S.read();const r=d.rounds.find(x=>E.isFinished(x));this.setData({storageError:S.storageStatus(),profile:d.profile,active:S.active()||null,stats:S.stats(),recent:r?Object.assign({},r,E.summary(r,'me'),{date:S.date(r.createdAt)}):null});});},retryUpgrade(){run(()=>{S.retryUpgrade();this.onShow();});},start(){if(this.data.active)go('score','?id='+this.data.active.id);else go('courses');},courses(){go('courses');},friends(){go('friends');},profile(){tab('profile');},history(){tab('history');},result(){go('result','?id='+this.data.recent.id);}});

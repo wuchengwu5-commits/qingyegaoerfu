@@ -1,0 +1,1 @@
+const P=require('../../services/privacy');Component({data:{visible:false},lifetimes:{attached(){this.off=P.subscribe(visible=>this.setData({visible}));},detached(){if(this.off)this.off();}},methods:{agree(){P.answer(true);},decline(){P.answer(false);},policy(){wx.openPrivacyContract({fail(){wx.showToast({title:'请先在微信后台配置隐私保护指引',icon:'none'});}});},stop(){}}});

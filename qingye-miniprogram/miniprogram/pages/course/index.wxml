@@ -1,0 +1,39 @@
+<view class="page course-detail">
+ <image class="page-backdrop" src="cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/media-v1/assets__spring-lake.webp" mode="aspectFill" aria-hidden="true"/>
+ <view class="card course-overview">
+  <view class="course-cover"><image src="cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/media-v1/assets__spring-lake.webp" mode="aspectFill"/><text class="cover-credit">AI 意境图 · 非球场实拍</text></view>
+  <view class="course-summary">
+   <view class="row course-name-row"><view class="title grow">{{course.name}}</view><button class="favorite-button" bindtap="favorite" aria-label="{{favorite?'取消收藏球场':'收藏球场'}}"><image src="/assets/{{favorite?'star-active':'star'}}.png" mode="aspectFit"/></button></view>
+   <view class="sub course-meta">{{course.city}} · {{holeCount}} 洞<text wx:if="{{par}}"> · Par {{par}}</text></view>
+   <button wx:if="{{canScore}}" class="primary start-round" bindtap="start"><image class="start-icon" src="/assets/flag-white.png" mode="aspectFit"/><text>开始记分</text><image class="start-arrow" src="/assets/arrow-light.png" mode="aspectFit"/></button>
+   <view wx:else class="unavailable"><view>记分卡待补充，暂不能开局</view><text>可以先查看球场资料与球道图。</text></view>
+   <view wx:if="{{canScore}}" class="start-hint">选好发球台与球友，开启这一轮。</view>
+  </view>
+ </view>
+ <view class="card range-entry" bindtap="maps" role="button" aria-label="查看球道图"><view class="row"><image class="detail-icon" src="/assets/pin.png" mode="aspectFit"/><view class="grow"><view class="detail-heading">球道图</view><view class="menu-copy">{{hasGpsMap?gpsMapCount+' / '+holeCount+' 洞 · 卫星图 · GPS 测距':hasCourseMap?'卫星总览 · 逐洞位置核对中':'选洞查看 · 球道图待补充'}}</view></view><image class="detail-arrow" src="/assets/chevron.png" mode="aspectFit"/></view></view>
+ <view class="card scorecard-panel">
+  <button class="disclosure" bindtap="toggleScorecard" aria-expanded="{{scorecardExpanded}}"><image class="detail-icon" src="/assets/history.png" mode="aspectFit"/><view class="grow"><view class="detail-heading">球洞与记分卡</view><view class="menu-copy">{{holeCount}} 洞 · 逐洞 PAR、难度与距离</view></view><text class="disclosure-label">{{scorecardExpanded?'收起':'展开'}}</text><image class="detail-arrow disclosure-arrow {{scorecardExpanded?'expanded':''}}" src="/assets/chevron.png" mode="aspectFit"/></button>
+  <view wx:if="{{scorecardExpanded}}" class="scorecard-content">
+   <view wx:if="{{teeOptions.length}}" class="tee-selector">
+    <view class="tee-selector-heading">查看发球台数据</view>
+    <view class="tee-options"><button wx:for="{{teeOptions}}" wx:key="index" class="tee-option {{teeIndex===item.index?'selected':''}}" data-index="{{item.index}}" bindtap="tee" aria-label="{{item.label}}" aria-pressed="{{teeIndex===item.index}}"><text class="tee-dot {{item.neutral?'neutral':''}}" style="background:{{item.color}}"/><text class="tee-label">{{item.label}}</text><text wx:if="{{teeIndex===item.index}}" class="tee-check" aria-hidden="true">✓</text></button></view>
+   </view>
+   <view wx:if="{{sections.length>1}}" class="section-tabs"><button wx:for="{{sections}}" wx:key="id" class="choice {{sectionIndex===index?'active':''}}" data-index="{{index}}" bindtap="section">{{item.name}}</button></view>
+   <view wx:if="{{selectedSection}}" class="hole-table">
+    <view wx:if="{{sections.length===1}}" class="single-section">{{selectedSection.name}}</view>
+    <view class="card-row table-head"><text>洞号</text><text>PAR</text><text>SI</text><text>距离 / 码</text></view>
+    <view wx:for="{{selectedSection.holes}}" wx:key="id" class="card-row"><text>{{item.label}}</text><text>{{item.par}}</text><text>{{item.si===null?'—':item.si}}</text><text>{{item.distance}}</text></view>
+   </view>
+   <view wx:else class="note scorecard-note">逐洞资料待补充。</view>
+   <view class="note scorecard-note">此处用于查看资料。打球洞段与发球台在开始记分时设置。</view>
+  </view>
+ </view>
+ <view class="card contact-panel">
+  <view class="menu contact-row" bindtap="navigate" role="button" aria-label="查看球场地址"><view class="row"><view class="grow"><view class="contact-label">球场地址</view><view class="contact-value">{{course.address||'地址待补充'}}</view></view><text class="link">导航 ›</text></view></view>
+  <view wx:if="{{course.phone}}" class="menu row contact-row" bindtap="phone" role="button" aria-label="拨打球场电话"><view><view class="contact-label">联系电话</view><view class="contact-value">{{course.phone}}</view></view><text class="link">拨打 ›</text></view>
+ </view>
+ <view class="card sources-panel">
+  <button class="disclosure" bindtap="toggleSources" aria-expanded="{{sourcesExpanded}}"><image class="detail-icon" src="/assets/info.png" mode="aspectFit"/><view class="grow"><view class="detail-heading">资料与来源</view><view class="menu-copy">查看资料日期与来源链接</view></view><text class="disclosure-label">{{sourcesExpanded?'收起':'展开'}}</text><image class="detail-arrow disclosure-arrow {{sourcesExpanded?'expanded':''}}" src="/assets/chevron.png" mode="aspectFit"/></button>
+  <view wx:if="{{sourcesExpanded}}" class="sources-content"><view class="note">采集于 {{course.retrievedOn||'日期待补充'}} · 营业状态和记分卡现行版本待球会核实。全国资料不是全部在营球场认证名录。</view><view wx:for="{{course.sources}}" wx:key="source_id" class="menu note" data-url="{{item.url}}" bindtap="source">{{item.title}} · 复制来源链接 ›</view></view>
+ </view>
+</view><privacy-panel/>

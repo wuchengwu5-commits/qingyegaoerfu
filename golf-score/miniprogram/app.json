@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/courses/index",
+    "pages/create/index",
+    "pages/score/index",
+    "pages/result/index",
+    "pages/history/index",
+    "pages/stats/index",
+    "pages/friends/index",
+    "pages/profile/index",
+    "pages/rules/index",
+    "pages/adjust/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "青野 · GOLF",
+    "navigationBarBackgroundColor": "#f6f8f5",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f8f5"
+  },
+  "tabBar": {
+    "color": "#829088",
+    "selectedColor": "#176b48",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "打球",
+        "iconPath": "assets/home.png",
+        "selectedIconPath": "assets/home-active.png"
+      },
+      {
+        "pagePath": "pages/history/index",
+        "text": "记录",
+        "iconPath": "assets/history.png",
+        "selectedIconPath": "assets/history-active.png"
+      },
+      {
+        "pagePath": "pages/stats/index",
+        "text": "统计",
+        "iconPath": "assets/stats.png",
+        "selectedIconPath": "assets/stats-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "assets/profile.png",
+        "selectedIconPath": "assets/profile-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}
