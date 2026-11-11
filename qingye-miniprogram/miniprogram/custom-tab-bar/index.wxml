@@ -1,6 +1,6 @@
 <view wx:if="{{!hidden}}" class="glass-tabs" role="tablist" aria-label="底部导航">
  <view class="glass-tab-track">
   <view class="glass-tab-highlight" style="transform:translateX({{selected*100}}%);" aria-hidden="true"/>
-  <button wx:for="{{tabs}}" wx:key="page" class="tab {{selected===index?'selected':''}}" hover-class="tab-pressed" hover-stay-time="100" data-page="{{item.page}}" bindtap="switchTab" role="tab" aria-label="{{item.text}}" aria-selected="{{selected===index}}"><image class="tab-image" src="/assets/nav-{{item.icon}}.png" mode="aspectFit"/><text class="tab-label">{{item.text}}</text></button>
+  <button wx:for="{{tabs}}" wx:key="page" class="tab {{selected===index?'selected':''}}" hover-class="tab-pressed" hover-stay-time="100" data-page="{{item.page}}" bindtap="switchTab" role="tab" aria-label="{{item.text}}" aria-selected="{{selected===index}}"><image class="tab-image" src="/assets/{{item.icon}}.png" mode="aspectFit"/><text class="tab-label">{{item.text}}</text></button>
  </view>
 </view>

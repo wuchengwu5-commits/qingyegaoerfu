@@ -1,0 +1,11 @@
+<view class="page background-page"><scene-backdrop/>
+ <view class="eyebrow">A LITTLE CLOSER TO NATURE</view><view class="title">换一片，想去的绿意。</view><view class="sub">四季有不同的风景，你也可以有自己的偏爱。</view>
+ <view class="background-preview"><image class="{{previewMirrored?'theme-image-mirrored':''}}" src="{{preview}}" mode="aspectFill" binderror="imageError"/><view class="preview-shade"/><view class="preview-copy"><text class="preview-eyebrow">青野 · QINGYE GOLF</text><view>走进绿意，把心放慢。</view><text class="preview-caption">{{previewName}}</text></view><view class="preview-label">效果预览</view></view>
+ <view class="segment mode-switch"><view class="{{mode==='auto'?'active':''}}" data-mode="auto" bindtap="mode">自动切换</view><view class="{{mode==='manual'?'active':''}}" data-mode="manual" bindtap="mode">自己选择</view></view>
+ <view class="mode-description" wx:if="{{mode==='auto'}}"><view>顺着季节，也顺着一天的光。</view><text>按本机当前时间与季节选择。清晨看雾，傍晚看夕阳，其余时段看当季风景。</text></view>
+ <view class="mode-description" wx:else><view>把喜欢的这一刻，留下来。</view><text>选好后固定使用，不会随时间改变。首页保留风景，功能页会柔和虚化。</text></view>
+ <view class="row collection-title"><text>四季 · 晨昏 · 天气</text></view>
+ <view class="background-grid"><view wx:for="{{items}}" wx:key="id" class="background-choice {{mode==='manual'&&themeId===item.id?'selected':''}}" data-id="{{item.id}}" bindtap="select"><image class="{{item.mirrored?'theme-image-mirrored':''}}" src="{{item.fileID}}" mode="aspectFill" lazy-load/><view class="theme-check" wx:if="{{mode==='manual'&&themeId===item.id}}">✓</view><view class="theme-copy"><view>{{item.name}}</view><text>{{item.description}}</text></view></view></view>
+ <view class="note background-note">雨雪风景可自己选择；自动模式不会把意境图当作实时天气。选择保存在本机。</view>
+ <view class="background-save"><view class="save-copy">{{mode==='auto'?'自动 · '+previewName:previewName}}</view><button class="primary" bindtap="save" loading="{{saving}}" disabled="{{saving}}">保存并查看首页 →</button></view>
+</view><privacy-panel/>

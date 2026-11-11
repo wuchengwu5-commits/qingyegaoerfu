@@ -1,1 +1,102 @@
-<view class="page score-page"><image class="page-backdrop" src="cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/media-v1/assets__spring-lake.webp" mode="aspectFill" aria-hidden="true"/><view class="score-intro"><view class="title">本轮记分</view><view class="sub">专注当下，享受每一洞。</view></view><view class="row space score-social" bindtap="groups"><text class="link">{{r.cloud?'同组与活动成绩':'微信组队'}} ↗</text><text class="note">{{syncText}}</text></view><view class="card row score-course"><view class="grow course-name">{{r.courseName}}</view><text class="link tap" bindtap="guide">球道图 ›</text></view><view class="card hole-score-card"><view class="row hole-heading"><view class="row"><view><view class="note">当前球洞</view><view class="current-hole">第 {{h.number}} 洞</view></view><view class="par-header"><view class="note">标准杆</view><view>PAR {{h.par}}</view></view></view><view class="note">{{editing?'更正中':'✓ 已保存'}}</view></view><view class="segment half"><view class="{{half==='front'?'active':''}}" data-id="front" bindtap="half">前九洞</view><view wx:if="{{r.holes.length>9}}" class="{{half==='back'?'active':''}}" data-id="back" bindtap="half">后九洞</view></view><view class="score-table"><view class="table-line table-head"><view class="name-cell">球洞</view><view wx:for="{{tableHoles}}" wx:key="number" class="hole-cell {{h.number===item.number?'current':''}}" data-number="{{item.number}}" bindtap="hole">{{item.number}}</view><view class="total-cell">总杆</view></view><view class="table-line par-line"><view class="name-cell">PAR</view><view wx:for="{{tableHoles}}" wx:key="number" class="hole-cell {{h.number===item.number?'current':''}}" data-number="{{item.number}}" bindtap="hole" role="button" aria-label="第 {{item.number}} 洞，PAR {{item.par}}">{{item.par}}</view><view class="total-cell">—</view></view><view wx:for="{{tablePlayers}}" wx:key="id" class="table-line player-line"><view class="name-cell">{{item.name}}</view><view wx:for="{{item.cells}}" wx:for-item="cell" wx:key="number" class="hole-cell {{h.number===cell.number?'current':''}} {{h.number===cell.number && p.id===item.id?'selected-cell':''}}" data-pid="{{item.id}}" data-number="{{cell.number}}" bindtap="hole"><view class="score-mark {{cell.kind}}">{{cell.value}}</view></view><view class="total-cell">{{item.total}}</view></view></view></view><view class="card compact-stepper"><view wx:if="{{players.length>1}}" class="players"><view wx:for="{{players}}" wx:key="id" class="person {{p.id===item.id?'selected':''}}" data-id="{{item.id}}" bindtap="selectPlayer">{{item.id==='me'?'我':item.name}}</view></view><view class="row step-row"><view class="grow"><view class="note">{{p.id==='me'?'我':p.name}}的本洞总杆</view><view class="score-caption">{{s?(s.completion==='holed_out'?(appearance.label||appearance.delta):statusText):'默认 PAR · 待确认'}}</view></view><button class="step-minus" data-delta="-1" bindtap="step" aria-label="减少一杆">−</button><button class="score-number" bindtap="input" aria-label="确认默认标准杆">{{displayScore}}</button><button class="primary step-plus" data-delta="1" bindtap="step" aria-label="增加一杆">＋</button></view><view class="row step-footer"><text class="note">总杆 {{summary.liveTotal}} <text>{{summary.diff===0?'E':summary.diff>0?'+'+summary.diff:summary.diff}}</text></text><text wx:if="{{!s}}" class="link" bindtap="input">记为 Par ✓</text><text wx:else class="link tap" bindtap="clear">清空</text><text class="link tap" bindtap="undo">↶ 撤销</text></view></view><view class="legend"><view><text class="score-mark eagle">−2</text><text>Eagle</text></view><view><text class="score-mark birdie">−1</text><text>Birdie</text></view><view><text class="score-mark par">E</text><text>Par</text></view><view><text class="score-mark bogey">+1</text><text>Bogey</text></view><view><text class="score-mark double">+2</text><text>Double</text></view></view><view class="quiet-card spaced row" bindtap="operations"><text>本洞详情与比赛操作</text><text>{{operations?'⌃':'⌄'}}</text></view><view wx:if="{{operations}}"><view class="note">{{statusText}} · {{h.sectionName}} · 原洞号 {{h.label}} · {{p.tee}}</view><view class="sub">{{explanation}}</view><view class="choices"><text class="choice" data-mode="special" bindtap="adjust">捡球 / 跳洞</text><text class="choice" data-mode="penalty" bindtap="adjust">追加罚杆</text><text class="choice" data-mode="event" bindtap="adjust">比赛事件</text><text class="choice" data-mode="award" bindtap="adjust">附加奖项</text><text class="choice" bindtap="rules">本场规则</text></view></view><view class="menu row" bindtap="technical"><text>详细记录 <text class="note">选填</text></text><text>{{technical?'收起 −':'展开 +'}}</text></view><view wx:if="{{technical}}" class="card"><view class="menu row" data-key="putts" bindtap="tech"><text>推杆数</text><text>{{!s||s.putts===null?'未记录':s.putts}} ›</text></view><view class="menu row" data-key="penalties" bindtap="tech"><text>罚杆 · 已含在总杆中</text><text>{{s?s.penalties:0}} ›</text></view><view class="menu row" data-key="fairway" bindtap="hit"><text>球道命中</text><text>{{h.par===3?'不适用':!s||s.fairway===null?'未记录':s.fairway?'命中':'未中'}}</text></view><view class="menu row" data-key="green" bindtap="hit"><text>标准杆上果岭</text><text>{{!s||s.green===null?'未记录':s.green?'命中':'未中'}}</text></view></view><view class="toolbar"><button bindtap="result">完整记分卡</button><button wx:if="{{!editing}}" bindtap="pause">暂存球局</button></view><button wx:if="{{!editing}}" class="space" bindtap="finish">检查并结束本轮</button><view wx:else><button class="primary space" bindtap="commit">填写原因并提交更正</button><button class="space" bindtap="cancel">放弃本次更正</button></view><view class="note spaced">总杆按整轮标准杆＋已完球洞杆差显示。未记球洞保留空白，不计作实际完洞。</view></view><privacy-panel/>
+<view class="page score-page"><scene-backdrop/><view wx:if="{{!r}}" class="card spaced"><view class="section">同组记分牌</view><view class="note">{{boardError||(boardLoginNeeded?'登录后查看同组成绩':'正在读取成绩…')}}</view><button wx:if="{{boardLoginNeeded}}" bindtap="boardLogin">微信授权登录</button><button wx:elif="{{boardError}}" bindtap="pollBoard">重新加载</button></view>
+<block wx:if="{{r}}">
+<view class="card score-course">
+ <view class="row"><view class="grow course-name">{{r.courseName}}</view><text wx:if="{{!remoteBoard}}" class="link course-map-link" bindtap="guide">球道图 ›</text></view>
+
+</view>
+<view class="card hole-score-card">
+ <view class="row hole-heading"><view class="grow"><view class="note">本轮第 {{currentPosition}} 洞<text wx:if="{{pendingCellCount}}"> · 待同步</text></view><view class="current-hole course-hole-title">{{courseHole}}</view></view><view class="par-header"><view class="note">标准杆</view><view>PAR {{h.par}}</view></view></view>
+ <view class="score-table">
+  <view class="fixed-players">
+   <view class="name-head">球友<text class="total-label">已记杆数</text></view><view class="name-par">PAR</view>
+   <view wx:for="{{tablePlayers}}" wx:key="id" class="player-id {{p.id===item.id?'selected-player':''}}" data-id="{{item.id}}" bindtap="selectPlayer" role="button" aria-label="选择{{item.name}}，已记{{item.total}}杆，{{item.played}}洞">
+    <view class="player-identity"><image class="score-avatar {{item.avatarUrl?'':'avatar-placeholder'}}" src="{{item.avatarUrl||'/assets/nav-profile.png'}}" mode="aspectFill" data-id="{{item.id}}" binderror="avatarError"/><text class="person-total">{{item.total}}</text></view><text class="person-name">{{item.name}}</text>
+   </view>
+  </view>
+  <scroll-view class="score-scroll" scroll-x="{{true}}" scroll-left="{{scoreScrollLeft}}" bindscroll="scoreScrolled" show-scrollbar="{{true}}" enhanced="{{true}}" aria-label="左右滑动查看完整记分表">
+   <view class="score-grid" style="width:{{tableWidth}}px">
+    <view class="table-line table-head"><view wx:for="{{tableHoles}}" wx:key="number" class="hole-cell {{h.number===item.number?'current':''}}" data-number="{{item.number}}" bindtap="hole" role="button" aria-label="选择{{item.shortLabel}}洞"><text wx:if="{{item.headerSection}}" class="hole-section-label">{{item.headerSection}}</text><text class="hole-number-label">{{item.headerNumber}}</text></view></view>
+    <view class="table-line par-line"><view wx:for="{{tableHoles}}" wx:key="number" class="hole-cell {{h.number===item.number?'current':''}}" data-number="{{item.number}}" bindtap="hole" role="button" aria-label="{{item.shortLabel}}洞，PAR {{item.par}}">{{item.par}}</view></view>
+    <view wx:for="{{tablePlayers}}" wx:key="id" class="table-line player-line {{p.id===item.id?'selected-row':''}}">
+     <view wx:for="{{item.cells}}" wx:for-item="cell" wx:key="number" class="hole-cell {{h.number===cell.number?'current':''}} {{h.number===cell.number&&p.id===item.id?'selected-cell':''}} {{cell.recorded?'recorded':'unrecorded'}}" data-pid="{{item.id}}" data-number="{{cell.number}}" bindtap="hole" role="button" aria-label="{{cell.aria}}">
+      <view wx:if="{{cell.recorded}}" class="score-mark {{cell.kind}}">{{cell.value}}</view><text wx:elif="{{!cell.distance}}" class="empty-score">—</text><text wx:if="{{cell.distance}}" class="hole-distance">{{cell.distance}}</text>
+     </view>
+    </view>
+   </view>
+  </scroll-view>
+ </view>
+ <view class="scroll-hint"><text>左右滑动 · 完整 {{r.holes.length}} 洞</text><text>淡字为距离（{{distanceUnitLabel}}）</text></view>
+</view>
+<view wx:if="{{scoreLocked&&!boardFinished}}" class="quiet-card">此记分卡已锁定，可查看逐洞成绩。</view>
+<view wx:if="{{!boardFinished&&!scoreLocked}}" class="card compact-stepper">
+ <scroll-view wx:if="{{players.length>1}}" class="players-scroll" scroll-x="{{true}}" scroll-into-view="{{playerScrollTarget}}" scroll-with-animation="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+  <view class="players"><view wx:for="{{players}}" wx:key="id" id="{{item.tabId}}" class="person {{p.id===item.id?'selected':''}}" data-id="{{item.id}}" bindtap="selectPlayer" role="button" aria-label="选择{{item.displayName}}记分"><image class="tab-avatar {{item.avatarUrl?'':'avatar-placeholder'}}" src="{{item.avatarUrl||'/assets/nav-profile.png'}}" mode="aspectFill" data-id="{{item.id}}" binderror="avatarError"/><text class="tab-name">{{item.displayName}}</text></view></view>
+ </scroll-view>
+ <view class="row step-row"><view class="grow entry-copy"><view class="note"><text class="entry-prefix">{{playerLabel}} · </text>{{currentHoleLabel}} 总杆</view><view class="score-caption">{{s?(s.completion==='holed_out'?(appearance.label||appearance.delta):statusText):'默认 PAR · 待确认'}}</view></view><button class="step-minus" disabled="{{joiningBusy}}" data-delta="-1" bindtap="step" aria-label="减少一杆">−</button><button class="score-number" disabled="{{joiningBusy}}" bindtap="input" aria-label="确认当前杆数">{{displayScore}}</button><button class="primary step-plus" disabled="{{joiningBusy}}" data-delta="1" bindtap="step" aria-label="增加一杆">＋</button></view>
+ <view class="row step-footer"><text class="note">已记 {{summary.totalText}} 杆 · {{summary.played}}/{{r.holes.length}} 洞</text><text wx:if="{{!s}}" class="link footer-action" bindtap="input">记为 Par ✓</text><text wx:else class="link footer-action" bindtap="clear">清空</text><text class="link footer-action" bindtap="undo">↶ 撤销</text></view>
+</view>
+<view class="legend"><view class="legend-item"><text class="score-mark eagle">−2</text><text>Eagle</text></view><view class="legend-item"><text class="score-mark birdie">−1</text><text>Birdie</text></view><view class="legend-item"><text class="score-mark par">E</text><text>Par</text></view><view class="legend-item"><text class="score-mark bogey">+1</text><text>Bogey</text></view><view class="legend-item"><text class="score-mark double">+2</text><text>Double</text></view></view>
+<view class="card round-details">
+ <view class="route-line"><view class="grow"><text class="route-caption">本轮路线</text><text class="route-label">{{routeLabel}}</text></view><button wx:if="{{canAdjustRoute}}" class="route-edit" bindtap="editRoute">调整 ›</button></view>
+ <view wx:if="{{routeEditing}}" class="route-panel">
+  <view class="route-title">选择场区与开球顺序</view>
+  <view class="route-pickers">
+   <view class="route-option"><view class="note">先打</view><picker range="{{routeFirstOptions}}" range-key="name" value="{{routeFirstIndex}}" data-which="0" bindchange="routePick"><view class="route-select">{{routeFirstName}} ⌄</view></picker></view>
+   <button wx:if="{{routeTwo}}" class="route-swap" bindtap="swapRoute" aria-label="调换前后顺序">⇄</button>
+   <view wx:if="{{routeTwo}}" class="route-option"><view class="note">后打</view><picker range="{{routeSecondOptions}}" range-key="name" value="{{routeSecondIndex}}" data-which="1" bindchange="routePick"><view class="route-select">{{routeSecondName}} ⌄</view></picker></view>
+  </view>
+  <view class="route-note">{{routeDraftLabel}} · 共 {{r.holes.length}} 洞</view>
+  <view class="route-note">已记成绩按实际球洞保留，换回场区仍可查看。</view>
+  <view class="route-actions"><button bindtap="cancelRoute">取消</button><button class="primary" bindtap="applyRoute">应用路线</button></view>
+ </view>
+ <view class="round-rule" bindtap="viewPolicy" role="button" aria-label="查看本场记分规则"><text class="route-caption">本场规则</text><text>{{policyName}} ›</text></view>
+</view>
+<view class="card score-tools team-tools">
+ <view class="tools-heading"><view><view class="tools-title">球友与组队</view><view class="tools-caption">本组 {{players.length}} / 16 位球员</view></view><button class="tools-link" bindtap="switchGroups">{{competitionBoard?'赛事总览 ›':'切换 / 新建 ›'}}</button></view>
+ <block wx:if="{{canInvite&&!editing&&!boardFinished}}">
+  <button class="team-invite" bindtap="enableSharing" loading="{{joiningBusy}}" disabled="{{joiningBusy}}">
+   <view class="invite-symbol" aria-hidden="true"><view></view><view></view><view></view><view></view></view>
+   <view class="tool-copy"><view class="tool-label">邀请球友扫码入组</view><view class="tool-description">一起查看、记录本组成绩</view></view><text class="tool-chevron">›</text>
+  </button>
+  <view class="team-secondary">
+   <button class="team-small-action" bindtap="addVirtual" disabled="{{joiningBusy}}"><text class="team-action-symbol">＋</text><view class="tool-copy"><view class="tool-label">添加手动球员</view><view class="tool-description">由你代为记分</view></view></button>
+   <button class="team-small-action" bindtap="inviteScorer" disabled="{{joiningBusy}}"><image class="team-action-icon" src="/assets/nav-profile.png"/><view class="tool-copy"><view class="tool-label">记分员 / 球童</view><view class="tool-description">邀请协助记分</view></view></button>
+  </view>
+ </block>
+ <view wx:if="{{liveBoard||r.cloud&&!remoteBoard}}" class="team-sync"><text wx:if="{{liveBoard}}">{{pendingCellCount?'本机已记 · 同步中':(boardFinished?'本轮已结束':'同组共同记分')}}</text><text wx:if="{{r.cloud&&!remoteBoard}}" class="link" bindtap="groups">小组成绩 ›</text></view>
+ <view wx:if="{{!competitionBoard}}" class="row space"><view class="note">主要记分员 · {{primaryScorerName}}</view><picker wx:if="{{canInvite&&!boardFinished&&scorerChoices.length>1}}" range="{{scorerChoices}}" range-key="name" value="{{scorerIndex}}" bindchange="changePrimary"><view class="link">修改 ›</view></picker></view>
+ <view wx:if="{{scorers.length}}" class="scorer-list"><view class="note">记分员 · 不参赛</view><view wx:for="{{scorers}}" wx:key="uid" class="row scorer-row"><text>{{item.name}}</text><text wx:if="{{canInvite}}" class="link" data-uid="{{item.uid}}" bindtap="removeScorer">移除</text></view></view>
+ <view wx:if="{{boardError}}" class="board-error">{{boardError}} <text wx:if="{{boardConflict}}" bindtap="resolveBoard" class="link">处理同步</text><text wx:else bindtap="retryBoard" class="link">重试</text></view>
+</view>
+<view class="card score-tools round-tools">
+ <view class="tools-heading"><view class="tools-title">记分与球局</view></view>
+ <button wx:if="{{!remoteBoard}}" class="tool-row" bindtap="result"><image class="tool-row-icon" src="/assets/history.png"/><view class="tool-copy"><view class="tool-label">完整记分卡</view><view class="tool-description">查看本轮逐洞成绩</view></view><text class="tool-chevron">›</text></button>
+ <button class="tool-row" bindtap="technical" aria-expanded="{{technical}}"><view class="tool-glyph" aria-hidden="true">≡</view><view class="tool-copy"><view class="tool-label">详细记录<text class="optional-label">选填</text></view><view class="tool-description">推杆、罚杆与命中情况</view></view><text class="tool-chevron">{{technical?'−':'＋'}}</text></button>
+ <view wx:if="{{technical}}" class="tool-expanded">
+  <view class="menu row" data-key="putts" bindtap="tech"><text>推杆数</text><text>{{!s||s.putts===null?'未记录':s.putts}} ›</text></view>
+  <view class="menu row" data-key="penalties" bindtap="tech"><text>罚杆 · 已含在总杆中</text><text>{{s?s.penalties:0}} ›</text></view>
+  <view class="menu row" data-key="fairway" bindtap="hit"><text>球道命中</text><text>{{h.par===3?'不适用':!s||s.fairway===null?'未记录':s.fairway?'命中':'未中'}} ›</text></view>
+  <view class="menu row" data-key="green" bindtap="hit"><text>标准杆上果岭</text><text>{{!s||s.green===null?'未记录':s.green?'命中':'未中'}} ›</text></view>
+ </view>
+ <button wx:if="{{!remoteBoard}}" class="tool-row" bindtap="operations" aria-expanded="{{operations}}"><image class="tool-row-icon" src="/assets/flag.png"/><view class="tool-copy"><view class="tool-label">本洞与比赛操作</view><view class="tool-description">捡球、补记与比赛规则</view></view><text class="tool-chevron">{{operations?'−':'＋'}}</text></button>
+ <view wx:if="{{operations&&!remoteBoard}}" class="tool-expanded"><view class="note">{{statusText}} · {{courseHole}} · {{p.tee}}</view><view class="sub">{{explanation}}</view><view class="choices"><text class="choice" data-mode="special" bindtap="adjust">捡球 / 跳洞</text><text class="choice" data-mode="penalty" bindtap="adjust">追加罚杆</text><text class="choice" data-mode="event" bindtap="adjust">比赛事件</text><text class="choice" data-mode="award" bindtap="adjust">附加奖项</text><text class="choice" bindtap="rules">本场规则</text></view></view>
+ <button wx:if="{{!remoteBoard&&!editing}}" class="tool-row" bindtap="pause"><view class="tool-glyph pause-symbol" aria-hidden="true">Ⅱ</view><view class="tool-copy"><view class="tool-label">保存并返回</view><view class="tool-description">成绩已保留，其他组员可继续记分</view></view><text class="tool-chevron">›</text></button>
+ <button wx:if="{{competitionBoard}}" class="tool-row" bindtap="switchGroups"><view class="tool-copy"><view class="tool-label">核对成绩与交卡</view><view class="tool-description">回到本组赛事页面确认成绩</view></view><text class="tool-chevron">›</text></button><button wx:if="{{canFinishRemote&&!boardFinished}}" class="primary round-finish" bindtap="finishRemote">检查并结束本轮</button><view wx:if="{{!remoteBoard}}" class="round-finish-area"><button wx:if="{{!editing}}" class="primary round-finish" bindtap="finish">检查并结束本轮<text>→</text></button><block wx:else><button class="primary round-finish" bindtap="commit">填写原因并提交更正<text>→</text></button><button class="tools-cancel" bindtap="cancel">放弃本次更正</button></block></view>
+</view>
+<view class="score-footnote">杆数仅累计已记录的实际完洞成绩；未记球洞留空，不自动补标准杆。</view></block></view><view wx:if="{{codeOpen}}" class="invite-code-layer" catchtouchmove="codeNoop">
+ <view class="invite-code-mask" bindtap="closeCode"></view>
+ <scroll-view class="invite-code-dialog" scroll-y="{{true}}" catchtap="codeNoop">
+  <view class="invite-code-content">
+   <button class="invite-code-close" bindtap="closeCode" aria-label="关闭邀请">×</button>
+   <view class="invite-code-title">{{codeKind==='scorer'?'邀请记分员 / 球童':codeKind==='group'?'邀请另一组加入活动':codeKind==='watch'?'邀请查看成绩':'邀请球友扫码入组'}}</view><view class="invite-code-subtitle">{{codeKind==='scorer'?'只协助本组记分，不占球位、不参与排名':codeKind==='watch'?'扫码查看本活动成绩':codeKind==='group'?'扫码建立小组，一起查看活动成绩':'微信扫一扫，加入本组一起记分'}}</view>
+   <view class="invite-code-frame">
+    <image wx:if="{{boardCode}}" class="invite-code-image" src="{{boardCode}}" mode="aspectFit" show-menu-by-longpress="{{true}}" bindtap="previewCode" binderror="codeImageError"/>
+    <view wx:elif="{{codeBusy}}" class="invite-code-status"><view class="invite-code-spinner"></view><text>正在生成微信小程序码…</text></view>
+    <view wx:else class="invite-code-status"><text>{{codeError||'暂未生成小程序码'}}</text><button bindtap="retryCode">重新生成</button></view>
+   </view>
+   <view class="invite-code-version">{{codeVersion}} · 微信小程序码</view>
+   <button wx:if="{{boardInvite}}" class="primary invite-code-share" open-type="share">转发给微信好友</button>
+   <view class="invite-code-actions"><text bindtap="closeCode" role="button">关闭</text><text wx:if="{{boardInvite}}" bindtap="revokeCode" role="button">撤销本次邀请</text></view>
+  </view>
+ </scroll-view>
+</view><privacy-panel/>

@@ -1,0 +1,337 @@
+{
+  "courseId": "cn_bg_585",
+  "package": "hole-map",
+  "revision": "yintao-art-overlay-20261106.1",
+  "coordinateSpace": {
+    "width": 300,
+    "height": 500
+  },
+  "review": "Manually inspected current library artwork: back tee turf center and green flag base/center. Display anchors only; GPS geometry unchanged.",
+  "holes": [
+    {
+      "id": "cn_bg_585_s1_h01",
+      "tee": [
+        102,
+        460
+      ],
+      "green": [
+        104,
+        56
+      ],
+      "contentFrame": [
+        -93,
+        -724,
+        249,
+        784
+      ],
+      "contentFrameSourceSha256": "f2fa61191cd62983a5cea2b3f535e9b94574a852334c0cac38f138a1e9457220"
+    },
+    {
+      "id": "cn_bg_585_s1_h02",
+      "tee": [
+        137,
+        454
+      ],
+      "green": [
+        161,
+        59
+      ],
+      "contentFrame": [
+        -151,
+        -738,
+        262,
+        802
+      ],
+      "contentFrameSourceSha256": "a11ff58489b21583491e7084053dac69cb52412b56fa0c1c19b42b0ffbfe36f5"
+    },
+    {
+      "id": "cn_bg_585_s1_h03",
+      "tee": [
+        100,
+        445
+      ],
+      "green": [
+        101,
+        81
+      ],
+      "contentFrame": [
+        -130,
+        -782,
+        420,
+        872
+      ],
+      "contentFrameSourceSha256": "ea5941e7c2bb84f6f4513254648fab51ff4ca0380b123f8d1610352f1aca433e"
+    },
+    {
+      "id": "cn_bg_585_s1_h04",
+      "tee": [
+        125,
+        466
+      ],
+      "green": [
+        133,
+        56
+      ],
+      "contentFrame": [
+        -79,
+        -728,
+        215,
+        780
+      ],
+      "contentFrameSourceSha256": "5b1ed7473c0856a1c5995d44acbb5f7daa7dae288a0fee9e65f44618e1c06ab0"
+    },
+    {
+      "id": "cn_bg_585_s1_h05",
+      "tee": [
+        132,
+        441
+      ],
+      "green": [
+        147,
+        114
+      ],
+      "contentFrame": [
+        -215,
+        -857,
+        439,
+        960
+      ],
+      "contentFrameSourceSha256": "152dc4a103509bb55bacb7107cc4ccdeaf23358901270b48301d619e2b74cb9c"
+    },
+    {
+      "id": "cn_bg_585_s1_h06",
+      "tee": [
+        70,
+        462
+      ],
+      "green": [
+        84,
+        57
+      ],
+      "contentFrame": [
+        -96,
+        -733,
+        380,
+        792
+      ],
+      "contentFrameSourceSha256": "0e5704e65b26dc3c57297115c8b93d4aecd9ae0400cd0354cd6bff0d45e1264c"
+    },
+    {
+      "id": "cn_bg_585_s1_h07",
+      "tee": [
+        126,
+        474
+      ],
+      "green": [
+        141,
+        56
+      ],
+      "contentFrame": [
+        -128,
+        -728,
+        278,
+        768
+      ],
+      "contentFrameSourceSha256": "ba42e07ec6ac2e35e520e8be7b35a0d388b72ead151d1c02b41d4e5c443c9bda"
+    },
+    {
+      "id": "cn_bg_585_s1_h08",
+      "tee": [
+        129,
+        468
+      ],
+      "green": [
+        123,
+        55
+      ],
+      "contentFrame": [
+        -86,
+        -721,
+        246,
+        766
+      ],
+      "contentFrameSourceSha256": "1b26aba600209b6c90c137d77499de078a537406b1451b83865b2300a96f4e25"
+    },
+    {
+      "id": "cn_bg_585_s1_h09",
+      "tee": [
+        145,
+        463
+      ],
+      "green": [
+        168,
+        56
+      ],
+      "contentFrame": [
+        -118,
+        -729,
+        219,
+        784
+      ],
+      "contentFrameSourceSha256": "62519e58dfec767409311c121c7ebb21b2fbc78850ea47d67da44e38508a72e2"
+    },
+    {
+      "id": "cn_bg_585_s2_h01",
+      "tee": [
+        122,
+        452
+      ],
+      "green": [
+        117,
+        71
+      ],
+      "contentFrame": [
+        -84,
+        -758,
+        301,
+        834
+      ],
+      "contentFrameSourceSha256": "e40e41a13c0910b24b6d146d77da4003598d5017902da56cb18b4f2abd479da8"
+    },
+    {
+      "id": "cn_bg_585_s2_h02",
+      "tee": [
+        128,
+        463
+      ],
+      "green": [
+        145,
+        61
+      ],
+      "contentFrame": [
+        -107,
+        -735,
+        234,
+        789
+      ],
+      "contentFrameSourceSha256": "74fa9baa17483b37f4a21bc2fc529026407a5d32e70ee2482444294beceb91b1"
+    },
+    {
+      "id": "cn_bg_585_s2_h03",
+      "tee": [
+        149,
+        429
+      ],
+      "green": [
+        150,
+        101
+      ],
+      "contentFrame": [
+        -194,
+        -834,
+        372,
+        955
+      ],
+      "contentFrameSourceSha256": "ef1b65b8051e9cc1e3991cee40815c95d815fc7b453f42a5bea6b10d4627bbe8"
+    },
+    {
+      "id": "cn_bg_585_s2_h04",
+      "tee": [
+        139,
+        461
+      ],
+      "green": [
+        158,
+        67
+      ],
+      "contentFrame": [
+        -147,
+        -747,
+        272,
+        806
+      ],
+      "contentFrameSourceSha256": "9023129942b040fba09f236ec2c5d8c182faf9a579f36259911be023b5347ccc"
+    },
+    {
+      "id": "cn_bg_585_s2_h05",
+      "tee": [
+        153,
+        455
+      ],
+      "green": [
+        185,
+        65
+      ],
+      "contentFrame": [
+        -205,
+        -742,
+        302,
+        813
+      ],
+      "contentFrameSourceSha256": "2b1d9d688140a62de11cd5068ec20d666e71b48ebe1dff5dd5802619bd3cdcf7"
+    },
+    {
+      "id": "cn_bg_585_s2_h06",
+      "tee": [
+        131,
+        463
+      ],
+      "green": [
+        143,
+        65
+      ],
+      "contentFrame": [
+        -128,
+        -747,
+        290,
+        805
+      ],
+      "contentFrameSourceSha256": "60621bafbdb4337983b772f60eeb9f90e5fdc8b368942194a6e2e61905ca611c"
+    },
+    {
+      "id": "cn_bg_585_s2_h07",
+      "tee": [
+        146,
+        430
+      ],
+      "green": [
+        166,
+        91
+      ],
+      "contentFrame": [
+        -200,
+        -814,
+        342,
+        933
+      ],
+      "contentFrameSourceSha256": "ae34d44cf7b22deaf1c402d08e3fb97a40ac9e06d9d9eed45a07b6810558bb8f"
+    },
+    {
+      "id": "cn_bg_585_s2_h08",
+      "tee": [
+        126,
+        462
+      ],
+      "green": [
+        148,
+        58
+      ],
+      "contentFrame": [
+        -107,
+        -735,
+        221,
+        791
+      ],
+      "contentFrameSourceSha256": "a97a12e921da6857ebbfc316519d19177a2d7f0dd2bb0fbb804512161a34d2a3"
+    },
+    {
+      "id": "cn_bg_585_s2_h09",
+      "tee": [
+        134,
+        465
+      ],
+      "green": [
+        180,
+        48
+      ],
+      "contentFrame": [
+        -171,
+        -717,
+        261,
+        772
+      ],
+      "contentFrameSourceSha256": "e6e60ea0131e214918e0facf3094908697d18dce7ef53f2b28f4744e141a03d0"
+    }
+  ],
+  "contentFrameMethod": "Tee-relative 640-unit frame of the displayed PNG silhouette, alpha > 16, with a 2-unit edge margin."
+}

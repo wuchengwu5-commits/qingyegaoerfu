@@ -1,0 +1,16 @@
+{
+  "width": 5288,
+  "height": 6144,
+  "extent": {
+    "xmin": 13481346.932519395,
+    "ymin": 3579681.1887319786,
+    "xmax": 13485577.07316954,
+    "ymax": 3584596.198741181,
+    "spatialReference": {
+      "wkid": 3857
+    }
+  },
+  "northUp": true,
+  "source": "Esri / Vantor / GIS User Community",
+  "retrievedOn": "2026-11-05"
+}

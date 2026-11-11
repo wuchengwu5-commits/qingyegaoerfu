@@ -2,7 +2,14 @@
    It is never included in the WeChat package. GPS remains a WeChat-only check. */
 window.PreviewCanvas = (() => {
   const assetURL = value => {
-    if(/^cloud:\/\//.test(value))return '/cloud-assets/media-v1/'+value.split('/media-v1/')[1].replaceAll('__','/');
+    if(/^cloud:\/\//.test(value)){
+      const thumb=/\/course-thumbs-v1\/course-([012])-/.exec(value);if(thumb)return '/cloudfunctions/qingyeThemes/assets/thumb-'+thumb[1]+'.jpg';
+      const gps=value.split('/hole-gps-v1/')[1];if(gps)return '/cloud-assets/hole-gps-v1/'+gps;
+      const reference=value.split('/hole-reference-v1/')[1];if(reference)return '/cloud-assets/hole-reference-v1/'+reference;
+      const media=value.split('/media-v1/')[1];
+      // Cloud-only backgrounds are not downloaded by this browser UI aid.
+      return media?'/cloud-assets/media-v1/'+media.replaceAll('__','/'):'/miniprogram/assets/spring-morning.jpg';
+    }
     if(/^\/packages\/.*\.jpe?g$/i.test(value)||/^\/assets\/(course-[0-2]\.jpg|spring-lake\.webp)$/.test(value))return '/cloud-assets/media-v1'+value;
     return /^\/(assets|packages)\//.test(value)?'/miniprogram'+value:value;
   };

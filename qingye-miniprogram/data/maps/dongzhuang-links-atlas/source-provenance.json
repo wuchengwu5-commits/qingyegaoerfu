@@ -1,0 +1,36 @@
+{
+  "retrievedOn": "2026-11-06",
+  "imagery": {
+    "width": 3072,
+    "height": 2596,
+    "extent": {
+      "xmin": 13556392.46879111,
+      "ymin": 3656186.916338086,
+      "xmax": 13558826.08598877,
+      "ymax": 3658243.449621004,
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "northUp": true,
+    "crs": "EPSG:3857",
+    "source": "Esri World Imagery / Vantor / GIS User Community",
+    "retrievedOn": "2026-11-06",
+    "imageryDate": null,
+    "image": "satellite.jpg",
+    "sourceUrl": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=13556392.833654292,3656186.916338086,13558825.721125579,3658243.449621004&bboxSR=3857&imageSR=3857&size=3072,2596&format=jpg&f=json"
+  },
+  "referenceUrl": "https://w.baigolf.com/course.php?act=detail&golf_course_id=3981&lan=zh_cn",
+  "sourceRole": "Reference diagrams for identity; raw georeferenced Esri imagery for independent surface reading.",
+  "fieldSurvey": false,
+  "revision": "20261106-r1",
+  "issues": [
+    "自动图形比对仅用于候选定位；实际起终点另在无标记卫星裁图中判读。",
+    "园景A3/B9与林克斯C2/C4为共用果岭面；每洞保存对应参考中心，前后沿沿整个实际轮廓计算。"
+  ],
+  "identitySources": [
+    "https://w.baigolf.com/course.php?act=detail&golf_course_id=3981&lan=zh_cn",
+    "https://www.golfcore.org/courses/shanghai-dongzhuang-beach-golf-club/"
+  ]
+}

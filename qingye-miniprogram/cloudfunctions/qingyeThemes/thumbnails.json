@@ -1,0 +1,23 @@
+[
+  {
+    "id": "thumb-0",
+    "asset": "thumb-0.jpg",
+    "bytes": 2478,
+    "sha256": "e374800c669f41bc6ac163ca165d3d7a84da17e0e2105e79315599d3359cc199",
+    "cloudPath": "course-thumbs-v1/course-0-e374800c669f.jpg"
+  },
+  {
+    "id": "thumb-1",
+    "asset": "thumb-1.jpg",
+    "bytes": 2643,
+    "sha256": "b197b575497bd12692fa86611823fb521c6996ae6246ce003bb67f01fbd3ddd6",
+    "cloudPath": "course-thumbs-v1/course-1-b197b575497b.jpg"
+  },
+  {
+    "id": "thumb-2",
+    "asset": "thumb-2.jpg",
+    "bytes": 3099,
+    "sha256": "da930a63d87aad25cedab4d4e1469f2fe5e4eadf1eea54a08e8dbc7a52b3850a",
+    "cloudPath": "course-thumbs-v1/course-2-da930a63d87a.jpg"
+  }
+]

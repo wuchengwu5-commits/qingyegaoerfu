@@ -6,12 +6,12 @@ function page(name,o={}){let def;global.Page=p=>def=p;const file=require.resolve
 function event(dataset){return {currentTarget:{dataset}};}
 function round(){return S.create({courseId:'cn_bg_585',mode:'all',friendIds:[],ruleSnapshot:E.defaultRules('stroke_play')});}
 beforeEach(()=>{memory={};routes=[];modal=null;S.init();});
-test('all four destinations agree with native custom tabs and the old score landing redirects',()=>{
- const app=require(base+'/app.json');assert.deepEqual(app.tabBar.list.map(t=>t.text),['首页','球场','知识','我的']);
+test('scoring is the second tab and courses third; both navigation helpers open the scoring hub',()=>{
+ const app=require(base+'/app.json');assert.deepEqual(app.tabBar.list.map(t=>t.text),['首页','记分','球场','我的']);
  let component;global.Component=c=>component=c;require(base+'/custom-tab-bar/index');
  assert.deepEqual(component.data.tabs.map(t=>'pages/'+t.page+'/index'),app.tabBar.list.map(t=>t.pagePath));
  for(const t of app.tabBar.list){assert.ok(app.pages.includes(t.pagePath));assert.ok(fs.existsSync(base+'/'+t.iconPath));assert.ok(fs.existsSync(base+'/'+t.selectedIconPath));}
- const ui=require(base+'/services/ui');ui.go('play');ui.tab('play');page('pages/play');assert.ok(routes.every(r=>r[0]==='tab'&&r[1]==='/pages/courses/index'));
+ const ui=require(base+'/services/ui');ui.go('play');ui.tab('play');assert.deepEqual(routes,[['tab','/pages/play/index'],['tab','/pages/play/index']]);
 });
 test('home starts with courses for a new player and resumes an existing round',()=>{
  const home=page('pages/home');home.start();assert.deepEqual(routes.pop(),['tab','/pages/courses/index']);
@@ -19,8 +19,7 @@ test('home starts with courses for a new player and resumes an existing round',(
 });
 test('selecting a course keeps the intended course through setup, without losing the active round',()=>{
  const course=page('pages/course',{id:'cn_bg_585'});course.start();assert.deepEqual(routes.pop(),['push','/pages/create/index?course=cn_bg_585']);
- const r=round();S.saveScore(r.id,'me',1,{strokes:5,putts:2,penalties:0});course.start();assert.ok(modal);modal.success({confirm:false});assert.equal(S.active().id,r.id);assert.equal(routes.length,0);
- course.start();modal.success({confirm:true});assert.equal(S.getRound(r.id).status,'paused');assert.equal(S.getRound(r.id).scores.me[1].grossStrokes,5);assert.deepEqual(routes.pop(),['push','/pages/create/index?course=cn_bg_585']);
+ const r=round();S.saveScore(r.id,'me',1,{strokes:5,putts:2,penalties:0});course.start();assert.equal(modal,null);assert.equal(S.getRound(r.id).status,'active');assert.equal(S.getRound(r.id).scores.me[1].grossStrokes,5);assert.deepEqual(routes.pop(),['push','/pages/create/index?course=cn_bg_585']);
 });
 test('all 16 catalog articles open complete local bodies and official references',()=>{
  assert.equal(K.articles.length,16);assert.equal(new Set(K.articles.map(a=>a.id)).size,16);
@@ -34,23 +33,45 @@ test('knowledge search combines categories and keywords and recovers from empty 
  p.search({detail:{value:' GPS '}});assert.deepEqual(p.data.items.map(a=>a.id),['distance']);
  p.clear();p.category(event({id:'etiquette'}));assert.equal(p.data.count,4);p.article(event({id:p.data.items[0].id}));assert.match(routes.pop()[1],/knowledge\/index\?id=safety$/);
 });
-test('rules in My profile reach the rules catalog and legacy article links resolve',()=>{
- page('pages/profile').golfRules();assert.deepEqual(routes.pop(),['push','/packages/knowledge/index?category=rules']);
+test('My opens a compact knowledge collection; article and legacy links still resolve',()=>{
+ page('pages/profile').knowledge();assert.deepEqual(routes.pop(),['push','/pages/knowledge/index']);const k=page('pages/knowledge');assert.equal(k.data.expanded,false);assert.equal(k.data.essentials.length,3);assert.ok(k.data.essentials.every(a=>a?.id));k.toggle();assert.equal(k.data.expanded,true);
  const p=page('packages/knowledge',{category:'rules'});assert.equal(p.data.items.length,7);assert.ok(p.data.items.every(a=>a.category==='rules'));
  page('pages/guide',{group:'formats',article:'stroke'});assert.deepEqual(routes.pop(),['replace','/packages/knowledge/index?id=formats']);
- page('packages/knowledge',{id:'not-found'}).library();assert.deepEqual(routes.pop(),['tab','/pages/knowledge/index']);
+ page('packages/knowledge',{id:'not-found'}).library();assert.deepEqual(routes.pop(),['replace','/pages/knowledge/index']);
 });
 test('paused rounds are discoverable and resume exactly where the player left off',()=>{
  let r=round();r=S.saveScore(r.id,'me',1,{strokes:5,putts:2,penalties:0});r.status='paused';r.currentHole=2;S.replace(r);
- const before=structuredClone(r.scores),p=page('pages/history',{filter:'paused'});p.onShow();assert.equal(p.data.items.length,1);
- p.open(event({id:r.id}));assert.equal(S.active().id,r.id);assert.equal(S.active().currentHole,2);assert.deepEqual(S.active().scores,before);assert.deepEqual(routes.pop(),['push','/pages/score/index?id='+r.id]);
+ const before=structuredClone(r.scores),p=page('pages/history',{filter:'active'});p.onShow();assert.equal(p.data.items.length,1);
+ p.open(event({id:p.data.items[0].key}));assert.equal(S.active().id,r.id);assert.equal(S.active().currentHole,2);assert.deepEqual(S.active().scores,before);assert.deepEqual(routes.pop(),['push','/pages/score/index?id='+r.id]);
 });
-test('switching to a paused round requires confirmation and preserves both scores',()=>{
- let old=round();old.status='paused';S.replace(old);const active=round(),p=page('pages/history');
- p.open(event({id:old.id}));modal.success({confirm:false});assert.equal(S.active().id,active.id);assert.equal(S.getRound(old.id).status,'paused');assert.equal(routes.length,0);
- p.open(event({id:old.id}));modal.success({confirm:true});assert.equal(S.active().id,old.id);assert.equal(S.getRound(active.id).status,'paused');assert.equal(S.read().rounds.filter(r=>r.status==='active').length,1);
+test('switching to a paused round resumes it alongside the other active group',()=>{
+ let old=round();old=S.saveScore(old.id,'me',1,{strokes:5});old.status='paused';S.replace(old);const active=round();S.saveScore(active.id,'me',1,{strokes:6});const p=page('pages/history');
+ p.onShow();p.open(event({id:p.data.items.find(item=>item.id===old.id).key}));assert.equal(modal,null);assert.equal(S.getRound(old.id).status,'active');assert.equal(S.getRound(active.id).status,'active');assert.equal(S.read().rounds.filter(r=>r.status==='active').length,2);assert.equal(S.getRound(old.id).scores.me[1].strokes,5);assert.equal(S.getRound(active.id).scores.me[1].strokes,6);assert.deepEqual(routes.pop(),['push','/pages/score/index?id='+old.id]);
 });
-test('score pause returns home and recent paused round opens resumable history',()=>{
- const r=round(),score=page('pages/score',{id:r.id});score.pause();modal.success({confirm:true});assert.equal(S.getRound(r.id).status,'paused');assert.deepEqual(routes.pop(),['tab','/pages/home/index']);
+test('save and return keeps the group active and its scores intact; legacy paused rounds remain accessible',()=>{
+ const r=round();S.saveScore(r.id,'me',1,{strokes:5,putts:2,penalties:0});
+ const before=structuredClone(S.getRound(r.id)),score=page('pages/score',{id:r.id});score.pause();
+ assert.equal(modal,null);assert.equal(S.getRound(r.id).status,'active');assert.deepEqual(S.getRound(r.id).scores,before.scores);assert.deepEqual(routes.pop(),['tab','/pages/play/index']);
  const profile=page('pages/profile');profile.data.recent={id:r.id,status:'paused'};profile.recent();assert.deepEqual(routes.pop(),['push','/pages/history/index?filter=paused']);
+ const history=page('pages/history',{filter:'paused'});history.onShow();assert.ok(history.data.items.some(item=>item.id===r.id));
+});
+
+test('scoring hub opens course selection, resumes saved setup and prioritizes an active scorecard',()=>{
+ const hub=page('pages/play');hub.onShow();hub.start();assert.deepEqual(routes.pop(),['tab','/pages/courses/index']);
+ S.mutate(d=>d.draft={courseId:'cn_bg_585',activityId:'activity',groupId:'group'});
+ hub.onShow();hub.start();assert.deepEqual(routes.pop(),['push','/pages/create/index?course=cn_bg_585&activity=activity&group=group']);
+ const r=round();hub.onShow();hub.start();assert.deepEqual(routes.pop(),['push','/pages/score/index?id='+r.id]);
+});
+test('three named policies freeze valid terms, survive a change of game, and preserve old record labels',()=>{
+ const P=require(base+'/services/scoring-policies'),F=require(base+'/services/forms'),R=require(base+'/services/rules'),cloudRules=require('../cloudfunctions/qingye/lib/rules');
+ const r=round();for(const option of P.options){
+  F.set(r,'penaltyPolicy.mode',option.id);assert.equal(R.validateRuleConfig(r),true);assert.equal(cloudRules.validateRuleConfig(r),true);
+  const field=F.fields(r).find(f=>f.key==='penaltyPolicy.mode');assert.deepEqual(field.options.map(o=>o.label),['球场规则','大流氓','小流氓']);
+ }
+ const legacy={...P.make('large'),mode:'custom'};delete legacy.preset;r.ruleSnapshot.penaltyPolicy=legacy;
+ assert.equal(F.fields(r).find(f=>f.key==='penaltyPolicy.mode').displayValue,'旧版自定义规则');assert.equal(R.validateRuleConfig(r),true);
+ const form=page('pages/create',{course:'cn_bg_585'});form.onShow();form.selectPolicy(event({id:'small'}));
+ const terms=structuredClone(form.data.draft.ruleSnapshot.penaltyPolicy);
+ form.template(event({id:'stroke_play'}));modal.success({confirm:true});assert.deepEqual(form.data.draft.ruleSnapshot.penaltyPolicy,terms);
+ form.onShow();assert.deepEqual(form.data.draft.ruleSnapshot.penaltyPolicy,terms);
 });

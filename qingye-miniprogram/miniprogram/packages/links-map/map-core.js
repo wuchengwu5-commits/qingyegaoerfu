@@ -1,8 +1,8 @@
 (function(root){
   'use strict';
   const R=6378137,rad=Math.PI/180;
-  function toGeo(p,d){const e=d.extent,x=e.xmin+p[0]/d.width*(e.xmax-e.xmin),y=e.ymax-p[1]/d.height*(e.ymax-e.ymin);return [x/R/rad,(2*Math.atan(Math.exp(y/R))-Math.PI/2)/rad];}
-  function toPixel(g,d){const e=d.extent,x=R*g[0]*rad,y=R*Math.log(Math.tan(Math.PI/4+g[1]*rad/2));return [(x-e.xmin)/(e.xmax-e.xmin)*d.width,(e.ymax-y)/(e.ymax-e.ymin)*d.height];}
+  function toGeo(p,d){const e=d.extent,x=e.xmin+p[0]/d.width*(e.xmax-e.xmin),y=e.ymax-p[1]/d.height*(e.ymax-e.ymin);return e.spatialReference?.wkid===4326?[x,y]:[x/R/rad,(2*Math.atan(Math.exp(y/R))-Math.PI/2)/rad];}
+  function toPixel(g,d){const e=d.extent,geographic=e.spatialReference?.wkid===4326,x=geographic?g[0]:R*g[0]*rad,y=geographic?g[1]:R*Math.log(Math.tan(Math.PI/4+g[1]*rad/2));return [(x-e.xmin)/(e.xmax-e.xmin)*d.width,(e.ymax-y)/(e.ymax-e.ymin)*d.height];}
   function meters(a,b){const p=a[1]*rad,q=b[1]*rad,dp=q-p,dl=(b[0]-a[0])*rad,h=Math.sin(dp/2)**2+Math.cos(p)*Math.cos(q)*Math.sin(dl/2)**2;return 6371008.8*2*Math.atan2(Math.sqrt(h),Math.sqrt(Math.max(0,1-h)));}
   function distance(a,b,d){return meters(toGeo(a,d),toGeo(b,d));}
   function inside(p,polygon){let yes=false;for(let i=0,j=polygon.length-1;i<polygon.length;j=i++){const a=polygon[i],b=polygon[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])yes=!yes;}return yes;}
@@ -61,8 +61,9 @@
   }
   // Keep a clear outer buffer, then blend across a narrow continuous edge.
   function focusOpacity(p,d){
-    const rough=d.focusRoute?null:d.features.find(f=>f.kind==='rough').points;
-    const outside=d.focusRoute?Math.max(0,polygonDistance(p,d.focusRoute,false)-d.focusRadius):inside(p,rough)?0:polygonDistance(p,rough);
+    // A hand-refined display cutout is independent of the measured course features.
+    const rough=d.focusBoundary||(d.focusRoute?null:d.features.find(f=>f.kind==='rough').points);
+    const outside=rough?(inside(p,rough)?0:polygonDistance(p,rough)):Math.max(0,polygonDistance(p,d.focusRoute,false)-d.focusRadius);
     const fadeDistance=Math.max(0,outside-(d.focusSolidBuffer??0));
     const feather=1-smooth(fadeDistance/(d.focusFeather??140));
     const edge=Math.min(p[0],p[1],d.width-p[0],d.height-p[1]);
@@ -77,7 +78,7 @@
     m.putImageData(pixels,0,0);ctx.globalCompositeOperation='destination-in';ctx.imageSmoothingEnabled=true;ctx.drawImage(mask,0,0,d.width,d.height);ctx.globalCompositeOperation='source-over';return surface;
   }
   function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
-  function tag(ctx,p,text,accent,w,h){ctx.font='500 12px sans-serif';const tw=ctx.measureText(text).width+22;let x=p[0]+13,y=p[1]-30;x=Math.min(w-tw-8,Math.max(8,x));y=Math.max(8,Math.min(h-36,y));roundRect(ctx,x,y,tw,29,9);ctx.fillStyle='rgba(243,251,248,.91)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,.76)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='#274d40';ctx.fillText(text,x+11,y+19);}
+  function tag(ctx,p,text,accent,w,h){ctx.save();ctx.font='bold 14px sans-serif';ctx.textAlign='left';ctx.textBaseline='middle';const tw=ctx.measureText(text).width+22;let x=p[0]+13,y=p[1]-30;x=Math.min(w-tw-8,Math.max(8,x));y=Math.max(8,Math.min(h-36,y));roundRect(ctx,x,y,tw,28,10);ctx.fillStyle='rgba(28,65,47,.94)';ctx.fill();ctx.strokeStyle='rgba(255,255,245,.3)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='#f5f9ed';ctx.fillText(text,x+11,y+14);ctx.restore();}
   function draw(ctx,image,w,h,s,d){
     ctx.clearRect(0,0,w,h);if(!s.transparentBackground){ctx.fillStyle='#e7f0ec';ctx.fillRect(0,0,w,h);}if(!image&&!s.focusEnhanced&&!s.focusSatellite)return;const c=s.camera;
     ctx.save();ctx.translate(c.x,c.y);ctx.scale(c.scale,c.scale);ctx.rotate(c.angle||0);ctx.translate(-d.width/2,-d.height/2);
@@ -92,8 +93,10 @@
     ctx.restore();
     if(s.clean)return;
     const a=screen(s.origin,c,d),b=screen(s.target,c,d),g=screen(d.greenCenter,c,d),m=measure(s,d),unit=s.unit==='yd'?'码':'米';
-    ctx.beginPath();ctx.moveTo(...a);ctx.lineTo(...b);ctx.lineTo(...g);ctx.lineWidth=1.5;ctx.strokeStyle='rgba(242,253,248,.86)';ctx.setLineDash([4,5]);ctx.stroke();ctx.setLineDash([]);
-    [[a,'#f3fcf7','#3d7158'],[b,'#f3fcf7','#3d7158'],[g,'#f3fcf7','#3d7158']].forEach(([p,color,fill],i)=>{ctx.beginPath();ctx.arc(...p,i===1?9:7,0,Math.PI*2);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke();});
+    const direct=d.directApproach&&Math.hypot(s.target[0]-d.greenCenter[0],s.target[1]-d.greenCenter[1])<1;
+    ctx.beginPath();ctx.moveTo(...a);if(!direct)ctx.lineTo(...b);ctx.lineTo(...g);ctx.lineWidth=1.5;ctx.strokeStyle='rgba(242,253,248,.86)';ctx.setLineDash([4,5]);ctx.stroke();ctx.setLineDash([]);
+    [[a,'#f3fcf7','#3d7158'],[b,'#f3fcf7','#3d7158'],[g,'#f3fcf7','#3d7158']].forEach(([p,color,fill],i)=>{if(direct&&i===1)return;ctx.beginPath();ctx.arc(...p,i===1?9:7,0,Math.PI*2);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke();});
+    if(direct){tag(ctx,[(a[0]+g[0])/2,(a[1]+g[1])/2],'到果岭 '+value(m.center,s.unit)+' '+unit,null,w,h);tag(ctx,a,'起点',null,w,h);return;}
     ctx.beginPath();ctx.moveTo(b[0]-15,b[1]);ctx.lineTo(b[0]+15,b[1]);ctx.moveTo(b[0],b[1]-15);ctx.lineTo(b[0],b[1]+15);ctx.strokeStyle='#ffffff';ctx.lineWidth=1;ctx.stroke();
     const first=[(a[0]+b[0])/2,(a[1]+b[1])/2+(d.par===3?0:20)],second=[(b[0]+g[0])/2,(b[1]+g[1])/2];
     if(Math.abs(first[1]-second[1])<38)first[1]=second[1]+42;

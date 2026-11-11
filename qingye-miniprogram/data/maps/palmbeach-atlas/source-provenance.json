@@ -1,0 +1,36 @@
+{
+  "retrievedOn": "2026-11-06",
+  "imagery": {
+    "width": 4096,
+    "height": 1715,
+    "extent": {
+      "xmin": 13529065.935811225,
+      "ymin": 3609925.6660411023,
+      "xmax": 13532608.778793264,
+      "ymax": 3611409.058549451,
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "northUp": true,
+    "crs": "EPSG:3857",
+    "sourceUrl": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=13529065.935811225%2C3609925.7083937903%2C13532608.778793264%2C3611409.0161967627&bboxSR=3857&imageSR=3857&size=4096%2C1715&format=jpg&f=json",
+    "source": "Esri World Imagery / Vantor / GIS User Community",
+    "retrievedOn": "2026-11-06",
+    "imageryDate": null,
+    "image": "satellite.jpg"
+  },
+  "referenceUrl": "https://w.baigolf.com/course.php?act=detail&golf_course_id=587&lan=zh_cn",
+  "sourceRole": "Reference diagrams for identity; raw georeferenced Esri imagery for independent surface reading.",
+  "fieldSurvey": false,
+  "revision": "20261106-r1",
+  "issues": [
+    "百高历史码书与新记分卡洞型不符，弃用于当前点位定位。编号以公开地图几何、新记分卡和实际球洞衔接交叉判读；未获球会直接确认。"
+  ],
+  "identitySources": [
+    "https://www.golfcore.org/courses/palmbeach-sea-view-golf-club/",
+    "https://thegrint.com/golf-courses/rest-of-world/china/shanghai-palm-beach-course/shanghai-palm-beach-course",
+    "https://w.baigolf.com/course.php?act=detail&golf_course_id=587&lan=zh_cn"
+  ]
+}

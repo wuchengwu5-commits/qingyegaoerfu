@@ -1,8 +1,7 @@
-const K=require('../../services/knowledge'),Scene=require('../../services/scene');
+const K=require('../../services/knowledge');
 Page({
- data:{categories:[{id:'all',name:'全部'},...K.categories],category:'all',query:'',items:K.articles,total:K.articles.length,count:K.articles.length},
- onLoad(){this.setData({topInset:Scene.topInset()});},
- onShow(){Scene.selectTab(this,2);},
+ data:{expanded:false,essentials:['scoring','lost','penalty-area'].map(id=>K.find(id)),categories:[{id:'all',name:'全部'},...K.categories],category:'all',query:'',items:K.articles,total:K.articles.length,count:K.articles.length},
+ toggle(){this.setData({expanded:!this.data.expanded});},
  refresh(){const items=K.list(this.data.category,this.data.query);this.setData({items,count:items.length});},
  category(e){this.setData({category:e.currentTarget.dataset.id});this.refresh();},
  search(e){this.setData({query:e.detail.value});this.refresh();},

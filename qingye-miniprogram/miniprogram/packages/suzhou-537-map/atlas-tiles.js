@@ -1,0 +1,1 @@
+module.exports={"/packages/suzhou-537-map/atlas-c15b347e3f5eb4c3.jpg":{"width":652,"height":652,"tiles":[{"src":"/packages/suzhou-537-map/tile-0-0-749035905b340dfb.jpg","x":0,"y":0,"width":652,"height":652,"left":0,"top":0}]}};

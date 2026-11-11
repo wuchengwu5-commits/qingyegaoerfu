@@ -1,2 +1,5 @@
 const H=require('./satellite-holes').holes;
 module.exports={shortName:'上海佘山',courseId:'cn_bg_2525',route:'/packages/sheshan-map/index',assetRoot:'/packages/sheshan-map',photo:null,atlas:'/packages/sheshan-map/course-overview.jpg',defaultMap:H.cn_bg_2525_s1_h01,holes:H,overview:require('./overview-data'),availabilityNote:'18 洞卫星图已开放',attribution:'Esri · Vantor · GIS Community / © OpenStreetMap',overviewNote:'上海佘山全场卫星实景。双指缩放、拖动查看；左上角选择前九或后九球洞。底图来源：Esri / Vantor / GIS User Community，2026-10-30 获取，获取日期不代表拍摄日期。',mapNote:'上海佘山 18 洞卫星球道图。\n距离为地图水平直线估算；果岭中心不是当天旗位，前后沿按起点到中心方向计算。默认起点为历史地图中的参考发球区，可拖动；Tee 色点不代表当天发球标志的实测位置。\nTee 与单位沿用开局设置。选洞浏览不改变记分进度，GPS 仅在唯一匹配的球道范围内自动对应球洞，存在歧义时保持当前洞。已授权时获取定位并在前台刷新；误差较大或不在本洞附近时保留参考起点。拖动后不被迟到定位覆盖，复位保留起点。位置不保存、不上传。\n卫星底图：Esri / Vantor / GIS User Community，2026-10-30 获取。洞位：© OpenStreetMap contributors，2019 年历史资料，与球场总图和卫星核对；未实地校准。第8洞原数据误标为发球区的“Hole 8”已在本地按果岭关联。\n球洞 Par、Tee 码数与 SI 沿用现有记分卡；不同年代资料存在差异，缺失 SI 保持未知。官网球道示意图未经地理配准，不参与测距。'};
+
+// Use the reviewed 2026-11-06 continuous GPS atlas from all normal entry points.
+module.exports.atlasRoute="/packages/sheshan-map/atlas";

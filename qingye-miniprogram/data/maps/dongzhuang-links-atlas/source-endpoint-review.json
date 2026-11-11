@@ -1,0 +1,1619 @@
+{
+  "courseId": "cn_bg_3981",
+  "revision": "20261106-r1",
+  "passes": [
+    {
+      "id": "identity",
+      "status": "complete",
+      "evidence": [
+        "guide-source.json",
+        "provenance.json"
+      ]
+    },
+    {
+      "id": "surface",
+      "status": "complete",
+      "evidence": [
+        "evidence/"
+      ]
+    },
+    {
+      "id": "render",
+      "status": "complete",
+      "evidence": [
+        "renders/overview.png",
+        "renders/hole-01.png",
+        "renders/hole-02.png",
+        "renders/hole-03.png",
+        "renders/hole-04.png",
+        "renders/hole-05.png",
+        "renders/hole-06.png",
+        "renders/hole-07.png",
+        "renders/hole-08.png",
+        "renders/hole-09.png",
+        "renders/hole-10.png",
+        "renders/hole-11.png",
+        "renders/hole-12.png",
+        "renders/hole-13.png",
+        "renders/hole-14.png",
+        "renders/hole-15.png",
+        "renders/hole-16.png",
+        "renders/hole-17.png",
+        "renders/hole-18.png"
+      ],
+      "note": "实际画面逐洞检查：起终点均在画幅内，果岭在上，三杆洞倍率受限；90洞正逆转换和前中后距离顺序通过。未进行现场定位精度验证。"
+    }
+  ],
+  "holes": [
+    {
+      "id": "cn_bg_3981_s1_h01",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.796009663,
+          31.183124589
+        ],
+        "outline": [
+          [
+            121.795883276,
+            31.183188885
+          ],
+          [
+            121.79601991,
+            31.183247335
+          ],
+          [
+            121.796142882,
+            31.183071984
+          ],
+          [
+            121.795992583,
+            31.182990154
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-01.jpg",
+          "evidence/unmarked-01-tee.jpg"
+        ],
+        "note": "C1 dogleg around lake to southeastern tip. Tee platform is on east side of path."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.798785055,
+          31.18173054
+        ],
+        "outline": [
+          [
+            121.798752605,
+            31.18184452
+          ],
+          [
+            121.798848249,
+            31.18185621
+          ],
+          [
+            121.798916566,
+            31.181786069
+          ],
+          [
+            121.798916566,
+            31.181692547
+          ],
+          [
+            121.798861913,
+            31.181622406
+          ],
+          [
+            121.798711614,
+            31.181622406
+          ],
+          [
+            121.798629633,
+            31.181669167
+          ],
+          [
+            121.798643297,
+            31.181750998
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-01.jpg",
+          "evidence/unmarked-01-green.jpg"
+        ],
+        "note": "C1 dogleg around lake to southeastern tip. Tee platform is on east side of path."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s1_h02",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.799189836,
+          31.182072479
+        ],
+        "outline": [
+          [
+            121.799080528,
+            31.182113394
+          ],
+          [
+            121.799176172,
+            31.182171845
+          ],
+          [
+            121.799299144,
+            31.182043253
+          ],
+          [
+            121.799203499,
+            31.181961422
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-02.jpg",
+          "evidence/unmarked-02-tee.jpg"
+        ],
+        "note": "C2 northwestern return; south lobe of shared C2/C4 green. Middle rectangular tee on lakeshore."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.796675757,
+          31.183761695
+        ],
+        "outline": [
+          [
+            121.796265853,
+            31.184322812
+          ],
+          [
+            121.796375161,
+            31.184369571
+          ],
+          [
+            121.796484468,
+            31.184346192
+          ],
+          [
+            121.796552786,
+            31.184229293
+          ],
+          [
+            121.796593776,
+            31.184089013
+          ],
+          [
+            121.796539122,
+            31.183972114
+          ],
+          [
+            121.796593776,
+            31.183878594
+          ],
+          [
+            121.796730411,
+            31.183855215
+          ],
+          [
+            121.796826055,
+            31.183785075
+          ],
+          [
+            121.796812392,
+            31.183691555
+          ],
+          [
+            121.796703084,
+            31.183656485
+          ],
+          [
+            121.796566449,
+            31.183691555
+          ],
+          [
+            121.796470805,
+            31.183738315
+          ],
+          [
+            121.796457141,
+            31.183855215
+          ],
+          [
+            121.796416151,
+            31.183948734
+          ],
+          [
+            121.796375161,
+            31.184007184
+          ],
+          [
+            121.796279516,
+            31.184100703
+          ],
+          [
+            121.796238526,
+            31.184217603
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-02.jpg",
+          "evidence/unmarked-02-green.jpg"
+        ],
+        "note": "C2 northwestern return; south lobe of shared C2/C4 green. Middle rectangular tee on lakeshore."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s1_h03",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.797464822,
+          31.184147463
+        ],
+        "outline": [
+          [
+            121.797386258,
+            31.184240982
+          ],
+          [
+            121.797495565,
+            31.184252672
+          ],
+          [
+            121.797550219,
+            31.184077324
+          ],
+          [
+            121.797427248,
+            31.184018874
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-03.jpg",
+          "evidence/unmarked-03-tee.jpg"
+        ],
+        "note": "C3 northwest along sea boundary. Rear rectangular tee inside path bend."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.795045705,
+          31.187518777
+        ],
+        "outline": [
+          [
+            121.794899506,
+            31.187666065
+          ],
+          [
+            121.79499515,
+            31.187701133
+          ],
+          [
+            121.795090794,
+            31.187642686
+          ],
+          [
+            121.795118121,
+            31.18753748
+          ],
+          [
+            121.795227429,
+            31.187479033
+          ],
+          [
+            121.795227429,
+            31.187397206
+          ],
+          [
+            121.795118121,
+            31.187338759
+          ],
+          [
+            121.794981486,
+            31.187385517
+          ],
+          [
+            121.794940496,
+            31.187479033
+          ],
+          [
+            121.794858515,
+            31.187560859
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-03.jpg",
+          "evidence/unmarked-03-green.jpg"
+        ],
+        "note": "C3 northwest along sea boundary. Rear rectangular tee inside path bend."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s1_h04",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.794489601,
+          31.18710789
+        ],
+        "outline": [
+          [
+            121.794393957,
+            31.187151726
+          ],
+          [
+            121.794516928,
+            31.187210174
+          ],
+          [
+            121.794598909,
+            31.187058209
+          ],
+          [
+            121.794448611,
+            31.187011451
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-04.jpg",
+          "evidence/unmarked-04-tee.jpg"
+        ],
+        "note": "C4 opposite parallel corridor, north lobe of shared C2/C4 green."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.796402488,
+          31.184217603
+        ],
+        "outline": [
+          [
+            121.796265853,
+            31.184322812
+          ],
+          [
+            121.796375161,
+            31.184369571
+          ],
+          [
+            121.796484468,
+            31.184346192
+          ],
+          [
+            121.796552786,
+            31.184229293
+          ],
+          [
+            121.796593776,
+            31.184089013
+          ],
+          [
+            121.796539122,
+            31.183972114
+          ],
+          [
+            121.796593776,
+            31.183878594
+          ],
+          [
+            121.796730411,
+            31.183855215
+          ],
+          [
+            121.796826055,
+            31.183785075
+          ],
+          [
+            121.796812392,
+            31.183691555
+          ],
+          [
+            121.796703084,
+            31.183656485
+          ],
+          [
+            121.796566449,
+            31.183691555
+          ],
+          [
+            121.796470805,
+            31.183738315
+          ],
+          [
+            121.796457141,
+            31.183855215
+          ],
+          [
+            121.796416151,
+            31.183948734
+          ],
+          [
+            121.796375161,
+            31.184007184
+          ],
+          [
+            121.796279516,
+            31.184100703
+          ],
+          [
+            121.796238526,
+            31.184217603
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-04.jpg",
+          "evidence/unmarked-04-green.jpg"
+        ],
+        "note": "C4 opposite parallel corridor, north lobe of shared C2/C4 green."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s1_h05",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.795620254,
+          31.18422637
+        ],
+        "outline": [
+          [
+            121.795487035,
+            31.184252672
+          ],
+          [
+            121.795610006,
+            31.184346192
+          ],
+          [
+            121.795746641,
+            31.184217603
+          ],
+          [
+            121.795637333,
+            31.184089013
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-05.jpg",
+          "evidence/unmarked-05-tee.jpg"
+        ],
+        "note": "C5 across narrow lake outlet to western peninsula. Clearly rectangular tee adjacent to path."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.794522784,
+          31.184681858
+        ],
+        "outline": [
+          [
+            121.794489601,
+            31.184778717
+          ],
+          [
+            121.794598909,
+            31.184778717
+          ],
+          [
+            121.7946399,
+            31.184708578
+          ],
+          [
+            121.794598909,
+            31.184650129
+          ],
+          [
+            121.794503265,
+            31.184579989
+          ],
+          [
+            121.794421284,
+            31.184603369
+          ],
+          [
+            121.794407621,
+            31.184673508
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-05.jpg",
+          "evidence/unmarked-05-green.jpg"
+        ],
+        "note": "C5 across narrow lake outlet to western peninsula. Clearly rectangular tee adjacent to path."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s1_h06",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.793734695,
+          31.185459648
+        ],
+        "outline": [
+          [
+            121.79365613,
+            31.185526864
+          ],
+          [
+            121.793779101,
+            31.185550244
+          ],
+          [
+            121.793820091,
+            31.185398277
+          ],
+          [
+            121.793683457,
+            31.185363207
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-06.jpg",
+          "evidence/unmarked-06-tee.jpg"
+        ],
+        "note": "C6 north along lakeshore; green south-side bunker. Middle platform selected."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.793885372,
+          31.188072598
+        ],
+        "outline": [
+          [
+            121.793765437,
+            31.188168712
+          ],
+          [
+            121.793874745,
+            31.188215469
+          ],
+          [
+            121.793984053,
+            31.18820378
+          ],
+          [
+            121.79405237,
+            31.188133643
+          ],
+          [
+            121.794038707,
+            31.188028438
+          ],
+          [
+            121.793984053,
+            31.187958302
+          ],
+          [
+            121.793847418,
+            31.187923233
+          ],
+          [
+            121.793724447,
+            31.187958302
+          ],
+          [
+            121.79369712,
+            31.188063507
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-06.jpg",
+          "evidence/unmarked-06-green.jpg"
+        ],
+        "note": "C6 north along lakeshore; green south-side bunker. Middle platform selected."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s1_h07",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.793943063,
+          31.188896376
+        ],
+        "outline": [
+          [
+            121.793847418,
+            31.188940211
+          ],
+          [
+            121.793956726,
+            31.188998657
+          ],
+          [
+            121.79405237,
+            31.188858385
+          ],
+          [
+            121.793915736,
+            31.188788249
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-07.jpg",
+          "evidence/unmarked-07-tee.jpg"
+        ],
+        "note": "C7 west along southern lake shore; green on western peninsula."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.78912593,
+          31.188607714
+        ],
+        "outline": [
+          [
+            121.789065203,
+            31.188706424
+          ],
+          [
+            121.789160847,
+            31.188741492
+          ],
+          [
+            121.789270155,
+            31.188706424
+          ],
+          [
+            121.789311146,
+            31.188636288
+          ],
+          [
+            121.789256492,
+            31.188554462
+          ],
+          [
+            121.78913352,
+            31.188496015
+          ],
+          [
+            121.788996886,
+            31.188484326
+          ],
+          [
+            121.788955895,
+            31.188531083
+          ],
+          [
+            121.788983222,
+            31.188612909
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-07.jpg",
+          "evidence/unmarked-07-green.jpg"
+        ],
+        "note": "C7 west along southern lake shore; green on western peninsula."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s1_h08",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.788105344,
+          31.189778917
+        ],
+        "outline": [
+          [
+            121.788013116,
+            31.189851974
+          ],
+          [
+            121.788163414,
+            31.189863663
+          ],
+          [
+            121.788190741,
+            31.189711703
+          ],
+          [
+            121.788054106,
+            31.189688325
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-08.jpg",
+          "evidence/unmarked-08-tee.jpg"
+        ],
+        "note": "C8 northeast dogleg; long north-south green, tee east of path bend."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.790901232,
+          31.191438772
+        ],
+        "outline": [
+          [
+            121.790827791,
+            31.191535207
+          ],
+          [
+            121.790937099,
+            31.191546896
+          ],
+          [
+            121.791046407,
+            31.19150014
+          ],
+          [
+            121.79106007,
+            31.191394939
+          ],
+          [
+            121.790964426,
+            31.191336493
+          ],
+          [
+            121.790841454,
+            31.191324804
+          ],
+          [
+            121.790759474,
+            31.191394939
+          ],
+          [
+            121.790773137,
+            31.191476762
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-08.jpg",
+          "evidence/unmarked-08-green.jpg"
+        ],
+        "note": "C8 northeast dogleg; long north-south green, tee east of path bend."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s1_h09",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.790311995,
+          31.191678397
+        ],
+        "outline": [
+          [
+            121.790253925,
+            31.191780676
+          ],
+          [
+            121.79039056,
+            31.191768987
+          ],
+          [
+            121.790363233,
+            31.191581963
+          ],
+          [
+            121.790240262,
+            31.191581963
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-09.jpg",
+          "evidence/unmarked-09-tee.jpg"
+        ],
+        "note": "C9 northwest across northern central corridor; tee close to path intersection."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.786429671,
+          31.193713234
+        ],
+        "outline": [
+          [
+            121.786414489,
+            31.193791159
+          ],
+          [
+            121.786523797,
+            31.193837914
+          ],
+          [
+            121.786619442,
+            31.193802848
+          ],
+          [
+            121.786619442,
+            31.193721027
+          ],
+          [
+            121.786537461,
+            31.193639206
+          ],
+          [
+            121.786373499,
+            31.19359245
+          ],
+          [
+            121.786250528,
+            31.193615828
+          ],
+          [
+            121.786223201,
+            31.193685961
+          ],
+          [
+            121.786305182,
+            31.193732715
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-09.jpg",
+          "evidence/unmarked-09-green.jpg"
+        ],
+        "note": "C9 northwest across northern central corridor; tee close to path intersection."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s2_h01",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.786571619,
+          31.1930197
+        ],
+        "outline": [
+          [
+            121.786482807,
+            31.193124899
+          ],
+          [
+            121.786660432,
+            31.193124899
+          ],
+          [
+            121.786660432,
+            31.192902811
+          ],
+          [
+            121.786482807,
+            31.192926189
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-10.jpg",
+          "evidence/unmarked-10-tee.jpg"
+        ],
+        "note": "D1 southeast along central northern corridor. Tee moved north to visible rectangle, original registration fell at rough edge."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.790014814,
+          31.191424161
+        ],
+        "outline": [
+          [
+            121.789939665,
+            31.19150014
+          ],
+          [
+            121.7900763,
+            31.191523518
+          ],
+          [
+            121.790171944,
+            31.191465073
+          ],
+          [
+            121.790171944,
+            31.19138325
+          ],
+          [
+            121.790089963,
+            31.191324804
+          ],
+          [
+            121.789939665,
+            31.191348182
+          ],
+          [
+            121.789857684,
+            31.191394939
+          ],
+          [
+            121.789871348,
+            31.191453384
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-10.jpg",
+          "evidence/unmarked-10-green.jpg"
+        ],
+        "note": "D1 southeast along central northern corridor. Tee moved north to visible rectangle, original registration fell at rough edge."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s2_h02",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.789430701,
+          31.190924454
+        ],
+        "outline": [
+          [
+            121.789283819,
+            31.190985822
+          ],
+          [
+            121.789461444,
+            31.191020889
+          ],
+          [
+            121.789570752,
+            31.19088062
+          ],
+          [
+            121.78940679,
+            31.190810485
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-11.jpg",
+          "evidence/unmarked-11-tee.jpg"
+        ],
+        "note": "D2 short westbound hole, distinct northwest tee terrace, green west of double sand."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.788334966,
+          31.19038578
+        ],
+        "outline": [
+          [
+            121.788300049,
+            31.190506568
+          ],
+          [
+            121.788395693,
+            31.190518257
+          ],
+          [
+            121.788450347,
+            31.190448122
+          ],
+          [
+            121.78842302,
+            31.190366298
+          ],
+          [
+            121.788395693,
+            31.190272785
+          ],
+          [
+            121.788327376,
+            31.190249407
+          ],
+          [
+            121.788245395,
+            31.190296163
+          ],
+          [
+            121.788218068,
+            31.190377988
+          ],
+          [
+            121.788259058,
+            31.190436433
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-11.jpg",
+          "evidence/unmarked-11-green.jpg"
+        ],
+        "note": "D2 short westbound hole, distinct northwest tee terrace, green west of double sand."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s2_h03",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.78816683,
+          31.191920943
+        ],
+        "outline": [
+          [
+            121.788026779,
+            31.192002766
+          ],
+          [
+            121.788231731,
+            31.192002766
+          ],
+          [
+            121.788300049,
+            31.191862499
+          ],
+          [
+            121.78810876,
+            31.191815743
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-12.jpg",
+          "evidence/unmarked-12-tee.jpg"
+        ],
+        "note": "D3 northwestern dogleg with three fairway bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.785287253,
+          31.193897819
+        ],
+        "outline": [
+          [
+            121.785239431,
+            31.193989867
+          ],
+          [
+            121.785335075,
+            31.194013245
+          ],
+          [
+            121.78543072,
+            31.19396649
+          ],
+          [
+            121.785403393,
+            31.19387298
+          ],
+          [
+            121.785321412,
+            31.193791159
+          ],
+          [
+            121.785239431,
+            31.193791159
+          ],
+          [
+            121.78515745,
+            31.193837914
+          ],
+          [
+            121.785171114,
+            31.193919735
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-12.jpg",
+          "evidence/unmarked-12-green.jpg"
+        ],
+        "note": "D3 northwestern dogleg with three fairway bunkers."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s2_h04",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.784552841,
+          31.194436959
+        ],
+        "outline": [
+          [
+            121.78444695,
+            31.194469103
+          ],
+          [
+            121.784597248,
+            31.194515858
+          ],
+          [
+            121.784665565,
+            31.19441066
+          ],
+          [
+            121.784501603,
+            31.194352217
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-13.jpg",
+          "evidence/unmarked-13-tee.jpg"
+        ],
+        "note": "D4 par3 on northern edge, green southeast of small bunker."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.785977258,
+          31.194743786
+        ],
+        "outline": [
+          [
+            121.785922605,
+            31.194819762
+          ],
+          [
+            121.786031912,
+            31.194843139
+          ],
+          [
+            121.786127557,
+            31.194784696
+          ],
+          [
+            121.78610023,
+            31.194702876
+          ],
+          [
+            121.786018249,
+            31.194656121
+          ],
+          [
+            121.785895278,
+            31.194656121
+          ],
+          [
+            121.785854287,
+            31.194714565
+          ],
+          [
+            121.785867951,
+            31.194773008
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-13.jpg",
+          "evidence/unmarked-13-green.jpg"
+        ],
+        "note": "D4 par3 on northern edge, green southeast of small bunker."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s2_h05",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.786636521,
+          31.194378516
+        ],
+        "outline": [
+          [
+            121.786523797,
+            31.194445726
+          ],
+          [
+            121.786660432,
+            31.194469103
+          ],
+          [
+            121.786756076,
+            31.194328839
+          ],
+          [
+            121.786605778,
+            31.194270396
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-14.jpg",
+          "evidence/unmarked-14-tee.jpg"
+        ],
+        "note": "D5 southeast along outer northeast corridor. Long kidney-shaped putting surface."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.790918881,
+          31.192007637
+        ],
+        "outline": [
+          [
+            121.790855118,
+            31.192166411
+          ],
+          [
+            121.790950762,
+            31.192224856
+          ],
+          [
+            121.79101908,
+            31.192201478
+          ],
+          [
+            121.79101908,
+            31.192107967
+          ],
+          [
+            121.790978089,
+            31.192014455
+          ],
+          [
+            121.790978089,
+            31.191909254
+          ],
+          [
+            121.791032743,
+            31.191815743
+          ],
+          [
+            121.790991753,
+            31.191780676
+          ],
+          [
+            121.790882445,
+            31.19185081
+          ],
+          [
+            121.790800464,
+            31.191920943
+          ],
+          [
+            121.79074581,
+            31.192002766
+          ],
+          [
+            121.790773137,
+            31.192096278
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-14.jpg",
+          "evidence/unmarked-14-green.jpg"
+        ],
+        "note": "D5 southeast along outer northeast corridor. Long kidney-shaped putting surface."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s2_h06",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.791306012,
+          31.191549818
+        ],
+        "outline": [
+          [
+            121.791183041,
+            31.191663786
+          ],
+          [
+            121.791347003,
+            31.191675475
+          ],
+          [
+            121.791428984,
+            31.191453384
+          ],
+          [
+            121.791265022,
+            31.191406628
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-15.jpg",
+          "evidence/unmarked-15-tee.jpg"
+        ],
+        "note": "D6 southeast around water. Reference tee shifted west from water to clear platform."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.793201331,
+          31.189696674
+        ],
+        "outline": [
+          [
+            121.793082264,
+            31.18975846
+          ],
+          [
+            121.793246226,
+            31.189781839
+          ],
+          [
+            121.793369197,
+            31.189723393
+          ],
+          [
+            121.793369197,
+            31.189664946
+          ],
+          [
+            121.793246226,
+            31.189618189
+          ],
+          [
+            121.793082264,
+            31.189641568
+          ],
+          [
+            121.793013946,
+            31.189688325
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-15.jpg",
+          "evidence/unmarked-15-green.jpg"
+        ],
+        "note": "D6 southeast around water. Reference tee shifted west from water to clear platform."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s2_h07",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.793529743,
+          31.189220754
+        ],
+        "outline": [
+          [
+            121.793451178,
+            31.189279201
+          ],
+          [
+            121.793574149,
+            31.189314269
+          ],
+          [
+            121.793628803,
+            31.189162308
+          ],
+          [
+            121.793464841,
+            31.18912724
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-16.jpg",
+          "evidence/unmarked-16-tee.jpg"
+        ],
+        "note": "D7 west along northern lake shore; green west of bunker on water edge."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.788742404,
+          31.188978201
+        ],
+        "outline": [
+          [
+            121.788655299,
+            31.189103861
+          ],
+          [
+            121.788791934,
+            31.18912724
+          ],
+          [
+            121.788887578,
+            31.189057104
+          ],
+          [
+            121.788901241,
+            31.188963589
+          ],
+          [
+            121.788805597,
+            31.188858385
+          ],
+          [
+            121.788709953,
+            31.188823317
+          ],
+          [
+            121.788614308,
+            31.188893453
+          ],
+          [
+            121.788573318,
+            31.188998657
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-16.jpg",
+          "evidence/unmarked-16-green.jpg"
+        ],
+        "note": "D7 west along northern lake shore; green west of bunker on water edge."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s2_h08",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.790161697,
+          31.187826795
+        ],
+        "outline": [
+          [
+            121.790021646,
+            31.187876475
+          ],
+          [
+            121.790158281,
+            31.187923233
+          ],
+          [
+            121.790281252,
+            31.18778296
+          ],
+          [
+            121.790185608,
+            31.187724512
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-17.jpg",
+          "evidence/unmarked-17-tee.jpg"
+        ],
+        "note": "D8 southeast dogleg. Registration tee was in water and rejected; selected clear platform northeast of lake beside path."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.792950753,
+          31.18567737
+        ],
+        "outline": [
+          [
+            121.792877312,
+            31.185784038
+          ],
+          [
+            121.792959293,
+            31.185819108
+          ],
+          [
+            121.793054937,
+            31.185772349
+          ],
+          [
+            121.793082264,
+            31.185678831
+          ],
+          [
+            121.79302761,
+            31.185585313
+          ],
+          [
+            121.792931966,
+            31.185538554
+          ],
+          [
+            121.792849985,
+            31.185573623
+          ],
+          [
+            121.792822658,
+            31.185667141
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-17.jpg",
+          "evidence/unmarked-17-green.jpg"
+        ],
+        "note": "D8 southeast dogleg. Registration tee was in water and rejected; selected clear platform northeast of lake beside path."
+      }
+    },
+    {
+      "id": "cn_bg_3981_s2_h09",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.792757756,
+          31.185082652
+        ],
+        "outline": [
+          [
+            121.792645033,
+            31.185129412
+          ],
+          [
+            121.792768004,
+            31.185176171
+          ],
+          [
+            121.792877312,
+            31.185059273
+          ],
+          [
+            121.792740677,
+            31.184965754
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-18.jpg",
+          "evidence/unmarked-18-tee.jpg"
+        ],
+        "note": "D9 par3 across lake to south peninsula; green has three north sand bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.793902072,
+          31.184065634
+        ],
+        "outline": [
+          [
+            121.793806428,
+            31.184147463
+          ],
+          [
+            121.793943063,
+            31.184147463
+          ],
+          [
+            121.794066034,
+            31.184100703
+          ],
+          [
+            121.794079697,
+            31.184030564
+          ],
+          [
+            121.79401138,
+            31.183983804
+          ],
+          [
+            121.793861082,
+            31.183995494
+          ],
+          [
+            121.793738111,
+            31.184030564
+          ],
+          [
+            121.793710784,
+            31.184089013
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-18.jpg",
+          "evidence/unmarked-18-green.jpg"
+        ],
+        "note": "D9 par3 across lake to south peninsula; green has three north sand bunkers."
+      }
+    }
+  ]
+}

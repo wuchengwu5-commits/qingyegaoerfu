@@ -26,7 +26,7 @@ async function flush(){
      if(latest[id]?.stamp===sent.stamp)delete latest[id];else if(latest[id]){delete latest[id].sent;delete latest[id].error;}
      wx.setStorageSync(KEY,latest);
     }catch(e){
-     const latest=wx.getStorageSync(KEY)||{};if(latest[id]){latest[id].error=e.code==='CONFLICT'?'另一设备已更新，请先查看云端成绩再处理本机记录':e.message;wx.setStorageSync(KEY,latest);}return;
+     const latest=wx.getStorageSync(KEY)||{};if(latest[id]){latest[id].errorCode=e.code||'';latest[id].error=e.code==='CONFLICT'?'另一设备已更新，请先查看云端成绩再处理本机记录':e.message;wx.setStorageSync(KEY,latest);}return;
     }
    }
   }
@@ -34,4 +34,16 @@ async function flush(){
  return running;
 }
 function status(id){const x=(wx.getStorageSync(KEY)||{})[id];return x?(x.error||'本机已保存 · 待同步'):'已同步';}
-module.exports={enqueue,flush,status};
+function pending(id){return (wx.getStorageSync(KEY)||{})[id];}
+function version(round){return Math.max(round.cloud?.serverVersion||0,(wx.getStorageSync(VERSIONS)||{})[round.id]||0);}
+function markVersion(id,value){const known=wx.getStorageSync(VERSIONS)||{};known[id]=value;wx.setStorageSync(VERSIONS,known);}
+function keepConflictCopy(id, stamp){
+ const queue=wx.getStorageSync(KEY)||{};
+ if(running||queue[id]?.stamp!==stamp||queue[id]?.errorCode!=='CONFLICT')throw Error('同步状态已变化，请再试一次');
+ const S=require('./store'),r=S.getRound(id);
+ const backup={...r,id:S.id(),courseName:r.courseName+'（本机副本）',status:'paused',conflictSourceId:r.id};
+ delete backup.cloud;
+ S.mutate(d=>d.rounds.push(backup));
+ delete queue[id];wx.setStorageSync(KEY,queue);
+}
+module.exports={enqueue,flush,status,pending,version,markVersion,keepConflictCopy};

@@ -1,7 +1,7 @@
 <view class="page course-detail">
- <image class="page-backdrop" src="cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/media-v1/assets__spring-lake.webp" mode="aspectFill" aria-hidden="true"/>
+ <scene-backdrop/>
  <view class="card course-overview">
-  <view class="course-cover"><image src="cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/media-v1/assets__spring-lake.webp" mode="aspectFill"/><text class="cover-credit">AI 意境图 · 非球场实拍</text></view>
+  <view class="course-cover"><image src="{{sceneSrc}}" mode="aspectFill" binderror="sceneError"/><text class="cover-credit">AI 意境图 · 非球场实拍</text></view>
   <view class="course-summary">
    <view class="row course-name-row"><view class="title grow">{{course.name}}</view><button class="favorite-button" bindtap="favorite" aria-label="{{favorite?'取消收藏球场':'收藏球场'}}"><image src="/assets/{{favorite?'star-active':'star'}}.png" mode="aspectFit"/></button></view>
    <view class="sub course-meta">{{course.city}} · {{holeCount}} 洞<text wx:if="{{par}}"> · Par {{par}}</text></view>
@@ -10,7 +10,7 @@
    <view wx:if="{{canScore}}" class="start-hint">选好发球台与球友，开启这一轮。</view>
   </view>
  </view>
- <view class="card range-entry" bindtap="maps" role="button" aria-label="查看球道图"><view class="row"><image class="detail-icon" src="/assets/pin.png" mode="aspectFit"/><view class="grow"><view class="detail-heading">球道图</view><view class="menu-copy">{{hasGpsMap?gpsMapCount+' / '+holeCount+' 洞 · 卫星图 · GPS 测距':hasCourseMap?'卫星总览 · 逐洞位置核对中':'选洞查看 · 球道图待补充'}}</view></view><image class="detail-arrow" src="/assets/chevron.png" mode="aspectFit"/></view></view>
+ <view wx:if="{{mapInfo.available}}" class="card range-entry" bindtap="maps" role="button" aria-label="查看球道图"><view class="row"><image class="detail-icon" src="/assets/pin.png" mode="aspectFit"/><view class="grow"><view class="detail-heading">球道图</view><view class="course-map-badges detail-map-badges"><text wx:for="{{mapInfo.types}}" wx:key="id" class="course-map-badge {{item.id}}">{{item.label}}<text class="map-coverage">{{item.coverage}}</text></text></view><view wx:if="{{mapInfo.overviewOnly}}" class="menu-copy map-status-note">当前仅全览，逐洞图正在复核</view></view><image class="detail-arrow" src="/assets/chevron.png" mode="aspectFit"/></view></view>
  <view class="card scorecard-panel">
   <button class="disclosure" bindtap="toggleScorecard" aria-expanded="{{scorecardExpanded}}"><image class="detail-icon" src="/assets/history.png" mode="aspectFit"/><view class="grow"><view class="detail-heading">球洞与记分卡</view><view class="menu-copy">{{holeCount}} 洞 · 逐洞 PAR、难度与距离</view></view><text class="disclosure-label">{{scorecardExpanded?'收起':'展开'}}</text><image class="detail-arrow disclosure-arrow {{scorecardExpanded?'expanded':''}}" src="/assets/chevron.png" mode="aspectFit"/></button>
   <view wx:if="{{scorecardExpanded}}" class="scorecard-content">

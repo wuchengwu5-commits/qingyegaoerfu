@@ -1,4 +1,4 @@
-<view class="page knowledge-reader"><image class="page-backdrop" src="cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/media-v1/assets__spring-lake.webp" mode="aspectFill" aria-hidden="true"/>
+<view class="page knowledge-reader"><scene-backdrop/>
  <block wx:if="{{article}}">
   <view class="reader-meta">{{article.categoryName}}<text>约 {{article.minutes}} 分钟</text></view>
   <view class="title reader-title">{{article.title}}</view>

@@ -1,10 +1,31 @@
 const {test}=require('node:test'),A=require('node:assert/strict');
 const {createService,uidFor}=require('../cloudfunctions/qingye/domain'),V=require('../miniprogram/services/service'),R=require('../miniprogram/services/rules'),S=require('../miniprogram/services/store');
 function setup(){let db={},serial=0,time=1000,queue=Promise.resolve();const clone=x=>x==null?null:structuredClone(x);const access=o=>({get:async(c,id)=>clone(o[c+':'+id]),set:async(c,id,v)=>{o[c+':'+id]=clone(v);}});const repo={get:async(c,id)=>clone(db[c+':'+id]),transaction(fn){const next=queue.then(async()=>{const copy=clone(db),result=await fn(access(copy));db=copy;return result;});queue=next.catch(()=>{});return next;}};return {api:createService(repo,{now:()=>time,random:()=>String(++serial).padStart(24,'0'),verifyPhone:async()=>({number:'13800000000',countryCode:'86',verifiedAt:time})}).dispatch,advance(){time+=8*86400000;}};}
-async function fixture(){const x=setup();for(const id of ['a','b','c','d','e','watch','outsider'])await x.api(id,'phoneLogin',{code:'unit-test-only'});const ctx=await x.api('a','create',{courseId:'cn_bg_585',courseName:'银涛'});return {...x,ctx};}
+async function fixture(){const x=setup();for(const id of ['a','b','c','d','e','watch','outsider'])await x.api(id,'phoneLogin');const ctx=await x.api('a','create',{courseId:'cn_bg_585',courseName:'银涛'});return {...x,ctx};}
 test('server identity never accepts a client supplied uid; a stranger cannot enumerate activity scores',async()=>{const {api,ctx}=await fixture();A.notEqual(uidFor('one','app'),uidFor('two','app'));A.equal((await api('a','profile',{uid:'b',name:'甲'})).uid,'a');await A.rejects(api('outsider','get',ctx),e=>e.code==='FORBIDDEN');await A.rejects(api('outsider','invite',{...ctx,kind:'watch'}),e=>e.code==='FORBIDDEN');});
-test('one group has four distinct members; concurrent joins and repeat scans do not overfill it',async()=>{const {api,ctx}=await fixture(),inv=await api('a','invite',{...ctx,kind:'join'});const results=await Promise.allSettled(['b','c','d','e'].map(uid=>api(uid,'join',{token:inv.token})));A.equal(results.filter(x=>x.status==='fulfilled').length,3);const a=await api('a','get',ctx);A.equal(a.groups[0].memberUids.length,4);await api('b','join',{token:inv.token});A.equal((await api('a','get',ctx)).groups[0].memberUids.length,4);A.equal((await api('b','friends')).length,3);});
-test('another group can view the event but cannot overwrite another group; watch invites grant read only',async()=>{const {api,ctx}=await fixture();const inv=await api('a','invite',{...ctx,kind:'group'}),b=await api('b','join',{token:inv.token});A.notEqual(b.groupId,ctx.groupId);A.equal((await api('b','get',ctx)).groups.length,2);await A.rejects(api('b','saveRound',{...ctx,expectedVersion:0,round:{}}),e=>e.code==='FORBIDDEN');const view=await api('a','invite',{...ctx,kind:'watch'});await api('watch','join',{token:view.token});A.equal((await api('watch','get',ctx)).groups.some(g=>g.canScore),false);await A.rejects(api('watch','lock',ctx),e=>e.code==='FORBIDDEN');});
+test('the first sixteen distinct members can join, including concurrent scans for the final seat',async()=>{
+ const {api,ctx}=await fixture(),inv=await api('a','invite',{...ctx,kind:'join'});
+ const users=Array.from({length:16},(_,i)=>'player'+(i+1));
+ for(const uid of users)await api(uid,'phoneLogin');
+ const results=await Promise.allSettled(users.map(uid=>api(uid,'join',inv)));
+ A.equal(results.filter(x=>x.status==='fulfilled').length,15);
+ A.equal(results.find(x=>x.status==='rejected').reason.code,'FULL');
+ await api(users[0],'join',inv);
+ A.equal((await api('a','get',ctx)).groups[0].memberUids.length,16);
+ A.equal((await api(users[0],'friends')).length,15);
+});
+test('a practice group stays independent and watch invitations grant read only',async()=>{
+ const {api,ctx}=await fixture();
+ await A.rejects(api('a','invite',{...ctx,kind:'group'}),{code:'INVALID'});
+ const other=await api('b','create',{courseId:'cn_bg_585',courseName:'银涛'});
+ A.notEqual(other.activityId,ctx.activityId);
+ await A.rejects(api('b','get',ctx),{code:'FORBIDDEN'});
+ await A.rejects(api('b','saveRound',{...ctx,expectedVersion:0,round:{}}),{code:'FORBIDDEN'});
+ const view=await api('a','invite',{...ctx,kind:'watch'});
+ await api('watch','join',{token:view.token});
+ A.equal((await api('watch','get',ctx)).groups.some(g=>g.canScore),false);
+ await A.rejects(api('watch','lock',ctx),{code:'FORBIDDEN'});
+});
 test('expired, revoked and locked invitations cannot add members',async()=>{const {api,ctx,advance}=await fixture();let inv=await api('a','invite',{...ctx,kind:'join'});await api('a','revoke',{token:inv.token});await A.rejects(api('b','join',{token:inv.token}),e=>e.code==='EXPIRED');inv=await api('a','invite',{...ctx,kind:'join'});advance();await A.rejects(api('b','join',{token:inv.token}),e=>e.code==='EXPIRED');inv=await api('a','invite',{...ctx,kind:'join'});await api('a','lock',ctx);await A.rejects(api('b','join',{token:inv.token}),e=>e.code==='STARTED');});
 test('score versions reject stale devices and bind scores to real members; repeated saves preserve scores',async()=>{const {api,ctx}=await fixture(),course=S.courses.find(c=>c.id==='cn_bg_585');const r=V.newRound(course,[{id:'me',name:'伪造名字',tee:'Blue'}],{id:'round1',now:1000,date:'2026-10-27'});const first=await api('a','saveRound',{...ctx,expectedVersion:0,round:r});A.equal(first.version,1);await A.rejects(api('a','saveRound',{...ctx,expectedVersion:0,round:r}),e=>e.code==='CONFLICT');const next=R.applyOperation(r,{type:'score',playerId:'me',holeNumber:1,score:{strokes:5},operationId:'score-1',baseRevision:0,time:2000});A.equal((await api('a','saveRound',{...ctx,expectedVersion:1,round:next})).version,2);const saved=(await api('a','get',ctx)).groups[0];A.equal(saved.round.players[0].accountUid,'a');A.equal(saved.round.players[0].name,'高球爱好者');A.equal(saved.rows[0].total,'5');A.equal(saved.round.changeLog,undefined);const outsider=structuredClone(next);outsider.players[0].id='outsider';await A.rejects(api('a','saveRound',{...ctx,expectedVersion:2,round:outsider}),e=>e.code==='INVALID');});
 test('manual handicap belongs only to the authenticated user and accepts zero and plus values',async()=>{const {api}=await fixture();await api('a','handicap',{uid:'b',setting:{mode:'manual',value:0}});A.equal((await api('a','login')).handicapSetting.value,0);A.equal((await api('b','login')).handicapSetting,undefined);await A.rejects(api('a','handicap',{setting:{mode:'manual',value:99}}),e=>e.code==='INVALID');});

@@ -14,7 +14,8 @@ exports.main=async (event={})=>{
   if(event.action==='qrcode'){
    await service.dispatch(uid,'login');
    const inv=await repo.get('qy_invites',event.token);if(!inv||inv.issuerUid!==uid||inv.revoked||inv.expiresAt<=Date.now())return {ok:false,code:'EXPIRED',message:'邀请已失效，请重新生成'};
-   const result=await cloud.openapi.wxacode.getUnlimited({scene:inv.token,page:'pages/groups/index',checkPath:false,envVersion:process.env.MINIPROGRAM_ENV_VERSION||'release',width:430});
+   const envVersion=['develop','trial','release'].includes(event.envVersion)?event.envVersion:(process.env.MINIPROGRAM_ENV_VERSION||'release');
+   const result=await cloud.openapi.wxacode.getUnlimited({scene:inv.token,page:'pages/groups/index',checkPath:false,envVersion,width:430});
    if(!result.buffer)throw Error('小程序码暂未生成');const file=await cloud.uploadFile({cloudPath:'invites/'+inv.token+'.png',fileContent:result.buffer});const links=await cloud.getTempFileURL({fileList:[file.fileID]}),url=links.fileList?.[0]?.tempFileURL;if(!url)throw Error('小程序码暂不可读取');return {ok:true,data:{url}};
   }
   return {ok:true,data:await service.dispatch(uid,event.action,event)};

@@ -1,0 +1,35 @@
+/* All course maps share Tianma's native canvas controls and touch geometry. */
+page{height:100%;background:#edf3ec;color:#193f31}
+.hole-page{position:absolute;inset:0;overflow:hidden;background:#edf3ec;color:#193f31}
+.stage{position:absolute;inset:0;overflow:hidden}.map{display:block;width:100%;height:100%;touch-action:none}
+.hole-page .atlas-hit{position:absolute;z-index:2;opacity:0;min-width:0;min-height:0;padding:0;margin:0;border:0}
+.hole-page .atlas-hit:focus-visible{opacity:1;background:transparent;outline:3px solid #f6d679}
+.map-context{position:absolute;left:80px;right:63px;top:61px;min-height:24px;display:flex;align-items:center;gap:6px;font-size:11px;color:#193f31;pointer-events:none}
+.map-context>text:last-of-type{padding:3px 6px;border-radius:8px;background:rgba(247,250,240,.88)}
+.tee-dot{width:9px;height:9px;border-radius:50%;border:1px solid rgba(255,255,245,.7)}
+.hole-page .map-context button{pointer-events:auto;position:absolute;top:27px;right:0;width:auto;min-height:32px;margin:0;padding:0 10px;line-height:32px;font-size:11px;border-radius:12px;color:#193f31;background:rgba(247,250,240,.9)}
+.reference-note{position:absolute;left:12px;right:12px;top:92px;font-size:11px;color:#466453;pointer-events:none}
+.error,.map-loading{position:absolute;z-index:4;top:38%;left:15%;right:15%;padding:22rpx;text-align:center;background:rgba(247,250,240,.96);border:1px solid rgba(255,255,245,.65);border-radius:18px;font-size:25rpx;color:#193f31}
+.map-pending{position:absolute;left:24px;right:24px;top:30%;text-align:center;color:#466453;pointer-events:none}
+.pending-number{font-size:68px;line-height:1.2;color:#a7bfa9;margin-bottom:14px}.pending-title{font-size:18px;margin-bottom:12px}
+.map-pending>text{font-size:13px;line-height:1.8}.hole-page .map-pending button{pointer-events:auto;width:auto;min-height:44px;margin:18px auto 0;padding:0 20px;border-radius:18px;font-size:14px;color:#193f31;background:#f7faf0}
+.hole-sheet-shade{position:absolute;z-index:20;inset:0;background:rgba(20,53,43,.2);display:flex;align-items:flex-end}
+.hole-sheet{width:100%;max-height:84%;box-sizing:border-box;border:1rpx solid rgba(255,255,255,.8);border-bottom:0;border-radius:40rpx 40rpx 0 0;background:rgba(233,247,241,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:24rpx 30rpx calc(30rpx + env(safe-area-inset-bottom));box-shadow:inset 0 2rpx 1rpx rgba(255,255,255,.68),0 -16rpx 60rpx rgba(23,63,50,.1);display:flex;flex-direction:column}
+.hole-sheet-head{display:flex;align-items:center;justify-content:space-between;font-size:34rpx;font-weight:500;color:#173e34}
+.sheet-close{width:72rpx;height:72rpx;border-radius:36rpx;background:rgba(248,255,252,.45);border:1rpx solid rgba(255,255,255,.65);display:flex;align-items:center;justify-content:center}.sheet-close image{width:30rpx;height:30rpx;opacity:.8}
+.sheet-course{font-size:22rpx;color:#536e66;margin:2rpx 0 22rpx}
+.sheet-overview{display:flex;align-items:center;justify-content:space-between;min-height:88rpx;border-radius:28rpx;padding:0 24rpx;background:rgba(246,253,249,.5);border:1rpx solid rgba(255,255,255,.8);box-shadow:inset 0 1rpx 0 rgba(255,255,255,.65);font-size:25rpx;color:#38664f;margin-bottom:18rpx}.sheet-overview image{width:28rpx;height:28rpx}
+.hole-group-scroll{height:540rpx;max-height:52vh;flex-shrink:1;min-height:0;overflow-y:auto}
+.hole-sheet-head,.sheet-course,.sheet-overview,.sheet-note{flex-shrink:0}
+.hole-group-title{font-size:23rpx;color:#536e66;margin:20rpx 0 16rpx}
+.hole-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12rpx}
+.hole-option{position:relative;min-height:96rpx;border:1rpx solid rgba(255,255,255,.78);border-radius:24rpx;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5rpx;font-size:31rpx;color:#274d40;background:rgba(246,253,249,.46);box-shadow:inset 0 1rpx 0 rgba(255,255,255,.55)}
+.hole-option-par{font-size:18rpx;color:#607e70}.hole-option.selected{color:#f8fffb}.hole-option.selected .hole-option-par{color:#e6f3ec}
+.available-dot{height:7rpx;width:7rpx;position:absolute;right:12rpx;top:12rpx;border-radius:50%}.available-dot.ready{background:#73a789}.hole-option.selected .available-dot.ready{background:#d9eee2}
+.sheet-note{display:flex;align-items:center;gap:10rpx;font-size:20rpx;color:#536e66;margin-top:24rpx}.ready-dot{width:9rpx;height:9rpx;border-radius:50%;background:#73a789}
+
+/* Match the continuous atlas full-screen grouped hole picker. */
+.hole-sheet-shade{background:#f4f7f0;align-items:stretch}.hole-sheet{height:100%;max-height:100%;border:0;border-radius:0;padding:24rpx 30rpx calc(20rpx + env(safe-area-inset-bottom));background:#f4f7f0;box-shadow:none}
+.hole-sheet-head{font-size:36rpx;font-weight:600}.sheet-course{font-size:24rpx}.hole-group-scroll{flex:1;height:0;max-height:none}.hole-option{background:#fff;min-height:88rpx;border-radius:18rpx;font-size:29rpx}.hole-option.selected{background:linear-gradient(130deg,#447646,#1d4d2e);color:#fff}.hole-option.selected .hole-option-par{color:#edf4e7}.hole-option-par{font-size:20rpx}.sheet-note{font-size:22rpx;line-height:1.5}
+
+.overview-pending-note{position:absolute;top:63px;left:12px;right:64px;padding:8px 10px;border-radius:10px;background:rgba(247,250,240,.93);font-size:12px;line-height:1.6;color:#193f31;pointer-events:none}

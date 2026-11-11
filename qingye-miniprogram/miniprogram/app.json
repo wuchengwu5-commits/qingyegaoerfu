@@ -19,7 +19,8 @@
     "pages/share/index",
     "pages/account/index",
     "pages/groups/index",
-    "pages/knowledge/index"
+    "pages/knowledge/index",
+    "pages/background/index"
   ],
   "window": {
     "navigationBarTitleText": "青野 · GOLF",
@@ -40,16 +41,16 @@
         "selectedIconPath": "assets/nav-home.png"
       },
       {
+        "pagePath": "pages/play/index",
+        "text": "记分",
+        "iconPath": "assets/flag.png",
+        "selectedIconPath": "assets/flag-active.png"
+      },
+      {
         "pagePath": "pages/courses/index",
         "text": "球场",
         "iconPath": "assets/nav-pin.png",
         "selectedIconPath": "assets/nav-pin.png"
-      },
-      {
-        "pagePath": "pages/knowledge/index",
-        "text": "知识",
-        "iconPath": "assets/nav-book.png",
-        "selectedIconPath": "assets/nav-book.png"
       },
       {
         "pagePath": "pages/profile/index",
@@ -64,19 +65,28 @@
   "style": "v2",
   "permission": {
     "scope.userLocation": {
-      "desc": "用于展示附近球场，以及您主动使用球道测距时的位置参考"
-    },
-    "scope.writePhotosAlbum": {
-      "desc": "用于保存您主动生成的球场分享图片"
+      "desc": "用于查找附近球场及主动球道测距"
     }
   },
   "requiredPrivateInfos": [
     "getLocation"
   ],
   "usingComponents": {
-    "privacy-panel": "/components/privacy-panel/index"
+    "privacy-panel": "/components/privacy-panel/index",
+    "scene-backdrop": "/components/scene-backdrop/index"
   },
   "subPackages": [
+    {
+      "root": "packages/location-data",
+      "pages": []
+    },
+    {
+      "root": "packages/competition",
+      "pages": [
+        "index",
+        "course-picker"
+      ]
+    },
     {
       "root": "packages/course-guide",
       "pages": [
@@ -86,7 +96,8 @@
     {
       "root": "packages/hole-map",
       "pages": [
-        "index"
+        "index",
+        "atlas"
       ]
     },
     {
@@ -98,43 +109,179 @@
     {
       "root": "packages/sheshan-map",
       "pages": [
-        "index"
+        "index",
+        "atlas"
       ]
     },
     {
       "root": "packages/tianma-map",
       "pages": [
-        "index"
+        "index",
+        "trial"
       ]
     },
     {
       "root": "packages/huakai-map",
       "pages": [
-        "index"
+        "index",
+        "atlas"
       ]
     },
     {
       "root": "packages/links-map",
       "pages": [
-        "index"
+        "index",
+        "atlas"
       ]
     },
     {
       "root": "packages/meilan-masters-map",
       "pages": [
-        "index"
+        "index",
+        "atlas"
       ]
     },
     {
       "root": "packages/meilan-nicklaus-map",
       "pages": [
-        "index"
+        "index",
+        "atlas"
       ]
     },
     {
       "root": "packages/qizhong-map",
       "pages": [
+        "index",
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/jiulongshan-map",
+      "pages": [
+        "index",
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/anting-map",
+      "pages": [
         "index"
+      ]
+    },
+    {
+      "root": "packages/tomson-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/palmbeach-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/xiehe-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/dongzhuang-links-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/dongzhuang-garden-map",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/xubao-map",
+      "pages": [
+        "index",
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/tianhong-map",
+      "pages": [
+        "index",
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/anying-forest-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/anying-links-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/suzhou-529-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/suzhou-531-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/suzhou-533-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/suzhou-535-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/suzhou-537-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/suzhou-539-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/suzhou-541-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/suzhou-555-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/suzhou-619-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/suzhou-7743-map",
+      "pages": [
+        "atlas"
       ]
     }
   ],

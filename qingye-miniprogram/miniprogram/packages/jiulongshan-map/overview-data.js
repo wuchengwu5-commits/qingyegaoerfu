@@ -1,0 +1,1 @@
+module.exports={"width":2048,"height":2048,"extent":{"xmin":121.105,"ymin":30.5905,"xmax":121.143,"ymax":30.6285,"spatialReference":{"wkid":4326}},"frame":{"x":0,"y":0,"width":2048,"height":2048},"northUp":true,"fillViewport":false,"maxZoom":8,"verified":false};

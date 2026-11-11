@@ -1,0 +1,21 @@
+{
+  "width": 3190,
+  "height": 4096,
+  "extent": {
+    "xmin": 13489242.21556741,
+    "ymin": 3667121.7251763083,
+    "xmax": 13490710.723511519,
+    "ymax": 3669007.307790437,
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857
+    }
+  },
+  "northUp": true,
+  "crs": "EPSG:3857",
+  "sourceUrl": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=13489242.245140012%2C3667121.7251763083%2C13490710.693938913%2C3669007.307790437&bboxSR=3857&imageSR=3857&size=3190%2C4096&format=jpg&f=json",
+  "source": "Esri World Imagery / Vantor / GIS User Community",
+  "retrievedOn": "2026-11-06",
+  "imageryDate": null,
+  "image": "satellite.jpg"
+}

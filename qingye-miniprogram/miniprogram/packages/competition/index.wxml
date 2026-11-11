@@ -1,0 +1,266 @@
+<view class="page competition-page {{event.status==='draft'&&event.isOwner?'has-start-dock':''}}">
+ <scene-backdrop/>
+ <view wx:if="{{!event}}" class="title">比赛记分</view>
+ <view wx:if="{{!event}}" class="sub">分组比赛，逐洞记分，同路线一起排名。</view>
+ <view wx:if="{{error}}" class="competition-error" role="alert">{{error}}</view>
+ <view wx:if="{{!signedIn}}" class="card space">
+  <view class="muted">微信登录后创建比赛或接受邀请。</view>
+  <button class="primary space" bindtap="login">微信登录</button>
+ </view>
+
+ <view wx:elif="{{hasToken}}" class="card space">
+  <block wx:if="{{invitation}}">
+   <view class="competition-card-title">{{invitation.title}}</view>
+   <view class="muted">{{invitation.courseName}}<text wx:if="{{invitation.kind!=='competition-watch'}}"> · {{invitation.groupName}}</text></view>
+   <view wx:if="{{invitation.kind==='competition-player'&&!invitation.joined&&!invitation.closed}}" class="competition-fields">
+    <view class="note">同组微信球友会加入你的球友列表。</view>
+    <view class="label">选择球位</view>
+    <view wx:for="{{invitation.seats}}" wx:key="id" class="competition-seat {{joinSeat===item.id?'selected':''}}" data-id="{{item.id}}" bindtap="selectJoinSeat" role="button"><view>{{item.name}}<view class="note">认领原球位 · 已记 {{item.played}} 洞 · {{item.tee}}</view></view><text>{{joinSeat===item.id?'✓':'选择'}}</text></view>
+    <view wx:if="{{invitation.canAdd}}" class="competition-seat {{joinSeat==='+'?'selected':''}}" data-id="+" bindtap="selectJoinSeat" role="button"><text>新增我的球位</text><text>{{joinSeat==='+'?'✓':'选择'}}</text></view>
+    <block wx:if="{{joinSeat==='+'}}"><view class="label">参赛姓名或昵称</view><input class="competition-input" data-field="joinName" value="{{joinName}}" bindinput="input" maxlength="20"/><view class="label">发球台</view><picker range="{{invitation.tees}}" value="{{joinTee}}" bindchange="pickJoinTee"><view class="competition-picker">{{invitation.tees[joinTee]}} ›</view></picker></block>
+    <view wx:if="{{invitation.active}}" class="note">比赛已开始，认领会保留原成绩。新增球员请联系发起人。</view>
+   </view>
+   <view wx:if="{{invitation.kind==='competition-scorer'}}" class="note space">只为指定小组代录与核对成绩，不占球员名额。</view>
+   <view wx:if="{{invitation.kind==='competition-watch'}}" class="note space">以围观身份查看赛事排行榜。</view>
+   <button class="primary space" bindtap="join" disabled="{{busy||invitation.closed||invitation.kind==='competition-player'&&!invitation.joined&&!joinSeat}}">{{invitation.closed?'暂无可加入球位或赛事已结束':invitation.kind==='competition-watch'?'查看排行榜':invitation.joined?'进入赛事':invitation.kind==='competition-scorer'?'接受记分员邀请':'确认加入小组'}}</button>
+  </block>
+  <view wx:elif="{{!error}}" class="note">正在读取赛事邀请…</view>
+ </view>
+
+ <view wx:elif="{{setup}}" class="card space">
+  <view class="competition-step">比赛基本设置</view>
+  <view class="competition-fields">
+   <view class="label">赛事名称</view>
+   <input class="competition-input" value="{{title}}" placeholder="例如 周六佘山球友赛" maxlength="40" data-field="title" bindinput="input"/>
+   <view class="label">比赛日期</view>
+   <picker mode="date" value="{{date}}" data-field="date" bindchange="input"><view class="competition-picker">{{date}} ›</view></picker>
+   <view class="label">默认球场</view>
+   <button class="competition-course-entry {{course?'has-course':''}}" bindtap="openCoursePicker">
+    <view class="competition-course-symbol"><image src="/assets/pin-active.png" mode="aspectFit"/></view>
+    <view class="competition-course-copy"><view class="competition-course-name">{{course?course.name:'选择比赛球场'}}</view><view class="competition-course-summary">{{course?(course.city+' · '+course.holes+' 洞'):'查看完整球场列表，搜索或按地区选择'}}</view></view>
+    <view class="competition-course-change">{{course?'更换':'选择'}}<text>›</text></view>
+   </button>
+   <block wx:if="{{course}}">
+    <view class="label">默认比赛洞段 · 按打球顺序</view>
+    <picker range="{{sections}}" range-key="name" value="{{first}}" bindchange="firstSegment"><view class="competition-picker">{{sections[first].name}} ›</view></picker>
+    <picker range="{{secondOptions}}" range-key="name" value="{{second}}" bindchange="secondSegment"><view class="competition-picker">{{secondOptions[second].name}} ›</view></picker>
+    <view class="note">{{second?'18':'9'}} 洞 · 各小组默认使用，分组后可单独调整。</view>
+   </block>
+   <view class="label">当地规则（选填）</view>
+   <textarea class="competition-rule" value="{{localRules}}" maxlength="300" placeholder="填写赛前公布的球场当地规则" data-field="localRules" bindinput="input"/>
+  </view>
+  <button class="primary space" bindtap="create" loading="{{busy}}" disabled="{{busy||!course}}">保存草稿，开始分组</button>
+  <button class="space" bindtap="list">返回赛事列表</button>
+ </view>
+
+ <view wx:elif="{{event}}" class="space">
+  <view class="card competition-event">
+   <view class="competition-step">{{event.statusText}} · 个人比杆</view>
+   <view class="competition-card-title">{{event.title}}</view>
+   <view class="muted">{{event.courseName}} · {{event.date}} · {{event.holeCount}} 洞</view>
+   <view class="note space">默认路线 {{event.defaultRoute.routeName}} · 同球场同洞段分别排名</view>
+   <view wx:for="{{event.terms.localRules}}" wx:key="*this" class="note">{{item}}</view>
+   <view wx:if="{{event.isOwner}}" class="competition-event-share" data-kind="competition-watch" bindtap="inviteCode" role="button">分享比赛 · 邀请围观 ›</view>
+  </view>
+
+  <view id="competition-workspace"></view>
+  <view wx:if="{{event.status==='draft'&&event.isOwner}}" class="flow-progress" aria-label="准备比赛，共三步">
+   <view wx:for="{{flowSteps}}" wx:key="id" class="flow-step {{step===item.id?'is-current':step==='review'||step==='schedule'&&item.n===1?'is-done':''}}" data-id="{{item.id}}" bindtap="switchStep" role="button" aria-label="第{{item.n}}步，{{item.name}}"><view class="flow-dot">{{item.n}}</view><view class="flow-label">{{item.name}}</view></view>
+  </view>
+  <view wx:elif="{{event.status!=='draft'}}" class="competition-tabs">
+   <button wx:if="{{group}}" class="competition-tabs-button {{step==='cards'?'primary':''}}" data-id="cards" bindtap="switchStep">{{event.isOwner?'小组记分卡':'本组记分卡'}}</button>
+   <button class="competition-tabs-button {{step==='rank'?'primary':''}}" data-id="rank" bindtap="switchStep">赛事排行榜</button>
+  </view>
+
+  <view wx:if="{{event.status==='draft'&&event.isOwner&&step!=='review'||step==='cards'&&event.isOwner}}" class="competition-group-selector">
+   <view class="competition-selector-heading"><text>当前编辑的小组</text><text wx:if="{{event.status==='draft'&&step==='groups'}}" class="competition-text-action" bindtap="addGroup" role="button">＋ 新建小组</text></view>
+   <picker range="{{groupLabels}}" value="{{groupIndex}}" bindchange="pickGroup"><view class="competition-group-select"><text>{{groupLabels[groupIndex]}}</text><text class="note">切换小组 ⌄</text></view></picker>
+  </view>
+
+  <view wx:if="{{event.status==='draft'&&step==='groups'&&group}}" class="card space">
+   <view class="competition-step">第 1 步 · 分组加人</view>
+   <view class="row"><view class="competition-card-title">{{group.name}} · {{group.count}}/{{group.capacity}} 球员</view><text wx:if="{{event.isOwner&&group.rosterCount<group.capacity}}" class="competition-text-action" bindtap="addPlayerMenu" role="button">＋ 添加球员</text></view><view wx:if="{{!group.rosterCount}}" class="competition-roster-empty">先为这个小组添加球员<view class="note">可以手动填写，或邀请微信球友。</view></view>
+   <view wx:for="{{group.roster}}" wx:key="id" class="competition-row">
+    <view class="grow">
+     <view>{{item.name}}</view><picker wx:if="{{event.isOwner}}" range="{{group.teeOptions}}" value="{{item.teeIndex}}" data-id="{{item.id}}" bindchange="setMemberTee"><view class="note">发球台 {{item.tee||'请重新选择'}} ›</view></picker><view class="note"><text wx:if="{{!event.isOwner}}">{{item.tee}}</text><text wx:if="{{item.pending}}"> · 待确认</text><text wx:elif="{{item.manual}}"> · 手动添加</text></view>
+    </view>
+    <button wx:if="{{item.mine&&item.pending}}" class="competition-mini" data-id="{{item.id}}" bindtap="acceptFriend">确认加入</button>
+    <button wx:if="{{event.isOwner}}" class="competition-mini" data-id="{{item.id}}" bindtap="removeMember">移除</button>
+   </view>
+   <view class="competition-scorer-card">
+    <view class="competition-row">
+     <view class="grow"><view class="label">本组记分员</view><view class="competition-scorer-name">{{group.primaryScorer.name||'赛事发起人'}}<text wx:if="{{group.primaryScorer.mine}}"> · 我</text></view><view class="note">{{group.primaryScorer.kind||'默认代记'}} · 可为全组记分</view></view>
+     <picker class="competition-scorer-picker" wx:if="{{event.isOwner}}" range="{{group.scorerChoices}}" range-key="name" value="{{group.scorerIndex}}" bindchange="changeScorer"><view class="competition-text-action">修改 ›</view></picker>
+    </view>
+    <view class="note">手动球员不作为线上记分员；全组均为手动球员时，由发起人代记。</view>
+    <button wx:if="{{event.isOwner}}" class="competition-link-button" data-kind="competition-scorer" bindtap="inviteCode">扫码邀请球童 / 其他记分员 ›</button>
+    <view wx:for="{{group.scorers}}" wx:key="name" wx:if="{{item.id!==group.primaryScorerId}}" class="competition-row">
+     <view class="grow note">{{item.name}} · 协助记分</view><button wx:if="{{event.isOwner}}" class="competition-mini" data-id="{{item.id}}" bindtap="removeScorer">移除</button>
+    </view>
+   </view>
+   <block wx:if="{{entry}}">
+    <view class="competition-fields space">
+     <view wx:if="{{entry.type==='manual'||entry.type==='accept'||entry.type==='late'}}" class="label">球员姓名或昵称</view>
+     <input wx:if="{{entry.type==='manual'||entry.type==='accept'||entry.type==='late'}}" class="competition-input" value="{{entry.name}}" data-field="name" bindinput="editEntry" maxlength="20" placeholder="输入球员姓名或昵称"/>
+     <view class="label">发球台</view>
+     <picker range="{{group.route.tees}}" value="{{entry.tee}}" data-field="tee" bindchange="editEntry"><view class="competition-picker">{{group.route.tees[entry.tee]}} ›</view></picker>
+     <view wx:if="{{entry.type==='late'}}" class="competition-late-note"><view class="row"><view class="grow">参与正式排名<view class="note">未打的球洞留空；完赛后才可取得正式名次。</view></view><switch checked="{{entry.rankingEligible}}" bindchange="lateEligible" color="#376849"/></view><view class="note">{{entry.rankingEligible?'这位球员将参与本路线排名。':'当前仅记录成绩，不参与正式排名。'}}</view></view>
+     <block wx:if="{{entry.type==='friend'}}">
+      <view wx:if="{{friendBusy}}" class="note">正在读取微信球友…</view>
+      <button wx:for="{{friends}}" wx:key="uid" data-uid="{{item.uid}}" bindtap="addMember" disabled="{{busy}}">邀请 {{item.name}}</button>
+      <view wx:if="{{!friends.length&&!friendBusy}}" class="note">还没有已关联微信的球友。</view>
+     </block>
+     <button wx:elif="{{entry.type==='accept'}}" class="primary" bindtap="confirmFriend" disabled="{{busy}}">确认参赛</button>
+     <button wx:else class="primary" bindtap="addMember" disabled="{{busy}}">加入 {{group.name}}</button>
+     <view class="competition-text-action" bindtap="closeEntry" role="button">取消添加</view>
+    </view>
+   </block>
+   <view wx:if="{{event.isOwner}}" class="note space">为各组添加好球员后，点击下方“下一步”。</view>
+  </view>
+  <view wx:if="{{event.status==='draft'&&!event.isOwner&&!group}}" class="card space"><view class="note">赛事筹备中，开赛后可在这里查看排行榜。</view><button class="space" bindtap="refresh">刷新赛事</button></view>
+
+  <view wx:if="{{event.status==='draft'&&event.isOwner&&step==='schedule'&&group}}" class="card space">
+   <view class="competition-step">第 2 步 · 出发安排</view>
+   <view class="row"><view class="competition-card-title">{{group.name}} · 球场与出发</view><text class="pill">{{routeUseDefault?'沿用赛事默认':'本组单独安排'}}</text></view>
+   <view class="competition-fields">
+    <view class="label">本组球场</view>
+    <button class="competition-course-entry" bindtap="openGroupCoursePicker" disabled="{{busy}}"><view class="competition-course-copy"><view class="competition-course-name">{{routeCourse.name}}</view><view class="competition-course-summary">只调整本组，其他组保持原安排</view></view><view class="competition-course-change">更换<text>›</text></view></button>
+    <view class="row"><view class="label">本组洞段 · 按打球顺序</view><text wx:if="{{!routeUseDefault}}" class="competition-text-action" bindtap="defaultGroupRoute">恢复赛事默认</text></view>
+    <view class="competition-route-pickers">
+     <picker range="{{routeSections}}" range-key="name" value="{{routeFirst}}" bindchange="groupFirstSegment"><view class="competition-picker"><view class="label">先打</view>{{routeSections[routeFirst].name}} ›</view></picker>
+     <picker range="{{routeSecondOptions}}" range-key="name" value="{{routeSecond}}" bindchange="groupSecondSegment"><view class="competition-picker"><view class="label">再打</view>{{routeSecondOptions[routeSecond].name}} ›</view></picker>
+    </view>
+    <view class="label">出发时间</view>
+    <picker mode="time" value="{{scheduleTime}}" data-field="scheduleTime" bindchange="input"><view class="competition-picker">{{scheduleTime}} ›</view></picker>
+    <view class="label">起始洞</view>
+    <picker range="{{scheduleHoles}}" range-key="name" value="{{scheduleHole}}" bindchange="pickScheduleHole"><view class="competition-picker">{{scheduleHoles[scheduleHole].name}} ›</view></picker>
+   </view>
+   <view class="note">更换洞段后默认从第一段首洞开球，也可在上面调整。更换球场后，请核对球员发球台。</view>
+   <view class="note space">切换小组或进入下一步时，会保存本组安排。</view>
+  </view>
+
+  <view wx:if="{{event.status==='draft'&&event.isOwner&&step==='review'}}" class="card space">
+   <view class="competition-step">第 3 步 · 确认开赛</view>
+   <view class="competition-card-title">{{event.count}} 位球员 · {{playingCount}} 个参赛组</view>
+   <view wx:for="{{playingGroups}}" wx:key="id" class="competition-row">
+    <view class="grow">
+     <view class="row"><view>{{item.name}} · {{item.count}}/{{item.capacity}}</view><text class="competition-text-action" data-id="{{item.id}}" bindtap="editGroupSchedule">编辑 ›</text></view><view class="note">{{item.route.courseName}}</view><view class="note">{{item.route.routeName}} · {{item.time||'待排时间'}} · {{item.startName}}</view><view class="note">记分员 · {{item.primaryScorer.name}}</view>
+     <view wx:for="{{item.roster}}" wx:for-item="player" wx:key="id" class="note">{{player.name}} · {{player.tee}}<text wx:if="{{player.pending}}"> · 待确认</text></view>
+    </view>
+   </view>
+   <view id="competition-start-checks" class="competition-start-checks {{event.ready?'is-ready':''}}">
+    <view class="competition-check-title">{{event.ready?'已准备好，可以开始比赛':'还有 '+event.issueCount+' 项安排待完成'}}</view>
+    <view class="note">{{event.ready?'开赛后保留球场与路线；仍可认领球位、添加球员或邀请记分员。':'点击下方事项即可修改；空组不参与开赛。'}}</view>
+    <button wx:if="{{hasScheduleIssues}}" class="competition-arrange-button" bindtap="autoArrange" disabled="{{busy}}">辅助错开出发时间 · 间隔 10 分钟</button>
+    <button wx:for="{{event.issues}}" wx:key="id" class="competition-start-issue" data-id="{{item.id}}" bindtap="resolveStartIssue"><text>{{item.label}}</text><text>›</text></button>
+    <view wx:if="{{!event.ready&&!event.issueCount}}" class="note space">{{event.reason}}</view>
+   </view>
+  </view>
+
+  <view wx:if="{{event.status!=='draft'&&step==='cards'&&group}}" class="card space">
+   <view class="competition-card-title">{{group.name}} · {{group.count}} 位球员</view>
+   <view class="note">{{group.route.courseName}} · {{group.route.routeName}}</view><view class="note">{{group.time}} · {{group.startName}}</view>
+   <button wx:if="{{group.started}}" class="primary space" bindtap="board">{{group.canContinue?'继续本组记分':'查看小组记分卡'}}</button>
+   <view wx:else class="note space">本组没有参赛球员。</view>
+   <view wx:if="{{event.isOwner&&event.status==='active'&&group.started}}" class="competition-people">
+    <view class="competition-people-heading" bindtap="people" role="button"><text>本组人员与记分员</text><text>{{peopleOpen?'收起 −':'管理 ＋'}}</text></view>
+    <view wx:if="{{peopleOpen}}">
+     <view class="competition-row"><view class="grow"><view class="note">主要记分员</view><view>{{group.primaryScorer.name}}</view></view><picker range="{{group.scorerChoices}}" range-key="name" value="{{group.scorerIndex}}" bindchange="changeScorer"><view class="competition-text-action">修改 ›</view></picker></view>
+     <view class="competition-manage-row" data-kind="competition-scorer" bindtap="inviteCode" role="button"><text>邀请记分员 / 球童</text><text>扫码加入 ›</text></view>
+     <view class="competition-manage-row" data-kind="competition-player" bindtap="inviteCode" role="button"><text>已有球员认领球位</text><text>出示二维码 ›</text></view>
+     <view wx:if="{{group.count<group.capacity}}" class="competition-manage-row" data-type="late" bindtap="openEntry" role="button"><text>临时添加球员</text><text>＋</text></view>
+    </view>
+   </view>
+   <block wx:if="{{entry}}">
+    <view class="competition-fields space">
+     <view wx:if="{{entry.type==='manual'||entry.type==='accept'||entry.type==='late'}}" class="label">球员姓名或昵称</view>
+     <input wx:if="{{entry.type==='manual'||entry.type==='accept'||entry.type==='late'}}" class="competition-input" value="{{entry.name}}" data-field="name" bindinput="editEntry" maxlength="20" placeholder="输入球员姓名或昵称"/>
+     <view class="label">发球台</view>
+     <picker range="{{group.route.tees}}" value="{{entry.tee}}" data-field="tee" bindchange="editEntry"><view class="competition-picker">{{group.route.tees[entry.tee]}} ›</view></picker>
+     <view wx:if="{{entry.type==='late'}}" class="competition-late-note"><view class="row"><view class="grow">参与正式排名<view class="note">未打的球洞留空；完赛后才可取得正式名次。</view></view><switch checked="{{entry.rankingEligible}}" bindchange="lateEligible" color="#376849"/></view><view class="note">{{entry.rankingEligible?'这位球员将参与本路线排名。':'当前仅记录成绩，不参与正式排名。'}}</view></view>
+     <block wx:if="{{entry.type==='friend'}}">
+      <view wx:if="{{friendBusy}}" class="note">正在读取微信球友…</view>
+      <button wx:for="{{friends}}" wx:key="uid" data-uid="{{item.uid}}" bindtap="addMember" disabled="{{busy}}">邀请 {{item.name}}</button>
+      <view wx:if="{{!friends.length&&!friendBusy}}" class="note">还没有已关联微信的球友。</view>
+     </block>
+     <button wx:elif="{{entry.type==='accept'}}" class="primary" bindtap="confirmFriend" disabled="{{busy}}">确认参赛</button>
+     <button wx:else class="primary" bindtap="addMember" disabled="{{busy}}">加入 {{group.name}}</button>
+     <view class="competition-text-action" bindtap="closeEntry" role="button">取消添加</view>
+    </view>
+   </block>
+   <view wx:for="{{cards}}" wx:key="playerId" class="competition-card-review">
+    <view class="competition-row">
+     <view class="grow"><view>{{item.name}} · {{item.statusLabel}}</view><view class="note">{{item.played}}/{{group.holeCount}} 洞 · 核分人 {{item.marker}}</view></view>
+     <button class="competition-mini" data-id="{{item.playerId}}" bindtap="review">{{reviewId===item.playerId?'收起':'逐洞核对'}}</button>
+    </view>
+    <view wx:if="{{reviewId===item.playerId}}">
+     <view class="competition-hole-scores">
+      <view class="competition-hole-score" wx:for="{{item.scores}}" wx:for-item="score" wx:key="id"><view class="note">{{score.name}}</view><text>{{score.strokes}}</text></view>
+     </view>
+     <view class="note space">球员 {{item.playerConfirmed?'已确认':'待确认'}} · 核分人 {{item.markerConfirmed?'已确认':'待确认'}}</view>
+     <view wx:if="{{item.reason}}" class="note">{{item.reason}}</view>
+     <button wx:if="{{item.canConfirm}}" class="primary space" data-id="{{item.playerId}}" bindtap="confirmCard" disabled="{{busy}}">确认逐洞成绩</button>
+     <button wx:if="{{item.canRecordOffline}}" class="space" data-id="{{item.playerId}}" data-offline="{{true}}" bindtap="confirmCard" disabled="{{busy}}">记录现场确认</button>
+     <button wx:if="{{event.isOwner&&event.status==='active'}}" class="space" data-id="{{item.playerId}}" bindtap="resolveCard">处理交卡状态</button>
+    </view>
+   </view>
+   <view wx:if="{{group.changes.length}}" class="space">
+    <view class="label">最近更正记录</view>
+    <view wx:for="{{group.changes}}" wx:key="index" class="note">{{item.actor}} · {{item.player}} · {{item.hole}} · {{item.before}} → {{item.after===null?'清空':item.after}}</view>
+   </view>
+  </view>
+
+  <view wx:if="{{event.status!=='draft'&&step==='rank'}}" class="card space">
+   <view class="competition-card-title">{{event.status==='published'?'正式排行榜':'赛事排行榜 · 暂列'}}</view>
+   <view class="note">相同球场、相同洞段一起排名，前后顺序不同仍在同榜。{{event.status==='published'?'有效完赛按总杆排名，同杆并列。':'按已记洞杆差暂列。'}}</view>
+   <view wx:for="{{event.leaderboards}}" wx:for-item="board" wx:key="id" class="competition-ranking-board">
+    <view class="competition-ranking-title">{{board.courseName}}</view><view class="note">{{board.routeName}} · {{board.holes}} 洞</view>
+    <view wx:for="{{board.rows}}" wx:key="id" class="competition-row competition-rank">
+     <view class="competition-position">{{item.rank||'—'}}</view>
+     <view class="grow"><view>{{item.name}}</view><view class="note">{{item.groupName}} · {{item.played}}/{{item.holes}} 洞 · {{item.state}}</view></view>
+     <view class="competition-total"><view>{{item.total}}</view><view class="note">{{item.diffText}}</view></view>
+    </view>
+   </view>
+   <button wx:if="{{event.isOwner&&event.status==='active'}}" class="primary space" bindtap="publish" disabled="{{busy}}">公布正式排行榜</button>
+  </view>
+  <view class="competition-bottom-links"><text bindtap="refresh" role="button">刷新</text><text bindtap="list" role="button">返回赛事列表 ›</text></view>
+ </view>
+
+ <view wx:else class="space">
+  <view class="card">
+   <view class="competition-card-title">创建一场比赛</view>
+   <view class="note">按需要分组，每组最多 16 位球员；同球场同洞段分别排名。</view>
+   <button class="primary space" bindtap="beginSetup">创建比赛</button>
+   <button class="space" bindtap="scan">扫码参赛或围观</button>
+  </view>
+  <view class="section">我的赛事</view>
+  <view wx:for="{{events}}" wx:key="id" class="card competition-event-link" role="button" data-id="{{item.id}}" bindtap="open">
+   <view class="competition-card-title">{{item.title}} ›</view>
+   <view class="muted">{{item.courseName}} · {{item.date}} · {{item.pending?'待确认入组':item.statusText}}</view>
+  </view>
+  <view wx:if="{{!events.length}}" class="empty">还没有赛事。</view>
+ </view>
+</view>
+
+<view wx:if="{{event.status==='draft'&&event.isOwner&&!setup&&!hasToken}}" class="flow-footer">
+ <button wx:if="{{step!=='groups'}}" class="flow-back" bindtap="previousStep" disabled="{{busy}}">上一步</button>
+ <button class="primary flow-next" bindtap="nextStep" loading="{{busy}}" disabled="{{busy}}">{{step==='groups'?'下一步 · 出发安排':step==='schedule'?'下一步 · 确认开赛':event.ready?'开始比赛':'检查待完成事项'}}</button>
+</view>
+<view wx:if="{{codeOpen}}" class="invite-code-layer" catchtouchmove="codeNoop">
+ <view class="invite-code-mask" bindtap="closeCode"></view>
+ <scroll-view class="invite-code-dialog" scroll-y="{{true}}" catchtap="codeNoop">
+  <view class="invite-code-content">
+   <button class="invite-code-close" bindtap="closeCode" aria-label="关闭邀请">×</button>
+   <view class="invite-code-title">{{codeLabel}}</view>
+   <view class="invite-code-subtitle">{{codeKind==='competition-watch'?event.title:group.name+' · '+event.title}}</view>
+   <view class="invite-code-frame">
+    <image wx:if="{{code}}" class="invite-code-image" src="{{code}}" mode="aspectFit" show-menu-by-longpress="{{true}}" bindtap="previewCode" binderror="codeError"/>
+    <view wx:elif="{{codeBusy}}" class="invite-code-status">正在生成微信小程序码…</view>
+    <view wx:else class="invite-code-status"><text>{{codeError||'暂未生成小程序码'}}</text><button bindtap="retryCode">重试</button></view>
+   </view>
+   <button wx:if="{{invite}}" class="primary invite-code-share" open-type="share">转发给微信好友</button>
+   <view class="invite-code-actions"><text bindtap="closeCode" role="button">关闭</text><text wx:if="{{invite}}" bindtap="revokeCode" role="button">撤销邀请</text></view>
+  </view>
+ </scroll-view>
+</view>
+<privacy-panel/>

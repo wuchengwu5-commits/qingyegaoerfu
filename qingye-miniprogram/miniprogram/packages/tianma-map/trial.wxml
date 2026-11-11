@@ -1,0 +1,15 @@
+<view class="atlas-page">
+ <canvas hidden="{{pickerOpen}}" type="2d" id="map" class="atlas-canvas" aria-label="{{mode==='overview'?'上海天马 27 洞卫星总览':sectionName+' '+holeNumber+' 号洞，发球区在下、旗杆在上'}}" bindtouchstart="touchStart" catchtouchmove="touchMove" bindtouchend="touchEnd" bindtouchcancel="touchCancel"/>
+ <block wx:if="{{!pickerOpen}}">
+  <button wx:for="{{actions}}" wx:key="key" class="atlas-hit" aria-label="{{item.name}}" data-action="{{item.key}}" bindtap="actionTap" style="left:{{item.x}}px;top:{{item.y}}px;width:{{item.w}}px;height:{{item.h}}px;"></button>
+  <view wx:if="{{loading||error}}" class="load-state" bindtap="retry">{{error||'正在打开卫星地图…'}}</view>
+ </block>
+ <view wx:if="{{pickerOpen}}" class="hole-picker">
+  <view class="picker-head"><view><text class="eyebrow">上海天马</text><view class="picker-title">选择球洞</view></view><button class="close-picker" bindtap="closePicker" aria-label="关闭选洞">×</button></view>
+  <scroll-view scroll-y="{{true}}" class="group-scroll">
+   <view wx:for="{{groups}}" wx:key="name" class="group"><view class="group-name"><text class="group-dot" style="background:{{item.color}}"></text>{{item.name}}</view><view class="hole-grid">
+   <button wx:for="{{item.holes}}" wx:for-item="entry" wx:key="id" class="hole-option {{selected===entry.number?'chosen':''}}" aria-label="{{entry.sectionName}}第 {{entry.local}} 洞" data-n="{{entry.number}}" bindtap="choose"><text>{{entry.local}}</text><text class="small-par">PAR {{entry.par}}</text></button></view></view>
+  </scroll-view>
+ </view>
+ <view class="sr" aria-live="polite">{{sectionName}}第 {{holeNumber}} 洞，果岭中心 {{center}} {{unit}}</view>
+</view><privacy-panel/>

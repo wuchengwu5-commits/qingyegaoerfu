@@ -1,0 +1,1942 @@
+[
+  {
+    "_id": "cn_bg_2533_s1_h01",
+    "courseId": "cn_bg_2533",
+    "number": 1,
+    "sectionId": "cn_bg_2533_s1",
+    "holeNumber": 1,
+    "par": 5,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "A1",
+    "displayNumber": 1,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-01.jpg",
+    "tee": [
+      121.78810876,
+      31.181742231
+    ],
+    "green": [
+      121.79267236,
+      31.183372585
+    ],
+    "target": [
+      121.790349569,
+      31.18254593
+    ],
+    "route": [
+      [
+        121.78810876,
+        31.181742231
+      ],
+      [
+        121.790349569,
+        31.18254593
+      ],
+      [
+        121.791784234,
+        31.183130434
+      ],
+      [
+        121.79267236,
+        31.183372585
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.792617706,
+        31.183469445
+      ],
+      [
+        121.792740677,
+        31.183481135
+      ],
+      [
+        121.792795331,
+        31.183422685
+      ],
+      [
+        121.792754341,
+        31.183329165
+      ],
+      [
+        121.792686023,
+        31.183259025
+      ],
+      [
+        121.792576715,
+        31.183282405
+      ],
+      [
+        121.792535725,
+        31.183364235
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.787917471,
+        31.181786069
+      ],
+      [
+        121.788231731,
+        31.18184452
+      ],
+      [
+        121.788286385,
+        31.181704237
+      ],
+      [
+        121.787999452,
+        31.181634096
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 1,
+    "note": "A1 follows southern edge; green has north and southeast bunkers. Reference tee at southern mown platform.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s1_h02",
+    "courseId": "cn_bg_2533",
+    "number": 2,
+    "sectionId": "cn_bg_2533_s1",
+    "holeNumber": 2,
+    "par": 3,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "A2",
+    "displayNumber": 2,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-02.jpg",
+    "tee": [
+      121.793089096,
+      31.183644795
+    ],
+    "green": [
+      121.791312085,
+      31.18448647
+    ],
+    "target": [
+      121.791312085,
+      31.18448647
+    ],
+    "route": [
+      [
+        121.793089096,
+        31.183644795
+      ],
+      [
+        121.791312085,
+        31.18448647
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.791278686,
+        31.18454492
+      ],
+      [
+        121.79137433,
+        31.184615059
+      ],
+      [
+        121.791456311,
+        31.184603369
+      ],
+      [
+        121.791469974,
+        31.18453323
+      ],
+      [
+        121.79137433,
+        31.184463091
+      ],
+      [
+        121.791292349,
+        31.184369571
+      ],
+      [
+        121.791196705,
+        31.184334502
+      ],
+      [
+        121.791169378,
+        31.184416331
+      ],
+      [
+        121.791196705,
+        31.18449816
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.79298662,
+        31.183714935
+      ],
+      [
+        121.793136918,
+        31.183714935
+      ],
+      [
+        121.793191572,
+        31.183598035
+      ],
+      [
+        121.793041273,
+        31.183551275
+      ]
+    ],
+    "status": "draft_tee_uncertain",
+    "satelliteReviewed": false,
+    "sourceReferenceNumber": 2,
+    "note": "A2 across water to narrow angled green. Tee shadow obscures edge.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s1_h03",
+    "courseId": "cn_bg_2533",
+    "number": 3,
+    "sectionId": "cn_bg_2533_s1",
+    "holeNumber": 3,
+    "par": 4,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "A3",
+    "displayNumber": 3,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面；本洞与另一洞共用果岭面",
+    "guide": "cn_bg_2533/evidence/guide-03.jpg",
+    "tee": [
+      121.791439231,
+      31.183750005
+    ],
+    "green": [
+      121.788272722,
+      31.18252255
+    ],
+    "target": [
+      121.790226598,
+      31.183107054
+    ],
+    "route": [
+      [
+        121.791439231,
+        31.183750005
+      ],
+      [
+        121.790226598,
+        31.183107054
+      ],
+      [
+        121.788272722,
+        31.18252255
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.788163414,
+        31.182651141
+      ],
+      [
+        121.788313712,
+        31.182674521
+      ],
+      [
+        121.788395693,
+        31.182616071
+      ],
+      [
+        121.788409356,
+        31.18253424
+      ],
+      [
+        121.788354703,
+        31.182440719
+      ],
+      [
+        121.788218068,
+        31.182382268
+      ],
+      [
+        121.78810876,
+        31.182323817
+      ],
+      [
+        121.788054106,
+        31.182241986
+      ],
+      [
+        121.788054106,
+        31.182136775
+      ],
+      [
+        121.787985789,
+        31.182078324
+      ],
+      [
+        121.787890144,
+        31.182066634
+      ],
+      [
+        121.787780837,
+        31.182136775
+      ],
+      [
+        121.78775351,
+        31.182230296
+      ],
+      [
+        121.787780837,
+        31.182323817
+      ],
+      [
+        121.787862818,
+        31.182370578
+      ],
+      [
+        121.787972125,
+        31.182393958
+      ],
+      [
+        121.78806777,
+        31.182452409
+      ],
+      [
+        121.788122424,
+        31.18251086
+      ],
+      [
+        121.78810876,
+        31.18256931
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.791319676,
+        31.183831835
+      ],
+      [
+        121.791483638,
+        31.183855215
+      ],
+      [
+        121.791565618,
+        31.183679865
+      ],
+      [
+        121.791387993,
+        31.183633105
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 3,
+    "note": "A3 reaches east lobe of shared putting complex with B9; each lobe measured separately, shared-green status retained.",
+    "sharedGreenWith": 18,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s1_h04",
+    "courseId": "cn_bg_2533",
+    "number": 4,
+    "sectionId": "cn_bg_2533_s1",
+    "holeNumber": 4,
+    "par": 5,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "A4",
+    "displayNumber": 4,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-04.jpg",
+    "tee": [
+      121.788569902,
+      31.183448988
+    ],
+    "green": [
+      121.787072044,
+      31.187104968
+    ],
+    "target": [
+      121.78748024,
+      31.184591679
+    ],
+    "route": [
+      [
+        121.788569902,
+        31.183448988
+      ],
+      [
+        121.78748024,
+        31.184591679
+      ],
+      [
+        121.786865384,
+        31.185468415
+      ],
+      [
+        121.787043009,
+        31.186169798
+      ],
+      [
+        121.787072044,
+        31.187104968
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.787015682,
+        31.187268621
+      ],
+      [
+        121.787097663,
+        31.187280311
+      ],
+      [
+        121.787152317,
+        31.187198484
+      ],
+      [
+        121.78716598,
+        31.187069899
+      ],
+      [
+        121.78712499,
+        31.186964693
+      ],
+      [
+        121.787056673,
+        31.186929624
+      ],
+      [
+        121.786988355,
+        31.186988072
+      ],
+      [
+        121.786974692,
+        31.187140036
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.78846401,
+        31.183504515
+      ],
+      [
+        121.788614308,
+        31.183527895
+      ],
+      [
+        121.788682626,
+        31.183410995
+      ],
+      [
+        121.788518664,
+        31.183352545
+      ]
+    ],
+    "status": "draft_tee_uncertain",
+    "satelliteReviewed": false,
+    "sourceReferenceNumber": 4,
+    "note": "A4 northbound with left turn around approach bunker; green between west and southeast sand.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s1_h05",
+    "courseId": "cn_bg_2533",
+    "number": 5,
+    "sectionId": "cn_bg_2533_s1",
+    "holeNumber": 5,
+    "par": 4,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "A5",
+    "displayNumber": 5,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-05.jpg",
+    "tee": [
+      121.787610043,
+      31.186844875
+    ],
+    "green": [
+      121.78903446,
+      31.184430943
+    ],
+    "target": [
+      121.787849154,
+      31.185748969
+    ],
+    "route": [
+      [
+        121.787610043,
+        31.186844875
+      ],
+      [
+        121.787849154,
+        31.185748969
+      ],
+      [
+        121.788409356,
+        31.184942375
+      ],
+      [
+        121.78903446,
+        31.184430943
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.788955895,
+        31.18453323
+      ],
+      [
+        121.789119857,
+        31.18452154
+      ],
+      [
+        121.789188174,
+        31.18447478
+      ],
+      [
+        121.789188174,
+        31.184404641
+      ],
+      [
+        121.789119857,
+        31.184346192
+      ],
+      [
+        121.788983222,
+        31.184322812
+      ],
+      [
+        121.788873914,
+        31.184381261
+      ],
+      [
+        121.788846588,
+        31.184463091
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.787507567,
+        31.186917935
+      ],
+      [
+        121.787644202,
+        31.186953003
+      ],
+      [
+        121.787712519,
+        31.186777659
+      ],
+      [
+        121.787575885,
+        31.186730901
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 5,
+    "note": "A5 dogleg around lake ending on southern peninsula, north bunker.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s1_h06",
+    "courseId": "cn_bg_2533",
+    "number": 6,
+    "sectionId": "cn_bg_2533_s1",
+    "holeNumber": 6,
+    "par": 3,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "A6",
+    "displayNumber": 6,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-06.jpg",
+    "tee": [
+      121.788826092,
+      31.183668175
+    ],
+    "green": [
+      121.790291879,
+      31.184125382
+    ],
+    "target": [
+      121.790291879,
+      31.184125382
+    ],
+    "route": [
+      [
+        121.788826092,
+        31.183668175
+      ],
+      [
+        121.790291879,
+        31.184125382
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.790185608,
+        31.184217603
+      ],
+      [
+        121.790322242,
+        31.184264362
+      ],
+      [
+        121.790458877,
+        31.184252672
+      ],
+      [
+        121.790472541,
+        31.184170843
+      ],
+      [
+        121.79039056,
+        31.184089013
+      ],
+      [
+        121.790308579,
+        31.183995494
+      ],
+      [
+        121.790212935,
+        31.183972114
+      ],
+      [
+        121.790130954,
+        31.184030564
+      ],
+      [
+        121.790144617,
+        31.184135773
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.788709953,
+        31.183738315
+      ],
+      [
+        121.788887578,
+        31.183738315
+      ],
+      [
+        121.788942232,
+        31.183621415
+      ],
+      [
+        121.788764607,
+        31.183574655
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 6,
+    "note": "A6 across lake to western shore, green southeast bunkers.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s1_h07",
+    "courseId": "cn_bg_2533",
+    "number": 7,
+    "sectionId": "cn_bg_2533_s1",
+    "holeNumber": 7,
+    "par": 4,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "A7",
+    "displayNumber": 7,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-07.jpg",
+    "tee": [
+      121.790571601,
+      31.184881003
+    ],
+    "green": [
+      121.78815829,
+      31.187085972
+    ],
+    "target": [
+      121.788696289,
+      31.1857139
+    ],
+    "route": [
+      [
+        121.790571601,
+        31.184881003
+      ],
+      [
+        121.788696289,
+        31.1857139
+      ],
+      [
+        121.788259058,
+        31.186485419
+      ],
+      [
+        121.78815829,
+        31.187085972
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.788122424,
+        31.187221863
+      ],
+      [
+        121.788190741,
+        31.187245242
+      ],
+      [
+        121.788259058,
+        31.187186795
+      ],
+      [
+        121.788245395,
+        31.18704652
+      ],
+      [
+        121.788204404,
+        31.186929624
+      ],
+      [
+        121.788122424,
+        31.186917935
+      ],
+      [
+        121.788054106,
+        31.186999762
+      ],
+      [
+        121.78806777,
+        31.187140036
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.790417887,
+        31.184918995
+      ],
+      [
+        121.790622839,
+        31.184989134
+      ],
+      [
+        121.79070482,
+        31.184860546
+      ],
+      [
+        121.790540858,
+        31.184755337
+      ]
+    ],
+    "status": "draft_tee_uncertain",
+    "satelliteReviewed": false,
+    "sourceReferenceNumber": 7,
+    "note": "A7 across lake to northwestern peninsula. Tee partly shaded.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s1_h08",
+    "courseId": "cn_bg_2533",
+    "number": 8,
+    "sectionId": "cn_bg_2533_s1",
+    "holeNumber": 8,
+    "par": 4,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "A8",
+    "displayNumber": 8,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-08.jpg",
+    "tee": [
+      121.785406808,
+      31.188297295
+    ],
+    "green": [
+      121.783786548,
+      31.185767153
+    ],
+    "target": [
+      121.784897844,
+      31.187163415
+    ],
+    "route": [
+      [
+        121.785406808,
+        31.188297295
+      ],
+      [
+        121.784897844,
+        31.187163415
+      ],
+      [
+        121.784091699,
+        31.186239936
+      ],
+      [
+        121.783786548,
+        31.185767153
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.783750112,
+        31.185912625
+      ],
+      [
+        121.78385942,
+        31.185971074
+      ],
+      [
+        121.783927738,
+        31.185924315
+      ],
+      [
+        121.783927738,
+        31.185830797
+      ],
+      [
+        121.783832093,
+        31.185737279
+      ],
+      [
+        121.783791103,
+        31.185620382
+      ],
+      [
+        121.783709122,
+        31.185550244
+      ],
+      [
+        121.783640805,
+        31.185608692
+      ],
+      [
+        121.783640805,
+        31.185748969
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.785280421,
+        31.188344053
+      ],
+      [
+        121.785444383,
+        31.1884025
+      ],
+      [
+        121.785526364,
+        31.188262227
+      ],
+      [
+        121.785376066,
+        31.188180401
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 8,
+    "note": "A8 southbound along west side of lake; tee platform beside west cart path.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s1_h09",
+    "courseId": "cn_bg_2533",
+    "number": 9,
+    "sectionId": "cn_bg_2533_s1",
+    "holeNumber": 9,
+    "par": 5,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "A9",
+    "displayNumber": 9,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-09.jpg",
+    "tee": [
+      121.782820996,
+      31.186312997
+    ],
+    "green": [
+      121.780438428,
+      31.190892309
+    ],
+    "target": [
+      121.781809899,
+      31.188133643
+    ],
+    "route": [
+      [
+        121.782820996,
+        31.186312997
+      ],
+      [
+        121.781809899,
+        31.188133643
+      ],
+      [
+        121.780839793,
+        31.190120826
+      ],
+      [
+        121.780438428,
+        31.190892309
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.780388898,
+        31.190974133
+      ],
+      [
+        121.780498206,
+        31.190985822
+      ],
+      [
+        121.780566523,
+        31.190939065
+      ],
+      [
+        121.78055286,
+        31.190857242
+      ],
+      [
+        121.780470879,
+        31.190787107
+      ],
+      [
+        121.780388898,
+        31.190798796
+      ],
+      [
+        121.780320581,
+        31.190868931
+      ],
+      [
+        121.780320581,
+        31.190927376
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.782711689,
+        31.186356833
+      ],
+      [
+        121.782820996,
+        31.186415281
+      ],
+      [
+        121.782930304,
+        31.186286695
+      ],
+      [
+        121.782820996,
+        31.186193178
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 9,
+    "note": "A9 northbound western boundary, green between three bunkers.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s2_h01",
+    "courseId": "cn_bg_2533",
+    "number": 10,
+    "sectionId": "cn_bg_2533_s2",
+    "holeNumber": 1,
+    "par": 4,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "B1",
+    "displayNumber": 10,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-10.jpg",
+    "tee": [
+      121.781905544,
+      31.191143624
+    ],
+    "green": [
+      121.785067662,
+      31.189663277
+    ],
+    "target": [
+      121.783299218,
+      31.190144204
+    ],
+    "route": [
+      [
+        121.781905544,
+        31.191143624
+      ],
+      [
+        121.783299218,
+        31.190144204
+      ],
+      [
+        121.784091699,
+        31.189618189
+      ],
+      [
+        121.785067662,
+        31.189663277
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.784966161,
+        31.189723393
+      ],
+      [
+        121.785102796,
+        31.189746771
+      ],
+      [
+        121.785212104,
+        31.189711703
+      ],
+      [
+        121.785212104,
+        31.189629879
+      ],
+      [
+        121.785089133,
+        31.189594811
+      ],
+      [
+        121.784966161,
+        31.189583122
+      ],
+      [
+        121.784925171,
+        31.189653257
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.781782572,
+        31.191196225
+      ],
+      [
+        121.781919207,
+        31.19125467
+      ],
+      [
+        121.782028515,
+        31.191102712
+      ],
+      [
+        121.78189188,
+        31.191020889
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 10,
+    "note": "B1 bends around lake, green among north and southeast sand.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s2_h02",
+    "courseId": "cn_bg_2533",
+    "number": 11,
+    "sectionId": "cn_bg_2533_s2",
+    "holeNumber": 2,
+    "par": 3,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "B2",
+    "displayNumber": 11,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-11.jpg",
+    "tee": [
+      121.785266758,
+      31.189083405
+    ],
+    "green": [
+      121.78418344,
+      31.188678035
+    ],
+    "target": [
+      121.78418344,
+      31.188678035
+    ],
+    "route": [
+      [
+        121.785266758,
+        31.189083405
+      ],
+      [
+        121.78418344,
+        31.188678035
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.784105363,
+        31.188799939
+      ],
+      [
+        121.784228334,
+        31.188788249
+      ],
+      [
+        121.784323978,
+        31.188683045
+      ],
+      [
+        121.784310315,
+        31.18858953
+      ],
+      [
+        121.784201007,
+        31.188554462
+      ],
+      [
+        121.784091699,
+        31.188624598
+      ],
+      [
+        121.784023382,
+        31.188706424
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.785130123,
+        31.18912724
+      ],
+      [
+        121.785307748,
+        31.189209065
+      ],
+      [
+        121.785403393,
+        31.189045415
+      ],
+      [
+        121.785225767,
+        31.1889519
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 11,
+    "note": "B2 short east-to-west approach, rectangular tee north of path.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s2_h03",
+    "courseId": "cn_bg_2533",
+    "number": 12,
+    "sectionId": "cn_bg_2533_s2",
+    "holeNumber": 3,
+    "par": 4,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "B3",
+    "displayNumber": 12,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-12.jpg",
+    "tee": [
+      121.783688627,
+      31.188346975
+    ],
+    "green": [
+      121.781179428,
+      31.190954094
+    ],
+    "target": [
+      121.782411092,
+      31.189045415
+    ],
+    "route": [
+      [
+        121.783688627,
+        31.188346975
+      ],
+      [
+        121.782411092,
+        31.189045415
+      ],
+      [
+        121.781179428,
+        31.190954094
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.781058408,
+        31.191032578
+      ],
+      [
+        121.781195043,
+        31.191044267
+      ],
+      [
+        121.781331678,
+        31.190985822
+      ],
+      [
+        121.781345341,
+        31.190903998
+      ],
+      [
+        121.78122237,
+        31.190857242
+      ],
+      [
+        121.781085735,
+        31.190892309
+      ],
+      [
+        121.781017418,
+        31.190962444
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.78354516,
+        31.188425879
+      ],
+      [
+        121.783709122,
+        31.188460947
+      ],
+      [
+        121.783832093,
+        31.188297295
+      ],
+      [
+        121.783668132,
+        31.18820378
+      ]
+    ],
+    "status": "draft_tee_uncertain",
+    "satelliteReviewed": false,
+    "sourceReferenceNumber": 12,
+    "note": "B3 northbound inner western corridor; tee boundary partly indistinct.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s2_h04",
+    "courseId": "cn_bg_2533",
+    "number": 13,
+    "sectionId": "cn_bg_2533_s2",
+    "holeNumber": 4,
+    "par": 5,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "B4",
+    "displayNumber": 13,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-13.jpg",
+    "tee": [
+      121.779989242,
+      31.191447539
+    ],
+    "green": [
+      121.783939449,
+      31.193741065
+    ],
+    "target": [
+      121.781768909,
+      31.192692412
+    ],
+    "route": [
+      [
+        121.779989242,
+        31.191447539
+      ],
+      [
+        121.781768909,
+        31.192692412
+      ],
+      [
+        121.783299218,
+        31.19321841
+      ],
+      [
+        121.783939449,
+        31.193741065
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.783845757,
+        31.193837914
+      ],
+      [
+        121.783982391,
+        31.193826225
+      ],
+      [
+        121.784078036,
+        31.193767782
+      ],
+      [
+        121.784078036,
+        31.193685961
+      ],
+      [
+        121.783968728,
+        31.193627517
+      ],
+      [
+        121.783845757,
+        31.193685961
+      ],
+      [
+        121.783777439,
+        31.193756093
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.779897013,
+        31.191511829
+      ],
+      [
+        121.780019985,
+        31.191535207
+      ],
+      [
+        121.780088302,
+        31.191418317
+      ],
+      [
+        121.779951667,
+        31.191324804
+      ]
+    ],
+    "status": "draft_tee_uncertain",
+    "satelliteReviewed": false,
+    "sourceReferenceNumber": 13,
+    "note": "B4 northeast along northern river, distinct large left-front bunker. Tee shaded.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s2_h05",
+    "courseId": "cn_bg_2533",
+    "number": 14,
+    "sectionId": "cn_bg_2533_s2",
+    "holeNumber": 5,
+    "par": 4,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "B5",
+    "displayNumber": 14,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-14.jpg",
+    "tee": [
+      121.784539178,
+      31.1940337
+    ],
+    "green": [
+      121.785629816,
+      31.191142789
+    ],
+    "target": [
+      121.784720219,
+      31.192832678
+    ],
+    "route": [
+      [
+        121.784539178,
+        31.1940337
+      ],
+      [
+        121.784720219,
+        31.192832678
+      ],
+      [
+        121.784993488,
+        31.19195601
+      ],
+      [
+        121.785629816,
+        31.191142789
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.7855127,
+        31.191219603
+      ],
+      [
+        121.785676662,
+        31.191242981
+      ],
+      [
+        121.785799633,
+        31.191196225
+      ],
+      [
+        121.785799633,
+        31.191102712
+      ],
+      [
+        121.785662999,
+        31.191044267
+      ],
+      [
+        121.785499037,
+        31.191055956
+      ],
+      [
+        121.785458046,
+        31.19113778
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.784433286,
+        31.194071688
+      ],
+      [
+        121.784569921,
+        31.194118443
+      ],
+      [
+        121.784651902,
+        31.194001556
+      ],
+      [
+        121.784501603,
+        31.193943113
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 14,
+    "note": "B5 southbound onto lake peninsula with sand north of green.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s2_h06",
+    "courseId": "cn_bg_2533",
+    "number": 15,
+    "sectionId": "cn_bg_2533_s2",
+    "holeNumber": 6,
+    "par": 3,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "B6",
+    "displayNumber": 15,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-15.jpg",
+    "tee": [
+      121.784846606,
+      31.191362794
+    ],
+    "green": [
+      121.7835537,
+      31.192296451
+    ],
+    "target": [
+      121.7835537,
+      31.192296451
+    ],
+    "route": [
+      [
+        121.784846606,
+        31.191362794
+      ],
+      [
+        121.7835537,
+        31.192296451
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.783449516,
+        31.192376812
+      ],
+      [
+        121.783586151,
+        31.192411879
+      ],
+      [
+        121.783722786,
+        31.192353434
+      ],
+      [
+        121.783736449,
+        31.192259923
+      ],
+      [
+        121.783654468,
+        31.192189789
+      ],
+      [
+        121.783490506,
+        31.192201478
+      ],
+      [
+        121.783394862,
+        31.192259923
+      ],
+      [
+        121.783394862,
+        31.192318367
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.784706555,
+        31.191430006
+      ],
+      [
+        121.784815863,
+        31.191511829
+      ],
+      [
+        121.784993488,
+        31.191313115
+      ],
+      [
+        121.784870517,
+        31.191196225
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 15,
+    "note": "B6 crosses lake northwest. Middle shore platform selected.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s2_h07",
+    "courseId": "cn_bg_2533",
+    "number": 16,
+    "sectionId": "cn_bg_2533_s2",
+    "holeNumber": 7,
+    "par": 4,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "B7",
+    "displayNumber": 16,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-16.jpg",
+    "tee": [
+      121.782175397,
+      31.191862499
+    ],
+    "green": [
+      121.785794509,
+      31.190274246
+    ],
+    "target": [
+      121.783832093,
+      31.190658527
+    ],
+    "route": [
+      [
+        121.782175397,
+        31.191862499
+      ],
+      [
+        121.783832093,
+        31.190658527
+      ],
+      [
+        121.785794509,
+        31.190274246
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.785662999,
+        31.19034292
+      ],
+      [
+        121.78578597,
+        31.190377988
+      ],
+      [
+        121.785881614,
+        31.19034292
+      ],
+      [
+        121.785977258,
+        31.190284474
+      ],
+      [
+        121.785949931,
+        31.190226028
+      ],
+      [
+        121.785840624,
+        31.190179272
+      ],
+      [
+        121.785676662,
+        31.190190961
+      ],
+      [
+        121.785581018,
+        31.190249407
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.782042178,
+        31.191909254
+      ],
+      [
+        121.782233467,
+        31.191979388
+      ],
+      [
+        121.782301784,
+        31.191827432
+      ],
+      [
+        121.782124159,
+        31.19173392
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 16,
+    "note": "B7 across lake with central fairway peninsula; moved tee onto visible northern platform.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s2_h08",
+    "courseId": "cn_bg_2533",
+    "number": 17,
+    "sectionId": "cn_bg_2533_s2",
+    "holeNumber": 8,
+    "par": 4,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "B8",
+    "displayNumber": 17,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面，颜色未确认",
+    "guide": "cn_bg_2533/evidence/guide-17.jpg",
+    "tee": [
+      121.786510134,
+      31.187879398
+    ],
+    "green": [
+      121.785184777,
+      31.185233159
+    ],
+    "target": [
+      121.785977258,
+      31.186345143
+    ],
+    "route": [
+      [
+        121.786510134,
+        31.187879398
+      ],
+      [
+        121.785977258,
+        31.186345143
+      ],
+      [
+        121.785581018,
+        31.185597003
+      ],
+      [
+        121.785184777,
+        31.185233159
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.78511646,
+        31.185339828
+      ],
+      [
+        121.785239431,
+        31.185363207
+      ],
+      [
+        121.785321412,
+        31.185293069
+      ],
+      [
+        121.785321412,
+        31.185176171
+      ],
+      [
+        121.785239431,
+        31.185094342
+      ],
+      [
+        121.78511646,
+        31.185117722
+      ],
+      [
+        121.785061806,
+        31.18519955
+      ],
+      [
+        121.785061806,
+        31.185281379
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.786387163,
+        31.187958302
+      ],
+      [
+        121.786564788,
+        31.187981681
+      ],
+      [
+        121.786633105,
+        31.187818028
+      ],
+      [
+        121.78645548,
+        31.187759581
+      ]
+    ],
+    "status": "satellite_reviewed",
+    "satelliteReviewed": true,
+    "sourceReferenceNumber": 17,
+    "note": "B8 follows eastern bank south to green with north and southeast sand.",
+    "sharedGreenWith": null,
+    "sourceRevision": "20261106-r1"
+  },
+  {
+    "_id": "cn_bg_2533_s2_h09",
+    "courseId": "cn_bg_2533",
+    "number": 18,
+    "sectionId": "cn_bg_2533_s2",
+    "holeNumber": 9,
+    "par": 4,
+    "schema": 2,
+    "crs": "EPSG:4326",
+    "atlas": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1",
+    "verified": false,
+    "label": "B9",
+    "displayNumber": 18,
+    "fieldVerified": false,
+    "teeIdentity": "可见参考台面；本洞与另一洞共用果岭面",
+    "guide": "cn_bg_2533/evidence/guide-18.jpg",
+    "tee": [
+      121.786072903,
+      31.184585834
+    ],
+    "green": [
+      121.787903808,
+      31.182183536
+    ],
+    "target": [
+      121.786879048,
+      31.183364235
+    ],
+    "route": [
+      [
+        121.786072903,
+        31.184585834
+      ],
+      [
+        121.786879048,
+        31.183364235
+      ],
+      [
+        121.787903808,
+        31.182183536
+      ]
+    ],
+    "greenOutline": [
+      [
+        121.788163414,
+        31.182651141
+      ],
+      [
+        121.788313712,
+        31.182674521
+      ],
+      [
+        121.788395693,
+        31.182616071
+      ],
+      [
+        121.788409356,
+        31.18253424
+      ],
+      [
+        121.788354703,
+        31.182440719
+      ],
+      [
+        121.788218068,
+        31.182382268
+      ],
+      [
+        121.78810876,
+        31.182323817
+      ],
+      [
+        121.788054106,
+        31.182241986
+      ],
+      [
+        121.788054106,
+        31.182136775
+      ],
+      [
+        121.787985789,
+        31.182078324
+      ],
+      [
+        121.787890144,
+        31.182066634
+      ],
+      [
+        121.787780837,
+        31.182136775
+      ],
+      [
+        121.78775351,
+        31.182230296
+      ],
+      [
+        121.787780837,
+        31.182323817
+      ],
+      [
+        121.787862818,
+        31.182370578
+      ],
+      [
+        121.787972125,
+        31.182393958
+      ],
+      [
+        121.78806777,
+        31.182452409
+      ],
+      [
+        121.788122424,
+        31.18251086
+      ],
+      [
+        121.78810876,
+        31.18256931
+      ]
+    ],
+    "teeOutline": [
+      [
+        121.785949931,
+        31.184626749
+      ],
+      [
+        121.786072903,
+        31.184685198
+      ],
+      [
+        121.786195874,
+        31.18455661
+      ],
+      [
+        121.786072903,
+        31.18447478
+      ]
+    ],
+    "status": "draft_tee_uncertain",
+    "satelliteReviewed": false,
+    "sourceReferenceNumber": 18,
+    "note": "B9 southbound to western lobe of shared putting complex with A3. Tee shaded.",
+    "sharedGreenWith": 3,
+    "sourceRevision": "20261106-r1"
+  }
+]

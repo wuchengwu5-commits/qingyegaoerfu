@@ -1,6 +1,6 @@
 const {test}=require('node:test'),A=require('node:assert/strict'),path=require('path'),fs=require('fs');
 const root=path.resolve(__dirname,'..'),base=root+'/miniprogram',M=require(base+'/packages/hole-map/map-core'),D=require(base+'/packages/hole-map/data'),H=require(base+'/services/handicap'),R=require(base+'/services/rules');
-function map(){let def;global.Page=x=>def=x;const f=base+'/packages/hole-map/index';delete require.cache[require.resolve(f)];require(f);const p={...def,data:structuredClone(def.data),setData(x){Object.assign(this.data,x);}};p.onLoad();return p;}
+function map(){let def;global.Page=x=>def=x;const f=base+'/packages/hole-map/index';delete require.cache[require.resolve(f)];require('./helpers/legacy-map.cjs').load(f+'.js');const p={...def,data:structuredClone(def.data),setData(x){Object.assign(this.data,x);}};p.onLoad({mode:'gps'});return p;}
 test('GPS auto start requires prior location and privacy authorization; refusal keeps the selected hole usable',()=>{
  let prompts=0,fixes=0;global.wx={getSetting:o=>o.success({authSetting:{}}),requirePrivacyAuthorize:()=>prompts++,getLocation:()=>fixes++};const p=map();A.equal(fixes,0);A.equal(prompts,0);A.equal(p.data.selected,1);p.next();A.equal(p.data.selected,2);A.equal(fixes,0);
  wx.getSetting=o=>o.success({authSetting:{'scope.userLocation':true}});wx.getPrivacySetting=o=>o.success({needAuthorization:true});p.autoLocate();A.equal(fixes,0);wx.getPrivacySetting=o=>o.success({needAuthorization:false});p.autoLocate();A.equal(fixes,1);A.equal(prompts,0);

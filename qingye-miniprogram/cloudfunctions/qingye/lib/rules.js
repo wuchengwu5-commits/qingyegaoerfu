@@ -1,5 +1,7 @@
 (function (root) {
   'use strict';
+  const MAX_PLAYERS = 16; // Historical scorecards retain all existing players.
+  const GROUP_MAX_PLAYERS = 16;
   const VERSION = 'scoring-v3.1', ENGINE = '1.0.0';
   const clone = x => JSON.parse(JSON.stringify(x));
   const fail = (code, message) => { const e = new Error(message); e.code = code; throw e; };
@@ -37,7 +39,7 @@
   function validateRuleConfig(r) {
     const rules=r.ruleSnapshot, players=r.players||[], ns=order(r), sc=rules?.scoring, gr=rules?.grouping, hc=rules?.handicap;
     if(!rules||!sc||!gr||!hc||!rules.penaltyPolicy||!Array.isArray(rules.sideGames))fail('RULES_INCOMPLETE','请完成五项规则设置');
-    if(players.length<1||players.length>4||new Set(ids(r)).size!==players.length) fail('INVALID_PLAYER_COUNT','每轮需要 1–4 位不同球友');
+    if(players.length<1||players.length>MAX_PLAYERS||new Set(ids(r)).size!==players.length) fail('INVALID_PLAYER_COUNT','每轮需要 1–16 位不同球友');
     if(!['individual','four_ball'].includes(gr.type))fail('INVALID_GROUPING','组队方式不支持');
     if(gr.type==='four_ball') {
       const all=(gr.teams||[]).flatMap(t=>t.playerIds||[]);
@@ -70,7 +72,7 @@
     const sideIds=new Set();for(const g of rules.sideGames){
       if(!g.id||sideIds.has(g.id))fail('INVALID_SIDE_GAME','附加玩法标识重复'); sideIds.add(g.id);
       if(!['skins','nassau','birdie','nearest','longest'].includes(g.type))fail('INCOMPATIBLE_SIDE_GAME','此附加玩法尚不支持');
-      if(g.type==='skins'&&(gr.type!=='individual'||players.length<2||sc.type==='match_play'||sc.cap?.enabled))fail('INCOMPATIBLE_SIDE_GAME','Skins 需要 2–4 人个人记分、常规比杆或积分赛');
+      if(g.type==='skins'&&(gr.type!=='individual'||players.length<2||sc.type==='match_play'||sc.cap?.enabled))fail('INCOMPATIBLE_SIDE_GAME','Skins 需要 2–16 人个人记分、常规比杆或积分赛');
       if(g.type==='nassau'&&(sc.type!=='match_play'||ns.length!==18||ns.some((n,i)=>n!==i+1)))fail('INCOMPATIBLE_SIDE_GAME','拿骚需要从第 1 洞顺序开始的 18 洞比洞');
       if(['nearest','longest'].includes(g.type)&&(!g.holeNumbers?.length||g.holeNumbers.some(n=>!ns.includes(n))||!['m','yd'].includes(g.unit)))fail('RULES_INCOMPLETE','奖项需要至少一个本轮球洞和距离单位');
       if(g.basis==='net'&&sc.basis!=='net')fail('INCOMPATIBLE_SIDE_GAME','净杆抓鸟奖励需先配置本轮净杆让杆');
@@ -257,6 +259,6 @@
     if(!data||![1,2,3].includes(data.version)||!Array.isArray(data.rounds)||!data.profile||data.profile.id!=='me'||typeof data.profile.name!=='string'||!data.profile.name.trim()||!Array.isArray(data.friends)||data.friends.some(p=>!p.id||p.id==='me'||typeof p.name!=='string')||new Set(data.friends.map(p=>p.id)).size!==data.friends.length)fail('INVALID_BACKUP','数据格式不正确或版本高于当前应用');
     const d=clone(data);d.rounds=d.rounds.map(migrateRound);if(new Set(d.rounds.map(r=>r.id)).size!==d.rounds.length)fail('INVALID_BACKUP','球局编号重复');d.version=3;d.settings=d.settings||{unit:'yd',technical:false};d.favorites=d.favorites||[];d.courses=d.courses||[];d.templates=d.templates||[];return d;
   }
-  const api={VERSION,ENGINE,topics,names,clone,defaultRules,order,isFinished,par,si,validSI,allocateStrokes,allowances,validateRuleConfig,normalizeScore,validateScore,points,derivePlayerHole,deriveTeamHole,competitors,contestHoles,evaluateContest,evaluateSideGame,rawSummary,strictEligible,buildRoundSummary,validateEvent,validateAward,applyOperation,validateRound,migrateRound,migrateV1};
+  const api={MAX_PLAYERS,GROUP_MAX_PLAYERS,VERSION,ENGINE,topics,names,clone,defaultRules,order,isFinished,par,si,validSI,allocateStrokes,allowances,validateRuleConfig,normalizeScore,validateScore,points,derivePlayerHole,deriveTeamHole,competitors,contestHoles,evaluateContest,evaluateSideGame,rawSummary,strictEligible,buildRoundSummary,validateEvent,validateAward,applyOperation,validateRound,migrateRound,migrateV1};
   if(typeof module!=='undefined')module.exports=api;else root.GolfRules=api;
 })(typeof globalThis==='undefined'?this:globalThis);

@@ -11,3 +11,11 @@
 .glass-tabs .tab-pressed,.glass-tabs .tab:active{transform:scale(.96)}
 .glass-tabs .tab:focus-visible{outline:2rpx solid #81a68d;outline-offset:-3rpx}
 @media(prefers-reduced-motion:reduce){.glass-tab-highlight,.glass-tabs .tab,.glass-tabs .tab-image{transition:none}}
+
+/* Keep navigation visually light while retaining full touch targets. */
+.glass-tabs{left:14rpx;right:14rpx;bottom:calc(8rpx + env(safe-area-inset-bottom));padding:6rpx 10rpx;border-radius:40rpx;background:rgba(248,252,239,.77);border-color:rgba(255,255,255,.83);box-shadow:inset 0 1rpx 1rpx #fff,0 5rpx 18rpx rgba(35,61,39,.055);backdrop-filter:blur(20px) saturate(.85);-webkit-backdrop-filter:blur(20px) saturate(.85)}
+.glass-tab-track{height:96rpx}.glass-tabs .tab{min-height:96rpx;gap:6rpx;font-weight:400}.glass-tabs .tab-image{width:42rpx;height:42rpx;opacity:.76}.glass-tabs .tab.selected{color:#234b32;font-weight:600}.glass-tab-highlight{border:0;border-radius:28rpx;background:rgba(219,232,205,.38);box-shadow:none}.glass-tabs .tab.selected .tab-image{transform:none;opacity:1}
+.glass-tabs{border-color:rgba(255,255,255,.35);box-shadow:inset 0 1rpx 1rpx rgba(255,255,255,.4),0 5rpx 18rpx rgba(35,61,39,.055)}
+
+/* Device-safe dock: paint through to the bottom; inset belongs inside, exactly once. */
+.glass-tabs{left:0;right:0;bottom:0;border-radius:38rpx 38rpx 0 0;padding:6rpx 14rpx calc(6rpx + env(safe-area-inset-bottom));border-bottom:0;background:rgba(248,252,239,.83)}

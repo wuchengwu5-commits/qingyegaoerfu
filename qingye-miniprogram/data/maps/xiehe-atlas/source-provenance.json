@@ -1,0 +1,33 @@
+{
+  "retrievedOn": "2026-11-06",
+  "imagery": {
+    "width": 4096,
+    "height": 2301,
+    "extent": {
+      "xmin": 13492674.285148544,
+      "ymin": 3694266.620413453,
+      "xmax": 13495373.883134088,
+      "ymax": 3695783.1670357026,
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "northUp": true,
+    "crs": "EPSG:3857",
+    "sourceUrl": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=13492674.285148544%2C3694266.6767806425%2C13495373.883134088%2C3695783.110668512&bboxSR=3857&imageSR=3857&size=4096%2C2301&format=jpg&f=json",
+    "source": "Esri World Imagery / Vantor / GIS User Community",
+    "retrievedOn": "2026-11-06",
+    "imageryDate": null,
+    "image": "satellite.jpg"
+  },
+  "referenceUrl": "https://w.baigolf.com/course.php?act=detail&golf_course_id=579&lan=zh_cn",
+  "sourceRole": "Reference diagrams for identity; raw georeferenced Esri imagery for independent surface reading.",
+  "fieldSurvey": false,
+  "revision": "20261106-r1",
+  "issues": [
+    "未能可靠完成18洞身份对应，因此不输出任何未经核实的逐洞GPS坐标。",
+    "检索并对照百高旧码书、新浪2009逐洞图（含350×622原图）、GolfTraxx、Hole19、ShotNavi、日文Explorer及原始影像。GolfTraxx返回同点/0.1占位坐标，已排除；ShotNavi同名条目地址为佘山，已排除；其余仍缺清晰现行带编号全场图或有效逐洞坐标。",
+    "扩大了底图范围，西侧自动识别候选含树丛，已排除。百高579/1857/5757三条目的18张图相同，已排除另有新版图的可能。新浪原图设计与百高一致，仍不能与现有影像唯一配准。公开旧图本身不足以确认现行洞序；未据此推断球场改造或关闭。"
+  ]
+}

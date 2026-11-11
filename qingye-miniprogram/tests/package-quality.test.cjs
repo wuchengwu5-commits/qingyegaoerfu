@@ -9,10 +9,40 @@ test('compressed catalog preserves every field and leaves headroom below 1.5 MiB
  const app=JSON.parse(fs.readFileSync(base+'/app.json'));
  for(const root of ['',...app.subPackages.map(x=>x.root)]){
   const group=files.filter(f=>root?f.startsWith(base+'/'+root+'/'):!app.subPackages.some(x=>f.startsWith(base+'/'+x.root+'/')));
-  A.ok(group.reduce((n,f)=>n+fs.statSync(f).size,0)<1.5*1024*1024,root||'main');
+  const bytes=group.reduce((n,f)=>n+fs.statSync(f).size,0);
+  A.ok(bytes<(root?1.5*1024*1024:1300000),(root||'main')+': '+bytes+' bytes');
  }
  const media=files.filter(f=>/\.(png|jpe?g|webp|mp3|wav|mp4)$/i.test(f));
- A.ok(media.reduce((n,f)=>n+fs.statSync(f).size,0)<200*1024,'all packaged image/audio bytes');
+ // Match the Developer Tools 200 K media check conservatively using decimal bytes.
+ // Keep local JPEG/transparent PNG compatibility assets within this actual budget.
+ A.ok(media.reduce((n,f)=>n+fs.statSync(f).size,0)<200000,'all packaged image/audio bytes must remain below 200 K');
+});
+test('GPS catalog readers live with their map pages and city geometry stays outside the main package',()=>{
+ const app=require(base+'/app.json');
+ A.equal(fs.existsSync(base+'/services/gps-maps.js'),false);
+ A.equal(fs.existsSync(base+'/services/location-cities-data.js'),false);
+ A.ok(app.subPackages.some(p=>p.root==='packages/location-data'));
+ A.ok(fs.existsSync(base+'/packages/location-data/location-cities-data.js'));
+ const source=fs.readFileSync(path.resolve(__dirname,'../../templates/map-ui/gps-maps.js'));
+ for(const {root} of app.subPackages.filter(p=>p.root.endsWith('-map'))){
+  const dir=base+'/'+root;
+  const callers=fs.readdirSync(dir).filter(file=>file.endsWith('.js')&&file!=='gps-maps.js')
+    .map(file=>fs.readFileSync(dir+'/'+file,'utf8')).filter(code=>code.includes('gps-maps'));
+  for(const code of callers)A.match(code,/require\('\.\/gps-maps'\)/,root);
+  if(callers.length)A.deepEqual(fs.readFileSync(dir+'/gps-maps.js'),source,root);
+ }
+});
+test('course-map controls share vector Tianma HUD and any remaining picker icons come from the main package',()=>{
+ const app=JSON.parse(fs.readFileSync(base+'/app.json'));
+ for(const pkg of app.subPackages.filter(p=>p.root.endsWith('-map'))){
+  const w=fs.readFileSync(base+'/'+pkg.root+'/'+(pkg.pages.includes('index')?'index':pkg.pages[0])+'.wxml','utf8');
+  const icons=[...w.matchAll(/src="(\/assets\/map-icons\/[^"{}]+\.png)"/g)].map(m=>m[1]);
+  A.match(w,/class="atlas-hit"/,pkg.root+' vector control hit targets');
+  A.deepEqual(fs.readFileSync(base+'/'+pkg.root+'/atlas-hud.js'),fs.readFileSync(path.resolve(__dirname,'../../templates/map-ui/atlas-hud.js')));
+  for(const icon of icons)A.ok(fs.existsSync(base+icon),icon);
+  A.doesNotMatch(w,/\{\{assetRoot\}\}\/icons\//);
+  A.equal(fs.existsSync(base+'/'+pkg.root+'/icons'),false,pkg.root+' duplicated icons');
+ }
 });
 test('a single hole decodes only intersecting tiles, with bounded concurrency and cache reuse',async()=>{
  const canvas=fakeCanvas(),loader=Raster.createLoader(canvas),region=C.defaultMap.sourceWindow,all=manifest[C.atlas].tiles;

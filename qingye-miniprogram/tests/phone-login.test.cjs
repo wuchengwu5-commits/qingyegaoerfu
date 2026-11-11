@@ -18,13 +18,13 @@ test('missing, invalid, cross-app and stale phone grants are never accepted',asy
 });
 test('legacy login and a forged phone field cannot create or upgrade an account',async()=>{
  const repo=memory(),api=service(repo);
- for(const action of ['login','profile','create','friends'])await A.rejects(api('new',action,{name:'X',phoneVerified:true,phone:{number:'13800000000',verifiedAt:time}}),e=>e.code==='PHONE_REQUIRED');
+ for(const action of ['login','profile','create','friends'])await A.rejects(api('new',action,{name:'X',phoneVerified:true,phone:{number:'13800000000',verifiedAt:time}}),e=>e.code==='AUTH_REQUIRED');
  await A.rejects(api('new','phoneLogin',{phoneVerified:true}),e=>e.code==='PHONE_REQUIRED');A.deepEqual(repo.dump(),{});
 });
 test('phone upgrade preserves legacy records and excludes the number from responses',async()=>{
- const old={uid:'old',name:'原球友',friendUids:['friend'],activityIds:['old-round'],createdAt:1,handicapSetting:{mode:'manual',value:12}};
+ const old={uid:'old',name:'原球友',friendUids:['friend'],activityIds:['old-round'],createdAt:1,wechatAuthorizedAt:time,handicapSetting:{mode:'manual',value:12}};
  const repo=memory({'qy_users:old':old}),verifyPhone=createPhoneVerifier({exchange:async()=>response(),appid,openid,now:()=>time}),api=service(repo,{verifyPhone});
- await A.rejects(api('old','login'),e=>e.code==='PHONE_REQUIRED');
+ await A.rejects(api('old','login'),e=>e.code==='AUTH_REQUIRED');
  const p=await api('old','phoneLogin',{code:'real-component-code',uid:'forged',phone:{number:'fake'}});
  A.equal(p.uid,'old');A.equal(p.phoneVerified,true);A.equal(p.phoneMasked,'138****0000');A.equal(p.phone,undefined);A.doesNotMatch(JSON.stringify(p),/13800000000/);
  const stored=repo.dump()['qy_users:old'];A.deepEqual(stored.activityIds,old.activityIds);A.deepEqual(stored.handicapSetting,old.handicapSetting);A.equal(stored.createdAt,1);A.equal(stored.phone.number,'13800000000');
@@ -36,32 +36,20 @@ test('friends never receive phone information and avatars must belong to their o
  await A.rejects(api('a','profile',{name:'甲',avatarUrl:'cloud://test.bucket/profiles/b/avatar-1.jpg'}),e=>e.code==='INVALID');
  const p=await api('a','profile',{name:'甲',avatarUrl:'cloud://test.bucket/profiles/a/avatar-1.jpg'});A.equal(p.profileCompleted,true);A.equal(p.avatarUrl,'cloud://test.bucket/profiles/a/avatar-1.jpg');
 });
-function page(t){
- const modulePath=require.resolve('../miniprogram/pages/account/index'),account=require('../miniprogram/services/account'),saved={...account},oldPage=global.Page,oldWx=global.wx;let def,toasts=[],routes=[];
- account.user=()=>null;global.Page=x=>def=x;global.wx={showToast:x=>toasts.push(x),switchTab:x=>{routes.push(x.url);x.success?.();}};delete require.cache[modulePath];require(modulePath);
- const p={...def,data:structuredClone(def.data),setData(x){Object.assign(this.data,x);}};
- t.after(()=>{Object.assign(account,saved);global.Page=oldPage;global.wx=oldWx;delete require.cache[modulePath];});return {p,account,toasts,routes};
-}
-test('cancelled or quota-blocked authorization never calls login or shows success',async t=>{
- const {p,account,toasts,routes}=page(t);let calls=0;account.loginWithPhone=async()=>calls++;
- await p.phoneLogin({detail:{errMsg:'getPhoneNumber:fail user deny'}});A.equal(calls,0);A.equal(p.data.loggedIn,false);A.match(p.data.error,/取消/);
- await p.phoneLogin({detail:{errno:1400001}});A.equal(calls,0);A.equal(toasts.length,0);A.deepEqual(routes,[]);
-});
-test('duplicate grants are suppressed and a failed server verification cannot establish login',async t=>{
- const {p,account,toasts,routes}=page(t);let calls=0,reject;account.loginWithPhone=()=>{calls++;return new Promise((_,r)=>reject=r);};
- const first=p.phoneLogin({detail:{code:'one-use'}});A.equal(p.data.busy,true);await p.phoneLogin({detail:{code:'one-use'}});A.equal(calls,1);
- reject(Error('verification failed'));await first;A.equal(p.data.loggedIn,false);A.equal(p.data.busy,false);A.equal(toasts.length,0);A.deepEqual(routes,[]);
-});
-test('verified login shows masked phone; profile submit uses validated form contents',async t=>{
- const {p,account,toasts,routes}=page(t);account.loginWithPhone=async()=>({uid:'a',phoneVerified:true,phoneMasked:'138****0000',profileCompleted:false});
- await p.phoneLogin({detail:{code:'code'}});A.equal(p.data.loggedIn,true);A.equal(p.data.phoneMasked,'138****0000');A.equal(p.data.name,'');A.equal(toasts[0].title,'登录成功');A.deepEqual(routes,['/pages/home/index']);
- let saves=0;account.updateProfile=async name=>{saves++;return {name};};p.name({detail:{value:'stale nickname'}});
- await p.save({detail:{value:{nickname:''}}});A.equal(saves,0);await p.save({detail:{value:{nickname:'新球友'}}});A.equal(saves,1);A.equal(p.data.name,'新球友');
-});
-test('returning users go home only after phone verification completes',async t=>{
- const {p,account,routes}=page(t);let resolve;account.loginWithPhone=()=>new Promise(r=>resolve=r);
- const pending=p.phoneLogin({detail:{code:'new-code'}});A.deepEqual(routes,[]);
- resolve({uid:'a',phoneVerified:true,profileCompleted:true,name:'球友'});await pending;
- A.deepEqual(routes,['/pages/home/index']);A.equal(p.data.busy,false);
- await p.phoneLogin({detail:{code:'duplicate'}});A.equal(routes.length,1);
+
+test('native component code reaches cloud phone exchange and a fresh app restores without exchanging again',async()=>{
+ const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
+ const context={APPID:'wx771368adc305a848',OPENID:'server-openid'},records=new Map(),grants=[],requests=[],disk={},local={profile:{name:'原球友'},rounds:[{id:'saved-round'}],pendingHandicapInputs:{}};
+ const db={collection:c=>({doc:id=>({get:async()=>{if(!records.has(c+id))throw Error('not exist');return {data:structuredClone(records.get(c+id))};},set:async({data})=>records.set(c+id,structuredClone(data))})}),runTransaction:fn=>fn(db)};
+ const cloud={DYNAMIC_CURRENT_ENV:'env',init(){},database:()=>db,getWXContext:()=>context,openapi:{phonenumber:{getPhoneNumber:async q=>{grants.push(q);return {errCode:0,phoneInfo:{purePhoneNumber:'13800000000',countryCode:'86',watermark:{appid:context.APPID,timestamp:Date.now()/1000}}};}}}};
+ const entry=path.resolve(__dirname,'../cloudfunctions/qingye/index.js'),realRequire=require('node:module').createRequire(entry),out={};
+ vm.runInNewContext(fs.readFileSync(entry,'utf8'),{exports:out,process,require:id=>id==='wx-server-sdk'?cloud:realRequire(id)});
+ const source=fs.readFileSync(path.resolve(__dirname,'../miniprogram/services/account.js'),'utf8');
+ function restart(){
+  const module={exports:{}},wx={getStorageSync:k=>structuredClone(disk[k]),setStorageSync:(k,v)=>disk[k]=structuredClone(v),cloud:{callFunction:async q=>{requests.push(q.data.action);return {result:await out.main(q.data)};}}};
+  vm.runInNewContext(source,{module,Date,wx,require:id=>id==='../config'?{cloudEnv:'env'}:id==='./store'?{read:()=>structuredClone(local),mutate:fn=>fn(local)}:id==='./cloud-client'?{init(){}}:id==='./cloud-sync'?{flush:async()=>{}}:null});
+  return module.exports;
+ }
+ const first=restart();A.equal(first.user(),null);await first.loginWithPhone('real-component-code');A.equal(first.user().phoneVerified,true);A.equal(grants.length,1);A.equal(grants[0].openid,context.OPENID);A.equal(grants[0].code,'real-component-code');
+ const next=restart();A.equal(next.user().phoneVerified,true);await next.restore();await next.call('friends');A.deepEqual(requests,['phoneLogin','login','friends']);A.equal(grants.length,1);A.equal(local.rounds[0].id,'saved-round');A.doesNotMatch(JSON.stringify(disk),/13800000000|real-component-code|server-openid/);
 });

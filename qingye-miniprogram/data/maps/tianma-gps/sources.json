@@ -1,0 +1,57 @@
+{
+  "catalog": "cn_bg_577",
+  "satellite": {
+    "href": "https://services.arcgisonline.com/arcgis/rest/directories/arcgisoutput/World_Imagery_MapServer/_ags_map86fb43e962464b208fce77d614bd02ab.jpg",
+    "width": 4074,
+    "height": 4096,
+    "extent": {
+      "xmin": 13483551.080701001,
+      "ymin": 3639192.5140532604,
+      "xmax": 13486010.918621011,
+      "ymax": 3641665.6353395544,
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "scale": 2282.034024407593,
+    "requestUrl": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=13483551.080701001%2C3639192.5140532604%2C13486010.918621011%2C3641665.6353395544&bboxSR=3857&imageSR=3857&size=4074%2C4096&format=jpg&f=json",
+    "retrievedOn": "2026-11-02"
+  },
+  "satelliteGrid": {
+    "width": 3565,
+    "height": 3584,
+    "extent": {
+      "xmin": 13483551.080701001,
+      "ymin": 3639192.5140532604,
+      "xmax": 13486010.918621011,
+      "ymax": 3641665.6353395544,
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "frame": {
+      "x": 0,
+      "y": 0,
+      "width": 3565,
+      "height": 3584
+    },
+    "source": "Esri / Vantor / GIS User Community",
+    "retrievedOn": "2026-11-02",
+    "northUp": true,
+    "fillViewport": true,
+    "maxZoom": 12
+  },
+  "coursePages": [
+    "http://www.tianmacc.com/cn/golfc.php?ID=8",
+    "http://www.tianmacc.com/cn/golfc.php?ID=9",
+    "http://www.tianmacc.com/cn/golfc.php?ID=10"
+  ],
+  "guide": "https://www.baigolf.com/news.php?act=news_detail&news_id=1018",
+  "notes": [
+    "洞序按分场和球会导览、沙坑与水岸及洞间衔接判读，非实测。",
+    "天马场3号参考 corrected-tianma-03.jpg，与新场3号的重复图已区分。",
+    "前一版的老场九洞标注原样保留。"
+  ]
+}

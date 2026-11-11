@@ -1,6 +1,6 @@
 const {test}=require('node:test'),A=require('node:assert/strict'),fs=require('fs'),path=require('path');
 const base=path.resolve(__dirname,'../miniprogram'),root=path.resolve(base,'../..'),B=base+'/packages/sheshan-map',Config=require(B+'/course-config'),M=require(B+'/map-core'),{holeContext}=require(B+'/hole-context'),S=require(base+'/services/store'),C=require(base+'/services/catalog'),course=S.courses.find(c=>c.id===Config.courseId);
-function page(o={}){let def;global.Page=p=>def=p;delete require.cache[require.resolve(B+'/index')];require(B+'/index');const p={...def,data:structuredClone(def.data),setData(x){Object.assign(this.data,x)}};p.onLoad(o);return p;}
+function page(o={}){let def;global.Page=p=>def=p;delete require.cache[require.resolve(B+'/index')];require(B+'/index');const p={...def,data:structuredClone(def.data),setData(x){Object.assign(this.data,x)}};const atlasRoute=Config.atlasRoute,routes=require(base+'/services/course-map-route'),route=routes.route;try{Config.atlasRoute=null;routes.route=id=>id===Config.courseId?Config.route:route(id);p.onLoad(o);}finally{Config.atlasRoute=atlasRoute;routes.route=route;}return p;}
 test('18 distinct Sheshan holes use catalog IDs, Par, source geometry, and their own geographic atlas',()=>{
  const ctx=holeContext(course),holes=Object.values(Config.holes),atlas=Config.overview;A.equal(holes.length,18);A.equal(new Set(holes.map(h=>h.greenOsmId)).size,18);A.equal(new Set(holes.map(h=>h.originOsmId)).size,18);A.equal(ctx.holes.filter(h=>h.mapAvailable).length,18);A.equal(ctx.holes.filter(h=>h.enhancedAvailable).length,0);
  for(const d of holes){A.equal(d.par,ctx.holes.find(h=>h.sourceId===d.id).par);A.equal(d.verified,false);const f=d.sourceWindow,green=d.features.find(f=>f.id==='green');A.ok(M.inside(d.greenCenter,green.points));A.ok(f.x>=0&&f.y>=0&&f.x+f.width<=atlas.width&&f.y+f.height<=atlas.height);
@@ -23,9 +23,9 @@ test('manual Sheshan origins survive browsing and reset without retaining GPS po
  global.wx={};const p=page({course:course.id});p.manualOrigin=true;p.state.origin=p.mapData.defaultTarget.slice();const manual=p.state.origin.slice();p.selectHole(2);p.selectHole(1);A.deepEqual(p.state.origin,manual);p.reset();A.deepEqual(p.state.origin,manual);A.equal(p.data.locationText,'手动起点 · 可拖动');
 });
 test('legacy and mismatched package links route to the correct independent course package',()=>{
- let url;const storage={};global.wx={redirectTo:o=>url=o.url,getStorageSync:k=>storage[k],setStorageSync:(k,v)=>storage[k]=structuredClone(v)};page({course:'cn_bg_585',round:'a&b',hole:'10'});A.equal(url,'/packages/hole-map/index?course=cn_bg_585&round=a%26b&hole=10');
- let def;global.Page=p=>def=p;delete require.cache[require.resolve(base+'/packages/hole-map/index')];require(base+'/packages/hole-map/index');const p={...def,data:structuredClone(def.data),setData(x){Object.assign(this.data,x)}};p.onLoad({course:course.id,hole:18});A.equal(url,'/packages/sheshan-map/index?course=cn_bg_2525&hole=18');
- delete require.cache[require.resolve(base+'/packages/course-guide/index')];require(base+'/packages/course-guide/index');def.onLoad({course:course.id,round:'r1',hole:10});A.equal(url,'/packages/sheshan-map/index?course=cn_bg_2525&round=r1&hole=10');
+ let url;const storage={};global.wx={redirectTo:o=>url=o.url,getStorageSync:k=>storage[k],setStorageSync:(k,v)=>storage[k]=structuredClone(v)};page({course:'cn_bg_585',round:'a&b',hole:'10'});A.equal(url,'/packages/hole-map/atlas?course=cn_bg_585&round=a%26b&hole=10');
+ let def;global.Page=p=>def=p;delete require.cache[require.resolve(base+'/packages/hole-map/index')];require(base+'/packages/hole-map/index');const p={...def,data:structuredClone(def.data),setData(x){Object.assign(this.data,x)}};p.onLoad({course:course.id,hole:18});A.equal(url,'/packages/sheshan-map/atlas?course=cn_bg_2525&hole=18');
+ delete require.cache[require.resolve(base+'/packages/course-guide/index')];require(base+'/packages/course-guide/index');def.onLoad({course:course.id,round:'r1',hole:10});A.equal(url,'/packages/sheshan-map/atlas?course=cn_bg_2525&round=r1&hole=10');
 });
 test('image loading uses Sheshan atlas only and recovers after a failed request',async()=>{
  global.wx={};const p=page({course:course.id}),calls=[];p.canvas={};p.rasterLoader={load(src,region){calls.push({src,region});return calls.length===1?Promise.reject(new Error('network')):Promise.resolve({width:2560,tiles:[]});}};
@@ -37,4 +37,21 @@ test('shared template stays identical across independent packages; native handle
  global.wx={};const p=page({course:course.id});for(const [,handler] of fs.readFileSync(B+'/index.wxml','utf8').matchAll(/(?:bind|catch)[\w:]*="([a-zA-Z]+)"/g))A.equal(typeof p[handler],'function',handler);
  for(const name of fs.readdirSync(root+'/templates/course-map').filter(n=>!n.endsWith('.md')))for(const pkg of ['hole-map','sheshan-map'])A.deepEqual(fs.readFileSync(root+'/templates/course-map/'+name),fs.readFileSync(base+'/packages/'+pkg+'/'+name));
  const app=JSON.parse(fs.readFileSync(base+'/app.json'));for(const pkg of app.subPackages)A.ok(bytes(base+'/'+pkg.root)<2*1024*1024,pkg.root);const main=bytes(base)-bytes(base+'/packages');A.ok(main<2*1024*1024,'main package');
+});
+test('course detail and in-round map buttons ignore repeated taps and reopen after a return or a failed navigation',t=>{
+ const navigations=[];
+ const before=global.wx, beforePage=global.Page;
+ global.wx={navigateTo:request=>navigations.push(request)};
+ t.after(()=>{global.wx=before;global.Page=beforePage;});
+ for(const [name,open] of [['course','maps'],['score','guide']]){
+  let page;
+  global.Page=p=>{page={...p,cid:course.id,rid:'round one',data:{h:{number:7},r:{courseId:course.id}},refresh(){},showBoard(){}};};
+  const file=require.resolve(base+'/pages/'+name+'/index');delete require.cache[file];require(file);
+  const count=navigations.length;
+  page.onShow();page[open]();page[open]();
+  A.equal(navigations.length,count+1);
+  A.equal(navigations[count].url,'/packages/sheshan-map/atlas?course='+course.id+(name==='score'?'&round=round%20one&hole=7':''));
+  navigations[count].fail();page[open]();A.equal(navigations.length,count+2);
+  page.onShow();page[open]();A.equal(navigations.length,count+3);
+ }
 });

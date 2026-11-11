@@ -1,0 +1,4 @@
+@import "../../pages/courses/index.wxss";
+.page.course-directory{padding-top:0;padding-bottom:calc(36rpx + env(safe-area-inset-bottom))}
+.directory-heading{margin-top:24rpx}
+.directory-heading .title{font-size:48rpx}

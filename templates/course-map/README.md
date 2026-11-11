@@ -6,7 +6,7 @@
 
 本目录是银涛、佘山、天马、华凯、林克司、美兰湖名人赛、美兰湖尼克劳斯、旗忠共用的页面源模板。各分包的 `course-config.js` 提供球场、图片、洞位和来源，页面负责选洞、缩放、记分关联与展示。
 
-`python3 tools/course-maps/build-template.py` 将模板复制到 8 个独立分包；`qingye-miniprogram/build-preview.py` 自动执行此步骤。不要直接编辑生成的页面文件。微信各分包不跨包 require 或引用图片，主包及每个分包均须低于 2 MiB。
+`python3 tools/course-maps/build-template.py` 将模板复制到 9 个独立分包；`qingye-miniprogram/build-preview.py` 自动执行此步骤。不要直接编辑生成的页面文件。微信各分包不跨包 require 或引用图片，主包及每个分包均须低于 2 MiB。
 
 ## 两种数据模式
 
@@ -23,3 +23,7 @@
 4. 核对所有洞号与分场、后九/反序开局映射、图片失败重试和过期回调、返回记分、手机尺寸以及包体。
 
 新增五场的素材获取与构建：`fetch-five-guides.py`、`fetch-five-imagery.py`、`build-five.cjs`。逐洞来源及修正记录见 `outputs/shanghai-five-gps/import-manifest.json`。天马图册 A/B/C 实际分别为天马/新/老，必须按图片标题映射。天马场第 3 洞、华凯第 10 洞的原始误图已从独立公开图册补正。
+
+## 2026-11-05：参考图与 GPS 分开
+
+当前用户要求优先显示精修参考图，覆盖上文 2026-11-02 的“只显示 GPS”历史要求。银涛与九龙山的 `references` 按稳定洞 ID 保存独立图片，不向 `holes` 填入虚构 GPS。默认参考图，当前浏览过程保留切换模式，重新进入恢复默认；没有参考图的球场保持原有 GPS 行为。九龙山只接入有来源范围的全场 GPS 图。维护流程见 `qingye-miniprogram/球道参考图接入说明.md`。

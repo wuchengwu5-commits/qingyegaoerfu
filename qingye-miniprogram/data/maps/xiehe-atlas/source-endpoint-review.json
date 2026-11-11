@@ -1,0 +1,30 @@
+{
+  "courseId": "cn_bg_579",
+  "revision": "20261106-r1",
+  "passes": [
+    {
+      "id": "identity",
+      "status": "uncertain",
+      "evidence": [
+        "guide-source.json",
+        "provenance.json"
+      ]
+    },
+    {
+      "id": "surface",
+      "status": "uncertain",
+      "evidence": [
+        "evidence/"
+      ]
+    },
+    {
+      "id": "render",
+      "status": "partial",
+      "evidence": [
+        "renders/overview.png"
+      ],
+      "note": "仅全览已渲染；18洞尚未完成可靠定位。"
+    }
+  ],
+  "holes": []
+}

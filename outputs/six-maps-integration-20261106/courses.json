@@ -1,0 +1,68 @@
+[
+  {
+    "courseId": "cn_bg_2529",
+    "name": "颖奕安亭",
+    "package": "anting-map",
+    "gpsHoles": 18,
+    "reviewedHoles": 13,
+    "pendingTeeHoles": 5,
+    "overview": true,
+    "photo": "/packages/anting-map/atlas-4b589bd22dd731a8.jpg",
+    "revision": "six-atlas-20261106.1"
+  },
+  {
+    "courseId": "cn_bg_575",
+    "name": "汤臣",
+    "package": "tomson-map",
+    "gpsHoles": 18,
+    "reviewedHoles": 17,
+    "pendingTeeHoles": 1,
+    "overview": true,
+    "photo": "/packages/tomson-map/atlas-127e2efabe8d0930.jpg",
+    "revision": "six-atlas-20261106.1"
+  },
+  {
+    "courseId": "cn_bg_587",
+    "name": "棕榈滩海景",
+    "package": "palmbeach-map",
+    "gpsHoles": 18,
+    "reviewedHoles": 18,
+    "pendingTeeHoles": 0,
+    "overview": true,
+    "photo": "/packages/palmbeach-map/atlas-832576f18d606178.jpg",
+    "revision": "six-atlas-20261106.1"
+  },
+  {
+    "courseId": "cn_bg_579",
+    "name": "协和",
+    "package": "xiehe-map",
+    "gpsHoles": 0,
+    "reviewedHoles": 0,
+    "pendingTeeHoles": 0,
+    "overview": true,
+    "photo": "/packages/xiehe-map/atlas-1001f2bdb6488977.jpg",
+    "revision": "six-atlas-20261106.1"
+  },
+  {
+    "courseId": "cn_bg_3981",
+    "name": "东庄海岸林克斯",
+    "package": "dongzhuang-links-map",
+    "gpsHoles": 18,
+    "reviewedHoles": 18,
+    "pendingTeeHoles": 0,
+    "overview": true,
+    "photo": "/packages/dongzhuang-links-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1"
+  },
+  {
+    "courseId": "cn_bg_2533",
+    "name": "东庄园景",
+    "package": "dongzhuang-garden-map",
+    "gpsHoles": 18,
+    "reviewedHoles": 12,
+    "pendingTeeHoles": 6,
+    "overview": true,
+    "photo": "/packages/dongzhuang-garden-map/atlas-33d672e4559d6e9f.jpg",
+    "revision": "six-atlas-20261106.1"
+  }
+]

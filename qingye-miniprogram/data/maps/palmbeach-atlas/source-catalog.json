@@ -1,0 +1,1785 @@
+{
+  "courseId": "cn_bg_587",
+  "schema": 2,
+  "revision": "20261106-r1",
+  "holes": [
+    {
+      "_id": "cn_bg_587_s1_h01",
+      "courseId": "cn_bg_587",
+      "number": 1,
+      "sectionId": "cn_bg_587_s1",
+      "holeNumber": 1,
+      "par": 4,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "前1",
+      "displayNumber": 1,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-01.jpg",
+      "tee": [
+        121.548913695,
+        30.828451136
+      ],
+      "green": [
+        121.545315877,
+        30.827447758
+      ],
+      "target": [
+        121.546874849,
+        30.827921695
+      ],
+      "route": [
+        [
+          121.548913695,
+          30.828451136
+        ],
+        [
+          121.546874849,
+          30.827921695
+        ],
+        [
+          121.545315877,
+          30.827447758
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.545203989,
+          30.827545961
+        ],
+        [
+          121.545343227,
+          30.827580119
+        ],
+        [
+          121.545442683,
+          30.827545961
+        ],
+        [
+          121.545462574,
+          30.827443488
+        ],
+        [
+          121.545402901,
+          30.827341015
+        ],
+        [
+          121.545303445,
+          30.827306857
+        ],
+        [
+          121.545203989,
+          30.827358094
+        ],
+        [
+          121.545164206,
+          30.827460567
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.548804294,
+          30.828468214
+        ],
+        [
+          121.548963423,
+          30.828536529
+        ],
+        [
+          121.549023097,
+          30.828434057
+        ],
+        [
+          121.548863967,
+          30.828365742
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 1,
+      "note": "Southwest return to southern corridor green; tee rectangular pad below ninth green.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s1_h02",
+      "courseId": "cn_bg_587",
+      "number": 2,
+      "sectionId": "cn_bg_587_s1",
+      "holeNumber": 2,
+      "par": 3,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "前2",
+      "displayNumber": 2,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-02.jpg",
+      "tee": [
+        121.545343227,
+        30.827913156
+      ],
+      "green": [
+        121.543243286,
+        30.827814343
+      ],
+      "target": [
+        121.543243286,
+        30.827814343
+      ],
+      "route": [
+        [
+          121.545343227,
+          30.827913156
+        ],
+        [
+          121.543243286,
+          30.827814343
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.543175088,
+          30.827921695
+        ],
+        [
+          121.543274544,
+          30.827938774
+        ],
+        [
+          121.543334217,
+          30.82785338
+        ],
+        [
+          121.543334217,
+          30.827733828
+        ],
+        [
+          121.543254652,
+          30.827682592
+        ],
+        [
+          121.543175088,
+          30.827733828
+        ],
+        [
+          121.543155196,
+          30.827836301
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.545243771,
+          30.827938774
+        ],
+        [
+          121.545402901,
+          30.82799001
+        ],
+        [
+          121.545442683,
+          30.827887538
+        ],
+        [
+          121.545283554,
+          30.827836301
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 2,
+      "note": "Short westward par3 across stream, narrow north-south green.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s1_h03",
+      "courseId": "cn_bg_587",
+      "number": 3,
+      "sectionId": "cn_bg_587_s1",
+      "holeNumber": 3,
+      "par": 5,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "前3",
+      "displayNumber": 3,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-03.jpg",
+      "tee": [
+        121.542812073,
+        30.829027539
+      ],
+      "green": [
+        121.547891785,
+        30.830711899
+      ],
+      "target": [
+        121.544706709,
+        30.829971126
+      ],
+      "route": [
+        [
+          121.542812073,
+          30.829027539
+        ],
+        [
+          121.543294435,
+          30.829561244
+        ],
+        [
+          121.545999636,
+          30.830363929
+        ],
+        [
+          121.547891785,
+          30.830711899
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.547750061,
+          30.830807965
+        ],
+        [
+          121.54790919,
+          30.830825043
+        ],
+        [
+          121.548028537,
+          30.830773808
+        ],
+        [
+          121.548088211,
+          30.830671339
+        ],
+        [
+          121.548028537,
+          30.830603025
+        ],
+        [
+          121.547889299,
+          30.830603025
+        ],
+        [
+          121.547750061,
+          30.830671339
+        ],
+        [
+          121.547690387,
+          30.830739652
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.542697699,
+          30.829065966
+        ],
+        [
+          121.542856829,
+          30.829117202
+        ],
+        [
+          121.542936393,
+          30.828997652
+        ],
+        [
+          121.542757373,
+          30.828929338
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 3,
+      "note": "Long northeast dogleg; independent island tee surface north of second green.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s1_h04",
+      "courseId": "cn_bg_587",
+      "number": 4,
+      "sectionId": "cn_bg_587_s1",
+      "holeNumber": 4,
+      "par": 4,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "前4",
+      "displayNumber": 4,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-04.jpg",
+      "tee": [
+        121.547078733,
+        30.829996744
+      ],
+      "green": [
+        121.543470614,
+        30.828843945
+      ],
+      "target": [
+        121.545402901,
+        30.829270909
+      ],
+      "route": [
+        [
+          121.547078733,
+          30.829996744
+        ],
+        [
+          121.545402901,
+          30.829270909
+        ],
+        [
+          121.543470614,
+          30.828843945
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.543393891,
+          30.828946416
+        ],
+        [
+          121.54355302,
+          30.828963495
+        ],
+        [
+          121.543632585,
+          30.828878102
+        ],
+        [
+          121.543572911,
+          30.828758551
+        ],
+        [
+          121.543453564,
+          30.828707316
+        ],
+        [
+          121.543354108,
+          30.82877563
+        ],
+        [
+          121.543334217,
+          30.828878102
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.546974304,
+          30.830022361
+        ],
+        [
+          121.547133434,
+          30.830073597
+        ],
+        [
+          121.547193108,
+          30.829971126
+        ],
+        [
+          121.547014087,
+          30.829919891
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 4,
+      "note": "Southwestern return, tee strip south of water and third green.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s1_h05",
+      "courseId": "cn_bg_587",
+      "number": 5,
+      "sectionId": "cn_bg_587_s1",
+      "holeNumber": 5,
+      "par": 5,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "前5",
+      "displayNumber": 5,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-05.jpg",
+      "tee": [
+        121.541723031,
+        30.829147089
+      ],
+      "green": [
+        121.536912205,
+        30.828470654
+      ],
+      "target": [
+        121.54003228,
+        30.829083045
+      ],
+      "route": [
+        [
+          121.541723031,
+          30.829147089
+        ],
+        [
+          121.54003228,
+          30.829083045
+        ],
+        [
+          121.536912205,
+          30.828470654
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.536809908,
+          30.828553608
+        ],
+        [
+          121.536949146,
+          30.828587765
+        ],
+        [
+          121.537048602,
+          30.828536529
+        ],
+        [
+          121.537028711,
+          30.828434057
+        ],
+        [
+          121.536949146,
+          30.828331585
+        ],
+        [
+          121.536829799,
+          30.828382821
+        ],
+        [
+          121.536770125,
+          30.828468214
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.541623575,
+          30.829185516
+        ],
+        [
+          121.541782704,
+          30.829219673
+        ],
+        [
+          121.541822487,
+          30.829117202
+        ],
+        [
+          121.541663357,
+          30.829065966
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 5,
+      "note": "Westward long corridor to boundary green, tee on narrow strip south of main pond.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s1_h06",
+      "courseId": "cn_bg_587",
+      "number": 6,
+      "sectionId": "cn_bg_587_s1",
+      "holeNumber": 6,
+      "par": 3,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "前6",
+      "displayNumber": 6,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-06.jpg",
+      "tee": [
+        121.536765152,
+        30.828062595
+      ],
+      "green": [
+        121.536620941,
+        30.826749657
+      ],
+      "target": [
+        121.536620941,
+        30.826749657
+      ],
+      "route": [
+        [
+          121.536765152,
+          30.828062595
+        ],
+        [
+          121.536620941,
+          30.826749657
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.536531431,
+          30.826845726
+        ],
+        [
+          121.536670669,
+          30.826896963
+        ],
+        [
+          121.536770125,
+          30.826845726
+        ],
+        [
+          121.536790016,
+          30.826726173
+        ],
+        [
+          121.536710452,
+          30.826640778
+        ],
+        [
+          121.536571213,
+          30.82660662
+        ],
+        [
+          121.536471757,
+          30.826674936
+        ],
+        [
+          121.536451866,
+          30.826760331
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.536690561,
+          30.828160798
+        ],
+        [
+          121.536829799,
+          30.828143719
+        ],
+        [
+          121.536829799,
+          30.827972931
+        ],
+        [
+          121.536710452,
+          30.827972931
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 6,
+      "note": "Southbound short par3 along western boundary.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s1_h07",
+      "courseId": "cn_bg_587",
+      "number": 7,
+      "sectionId": "cn_bg_587_s1",
+      "holeNumber": 7,
+      "par": 4,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "前7",
+      "displayNumber": 7,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-07.jpg",
+      "tee": [
+        121.536879527,
+        30.82626504
+      ],
+      "green": [
+        121.539771208,
+        30.826625834
+      ],
+      "target": [
+        121.538043161,
+        30.826572462
+      ],
+      "route": [
+        [
+          121.536879527,
+          30.82626504
+        ],
+        [
+          121.538043161,
+          30.826572462
+        ],
+        [
+          121.539771208,
+          30.826625834
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.539674239,
+          30.826743252
+        ],
+        [
+          121.539773695,
+          30.82677741
+        ],
+        [
+          121.539893042,
+          30.826726173
+        ],
+        [
+          121.539932824,
+          30.82660662
+        ],
+        [
+          121.539873151,
+          30.826504146
+        ],
+        [
+          121.539753803,
+          30.826469988
+        ],
+        [
+          121.539634456,
+          30.826538304
+        ],
+        [
+          121.539634456,
+          30.826640778
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.536770125,
+          30.826299198
+        ],
+        [
+          121.536929255,
+          30.826350435
+        ],
+        [
+          121.536988928,
+          30.826230882
+        ],
+        [
+          121.536829799,
+          30.826179644
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 7,
+      "note": "Eastbound southern short par4; distinct diagonal tee rectangle.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s1_h08",
+      "courseId": "cn_bg_587",
+      "number": 8,
+      "sectionId": "cn_bg_587_s1",
+      "holeNumber": 8,
+      "par": 4,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "前8",
+      "displayNumber": 8,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-08.jpg",
+      "tee": [
+        121.541290398,
+        30.827392252
+      ],
+      "green": [
+        121.544535148,
+        30.827420005
+      ],
+      "target": [
+        121.543115414,
+        30.827238542
+      ],
+      "route": [
+        [
+          121.541290398,
+          30.827392252
+        ],
+        [
+          121.54204129,
+          30.827136068
+        ],
+        [
+          121.544535148,
+          30.827420005
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.544428232,
+          30.827511804
+        ],
+        [
+          121.544587362,
+          30.827528883
+        ],
+        [
+          121.544706709,
+          30.827477646
+        ],
+        [
+          121.5447266,
+          30.827392252
+        ],
+        [
+          121.544627144,
+          30.827323936
+        ],
+        [
+          121.544468015,
+          30.827306857
+        ],
+        [
+          121.544368559,
+          30.827375173
+        ],
+        [
+          121.544368559,
+          30.827443488
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.54120586,
+          30.827443488
+        ],
+        [
+          121.54136499,
+          30.827443488
+        ],
+        [
+          121.541384881,
+          30.827341015
+        ],
+        [
+          121.54120586,
+          30.827341015
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 8,
+      "note": "Eastbound across water and along southern central corridor.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s1_h09",
+      "courseId": "cn_bg_587",
+      "number": 9,
+      "sectionId": "cn_bg_587_s1",
+      "holeNumber": 9,
+      "par": 4,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "前9",
+      "displayNumber": 9,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-09.jpg",
+      "tee": [
+        121.545601813,
+        30.827981471
+      ],
+      "green": [
+        121.54874462,
+        30.82902449
+      ],
+      "target": [
+        121.547053869,
+        30.828536529
+      ],
+      "route": [
+        [
+          121.545601813,
+          30.827981471
+        ],
+        [
+          121.547053869,
+          30.828536529
+        ],
+        [
+          121.54874462,
+          30.82902449
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.548645164,
+          30.829117202
+        ],
+        [
+          121.548764511,
+          30.829134281
+        ],
+        [
+          121.548863967,
+          30.829065966
+        ],
+        [
+          121.548883858,
+          30.828963495
+        ],
+        [
+          121.548784403,
+          30.828912259
+        ],
+        [
+          121.548665055,
+          30.828946416
+        ],
+        [
+          121.548605382,
+          30.829031809
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.545502357,
+          30.828007089
+        ],
+        [
+          121.545641595,
+          30.828058325
+        ],
+        [
+          121.545701268,
+          30.827955853
+        ],
+        [
+          121.54556203,
+          30.827904616
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 9,
+      "note": "Northeast return to green near clubhouse, south of top bunker.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s2_h01",
+      "courseId": "cn_bg_587",
+      "number": 10,
+      "sectionId": "cn_bg_587_s2",
+      "holeNumber": 1,
+      "par": 4,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "后1",
+      "displayNumber": 10,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-10.jpg",
+      "tee": [
+        121.55091276,
+        30.82937338
+      ],
+      "green": [
+        121.552268202,
+        30.831637477
+      ],
+      "target": [
+        121.551171345,
+        30.830790886
+      ],
+      "route": [
+        [
+          121.55091276,
+          30.82937338
+        ],
+        [
+          121.551171345,
+          30.830790886
+        ],
+        [
+          121.552268202,
+          30.831637477
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.552165904,
+          30.831713108
+        ],
+        [
+          121.552344925,
+          30.831713108
+        ],
+        [
+          121.552464272,
+          30.831661874
+        ],
+        [
+          121.55242449,
+          30.831576483
+        ],
+        [
+          121.55226536,
+          30.831559405
+        ],
+        [
+          121.552126122,
+          30.831593562
+        ],
+        [
+          121.55208634,
+          30.831644796
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.550853086,
+          30.829441694
+        ],
+        [
+          121.550972433,
+          30.829441694
+        ],
+        [
+          121.550972433,
+          30.829305066
+        ],
+        [
+          121.550853086,
+          30.829305066
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 10,
+      "note": "Northbound dogleg on east side of clubhouse.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s2_h02",
+      "courseId": "cn_bg_587",
+      "number": 11,
+      "sectionId": "cn_bg_587_s2",
+      "holeNumber": 2,
+      "par": 4,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "后2",
+      "displayNumber": 11,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-11.jpg",
+      "tee": [
+        121.552782531,
+        30.83123492
+      ],
+      "green": [
+        121.556237915,
+        30.832254727
+      ],
+      "target": [
+        121.554294261,
+        30.831713108
+      ],
+      "route": [
+        [
+          121.552782531,
+          30.83123492
+        ],
+        [
+          121.554294261,
+          30.831713108
+        ],
+        [
+          121.556237915,
+          30.832254727
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.556183924,
+          30.832327918
+        ],
+        [
+          121.556303271,
+          30.832379152
+        ],
+        [
+          121.556382836,
+          30.83231084
+        ],
+        [
+          121.556343054,
+          30.832208372
+        ],
+        [
+          121.556223707,
+          30.83214006
+        ],
+        [
+          121.556124251,
+          30.832174216
+        ],
+        [
+          121.55610436,
+          30.832242528
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.552663184,
+          30.831251999
+        ],
+        [
+          121.552822314,
+          30.831320311
+        ],
+        [
+          121.552901878,
+          30.831217842
+        ],
+        [
+          121.552742749,
+          30.831149529
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 11,
+      "note": "Northeast corridor ending beside houses, tee strip south of lake.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s2_h03",
+      "courseId": "cn_bg_587",
+      "number": 12,
+      "sectionId": "cn_bg_587_s2",
+      "holeNumber": 3,
+      "par": 4,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "后3",
+      "displayNumber": 12,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-12.jpg",
+      "tee": [
+        121.557904512,
+        30.832272415
+      ],
+      "green": [
+        121.561116939,
+        30.833164736
+      ],
+      "target": [
+        121.559446079,
+        30.832771945
+      ],
+      "route": [
+        [
+          121.557904512,
+          30.832272415
+        ],
+        [
+          121.559446079,
+          30.832771945
+        ],
+        [
+          121.561116939,
+          30.833164736
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.561057265,
+          30.833267203
+        ],
+        [
+          121.561156721,
+          30.833318436
+        ],
+        [
+          121.561256177,
+          30.833301359
+        ],
+        [
+          121.561256177,
+          30.833164736
+        ],
+        [
+          121.561176612,
+          30.833045191
+        ],
+        [
+          121.561057265,
+          30.832993957
+        ],
+        [
+          121.5609777,
+          30.833045191
+        ],
+        [
+          121.560997592,
+          30.833181814
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.557815002,
+          30.832327918
+        ],
+        [
+          121.557994022,
+          30.832327918
+        ],
+        [
+          121.557994022,
+          30.83222545
+        ],
+        [
+          121.557815002,
+          30.832208372
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 12,
+      "note": "Eastern long par4, tee is north of central housing row.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s2_h04",
+      "courseId": "cn_bg_587",
+      "number": 13,
+      "sectionId": "cn_bg_587_s2",
+      "holeNumber": 4,
+      "par": 3,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "后4",
+      "displayNumber": 13,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-13.jpg",
+      "tee": [
+        121.5615993,
+        30.832763406
+      ],
+      "green": [
+        121.561210711,
+        30.831486213
+      ],
+      "target": [
+        121.561210711,
+        30.831486213
+      ],
+      "route": [
+        [
+          121.5615993,
+          30.832763406
+        ],
+        [
+          121.561210711,
+          30.831486213
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.561116939,
+          30.831576483
+        ],
+        [
+          121.561216395,
+          30.83161064
+        ],
+        [
+          121.561315851,
+          30.831559405
+        ],
+        [
+          121.561335742,
+          30.831456937
+        ],
+        [
+          121.561256177,
+          30.831371546
+        ],
+        [
+          121.561156721,
+          30.831371546
+        ],
+        [
+          121.561077156,
+          30.831456937
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.561534654,
+          30.832840256
+        ],
+        [
+          121.561654001,
+          30.832840256
+        ],
+        [
+          121.561673892,
+          30.832686555
+        ],
+        [
+          121.561534654,
+          30.832686555
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 13,
+      "note": "Southbound par3 on eastern boundary.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s2_h05",
+      "courseId": "cn_bg_587",
+      "number": 14,
+      "sectionId": "cn_bg_587_s2",
+      "holeNumber": 5,
+      "par": 5,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "后5",
+      "displayNumber": 14,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-14.jpg",
+      "tee": [
+        121.561549572,
+        30.830837852
+      ],
+      "green": [
+        121.556823284,
+        30.831461816
+      ],
+      "target": [
+        121.559008473,
+        30.830603025
+      ],
+      "route": [
+        [
+          121.561549572,
+          30.830837852
+        ],
+        [
+          121.559008473,
+          30.830603025
+        ],
+        [
+          121.557337613,
+          30.8308592
+        ],
+        [
+          121.556823284,
+          30.831461816
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.556720986,
+          30.831576483
+        ],
+        [
+          121.556820442,
+          30.831593562
+        ],
+        [
+          121.556900007,
+          30.831525249
+        ],
+        [
+          121.556959681,
+          30.831405702
+        ],
+        [
+          121.556900007,
+          30.831320311
+        ],
+        [
+          121.55678066,
+          30.831354468
+        ],
+        [
+          121.556681204,
+          30.831456937
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.561455089,
+          30.830893356
+        ],
+        [
+          121.561614218,
+          30.830893356
+        ],
+        [
+          121.561654001,
+          30.830790886
+        ],
+        [
+          121.56147498,
+          30.830773808
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 14,
+      "note": "Westbound dogleg par5, green at northwest elbow.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s2_h06",
+      "courseId": "cn_bg_587",
+      "number": 15,
+      "sectionId": "cn_bg_587_s2",
+      "holeNumber": 6,
+      "par": 4,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "后6",
+      "displayNumber": 15,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-15.jpg",
+      "tee": [
+        121.555477787,
+        30.831580753
+      ],
+      "green": [
+        121.552165904,
+        30.830377212
+      ],
+      "target": [
+        121.553956111,
+        30.830978747
+      ],
+      "route": [
+        [
+          121.555477787,
+          30.831580753
+        ],
+        [
+          121.553956111,
+          30.830978747
+        ],
+        [
+          121.552165904,
+          30.830377212
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.552066448,
+          30.830466399
+        ],
+        [
+          121.552165904,
+          30.830517634
+        ],
+        [
+          121.552285251,
+          30.830500556
+        ],
+        [
+          121.552344925,
+          30.830432242
+        ],
+        [
+          121.552305143,
+          30.830329772
+        ],
+        [
+          121.552205687,
+          30.83024438
+        ],
+        [
+          121.552106231,
+          30.830227302
+        ],
+        [
+          121.552006775,
+          30.830295616
+        ],
+        [
+          121.552006775,
+          30.830381007
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.555368386,
+          30.83161064
+        ],
+        [
+          121.555527515,
+          30.831661874
+        ],
+        [
+          121.555587189,
+          30.831559405
+        ],
+        [
+          121.555428059,
+          30.831491093
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 15,
+      "note": "Southwest across water to western peninsula, southeast sand.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s2_h07",
+      "courseId": "cn_bg_587",
+      "number": 16,
+      "sectionId": "cn_bg_587_s2",
+      "holeNumber": 7,
+      "par": 4,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "后7",
+      "displayNumber": 16,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-16.jpg",
+      "tee": [
+        121.552036612,
+        30.829642366
+      ],
+      "green": [
+        121.554669352,
+        30.830598146
+      ],
+      "target": [
+        121.553856655,
+        30.829919891
+      ],
+      "route": [
+        [
+          121.552036612,
+          30.829642366
+        ],
+        [
+          121.553856655,
+          30.829919891
+        ],
+        [
+          121.554513065,
+          30.830107753
+        ],
+        [
+          121.554669352,
+          30.830598146
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.554572738,
+          30.830688417
+        ],
+        [
+          121.554692085,
+          30.830722573
+        ],
+        [
+          121.554791541,
+          30.83065426
+        ],
+        [
+          121.554811432,
+          30.830534712
+        ],
+        [
+          121.554711976,
+          30.830466399
+        ],
+        [
+          121.554592629,
+          30.830517634
+        ],
+        [
+          121.554513065,
+          30.830603025
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.551947101,
+          30.829697871
+        ],
+        [
+          121.552106231,
+          30.829697871
+        ],
+        [
+          121.552126122,
+          30.829595401
+        ],
+        [
+          121.551966992,
+          30.829578322
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 16,
+      "note": "Dogleg around lake; distinct isolated rectangular tee platform.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s2_h08",
+      "courseId": "cn_bg_587",
+      "number": 17,
+      "sectionId": "cn_bg_587_s2",
+      "holeNumber": 8,
+      "par": 3,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "后8",
+      "displayNumber": 17,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-17.jpg",
+      "tee": [
+        121.555308712,
+        30.830188876
+      ],
+      "green": [
+        121.55668369,
+        30.829971126
+      ],
+      "target": [
+        121.55668369,
+        30.829971126
+      ],
+      "route": [
+        [
+          121.555308712,
+          30.830188876
+        ],
+        [
+          121.55668369,
+          30.829971126
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.556541966,
+          30.830056518
+        ],
+        [
+          121.556641422,
+          30.830090675
+        ],
+        [
+          121.55678066,
+          30.83003944
+        ],
+        [
+          121.556900007,
+          30.829971126
+        ],
+        [
+          121.556840333,
+          30.829885734
+        ],
+        [
+          121.556720986,
+          30.829851577
+        ],
+        [
+          121.556561857,
+          30.829902813
+        ],
+        [
+          121.556482292,
+          30.829971126
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.555209256,
+          30.83024438
+        ],
+        [
+          121.555388277,
+          30.83024438
+        ],
+        [
+          121.555408168,
+          30.83014191
+        ],
+        [
+          121.555229147,
+          30.830124832
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 17,
+      "note": "Short eastbound par3, tee strip north of water, green with left sand.",
+      "sharedGreenWith": null
+    },
+    {
+      "_id": "cn_bg_587_s2_h09",
+      "courseId": "cn_bg_587",
+      "number": 18,
+      "sectionId": "cn_bg_587_s2",
+      "holeNumber": 9,
+      "par": 5,
+      "schema": 2,
+      "crs": "EPSG:4326",
+      "atlas": "cn_bg_587/satellite.jpg",
+      "revision": "20261106-r1",
+      "verified": false,
+      "label": "后9",
+      "displayNumber": 18,
+      "fieldVerified": false,
+      "teeIdentity": "可见参考台面，颜色未确认",
+      "guide": "cn_bg_587/evidence/guide-18.jpg",
+      "tee": [
+        121.556089441,
+        30.829450233
+      ],
+      "green": [
+        121.551662941,
+        30.829153799
+      ],
+      "target": [
+        121.553757199,
+        30.829083045
+      ],
+      "route": [
+        [
+          121.556089441,
+          30.829450233
+        ],
+        [
+          121.554672194,
+          30.829014731
+        ],
+        [
+          121.551662941,
+          30.829153799
+        ]
+      ],
+      "greenOutline": [
+        [
+          121.551529386,
+          30.829305066
+        ],
+        [
+          121.551648734,
+          30.829287987
+        ],
+        [
+          121.551748189,
+          30.829168438
+        ],
+        [
+          121.551807863,
+          30.829083045
+        ],
+        [
+          121.551728298,
+          30.829014731
+        ],
+        [
+          121.551628842,
+          30.829048888
+        ],
+        [
+          121.551549278,
+          30.829168438
+        ]
+      ],
+      "teeOutline": [
+        [
+          121.556004904,
+          30.829510008
+        ],
+        [
+          121.556164033,
+          30.829510008
+        ],
+        [
+          121.556183924,
+          30.829390459
+        ],
+        [
+          121.556004904,
+          30.829390459
+        ]
+      ],
+      "status": "satellite_reviewed",
+      "satelliteReviewed": true,
+      "sourceReferenceNumber": 18,
+      "note": "Westbound finishing par5 around south side of lake, green on western peninsula.",
+      "sharedGreenWith": null
+    }
+  ]
+}

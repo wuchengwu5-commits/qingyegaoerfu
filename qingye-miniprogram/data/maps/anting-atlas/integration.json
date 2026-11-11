@@ -1,0 +1,56 @@
+{
+  "courseId": "cn_bg_2529",
+  "name": "颖奕安亭",
+  "atlas": {
+    "width": 3190,
+    "height": 4096,
+    "extent": {
+      "xmin": 13489242.21556741,
+      "ymin": 3667121.7251763083,
+      "xmax": 13490710.723511519,
+      "ymax": 3669007.307790437,
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "northUp": true,
+    "crs": "EPSG:3857",
+    "sourceUrl": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=13489242.245140012%2C3667121.7251763083%2C13490710.693938913%2C3669007.307790437&bboxSR=3857&imageSR=3857&size=3190%2C4096&format=jpg&f=json",
+    "source": "Esri World Imagery / Vantor / GIS User Community",
+    "retrievedOn": "2026-11-06",
+    "imageryDate": null,
+    "image": "satellite.jpg"
+  },
+  "photo": "/packages/anting-map/atlas-4b589bd22dd731a8.jpg",
+  "surround": {
+    "src": "/packages/anting-map/surround-4b589bd22dd731a8.jpg",
+    "bounds": [
+      0,
+      0,
+      3190,
+      4096
+    ]
+  },
+  "groups": [
+    {
+      "id": "cn_bg_2529_s1",
+      "name": "前九",
+      "short": "",
+      "color": "#204c37"
+    },
+    {
+      "id": "cn_bg_2529_s2",
+      "name": "后九",
+      "short": "",
+      "color": "#265570"
+    }
+  ],
+  "par3MaxScale": 0.8539776332104019,
+  "referenceRoute": "",
+  "databaseGps": false,
+  "overviewOnly": false,
+  "mapNote": "参考发球台和果岭按卫星影像判读，未现场验证。红旗是果岭参考中心，不是当日旗位。拖动白点设起点，点击地图或拖动金色十字设落点。金色洞号表示参考台面待核对。\n部分参考台面有阴影或剪草边界不清；详见逐洞清单。",
+  "revision": "six-atlas-20261106.1",
+  "pendingTeeCount": 5
+}

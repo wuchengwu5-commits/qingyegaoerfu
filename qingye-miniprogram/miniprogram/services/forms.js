@@ -1,11 +1,17 @@
-const R=require('./rules');
+const R=require('./rules'),Policies=require('./scoring-policies');
 const labels={skins:'Skins 抢洞',nassau:'拿骚',birdie:'抓鸟奖励',nearest:'最近旗奖',longest:'最远开球奖'};
 function fields(r){const rr=r.ruleSnapshot,s=rr.scoring,hc=rr.handicap,out=[];
 const add=(key,label,type,value,options=[])=>out.push({key,label,type,value:value??'',options:options.map(([value,label])=>({value,label})),index:Math.max(0,options.findIndex(x=>String(x[0])===String(value)))});
 add('scoring.type','① 记分方式','select',s.type,Object.entries(R.names));if(s.type!=='record_only')add('scoring.basis','成绩口径','select',s.basis,[['gross','总杆'],['net','净杆']]);if(s.type==='points')add('scoring.pointsRule','积分表','select',s.pointsRule,[['stableford','标准定分式'],['8421','8421']]);if(s.type==='stroke_play')add('capMode','比杆形式','select',s.cap?.enabled?s.cap.rule:'none',[['none','常规比杆'],['double_par','双倍Par封顶'],['par_plus_three','Par+3'],['fixed_ten','固定10杆'],['net_double_bogey','净双柏忌']]);
 add('grouping.type','② 组队方式','select',rr.grouping.type,[['individual','个人'],['four_ball','两人队四球']]);if(rr.grouping.type==='four_ball')r.players.forEach((p,i)=>add('team.'+i,p.name+'所在队','select',rr.grouping.teams.find(t=>t.playerIds.includes(p.id))?.teamId||(i<2?'A':'B'),[['A','A队'],['B','B队']]));
 add('handicap.mode','③ 让杆方式','select',hc.mode,[['none','不让杆'],['manual_round_total','本轮总数（需有效SI）'],['manual_hole','逐洞指定最终让杆']]);if(hc.mode==='manual_round_total'){r.players.forEach(p=>add('handicap.totals.'+p.id,p.name+'本轮让杆 0–'+r.holes.length*3,'number',hc.totals?.[p.id]));add('handicap.siConfirmed','确认当前组合/发球台/SI现行版本','boolean',!!hc.siConfirmed);}if(hc.mode==='manual_hole')R.order(r).forEach(n=>r.players.forEach(p=>add('handicap.perHole.'+p.id+'.'+n,p.name+' 第'+n+'洞让杆（0–3）','number',hc.perHole?.[p.id]?.[n])));
-add('penaltyPolicy.mode','④ 判罚约定','select',rr.penaltyPolicy.mode,[['official','正式规则与当地规则'],['custom','自定义'],['small','小流氓（逐项填写）'],['large','大流氓（逐项填写）'],...(rr.penaltyPolicy.mode==='legacy_unspecified'?[['legacy_unspecified','旧版未记录']]:[])]);if(!['official','legacy_unspecified'].includes(rr.penaltyPolicy.mode))R.topics.forEach((t,i)=>['action','outcome','area','note'].forEach((k,j)=>add('penaltyPolicy.topics.'+i+'.'+k,t+' · '+['如何处理','罚杆/洞结果','适用区域','说明'][j],'text',rr.penaltyPolicy.topics?.[i]?.[k])));else add('localRules','当地规则补充（逐行）','text',(rr.penaltyPolicy.localRules||[]).join('\n'));
+add('penaltyPolicy.mode','记分规则','select',rr.penaltyPolicy.mode,Policies.options.map(item=>[item.id,item.name]));
+out[out.length-1].displayValue=Policies.name(rr.penaltyPolicy.mode);
+if(rr.penaltyPolicy.preset){
+ add('policyInfo','本轮采用的口径','display',rr.penaltyPolicy.summary);
+}else if(!['official','legacy_unspecified'].includes(rr.penaltyPolicy.mode)){
+ R.topics.forEach((t,i)=>['action','outcome','area','note'].forEach((k,j)=>add('penaltyPolicy.topics.'+i+'.'+k,t+' · '+['如何处理','罚杆/洞结果','适用区域','说明'][j],'text',rr.penaltyPolicy.topics?.[i]?.[k])));
+}else add('localRules','当地规则补充（逐行）','text',(rr.penaltyPolicy.localRules||[]).join('\n'));
 for(const [t,label] of Object.entries(labels)){const g=rr.sideGames.find(g=>g.type===t);add('side.'+t,'⑤ '+label,'boolean',!!g);if(g){if(t==='skins')add('game.'+t+'.carry','并列滚存','boolean',g.carry!==false);if(t==='birdie')add('game.'+t+'.basis','抓鸟成绩口径','select',g.basis||'gross',[['gross','实际总杆'],['net','净杆']]);if(['nearest','longest'].includes(t)){add('game.'+t+'.holes','参与球洞，用逗号分隔','text',(g.holeNumbers||[]).join(','));add('game.'+t+'.qualification','必须'+(t==='nearest'?'上果岭':'上球道'),'boolean',!!g.qualification);add('game.'+t+'.unit','距离单位','select',g.unit||'m',[['m','米'],['yd','码']]);}}}
 if(r.id!=='draft')r.holes.forEach(h=>{add('hole.'+h.number+'.par','本轮第'+h.number+'洞 Par','number',h.par);add('hole.'+h.number+'.si','本轮第'+h.number+'洞 SI（未知留空）','number',R.si(r,r.players[0].id,h.number));});
 return out;}
@@ -16,7 +22,7 @@ if(key==='scoring.basis'&&value==='gross'){rr.handicap={mode:'none'};if(rr.scori
 if(key==='capMode'){if(value==='net_double_bogey')rr.scoring.basis='net';rr.scoring.cap={enabled:value!=='none',...(value==='none'?{}:{rule:value})};return;}
 if(key==='grouping.type'){rr.grouping={type:value,teams:value==='four_ball'?['A','B'].map((id,i)=>({teamId:id,name:id+'队',playerIds:r.players.slice(i*2,i*2+2).map(p=>p.id)})):[]};rr.sideGames=[];return;}
 if(key==='handicap.mode'){rr.handicap={mode:value};if(value!=='none')rr.scoring.basis='net';return;}
-if(key==='penaltyPolicy.mode'){rr.penaltyPolicy={mode:value,localRules:[],topics:R.topics.map(()=>({action:'',outcome:'',area:'',note:''}))};return;}
+if(key==='penaltyPolicy.mode'){rr.penaltyPolicy=Policies.make(value);return;}
 if(key.startsWith('team.')){const p=r.players[Number(key.split('.')[1])];rr.grouping.teams.forEach(t=>t.playerIds=t.playerIds.filter(id=>id!==p.id));rr.grouping.teams.find(t=>t.teamId===value).playerIds.push(p.id);return;}
 if(key.startsWith('side.')){const type=key.split('.')[1];rr.sideGames=rr.sideGames.filter(g=>g.type!==type);if(value)rr.sideGames.push({id:'sg-'+type,type,carry:true,basis:'gross',unit:'m',holeNumbers:[],qualification:false});return;}
 if(key.startsWith('game.')){const [_,type,k]=key.split('.'),g=rr.sideGames.find(g=>g.type===type);if(k==='holes')g.holeNumbers=String(value).split(/[,，\s]+/).filter(Boolean).map(Number);else g[k]=value;return;}

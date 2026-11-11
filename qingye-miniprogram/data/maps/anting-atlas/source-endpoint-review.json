@@ -1,0 +1,1711 @@
+{
+  "courseId": "cn_bg_2529",
+  "revision": "20261106-r1",
+  "passes": [
+    {
+      "id": "identity",
+      "status": "complete",
+      "evidence": [
+        "guide-source.json",
+        "provenance.json"
+      ]
+    },
+    {
+      "id": "surface",
+      "status": "complete",
+      "evidence": [
+        "evidence/"
+      ]
+    },
+    {
+      "id": "render",
+      "status": "complete",
+      "evidence": [
+        "renders/overview.png",
+        "renders/hole-01.png",
+        "renders/hole-02.png",
+        "renders/hole-03.png",
+        "renders/hole-04.png",
+        "renders/hole-05.png",
+        "renders/hole-06.png",
+        "renders/hole-07.png",
+        "renders/hole-08.png",
+        "renders/hole-09.png",
+        "renders/hole-10.png",
+        "renders/hole-11.png",
+        "renders/hole-12.png",
+        "renders/hole-13.png",
+        "renders/hole-14.png",
+        "renders/hole-15.png",
+        "renders/hole-16.png",
+        "renders/hole-17.png",
+        "renders/hole-18.png"
+      ],
+      "note": "实际画面逐洞检查：起终点均在画幅内，果岭在上，三杆洞倍率受限；90洞正逆转换和前中后距离顺序通过。未进行现场定位精度验证。"
+    }
+  ],
+  "holes": [
+    {
+      "id": "cn_bg_2529_s1_h01",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.184817904,
+          31.27415952
+        ],
+        "outline": [
+          [
+            121.18471203,
+            31.274175354
+          ],
+          [
+            121.184860253,
+            31.274229644
+          ],
+          [
+            121.184923777,
+            31.274157258
+          ],
+          [
+            121.184775554,
+            31.274075824
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-01.jpg",
+          "evidence/unmarked-01-tee.jpg"
+        ],
+        "note": "Reference tee moved west of cart path; green narrow N-S with right bunker."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.181335844,
+          31.272490355
+        ],
+        "outline": [
+          [
+            121.181302905,
+            31.272619043
+          ],
+          [
+            121.181377017,
+            31.272646188
+          ],
+          [
+            121.181419366,
+            31.272582849
+          ],
+          [
+            121.181419366,
+            31.272492365
+          ],
+          [
+            121.181377017,
+            31.272383784
+          ],
+          [
+            121.18132408,
+            31.272347591
+          ],
+          [
+            121.181281731,
+            31.272365688
+          ],
+          [
+            121.181260556,
+            31.272438075
+          ],
+          [
+            121.181260556,
+            31.272537607
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-01.jpg",
+          "evidence/unmarked-01-green.jpg"
+        ],
+        "note": "Reference tee moved west of cart path; green narrow N-S with right bunker."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s1_h02",
+      "tee": {
+        "status": "uncertain",
+        "confidence": "low",
+        "position": [
+          121.181537592,
+          31.272124396
+        ],
+        "outline": [
+          [
+            121.181472303,
+            31.272202816
+          ],
+          [
+            121.181557002,
+            31.272202816
+          ],
+          [
+            121.1816417,
+            31.272094235
+          ],
+          [
+            121.181599351,
+            31.272030895
+          ],
+          [
+            121.181504065,
+            31.272076138
+          ],
+          [
+            121.181451128,
+            31.272139477
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-02.jpg",
+          "evidence/unmarked-02-tee.jpg"
+        ],
+        "note": "Bunker-free long par 3; southern end of central fairway."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.18306464,
+          31.270363251
+        ],
+        "outline": [
+          [
+            121.183007468,
+            31.270537889
+          ],
+          [
+            121.183092167,
+            31.270565035
+          ],
+          [
+            121.183145103,
+            31.270492646
+          ],
+          [
+            121.183155691,
+            31.270384063
+          ],
+          [
+            121.183113341,
+            31.270293576
+          ],
+          [
+            121.183102754,
+            31.270212139
+          ],
+          [
+            121.183060405,
+            31.270175944
+          ],
+          [
+            121.183007468,
+            31.27020309
+          ],
+          [
+            121.182975706,
+            31.270311674
+          ],
+          [
+            121.182986293,
+            31.270456451
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-02.jpg",
+          "evidence/unmarked-02-green.jpg"
+        ],
+        "note": "Bunker-free long par 3; southern end of central fairway."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s1_h03",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.182920652,
+          31.269481007
+        ],
+        "outline": [
+          [
+            121.182827483,
+            31.269551587
+          ],
+          [
+            121.182933356,
+            31.269578733
+          ],
+          [
+            121.183018055,
+            31.269443002
+          ],
+          [
+            121.182943944,
+            31.26938871
+          ],
+          [
+            121.18288042,
+            31.269443002
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-03.jpg",
+          "evidence/unmarked-03-tee.jpg"
+        ],
+        "note": "Green between left paired bunker, upper-right bunker and lake shore."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.178897461,
+          31.272337638
+        ],
+        "outline": [
+          [
+            121.178793705,
+            31.272419978
+          ],
+          [
+            121.178867816,
+            31.272438075
+          ],
+          [
+            121.178941928,
+            31.27241093
+          ],
+          [
+            121.179026626,
+            31.272392833
+          ],
+          [
+            121.179058388,
+            31.272347591
+          ],
+          [
+            121.179026626,
+            31.272275203
+          ],
+          [
+            121.178941928,
+            31.272229961
+          ],
+          [
+            121.178814879,
+            31.27223901
+          ],
+          [
+            121.178761943,
+            31.272275203
+          ],
+          [
+            121.178740768,
+            31.272347591
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-03.jpg",
+          "evidence/unmarked-03-green.jpg"
+        ],
+        "note": "Green between left paired bunker, upper-right bunker and lake shore."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s1_h04",
+      "tee": {
+        "status": "uncertain",
+        "confidence": "low",
+        "position": [
+          121.178181756,
+          31.272544846
+        ],
+        "outline": [
+          [
+            121.178084353,
+            31.272628091
+          ],
+          [
+            121.178158464,
+            31.272646188
+          ],
+          [
+            121.178274925,
+            31.272510462
+          ],
+          [
+            121.178232575,
+            31.272447123
+          ],
+          [
+            121.178158464,
+            31.272492365
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-04.jpg",
+          "evidence/unmarked-04-tee.jpg"
+        ],
+        "note": "West river corridor, bunker cluster before and around green."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.177167489,
+          31.275235803
+        ],
+        "outline": [
+          [
+            121.17705738,
+            31.275369716
+          ],
+          [
+            121.177131492,
+            31.27539686
+          ],
+          [
+            121.177195016,
+            31.275369716
+          ],
+          [
+            121.177226778,
+            31.275306379
+          ],
+          [
+            121.17721619,
+            31.275243042
+          ],
+          [
+            121.17725854,
+            31.275161608
+          ],
+          [
+            121.177226778,
+            31.275089223
+          ],
+          [
+            121.177163254,
+            31.275080175
+          ],
+          [
+            121.177120904,
+            31.275116368
+          ],
+          [
+            121.177078555,
+            31.275224945
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-04.jpg",
+          "evidence/unmarked-04-green.jpg"
+        ],
+        "note": "West river corridor, bunker cluster before and around green."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s1_h05",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.177188663,
+          31.275659255
+        ],
+        "outline": [
+          [
+            121.177120904,
+            31.275677352
+          ],
+          [
+            121.177195016,
+            31.275722592
+          ],
+          [
+            121.17725854,
+            31.2756864
+          ],
+          [
+            121.17721619,
+            31.275614015
+          ],
+          [
+            121.177152666,
+            31.275595919
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-05.jpg",
+          "evidence/unmarked-05-tee.jpg"
+        ],
+        "note": "Across western elongated lake; peninsula green."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.178103602,
+          31.277092135
+        ],
+        "outline": [
+          [
+            121.178116115,
+            31.27724266
+          ],
+          [
+            121.178190226,
+            31.277224565
+          ],
+          [
+            121.178243163,
+            31.277179325
+          ],
+          [
+            121.178274925,
+            31.277115989
+          ],
+          [
+            121.178211401,
+            31.277052653
+          ],
+          [
+            121.178116115,
+            31.276980269
+          ],
+          [
+            121.178031416,
+            31.27693503
+          ],
+          [
+            121.177957304,
+            31.276953126
+          ],
+          [
+            121.17793613,
+            31.277034557
+          ],
+          [
+            121.177999654,
+            31.277125037
+          ],
+          [
+            121.178063178,
+            31.277170277
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-05.jpg",
+          "evidence/unmarked-05-green.jpg"
+        ],
+        "note": "Across western elongated lake; peninsula green."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s1_h06",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.178689596,
+          31.27757291
+        ],
+        "outline": [
+          [
+            121.178634895,
+            31.277631722
+          ],
+          [
+            121.178719593,
+            31.277649818
+          ],
+          [
+            121.17877253,
+            31.277586482
+          ],
+          [
+            121.178730181,
+            31.277514099
+          ],
+          [
+            121.178666657,
+            31.277505051
+          ],
+          [
+            121.17861372,
+            31.27755029
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-06.jpg",
+          "evidence/unmarked-06-tee.jpg"
+        ],
+        "note": "Green west of stacked bunkers by small lake."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.178282865,
+          31.273529534
+        ],
+        "outline": [
+          [
+            121.178232575,
+            31.273650555
+          ],
+          [
+            121.178306687,
+            31.273650555
+          ],
+          [
+            121.178349036,
+            31.273614361
+          ],
+          [
+            121.178359624,
+            31.273505782
+          ],
+          [
+            121.178327862,
+            31.273424347
+          ],
+          [
+            121.178274925,
+            31.27340625
+          ],
+          [
+            121.178221988,
+            31.273451492
+          ],
+          [
+            121.178190226,
+            31.273532927
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-06.jpg",
+          "evidence/unmarked-06-green.jpg"
+        ],
+        "note": "Green west of stacked bunkers by small lake."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s1_h07",
+      "tee": {
+        "status": "uncertain",
+        "confidence": "low",
+        "position": [
+          121.178340213,
+          31.272403389
+        ],
+        "outline": [
+          [
+            121.178285512,
+            31.272456172
+          ],
+          [
+            121.178359624,
+            31.272474269
+          ],
+          [
+            121.178433735,
+            31.272419978
+          ],
+          [
+            121.178380798,
+            31.272347591
+          ],
+          [
+            121.178317274,
+            31.272338542
+          ],
+          [
+            121.178264337,
+            31.272383784
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-07.jpg",
+          "evidence/unmarked-07-tee.jpg"
+        ],
+        "note": "Northern green between two long bunker clusters."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.180168883,
+          31.275138485
+        ],
+        "outline": [
+          [
+            121.180148885,
+            31.275243042
+          ],
+          [
+            121.180212409,
+            31.275243042
+          ],
+          [
+            121.180265346,
+            31.275188753
+          ],
+          [
+            121.180265346,
+            31.275107319
+          ],
+          [
+            121.180222996,
+            31.275034934
+          ],
+          [
+            121.180159472,
+            31.275025886
+          ],
+          [
+            121.180085361,
+            31.275062079
+          ],
+          [
+            121.180064186,
+            31.275143512
+          ],
+          [
+            121.180095948,
+            31.275197801
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-07.jpg",
+          "evidence/unmarked-07-green.jpg"
+        ],
+        "note": "Northern green between two long bunker clusters."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s1_h08",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.180777067,
+          31.275060571
+        ],
+        "outline": [
+          [
+            121.180710014,
+            31.275098271
+          ],
+          [
+            121.180815888,
+            31.275161608
+          ],
+          [
+            121.180900586,
+            31.275125416
+          ],
+          [
+            121.180826475,
+            31.27500779
+          ],
+          [
+            121.180731189,
+            31.274962549
+          ],
+          [
+            121.180678252,
+            31.27500779
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-08.jpg",
+          "evidence/unmarked-08-tee.jpg"
+        ],
+        "note": "Tee selected below rear candidate beside villa; dogleg around lake."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.180582966,
+          31.272555704
+        ],
+        "outline": [
+          [
+            121.180508855,
+            31.272646188
+          ],
+          [
+            121.180604141,
+            31.272664285
+          ],
+          [
+            121.180667665,
+            31.272628091
+          ],
+          [
+            121.180678252,
+            31.272537607
+          ],
+          [
+            121.180635903,
+            31.27246522
+          ],
+          [
+            121.180572379,
+            31.272447123
+          ],
+          [
+            121.180508855,
+            31.272492365
+          ],
+          [
+            121.18048768,
+            31.272564753
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-08.jpg",
+          "evidence/unmarked-08-green.jpg"
+        ],
+        "note": "Tee selected below rear candidate beside villa; dogleg around lake."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s1_h09",
+      "tee": {
+        "status": "uncertain",
+        "confidence": "low",
+        "position": [
+          121.181235852,
+          31.273035268
+        ],
+        "outline": [
+          [
+            121.181186445,
+            31.273071462
+          ],
+          [
+            121.181281731,
+            31.273116704
+          ],
+          [
+            121.181345255,
+            31.273062413
+          ],
+          [
+            121.181260556,
+            31.272980978
+          ],
+          [
+            121.181186445,
+            31.27297193
+          ],
+          [
+            121.181154683,
+            31.273008123
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-09.jpg",
+          "evidence/unmarked-09-tee.jpg"
+        ],
+        "note": "Return hole toward hotel, kidney green between left-side bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.185209636,
+          31.274959533
+        ],
+        "outline": [
+          [
+            121.185167286,
+            31.275089223
+          ],
+          [
+            121.18523081,
+            31.275107319
+          ],
+          [
+            121.185283747,
+            31.275062079
+          ],
+          [
+            121.185315509,
+            31.274971597
+          ],
+          [
+            121.185294334,
+            31.274890163
+          ],
+          [
+            121.185241398,
+            31.274826826
+          ],
+          [
+            121.185146111,
+            31.274826826
+          ],
+          [
+            121.185103762,
+            31.274881115
+          ],
+          [
+            121.185103762,
+            31.274980645
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-09.jpg",
+          "evidence/unmarked-09-green.jpg"
+        ],
+        "note": "Return hole toward hotel, kidney green between left-side bunkers."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s2_h01",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.186859497,
+          31.272765325
+        ],
+        "outline": [
+          [
+            121.186808325,
+            31.272845253
+          ],
+          [
+            121.186893023,
+            31.272863349
+          ],
+          [
+            121.186935373,
+            31.272790962
+          ],
+          [
+            121.186903611,
+            31.272673333
+          ],
+          [
+            121.186829499,
+            31.272664285
+          ],
+          [
+            121.18678715,
+            31.272754769
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-10.jpg",
+          "evidence/unmarked-10-tee.jpg"
+        ],
+        "note": "Long right boundary hole; tee on east lake edge."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.18767781,
+          31.268159209
+        ],
+        "outline": [
+          [
+            121.18762355,
+            31.268266664
+          ],
+          [
+            121.187718836,
+            31.268257615
+          ],
+          [
+            121.18778236,
+            31.268185224
+          ],
+          [
+            121.187792948,
+            31.268103785
+          ],
+          [
+            121.187750598,
+            31.26806759
+          ],
+          [
+            121.187644725,
+            31.26806759
+          ],
+          [
+            121.187560026,
+            31.268121883
+          ],
+          [
+            121.187549439,
+            31.268203322
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-10.jpg",
+          "evidence/unmarked-10-green.jpg"
+        ],
+        "note": "Long right boundary hole; tee on east lake edge."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s2_h02",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.186857732,
+          31.26766944
+        ],
+        "outline": [
+          [
+            121.186797737,
+            31.26775088
+          ],
+          [
+            121.186882436,
+            31.267759929
+          ],
+          [
+            121.186935373,
+            31.267678489
+          ],
+          [
+            121.186903611,
+            31.267588
+          ],
+          [
+            121.186829499,
+            31.267588
+          ],
+          [
+            121.186797737,
+            31.267651342
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-11.jpg",
+          "evidence/unmarked-11-tee.jpg"
+        ],
+        "note": "Parallel return hole; green adjacent west pair of bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.186595254,
+          31.270678142
+        ],
+        "outline": [
+          [
+            121.186522466,
+            31.270764104
+          ],
+          [
+            121.18658599,
+            31.270782201
+          ],
+          [
+            121.186670689,
+            31.270727909
+          ],
+          [
+            121.186723626,
+            31.270646472
+          ],
+          [
+            121.186681276,
+            31.270601229
+          ],
+          [
+            121.186596578,
+            31.27059218
+          ],
+          [
+            121.186511879,
+            31.270619326
+          ],
+          [
+            121.18646953,
+            31.270691715
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-11.jpg",
+          "evidence/unmarked-11-green.jpg"
+        ],
+        "note": "Parallel return hole; green adjacent west pair of bunkers."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s2_h03",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.186444826,
+          31.271403534
+        ],
+        "outline": [
+          [
+            121.186395418,
+            31.271478938
+          ],
+          [
+            121.186480117,
+            31.271497035
+          ],
+          [
+            121.186522466,
+            31.271424647
+          ],
+          [
+            121.186490704,
+            31.271316065
+          ],
+          [
+            121.186406005,
+            31.271316065
+          ],
+          [
+            121.186374243,
+            31.271388453
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-12.jpg",
+          "evidence/unmarked-12-tee.jpg"
+        ],
+        "note": "Across-water par 3; one bunker upper left and two at front."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.185158022,
+          31.270317329
+        ],
+        "outline": [
+          [
+            121.185093175,
+            31.270393111
+          ],
+          [
+            121.185177873,
+            31.27040216
+          ],
+          [
+            121.185262572,
+            31.270356917
+          ],
+          [
+            121.185304922,
+            31.270302625
+          ],
+          [
+            121.185241398,
+            31.270248333
+          ],
+          [
+            121.185135524,
+            31.270230236
+          ],
+          [
+            121.185040238,
+            31.270275479
+          ],
+          [
+            121.185008476,
+            31.270329771
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-12.jpg",
+          "evidence/unmarked-12-green.jpg"
+        ],
+        "note": "Across-water par 3; one bunker upper left and two at front."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s2_h04",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.184742028,
+          31.269889404
+        ],
+        "outline": [
+          [
+            121.18471203,
+            31.269967826
+          ],
+          [
+            121.184796729,
+            31.269985923
+          ],
+          [
+            121.184817904,
+            31.269904485
+          ],
+          [
+            121.184764967,
+            31.269795901
+          ],
+          [
+            121.184690856,
+            31.26980495
+          ],
+          [
+            121.184669681,
+            31.269877339
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-13.jpg",
+          "evidence/unmarked-13-tee.jpg"
+        ],
+        "note": "Southern peninsula green; tee selected in corridor below cart path."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.185126113,
+          31.266612727
+        ],
+        "outline": [
+          [
+            121.185082587,
+            31.266728353
+          ],
+          [
+            121.185167286,
+            31.266746451
+          ],
+          [
+            121.185241398,
+            31.266701206
+          ],
+          [
+            121.185241398,
+            31.266619765
+          ],
+          [
+            121.185199048,
+            31.266529276
+          ],
+          [
+            121.185124937,
+            31.266474982
+          ],
+          [
+            121.185061413,
+            31.26649308
+          ],
+          [
+            121.185008476,
+            31.26657452
+          ],
+          [
+            121.185008476,
+            31.266646912
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-13.jpg",
+          "evidence/unmarked-13-green.jpg"
+        ],
+        "note": "Southern peninsula green; tee selected in corridor below cart path."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s2_h05",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.185513644,
+          31.265474417
+        ],
+        "outline": [
+          [
+            121.185453144,
+            31.265542931
+          ],
+          [
+            121.185527256,
+            31.265588177
+          ],
+          [
+            121.185611955,
+            31.265524833
+          ],
+          [
+            121.18559078,
+            31.265443392
+          ],
+          [
+            121.185527256,
+            31.265370999
+          ],
+          [
+            121.185463732,
+            31.265389097
+          ],
+          [
+            121.185421382,
+            31.26546149
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-14.jpg",
+          "evidence/unmarked-14-tee.jpg"
+        ],
+        "note": "South river boundary; green right-side bunker."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.18233576,
+          31.267964031
+        ],
+        "outline": [
+          [
+            121.182224004,
+            31.268058541
+          ],
+          [
+            121.182308703,
+            31.268076639
+          ],
+          [
+            121.182393402,
+            31.268040443
+          ],
+          [
+            121.182446339,
+            31.267977101
+          ],
+          [
+            121.182467513,
+            31.267913759
+          ],
+          [
+            121.182435751,
+            31.267859466
+          ],
+          [
+            121.182329878,
+            31.267859466
+          ],
+          [
+            121.182245179,
+            31.267904711
+          ],
+          [
+            121.182171068,
+            31.26798615
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-14.jpg",
+          "evidence/unmarked-14-green.jpg"
+        ],
+        "note": "South river boundary; green right-side bunker."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s2_h06",
+      "tee": {
+        "status": "uncertain",
+        "confidence": "low",
+        "position": [
+          121.181876739,
+          31.268234088
+        ],
+        "outline": [
+          [
+            121.181800511,
+            31.26829381
+          ],
+          [
+            121.181864035,
+            31.268311908
+          ],
+          [
+            121.181948733,
+            31.268212371
+          ],
+          [
+            121.181916971,
+            31.268158078
+          ],
+          [
+            121.181853447,
+            31.268194273
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-15.jpg",
+          "evidence/unmarked-15-tee.jpg"
+        ],
+        "note": "River-side return ending on lake edge."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.17959599,
+          31.271007409
+        ],
+        "outline": [
+          [
+            121.179534819,
+            31.271107949
+          ],
+          [
+            121.179640692,
+            31.271116997
+          ],
+          [
+            121.179704216,
+            31.271062706
+          ],
+          [
+            121.179714804,
+            31.270981269
+          ],
+          [
+            121.179672454,
+            31.270926978
+          ],
+          [
+            121.17960893,
+            31.270899832
+          ],
+          [
+            121.179513644,
+            31.270926978
+          ],
+          [
+            121.179481882,
+            31.270990318
+          ],
+          [
+            121.179492469,
+            31.271053657
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-15.jpg",
+          "evidence/unmarked-15-green.jpg"
+        ],
+        "note": "River-side return ending on lake edge."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s2_h07",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.178957809,
+          31.271806192
+        ],
+        "outline": [
+          [
+            121.178878403,
+            31.271858975
+          ],
+          [
+            121.178963102,
+            31.271868023
+          ],
+          [
+            121.179047801,
+            31.271822781
+          ],
+          [
+            121.179026626,
+            31.271759441
+          ],
+          [
+            121.178952515,
+            31.271741345
+          ],
+          [
+            121.178878403,
+            31.271786587
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-16.jpg",
+          "evidence/unmarked-16-tee.jpg"
+        ],
+        "note": "Short par 3 across small lake, wide green."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.180758716,
+          31.270968601
+        ],
+        "outline": [
+          [
+            121.180657077,
+            31.271053657
+          ],
+          [
+            121.180762951,
+            31.271053657
+          ],
+          [
+            121.180826475,
+            31.271017463
+          ],
+          [
+            121.180900586,
+            31.270999366
+          ],
+          [
+            121.180932348,
+            31.270945075
+          ],
+          [
+            121.180868824,
+            31.270908881
+          ],
+          [
+            121.180741776,
+            31.270872686
+          ],
+          [
+            121.180667665,
+            31.270890783
+          ],
+          [
+            121.180614728,
+            31.270945075
+          ],
+          [
+            121.180614728,
+            31.270999366
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-16.jpg",
+          "evidence/unmarked-16-green.jpg"
+        ],
+        "note": "Short par 3 across small lake, wide green."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s2_h08",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.181244675,
+          31.270966188
+        ],
+        "outline": [
+          [
+            121.181186445,
+            31.27103556
+          ],
+          [
+            121.181271143,
+            31.271053657
+          ],
+          [
+            121.181334667,
+            31.270963172
+          ],
+          [
+            121.181281731,
+            31.270881735
+          ],
+          [
+            121.181218207,
+            31.270899832
+          ],
+          [
+            121.181175857,
+            31.270963172
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-17.jpg",
+          "evidence/unmarked-17-tee.jpg"
+        ],
+        "note": "Long dogleg around western lake; green below multiple bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.182936003,
+          31.268404658
+        ],
+        "outline": [
+          [
+            121.182859245,
+            31.268501933
+          ],
+          [
+            121.182954531,
+            31.268492884
+          ],
+          [
+            121.183028643,
+            31.268438591
+          ],
+          [
+            121.18303923,
+            31.268357152
+          ],
+          [
+            121.182996881,
+            31.268311908
+          ],
+          [
+            121.182933356,
+            31.268320957
+          ],
+          [
+            121.182859245,
+            31.26837525
+          ],
+          [
+            121.182816896,
+            31.268438591
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-17.jpg",
+          "evidence/unmarked-17-green.jpg"
+        ],
+        "note": "Long dogleg around western lake; green below multiple bunkers."
+      }
+    },
+    {
+      "id": "cn_bg_2529_s2_h09",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.183300384,
+          31.268702514
+        ],
+        "outline": [
+          [
+            121.183261564,
+            31.268800542
+          ],
+          [
+            121.18335685,
+            31.268809591
+          ],
+          [
+            121.183378025,
+            31.268710055
+          ],
+          [
+            121.183325088,
+            31.268610518
+          ],
+          [
+            121.183261564,
+            31.268610518
+          ],
+          [
+            121.183219215,
+            31.26867386
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-18.jpg",
+          "evidence/unmarked-18-tee.jpg"
+        ],
+        "note": "Closing dogleg across water; narrow green left of hotel lake."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.186149022,
+          31.272628091
+        ],
+        "outline": [
+          [
+            121.186035448,
+            31.27269143
+          ],
+          [
+            121.186141322,
+            31.272682382
+          ],
+          [
+            121.186226021,
+            31.272655237
+          ],
+          [
+            121.186342481,
+            31.272673333
+          ],
+          [
+            121.186374243,
+            31.27263714
+          ],
+          [
+            121.186331894,
+            31.272591898
+          ],
+          [
+            121.186226021,
+            31.272555704
+          ],
+          [
+            121.186088385,
+            31.272555704
+          ],
+          [
+            121.185971924,
+            31.272582849
+          ],
+          [
+            121.185940162,
+            31.272619043
+          ],
+          [
+            121.185961337,
+            31.272664285
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-18.jpg",
+          "evidence/unmarked-18-green.jpg"
+        ],
+        "note": "Closing dogleg across water; narrow green left of hotel lake."
+      }
+    }
+  ]
+}

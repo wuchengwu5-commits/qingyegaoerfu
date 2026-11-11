@@ -1,0 +1,709 @@
+{
+  "courseId": "cn_bg_611",
+  "registrationVersion": "2026-11-05.1",
+  "attribution": "Esri / Vantor / GIS User Community",
+  "assets": [
+    {
+      "id": "cn_bg_611_s1_h01",
+      "label": "A1",
+      "width": 698,
+      "height": 471,
+      "bytes": 136057,
+      "sha256": "536661f79dfd53a1361e2fe6e1a50720586f72046d365e3f2689a155e61cec0f",
+      "cloudPath": "hole-gps-v1/cn_bg_611/A1-536661f79dfd53a1.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/A1-536661f79dfd53a1.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/A1-536661f79dfd53a1.jpg",
+      "sourceWindow": [
+        3127,
+        3038,
+        3825,
+        3509
+      ],
+      "extent": {
+        "xmin": 121.12434016927084,
+        "ymin": 30.60679720052083,
+        "xmax": 121.1286572265625,
+        "ymax": 30.60971028645833,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s1_h02",
+      "label": "A2",
+      "width": 548,
+      "height": 806,
+      "bytes": 187234,
+      "sha256": "29c6355efee169f86e760589df174f3ebcbdee5a4e9652091b234e92a249fe99",
+      "cloudPath": "hole-gps-v1/cn_bg_611/A2-29c6355efee169f8.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/A2-29c6355efee169f8.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/A2-29c6355efee169f8.jpg",
+      "sourceWindow": [
+        2654,
+        3341,
+        3202,
+        4147
+      ],
+      "extent": {
+        "xmin": 121.12141471354167,
+        "ymin": 30.602851236979166,
+        "xmax": 121.12480403645833,
+        "ymax": 30.607836263020832,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s1_h03",
+      "label": "A3",
+      "width": 334,
+      "height": 440,
+      "bytes": 67596,
+      "sha256": "0be9ced5ab2a4d024e72909d96b44e25c2e270464b597eb3f384f16661ca04c1",
+      "cloudPath": "hole-gps-v1/cn_bg_611/A3-0be9ced5ab2a4d02.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/A3-0be9ced5ab2a4d02.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/A3-0be9ced5ab2a4d02.jpg",
+      "sourceWindow": [
+        2753,
+        4248,
+        3087,
+        4688
+      ],
+      "extent": {
+        "xmin": 121.12202701822918,
+        "ymin": 30.599505208333333,
+        "xmax": 121.1240927734375,
+        "ymax": 30.6022265625,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s1_h04",
+      "label": "A4",
+      "width": 898,
+      "height": 322,
+      "bytes": 108928,
+      "sha256": "b4829a78d3932974e44932489f102579d0c155db29ffa6b4584ec564ee94886e",
+      "cloudPath": "hole-gps-v1/cn_bg_611/A4-b4829a78d3932974.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/A4-b4829a78d3932974.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/A4-b4829a78d3932974.jpg",
+      "sourceWindow": [
+        3051,
+        4685,
+        3949,
+        5007
+      ],
+      "extent": {
+        "xmin": 121.12387011718751,
+        "ymin": 30.5975322265625,
+        "xmax": 121.12942415364583,
+        "ymax": 30.599523763020834,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s1_h05",
+      "label": "A5",
+      "width": 836,
+      "height": 373,
+      "bytes": 111838,
+      "sha256": "555afa8a3f8d3c1fbe419e4bb3e81afc8dd062ac76b35e3fb4a62ef49e5500d9",
+      "cloudPath": "hole-gps-v1/cn_bg_611/A5-555afa8a3f8d3c1f.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/A5-555afa8a3f8d3c1f.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/A5-555afa8a3f8d3c1f.jpg",
+      "sourceWindow": [
+        2980,
+        4505,
+        3816,
+        4878
+      ],
+      "extent": {
+        "xmin": 121.12343098958334,
+        "ymin": 30.598330078125,
+        "xmax": 121.12860156250001,
+        "ymax": 30.600637044270833,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s1_h06",
+      "label": "A6",
+      "width": 343,
+      "height": 368,
+      "bytes": 48366,
+      "sha256": "5dc4d722e9a62bee38a5f9100fec664fe4b2431fcf026048a12dfc9125b3babc",
+      "cloudPath": "hole-gps-v1/cn_bg_611/A6-5dc4d722e9a62bee.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/A6-5dc4d722e9a62bee.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/A6-5dc4d722e9a62bee.jpg",
+      "sourceWindow": [
+        2184,
+        4601,
+        2527,
+        4969
+      ],
+      "extent": {
+        "xmin": 121.1185078125,
+        "ymin": 30.597767252604164,
+        "xmax": 121.12062923177083,
+        "ymax": 30.600043294270833,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s1_h07",
+      "label": "A7",
+      "width": 327,
+      "height": 741,
+      "bytes": 100615,
+      "sha256": "b4bce8141d851bd590b50e026ca4a3e42a86ad79aaa5723e43fbcfe5107083ac",
+      "cloudPath": "hole-gps-v1/cn_bg_611/A7-b4bce8141d851bd5.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/A7-b4bce8141d851bd5.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/A7-b4bce8141d851bd5.jpg",
+      "sourceWindow": [
+        2414,
+        3649,
+        2741,
+        4390
+      ],
+      "extent": {
+        "xmin": 121.11993033854166,
+        "ymin": 30.601348307291666,
+        "xmax": 121.12195279947917,
+        "ymax": 30.605931315104165,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s1_h08",
+      "label": "A8",
+      "width": 596,
+      "height": 377,
+      "bytes": 71646,
+      "sha256": "54699437a57dddcc32348ee053a924ab989cc52b5adbe2c2788a1f43ef31e70b",
+      "cloudPath": "hole-gps-v1/cn_bg_611/A8-54699437a57dddcc.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/A8-54699437a57dddcc.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/A8-54699437a57dddcc.jpg",
+      "sourceWindow": [
+        2522,
+        3223,
+        3118,
+        3600
+      ],
+      "extent": {
+        "xmin": 121.12059830729167,
+        "ymin": 30.606234375,
+        "xmax": 121.12428450520834,
+        "ymax": 30.608566080729165,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s1_h09",
+      "label": "A9",
+      "width": 434,
+      "height": 463,
+      "bytes": 63446,
+      "sha256": "f4b7b7201c96e5575d893d10aaaa16ad09856f76b651e41f05ba8f754520d081",
+      "cloudPath": "hole-gps-v1/cn_bg_611/A9-f4b7b7201c96e557.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/A9-f4b7b7201c96e557.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/A9-f4b7b7201c96e557.jpg",
+      "sourceWindow": [
+        2918,
+        3014,
+        3352,
+        3477
+      ],
+      "extent": {
+        "xmin": 121.12304752604167,
+        "ymin": 30.6069951171875,
+        "xmax": 121.12573177083334,
+        "ymax": 30.609858723958332,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s2_h01",
+      "label": "B1",
+      "width": 619,
+      "height": 532,
+      "bytes": 121045,
+      "sha256": "db3986d4a71e94e31d3de4f7a0c0eff69fa14bf48525e0467b49d5e688ff32c6",
+      "cloudPath": "hole-gps-v1/cn_bg_611/B1-db3986d4a71e94e3.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/B1-db3986d4a71e94e3.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/B1-db3986d4a71e94e3.jpg",
+      "sourceWindow": [
+        2715,
+        2480,
+        3334,
+        3012
+      ],
+      "extent": {
+        "xmin": 121.1217919921875,
+        "ymin": 30.609871093749998,
+        "xmax": 121.12562044270834,
+        "ymax": 30.613161458333334,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s2_h02",
+      "label": "B2",
+      "width": 380,
+      "height": 750,
+      "bytes": 128627,
+      "sha256": "4c0977a19b1bdfe537f15b94c505d92ec03aa8fc256e47092f1df2eb0c63831f",
+      "cloudPath": "hole-gps-v1/cn_bg_611/B2-4c0977a19b1bdfe5.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/B2-4c0977a19b1bdfe5.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/B2-4c0977a19b1bdfe5.jpg",
+      "sourceWindow": [
+        2476,
+        2528,
+        2856,
+        3278
+      ],
+      "extent": {
+        "xmin": 121.12031380208333,
+        "ymin": 30.608225911458334,
+        "xmax": 121.12266406250001,
+        "ymax": 30.612864583333334,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s2_h03",
+      "label": "B3",
+      "width": 888,
+      "height": 553,
+      "bytes": 225951,
+      "sha256": "8a9f8e6a9e449574273c876a069031f2b807eb9fd7bd3581eb8ad66788f84a32",
+      "cloudPath": "hole-gps-v1/cn_bg_611/B3-8a9f8e6a9e449574.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/B3-8a9f8e6a9e449574.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/B3-8a9f8e6a9e449574.jpg",
+      "sourceWindow": [
+        1609,
+        3051,
+        2497,
+        3604
+      ],
+      "extent": {
+        "xmin": 121.11495149739584,
+        "ymin": 30.606209635416665,
+        "xmax": 121.12044368489583,
+        "ymax": 30.6096298828125,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s2_h04",
+      "label": "B4",
+      "width": 536,
+      "height": 383,
+      "bytes": 99438,
+      "sha256": "5c7b5acc45ca814857888ac5555afff89b0d89676d541a6c8c452673c5619eab",
+      "cloudPath": "hole-gps-v1/cn_bg_611/B4-5c7b5acc45ca8148.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/B4-5c7b5acc45ca8148.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/B4-5c7b5acc45ca8148.jpg",
+      "sourceWindow": [
+        946,
+        3705,
+        1482,
+        4088
+      ],
+      "extent": {
+        "xmin": 121.11085091145834,
+        "ymin": 30.603216145833333,
+        "xmax": 121.114166015625,
+        "ymax": 30.6055849609375,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s2_h05",
+      "label": "B5",
+      "width": 869,
+      "height": 427,
+      "bytes": 173084,
+      "sha256": "39bd36ea36f0c2e9b82e3107d4c995e7e4b3b25a1423736a57b7f4d187c9444a",
+      "cloudPath": "hole-gps-v1/cn_bg_611/B5-39bd36ea36f0c2e9.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/B5-39bd36ea36f0c2e9.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/B5-39bd36ea36f0c2e9.jpg",
+      "sourceWindow": [
+        933,
+        4160,
+        1802,
+        4587
+      ],
+      "extent": {
+        "xmin": 121.1107705078125,
+        "ymin": 30.6001298828125,
+        "xmax": 121.11614518229167,
+        "ymax": 30.60277083333333,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s2_h06",
+      "label": "B6",
+      "width": 328,
+      "height": 641,
+      "bytes": 97184,
+      "sha256": "afbf0894424957f6d3ebc04ddcea3c2eb5327a38f9fd7725c1077f72fb5c9558",
+      "cloudPath": "hole-gps-v1/cn_bg_611/B6-afbf0894424957f6.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/B6-afbf0894424957f6.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/B6-afbf0894424957f6.jpg",
+      "sourceWindow": [
+        1805,
+        3880,
+        2133,
+        4521
+      ],
+      "extent": {
+        "xmin": 121.11616373697917,
+        "ymin": 30.600538085937497,
+        "xmax": 121.11819238281251,
+        "ymax": 30.604502604166665,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s2_h07",
+      "label": "B7",
+      "width": 397,
+      "height": 335,
+      "bytes": 66014,
+      "sha256": "2ab6ae8c0be0dee2b0d3783616be5a970391201f3f53142e4fe132422f36e380",
+      "cloudPath": "hole-gps-v1/cn_bg_611/B7-2ab6ae8c0be0dee2.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/B7-2ab6ae8c0be0dee2.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/B7-2ab6ae8c0be0dee2.jpg",
+      "sourceWindow": [
+        1589,
+        3698,
+        1986,
+        4033
+      ],
+      "extent": {
+        "xmin": 121.11482779947917,
+        "ymin": 30.603556315104164,
+        "xmax": 121.117283203125,
+        "ymax": 30.605628255208334,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s2_h08",
+      "label": "B8",
+      "width": 1010,
+      "height": 536,
+      "bytes": 249093,
+      "sha256": "de089cc4cb69d7cf6014885404a5dd6772ce7754a54f53bb7f94ff42c925012c",
+      "cloudPath": "hole-gps-v1/cn_bg_611/B8-de089cc4cb69d7cf.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/B8-de089cc4cb69d7cf.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/B8-de089cc4cb69d7cf.jpg",
+      "sourceWindow": [
+        1617,
+        3155,
+        2627,
+        3691
+      ],
+      "extent": {
+        "xmin": 121.1150009765625,
+        "ymin": 30.605671549479165,
+        "xmax": 121.12124772135417,
+        "ymax": 30.608986653645832,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s2_h09",
+      "label": "B9",
+      "width": 723,
+      "height": 497,
+      "bytes": 116137,
+      "sha256": "ce1954c751613f795e0f9e5fe6f5aea59dfaec12e4c5e0b77c760a309099c685",
+      "cloudPath": "hole-gps-v1/cn_bg_611/B9-ce1954c751613f79.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/B9-ce1954c751613f79.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/B9-ce1954c751613f79.jpg",
+      "sourceWindow": [
+        2546,
+        2948,
+        3269,
+        3445
+      ],
+      "extent": {
+        "xmin": 121.12074674479167,
+        "ymin": 30.607193033854166,
+        "xmax": 121.12521842447917,
+        "ymax": 30.610266927083334,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s3_h01",
+      "label": "C1",
+      "width": 503,
+      "height": 711,
+      "bytes": 150588,
+      "sha256": "0cfa6775090aa691b02e35af2339b3ff1bad88d6ef437092849d5473bff276dc",
+      "cloudPath": "hole-gps-v1/cn_bg_611/C1-0cfa6775090aa691.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/C1-0cfa6775090aa691.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/C1-0cfa6775090aa691.jpg",
+      "sourceWindow": [
+        3097,
+        2065,
+        3600,
+        2776
+      ],
+      "extent": {
+        "xmin": 121.12415462239584,
+        "ymin": 30.611330729166667,
+        "xmax": 121.127265625,
+        "ymax": 30.615728190104164,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s3_h02",
+      "label": "C2",
+      "width": 637,
+      "height": 858,
+      "bytes": 230364,
+      "sha256": "6cedfb720d1f3ebd90e69bc0e8304da734c3ce6be36472054f5b3ab8db3c8a48",
+      "cloudPath": "hole-gps-v1/cn_bg_611/C2-6cedfb720d1f3ebd.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/C2-6cedfb720d1f3ebd.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/C2-6cedfb720d1f3ebd.jpg",
+      "sourceWindow": [
+        3261,
+        1144,
+        3898,
+        2002
+      ],
+      "extent": {
+        "xmin": 121.1251689453125,
+        "ymin": 30.616117838541665,
+        "xmax": 121.12910872395834,
+        "ymax": 30.621424479166667,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s3_h03",
+      "label": "C3",
+      "width": 788,
+      "height": 425,
+      "bytes": 134739,
+      "sha256": "91dac5a9a7f2ae10404ced10f585ea2ed5f99e0d436dfee9adb9feea23119571",
+      "cloudPath": "hole-gps-v1/cn_bg_611/C3-91dac5a9a7f2ae10.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/C3-91dac5a9a7f2ae10.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/C3-91dac5a9a7f2ae10.jpg",
+      "sourceWindow": [
+        3974,
+        826,
+        4762,
+        1251
+      ],
+      "extent": {
+        "xmin": 121.12957877604167,
+        "ymin": 30.6207626953125,
+        "xmax": 121.13445247395833,
+        "ymax": 30.623391276041666,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s3_h04",
+      "label": "C4",
+      "width": 348,
+      "height": 326,
+      "bytes": 38841,
+      "sha256": "5b654e750cfbdd948628962d1d056b81f788bdc87ba6a7809e1b3fee8779c2be",
+      "cloudPath": "hole-gps-v1/cn_bg_611/C4-5b654e750cfbdd94.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/C4-5b654e750cfbdd94.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/C4-5b654e750cfbdd94.jpg",
+      "sourceWindow": [
+        4741,
+        816,
+        5089,
+        1142
+      ],
+      "extent": {
+        "xmin": 121.13432259114583,
+        "ymin": 30.621436848958332,
+        "xmax": 121.13647493489583,
+        "ymax": 30.623453124999997,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s3_h05",
+      "label": "C5",
+      "width": 309,
+      "height": 741,
+      "bytes": 93918,
+      "sha256": "cfa5fc346fecf2a646ad0cbad90f5c7f120fff85728ce4d7d1a9326b984292dd",
+      "cloudPath": "hole-gps-v1/cn_bg_611/C5-cfa5fc346fecf2a6.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/C5-cfa5fc346fecf2a6.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/C5-cfa5fc346fecf2a6.jpg",
+      "sourceWindow": [
+        4889,
+        1059,
+        5198,
+        1800
+      ],
+      "extent": {
+        "xmin": 121.13523795572917,
+        "ymin": 30.617367187499998,
+        "xmax": 121.13714908854166,
+        "ymax": 30.6219501953125,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s3_h06",
+      "label": "C6",
+      "width": 779,
+      "height": 465,
+      "bytes": 142354,
+      "sha256": "3b3d1267472817f885c3ac8c41ddbb1b5d2a7c0bfedb927f4f5063c5a2c4068d",
+      "cloudPath": "hole-gps-v1/cn_bg_611/C6-3b3d1267472817f8.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/C6-3b3d1267472817f8.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/C6-3b3d1267472817f8.jpg",
+      "sourceWindow": [
+        3866,
+        1623,
+        4645,
+        2088
+      ],
+      "extent": {
+        "xmin": 121.12891080729167,
+        "ymin": 30.6155859375,
+        "xmax": 121.13372884114584,
+        "ymax": 30.6184619140625,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s3_h07",
+      "label": "C7",
+      "width": 478,
+      "height": 318,
+      "bytes": 53887,
+      "sha256": "70384cdd142c95549412d92883c5218eddc0a9ed051e95e0c6d7214e0808e738",
+      "cloudPath": "hole-gps-v1/cn_bg_611/C7-70384cdd142c9554.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/C7-70384cdd142c9554.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/C7-70384cdd142c9554.jpg",
+      "sourceWindow": [
+        3387,
+        1748,
+        3865,
+        2066
+      ],
+      "extent": {
+        "xmin": 121.1259482421875,
+        "ymin": 30.615722005208333,
+        "xmax": 121.12890462239584,
+        "ymax": 30.617688802083332,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s3_h08",
+      "label": "C8",
+      "width": 785,
+      "height": 426,
+      "bytes": 112865,
+      "sha256": "c843bbe794c076a61fbc7b4df6240a565d6b4eabc695dbe41f9c354cf85034b1",
+      "cloudPath": "hole-gps-v1/cn_bg_611/C8-c843bbe794c076a6.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/C8-c843bbe794c076a6.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/C8-c843bbe794c076a6.jpg",
+      "sourceWindow": [
+        3417,
+        1934,
+        4202,
+        2360
+      ],
+      "extent": {
+        "xmin": 121.12613378906251,
+        "ymin": 30.613903645833332,
+        "xmax": 121.13098893229167,
+        "ymax": 30.616538411458333,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    },
+    {
+      "id": "cn_bg_611_s3_h09",
+      "label": "C9",
+      "width": 993,
+      "height": 441,
+      "bytes": 185700,
+      "sha256": "389833ea4c366dab3d737a53ff1fbf06f5d13cf74eef041ec6f317e130420863",
+      "cloudPath": "hole-gps-v1/cn_bg_611/C9-389833ea4c366dab.jpg",
+      "fileID": "cloud://cloud1-d7gketoi570d17f80.636c-cloud1-d7gketoi570d17f80-1524135194/hole-gps-v1/cn_bg_611/C9-389833ea4c366dab.jpg",
+      "localFile": "qingye-miniprogram/cloud-assets/hole-gps-v1/cn_bg_611/C9-389833ea4c366dab.jpg",
+      "sourceWindow": [
+        3712,
+        2510,
+        4705,
+        2951
+      ],
+      "extent": {
+        "xmin": 121.12795833333334,
+        "ymin": 30.610248372395834,
+        "xmax": 121.13409993489583,
+        "ymax": 30.61297591145833,
+        "spatialReference": {
+          "wkid": 4326
+        }
+      }
+    }
+  ]
+}

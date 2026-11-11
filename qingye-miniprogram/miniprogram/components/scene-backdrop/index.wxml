@@ -1,0 +1,1 @@
+<view class="scene-backdrop {{original?'is-original':''}}" aria-hidden="true"><image class="scene-image" src="{{src}}" mode="aspectFill" binderror="failed"/><view class="scene-veil"/></view>

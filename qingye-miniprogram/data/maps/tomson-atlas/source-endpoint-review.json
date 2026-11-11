@@ -1,0 +1,1511 @@
+{
+  "courseId": "cn_bg_575",
+  "revision": "20261106-r1",
+  "passes": [
+    {
+      "id": "identity",
+      "status": "complete",
+      "evidence": [
+        "guide-source.json",
+        "provenance.json"
+      ]
+    },
+    {
+      "id": "surface",
+      "status": "complete",
+      "evidence": [
+        "evidence/"
+      ]
+    },
+    {
+      "id": "render",
+      "status": "complete",
+      "evidence": [
+        "renders/overview.png",
+        "renders/hole-01.png",
+        "renders/hole-02.png",
+        "renders/hole-03.png",
+        "renders/hole-04.png",
+        "renders/hole-05.png",
+        "renders/hole-06.png",
+        "renders/hole-07.png",
+        "renders/hole-08.png",
+        "renders/hole-09.png",
+        "renders/hole-10.png",
+        "renders/hole-11.png",
+        "renders/hole-12.png",
+        "renders/hole-13.png",
+        "renders/hole-14.png",
+        "renders/hole-15.png",
+        "renders/hole-16.png",
+        "renders/hole-17.png",
+        "renders/hole-18.png"
+      ],
+      "note": "实际画面逐洞检查：起终点均在画幅内，果岭在上，三杆洞倍率受限；90洞正逆转换和前中后距离顺序通过。未进行现场定位精度验证。"
+    }
+  ],
+  "holes": [
+    {
+      "id": "cn_bg_575_s1_h01",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.58141749,
+          31.221086856
+        ],
+        "outline": [
+          [
+            121.581336602,
+            31.221177145
+          ],
+          [
+            121.581471415,
+            31.221184829
+          ],
+          [
+            121.581489391,
+            31.221008094
+          ],
+          [
+            121.581372552,
+            31.220977357
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-01.jpg",
+          "evidence/unmarked-01-tee.jpg"
+        ],
+        "note": "Long tee platform west of clubhouse path. Green southeast of rear bunker."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.580802482,
+          31.224214533
+        ],
+        "outline": [
+          [
+            121.580716458,
+            31.224250757
+          ],
+          [
+            121.580833297,
+            31.224319912
+          ],
+          [
+            121.580905198,
+            31.224312228
+          ],
+          [
+            121.580923173,
+            31.224212338
+          ],
+          [
+            121.580842284,
+            31.224112447
+          ],
+          [
+            121.580725446,
+            31.224120131
+          ],
+          [
+            121.58067152,
+            31.224173918
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-01.jpg",
+          "evidence/unmarked-01-green.jpg"
+        ],
+        "note": "Long tee platform west of clubhouse path. Green southeast of rear bunker."
+      }
+    },
+    {
+      "id": "cn_bg_575_s1_h02",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.580871494,
+          31.22483089
+        ],
+        "outline": [
+          [
+            121.580815322,
+            31.224942306
+          ],
+          [
+            121.580878235,
+            31.22494999
+          ],
+          [
+            121.580941148,
+            31.224727158
+          ],
+          [
+            121.580851272,
+            31.224704106
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-02.jpg",
+          "evidence/unmarked-02-tee.jpg"
+        ],
+        "note": "Long narrow tee south of buildings; green north of front bunker."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.576075012,
+          31.224813876
+        ],
+        "outline": [
+          [
+            121.575980001,
+            31.224865467
+          ],
+          [
+            121.576078864,
+            31.224965358
+          ],
+          [
+            121.57613279,
+            31.224926938
+          ],
+          [
+            121.576177728,
+            31.224796313
+          ],
+          [
+            121.57613279,
+            31.224727158
+          ],
+          [
+            121.576042914,
+            31.224688739
+          ],
+          [
+            121.575980001,
+            31.224727158
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-02.jpg",
+          "evidence/unmarked-02-green.jpg"
+        ],
+        "note": "Long narrow tee south of buildings; green north of front bunker."
+      }
+    },
+    {
+      "id": "cn_bg_575_s1_h03",
+      "tee": {
+        "status": "uncertain",
+        "confidence": "low",
+        "position": [
+          121.576110321,
+          31.225378363
+        ],
+        "outline": [
+          [
+            121.576051901,
+            31.225449439
+          ],
+          [
+            121.576150765,
+            31.225434071
+          ],
+          [
+            121.576177728,
+            31.225318814
+          ],
+          [
+            121.576060889,
+            31.22531113
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-03.jpg",
+          "evidence/unmarked-03-tee.jpg"
+        ],
+        "note": "Par 3 across open approach. Tee mowing edge indistinct."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.578442599,
+          31.224956713
+        ],
+        "outline": [
+          [
+            121.578361711,
+            31.225003777
+          ],
+          [
+            121.578442599,
+            31.225057564
+          ],
+          [
+            121.578532475,
+            31.225042196
+          ],
+          [
+            121.578559438,
+            31.224973041
+          ],
+          [
+            121.578532475,
+            31.224896203
+          ],
+          [
+            121.578442599,
+            31.224857784
+          ],
+          [
+            121.578361711,
+            31.224880835
+          ],
+          [
+            121.578307785,
+            31.224942306
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-03.jpg",
+          "evidence/unmarked-03-green.jpg"
+        ],
+        "note": "Par 3 across open approach. Tee mowing edge indistinct."
+      }
+    },
+    {
+      "id": "cn_bg_575_s1_h04",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.5804693,
+          31.225019144
+        ],
+        "outline": [
+          [
+            121.580401893,
+            31.22504988
+          ],
+          [
+            121.580518731,
+            31.225072931
+          ],
+          [
+            121.580545694,
+            31.224988409
+          ],
+          [
+            121.58041088,
+            31.224965358
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-04.jpg",
+          "evidence/unmarked-04-tee.jpg"
+        ],
+        "note": "Select rectangular platform south of roof; green southwest of pair of bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.576011457,
+          31.225920071
+        ],
+        "outline": [
+          [
+            121.5759081,
+            31.226018039
+          ],
+          [
+            121.575997976,
+            31.226048774
+          ],
+          [
+            121.576096839,
+            31.226002671
+          ],
+          [
+            121.576150765,
+            31.22591815
+          ],
+          [
+            121.576114815,
+            31.225825944
+          ],
+          [
+            121.576006963,
+            31.225779842
+          ],
+          [
+            121.575926075,
+            31.225841312
+          ],
+          [
+            121.575890125,
+            31.225925833
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-04.jpg",
+          "evidence/unmarked-04-green.jpg"
+        ],
+        "note": "Select rectangular platform south of roof; green southwest of pair of bunkers."
+      }
+    },
+    {
+      "id": "cn_bg_575_s1_h05",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.575241221,
+          31.22609795
+        ],
+        "outline": [
+          [
+            121.575171118,
+            31.226125611
+          ],
+          [
+            121.575260994,
+            31.226156346
+          ],
+          [
+            121.575332895,
+            31.226117927
+          ],
+          [
+            121.575260994,
+            31.226048774
+          ],
+          [
+            121.575180106,
+            31.22604109
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-05.jpg",
+          "evidence/unmarked-05-tee.jpg"
+        ],
+        "note": "Front-left tee next to branching path; green south of twin sand bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.573662327,
+          31.222893578
+        ],
+        "outline": [
+          [
+            121.573571328,
+            31.222998272
+          ],
+          [
+            121.573679179,
+            31.222990588
+          ],
+          [
+            121.573805005,
+            31.222967536
+          ],
+          [
+            121.573813993,
+            31.222883012
+          ],
+          [
+            121.573733104,
+            31.222798488
+          ],
+          [
+            121.573625253,
+            31.222775436
+          ],
+          [
+            121.573553353,
+            31.22282154
+          ],
+          [
+            121.573517402,
+            31.222913748
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-05.jpg",
+          "evidence/unmarked-05-green.jpg"
+        ],
+        "note": "Front-left tee next to branching path; green south of twin sand bunkers."
+      }
+    },
+    {
+      "id": "cn_bg_575_s1_h06",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.573038813,
+          31.222856118
+        ],
+        "outline": [
+          [
+            121.57296916,
+            31.222929116
+          ],
+          [
+            121.573077011,
+            31.222929116
+          ],
+          [
+            121.573121949,
+            31.222806172
+          ],
+          [
+            121.572987135,
+            31.222760068
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-06.jpg",
+          "evidence/unmarked-06-tee.jpg"
+        ],
+        "note": "Reference platform north of old PV endpoint; southern old point in less distinct turf. Green west of small bunker."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.572472596,
+          31.226125611
+        ],
+        "outline": [
+          [
+            121.572340029,
+            31.2262255
+          ],
+          [
+            121.572456867,
+            31.226233184
+          ],
+          [
+            121.572555731,
+            31.226194765
+          ],
+          [
+            121.572600669,
+            31.226110244
+          ],
+          [
+            121.572582693,
+            31.226025722
+          ],
+          [
+            121.572501805,
+            31.226010355
+          ],
+          [
+            121.572402942,
+            31.226064141
+          ],
+          [
+            121.572340029,
+            31.226140979
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-06.jpg",
+          "evidence/unmarked-06-green.jpg"
+        ],
+        "note": "Reference platform north of old PV endpoint; southern old point in less distinct turf. Green west of small bunker."
+      }
+    },
+    {
+      "id": "cn_bg_575_s1_h07",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.571719885,
+          31.226730705
+        ],
+        "outline": [
+          [
+            121.571638997,
+            31.226771044
+          ],
+          [
+            121.571773811,
+            31.226786412
+          ],
+          [
+            121.571800774,
+            31.226709575
+          ],
+          [
+            121.57166596,
+            31.226655789
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-07.jpg",
+          "evidence/unmarked-07-tee.jpg"
+        ],
+        "note": "Rectangular platform east of path, ahead of old PV point; green between west and southeast bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.575341882,
+          31.226444059
+        ],
+        "outline": [
+          [
+            121.575287957,
+            31.2265559
+          ],
+          [
+            121.575359857,
+            31.2265559
+          ],
+          [
+            121.575404795,
+            31.226509798
+          ],
+          [
+            121.57542277,
+            31.226432961
+          ],
+          [
+            121.575458721,
+            31.226363807
+          ],
+          [
+            121.575404795,
+            31.226325389
+          ],
+          [
+            121.575296944,
+            31.226356123
+          ],
+          [
+            121.575225044,
+            31.22640991
+          ],
+          [
+            121.575216056,
+            31.226486747
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-07.jpg",
+          "evidence/unmarked-07-green.jpg"
+        ],
+        "note": "Rectangular platform east of path, ahead of old PV point; green between west and southeast bunkers."
+      }
+    },
+    {
+      "id": "cn_bg_575_s1_h08",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.575449733,
+          31.225555091
+        ],
+        "outline": [
+          [
+            121.57538682,
+            31.225641534
+          ],
+          [
+            121.575494671,
+            31.225641534
+          ],
+          [
+            121.575521634,
+            31.225480174
+          ],
+          [
+            121.575395808,
+            31.225457122
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-08.jpg",
+          "evidence/unmarked-08-tee.jpg"
+        ],
+        "note": "Par 3 rectangular south-facing tee and green between bilateral bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.575392437,
+          31.224220021
+        ],
+        "outline": [
+          [
+            121.575395808,
+            31.224319912
+          ],
+          [
+            121.575467708,
+            31.224327596
+          ],
+          [
+            121.575503659,
+            31.224250757
+          ],
+          [
+            121.575449733,
+            31.224150866
+          ],
+          [
+            121.57538682,
+            31.224089395
+          ],
+          [
+            121.575314919,
+            31.224127815
+          ],
+          [
+            121.575287957,
+            31.224212338
+          ],
+          [
+            121.575332895,
+            31.224281493
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-08.jpg",
+          "evidence/unmarked-08-green.jpg"
+        ],
+        "note": "Par 3 rectangular south-facing tee and green between bilateral bunkers."
+      }
+    },
+    {
+      "id": "cn_bg_575_s1_h09",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.575278969,
+          31.223628359
+        ],
+        "outline": [
+          [
+            121.575207068,
+            31.223682146
+          ],
+          [
+            121.57535087,
+            31.223682146
+          ],
+          [
+            121.57535087,
+            31.223574571
+          ],
+          [
+            121.575207068,
+            31.223574571
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-09.jpg",
+          "evidence/unmarked-09-tee.jpg"
+        ],
+        "note": "Rectangular tee south of path; green west of right bunker."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.580222141,
+          31.22129721
+        ],
+        "outline": [
+          [
+            121.58015024,
+            31.221430722
+          ],
+          [
+            121.580231129,
+            31.221423038
+          ],
+          [
+            121.58033898,
+            31.221346197
+          ],
+          [
+            121.580347967,
+            31.221261671
+          ],
+          [
+            121.580285054,
+            31.221184829
+          ],
+          [
+            121.580186191,
+            31.221177145
+          ],
+          [
+            121.580123278,
+            31.221230934
+          ],
+          [
+            121.58011429,
+            31.221323144
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-09.jpg",
+          "evidence/unmarked-09-green.jpg"
+        ],
+        "note": "Rectangular tee south of path; green west of right bunker."
+      }
+    },
+    {
+      "id": "cn_bg_575_s2_h01",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.581347836,
+          31.219836251
+        ],
+        "outline": [
+          [
+            121.581255713,
+            31.21987083
+          ],
+          [
+            121.581390527,
+            31.219901567
+          ],
+          [
+            121.581435465,
+            31.219824724
+          ],
+          [
+            121.581309639,
+            31.219747882
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-10.jpg",
+          "evidence/unmarked-10-tee.jpg"
+        ],
+        "note": "Tee moved onto flat platform west of old PV endpoint; green along west lake shore."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.579377308,
+          31.21740415
+        ],
+        "outline": [
+          [
+            121.57933237,
+            31.21754247
+          ],
+          [
+            121.579431234,
+            31.217488679
+          ],
+          [
+            121.579476171,
+            31.217419519
+          ],
+          [
+            121.579485159,
+            31.217342675
+          ],
+          [
+            121.579431234,
+            31.217288883
+          ],
+          [
+            121.57933237,
+            31.217304252
+          ],
+          [
+            121.579260469,
+            31.217381097
+          ],
+          [
+            121.579269457,
+            31.217465626
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-10.jpg",
+          "evidence/unmarked-10-green.jpg"
+        ],
+        "note": "Tee moved onto flat platform west of old PV endpoint; green along west lake shore."
+      }
+    },
+    {
+      "id": "cn_bg_575_s2_h02",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.579734565,
+          31.216474326
+        ],
+        "outline": [
+          [
+            121.579655923,
+            31.216543487
+          ],
+          [
+            121.579754787,
+            31.216558856
+          ],
+          [
+            121.5798177,
+            31.21641285
+          ],
+          [
+            121.579709849,
+            31.216382111
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-11.jpg",
+          "evidence/unmarked-11-tee.jpg"
+        ],
+        "note": "Narrow tee west of cart path. Green between north and south sand."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.576955154,
+          31.218237911
+        ],
+        "outline": [
+          [
+            121.576896734,
+            31.218318597
+          ],
+          [
+            121.576977623,
+            31.218333965
+          ],
+          [
+            121.577049523,
+            31.218310912
+          ],
+          [
+            121.577085474,
+            31.218226384
+          ],
+          [
+            121.577022561,
+            31.218157224
+          ],
+          [
+            121.576932685,
+            31.218126487
+          ],
+          [
+            121.576842809,
+            31.218180278
+          ],
+          [
+            121.576833821,
+            31.218249437
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-11.jpg",
+          "evidence/unmarked-11-green.jpg"
+        ],
+        "note": "Narrow tee west of cart path. Green between north and south sand."
+      }
+    },
+    {
+      "id": "cn_bg_575_s2_h03",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.576838315,
+          31.218823844
+        ],
+        "outline": [
+          [
+            121.576761921,
+            31.218864187
+          ],
+          [
+            121.576869772,
+            31.218879555
+          ],
+          [
+            121.57691471,
+            31.218787343
+          ],
+          [
+            121.576806859,
+            31.21876429
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-12.jpg",
+          "evidence/unmarked-12-tee.jpg"
+        ],
+        "note": "Par 3 with separate tee terraces. Northern rectangular middle platform selected."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.575702509,
+          31.217269672
+        ],
+        "outline": [
+          [
+            121.575674423,
+            31.217388781
+          ],
+          [
+            121.575773286,
+            31.217381097
+          ],
+          [
+            121.575818224,
+            31.217319621
+          ],
+          [
+            121.575800249,
+            31.217219723
+          ],
+          [
+            121.575728348,
+            31.217158247
+          ],
+          [
+            121.575629485,
+            31.217158247
+          ],
+          [
+            121.575584547,
+            31.217219723
+          ],
+          [
+            121.57561151,
+            31.217311937
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-12.jpg",
+          "evidence/unmarked-12-green.jpg"
+        ],
+        "note": "Par 3 with separate tee terraces. Northern rectangular middle platform selected."
+      }
+    },
+    {
+      "id": "cn_bg_575_s2_h04",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.575166624,
+          31.216489695
+        ],
+        "outline": [
+          [
+            121.57509023,
+            31.216543487
+          ],
+          [
+            121.575198081,
+            31.21656654
+          ],
+          [
+            121.575243019,
+            31.216443588
+          ],
+          [
+            121.575135168,
+            31.216405165
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-13.jpg",
+          "evidence/unmarked-13-tee.jpg"
+        ],
+        "note": "Rectangular rear platform north of original point; green surrounded on three sides by bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.574399184,
+          31.220979065
+        ],
+        "outline": [
+          [
+            121.574317297,
+            31.221069567
+          ],
+          [
+            121.574434136,
+            31.22109262
+          ],
+          [
+            121.574524012,
+            31.221077251
+          ],
+          [
+            121.574550975,
+            31.221008094
+          ],
+          [
+            121.574506037,
+            31.220915884
+          ],
+          [
+            121.574407173,
+            31.22085441
+          ],
+          [
+            121.574317297,
+            31.22085441
+          ],
+          [
+            121.574263372,
+            31.220931252
+          ],
+          [
+            121.57427236,
+            31.221008094
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-13.jpg",
+          "evidence/unmarked-13-green.jpg"
+        ],
+        "note": "Rectangular rear platform north of original point; green surrounded on three sides by bunkers."
+      }
+    },
+    {
+      "id": "cn_bg_575_s2_h05",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.574595913,
+          31.221415354
+        ],
+        "outline": [
+          [
+            121.574541987,
+            31.221492195
+          ],
+          [
+            121.574649838,
+            31.221476827
+          ],
+          [
+            121.574640851,
+            31.221346197
+          ],
+          [
+            121.574550975,
+            31.221346197
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-14.jpg",
+          "evidence/unmarked-14-tee.jpg"
+        ],
+        "note": "PV17 = catalogue14. Narrow tee east of path, green east of elongated bunker."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.575799126,
+          31.218830568
+        ],
+        "outline": [
+          [
+            121.575719361,
+            31.218956399
+          ],
+          [
+            121.575818224,
+            31.218948714
+          ],
+          [
+            121.575881137,
+            31.218894924
+          ],
+          [
+            121.575899112,
+            31.218787343
+          ],
+          [
+            121.57587215,
+            31.218718184
+          ],
+          [
+            121.575791261,
+            31.2187105
+          ],
+          [
+            121.575728348,
+            31.21876429
+          ],
+          [
+            121.57568341,
+            31.218864187
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-14.jpg",
+          "evidence/unmarked-14-green.jpg"
+        ],
+        "note": "PV17 = catalogue14. Narrow tee east of path, green east of elongated bunker."
+      }
+    },
+    {
+      "id": "cn_bg_575_s2_h06",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.575730595,
+          31.217936298
+        ],
+        "outline": [
+          [
+            121.575692398,
+            31.218003536
+          ],
+          [
+            121.575764299,
+            31.217995852
+          ],
+          [
+            121.575773286,
+            31.217880586
+          ],
+          [
+            121.575692398,
+            31.217865217
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-15.jpg",
+          "evidence/unmarked-15-tee.jpg"
+        ],
+        "note": "PV18 = catalogue15. Middle platform west of path. Green among three west bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.578871756,
+          31.220321319
+        ],
+        "outline": [
+          [
+            121.578802103,
+            31.220431779
+          ],
+          [
+            121.578900966,
+            31.220431779
+          ],
+          [
+            121.578963879,
+            31.220362621
+          ],
+          [
+            121.578963879,
+            31.220270411
+          ],
+          [
+            121.578936916,
+            31.220216621
+          ],
+          [
+            121.578865016,
+            31.220216621
+          ],
+          [
+            121.578784127,
+            31.220278095
+          ],
+          [
+            121.578757165,
+            31.220362621
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-15.jpg",
+          "evidence/unmarked-15-green.jpg"
+        ],
+        "note": "PV18 = catalogue15. Middle platform west of path. Green among three west bunkers."
+      }
+    },
+    {
+      "id": "cn_bg_575_s2_h07",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.579123858,
+          31.220619274
+        ],
+        "outline": [
+          [
+            121.57907173,
+            31.22066999
+          ],
+          [
+            121.579152618,
+            31.220685358
+          ],
+          [
+            121.579206544,
+            31.220600832
+          ],
+          [
+            121.579125656,
+            31.220554727
+          ],
+          [
+            121.579062743,
+            31.220585464
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-16.jpg",
+          "evidence/unmarked-16-tee.jpg"
+        ],
+        "note": "Rectangular west-facing tee, green between north and southwest sand."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.57504786,
+          31.221845664
+        ],
+        "outline": [
+          [
+            121.574991366,
+            31.221937874
+          ],
+          [
+            121.575108205,
+            31.221937874
+          ],
+          [
+            121.575171118,
+            31.221876401
+          ],
+          [
+            121.575144155,
+            31.22179956
+          ],
+          [
+            121.575045292,
+            31.221753455
+          ],
+          [
+            121.574955416,
+            31.221768823
+          ],
+          [
+            121.574919466,
+            31.221845664
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-16.jpg",
+          "evidence/unmarked-16-green.jpg"
+        ],
+        "note": "Rectangular west-facing tee, green between north and southwest sand."
+      }
+    },
+    {
+      "id": "cn_bg_575_s2_h08",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.574139793,
+          31.221449932
+        ],
+        "outline": [
+          [
+            121.574092608,
+            31.2215383
+          ],
+          [
+            121.574182484,
+            31.2215383
+          ],
+          [
+            121.574191471,
+            31.221361565
+          ],
+          [
+            121.574092608,
+            31.221361565
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-17.jpg",
+          "evidence/unmarked-17-tee.jpg"
+        ],
+        "note": "PV14 = catalogue17. Par3 west of terminal lake."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.574609394,
+          31.223183649
+        ],
+        "outline": [
+          [
+            121.574550975,
+            31.223321
+          ],
+          [
+            121.574649838,
+            31.22328258
+          ],
+          [
+            121.574712751,
+            31.223190372
+          ],
+          [
+            121.574712751,
+            31.223121216
+          ],
+          [
+            121.574658826,
+            31.223075112
+          ],
+          [
+            121.57456895,
+            31.223082796
+          ],
+          [
+            121.574515024,
+            31.223151952
+          ],
+          [
+            121.574506037,
+            31.22324416
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-17.jpg",
+          "evidence/unmarked-17-green.jpg"
+        ],
+        "note": "PV14 = catalogue17. Par3 west of terminal lake."
+      }
+    },
+    {
+      "id": "cn_bg_575_s2_h09",
+      "tee": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.575187296,
+          31.223362494
+        ],
+        "outline": [
+          [
+            121.575108205,
+            31.223428576
+          ],
+          [
+            121.575189093,
+            31.223443944
+          ],
+          [
+            121.575287957,
+            31.223328684
+          ],
+          [
+            121.575216056,
+            31.223274896
+          ],
+          [
+            121.575135168,
+            31.223336368
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-18.jpg",
+          "evidence/unmarked-18-tee.jpg"
+        ],
+        "note": "PV15 = catalogue18. Closing dogleg green southeast of paired bunkers."
+      },
+      "green": {
+        "status": "pass",
+        "confidence": "medium",
+        "position": [
+          121.579664911,
+          31.220779764
+        ],
+        "outline": [
+          [
+            121.579566047,
+            31.220862094
+          ],
+          [
+            121.579646936,
+            31.220869779
+          ],
+          [
+            121.579754787,
+            31.220815989
+          ],
+          [
+            121.579781749,
+            31.220739148
+          ],
+          [
+            121.579727824,
+            31.220693042
+          ],
+          [
+            121.579619973,
+            31.220716095
+          ],
+          [
+            121.57955706,
+            31.2207622
+          ]
+        ],
+        "evidence": [
+          "evidence/surfaces-18.jpg",
+          "evidence/unmarked-18-green.jpg"
+        ],
+        "note": "PV15 = catalogue18. Closing dogleg green southeast of paired bunkers."
+      }
+    }
+  ]
+}

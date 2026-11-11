@@ -1,0 +1,44 @@
+@import "../../services/invite-code.wxss";
+.competition-page{padding-bottom:calc(64rpx + env(safe-area-inset-bottom))}
+.competition-error{margin-top:24rpx;padding:22rpx;border-radius:18rpx;background:#fff1e7;color:#863d2e;font-size:26rpx}
+.competition-card-title{font-size:34rpx;line-height:1.45;font-weight:600;color:#234833;margin:8rpx 0}
+.competition-step{font-size:24rpx;color:#507358;font-weight:500;line-height:1.5}
+.competition-tabs,.competition-actions,.competition-groups{display:flex;flex-wrap:wrap;gap:12rpx;margin:24rpx 0}
+.competition-tabs-button{flex:1;font-size:25rpx;min-width:0;padding:0 12rpx}
+.competition-actions-button{flex:1 1 42%;font-size:25rpx;padding:8rpx 12rpx;line-height:1.4}
+.competition-groups-button{min-height:76rpx;line-height:1.4;font-size:25rpx;padding:10rpx 16rpx}
+.competition-fields{display:flex;flex-direction:column;gap:12rpx;margin-top:24rpx}
+.competition-input,.competition-rule{width:100%}
+.competition-picker{padding:23rpx 24rpx;border-radius:24rpx;background:#e7efdf;color:#345541;min-height:88rpx}
+.competition-row{min-height:84rpx;display:flex;align-items:center;gap:16rpx;padding:14rpx 0;border-bottom:1rpx solid #dce5d6;color:#274b36}
+.competition-row .competition-mini{font-size:23rpx;min-height:72rpx;line-height:1.4;padding:10rpx 16rpx}
+.competition-position{min-width:48rpx;font-size:32rpx;font-weight:600;text-align:center;color:#2f6344}
+.competition-total{min-width:72rpx;text-align:right;font-size:34rpx;font-weight:600}
+.competition-hole-scores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10rpx;margin-top:16rpx;text-align:center}
+.competition-hole-score{padding:10rpx 4rpx;border-radius:12rpx;background:#edf3e7}
+.competition-card-review{margin-top:12rpx}
+.competition-start-issue{margin-top:14rpx;padding:22rpx;text-align:left;line-height:1.6;font-size:26rpx;background:#f4eddf;color:#755331;border-radius:18rpx}
+.page .competition-course-entry{display:flex;align-items:center;gap:20rpx;width:100%;margin:0;padding:28rpx 24rpx;min-height:144rpx;line-height:1.5;text-align:left;border:1rpx solid #dbe6d2;border-radius:26rpx;background:#edf3e6;color:#2e5038;box-shadow:none}
+.competition-course-symbol{display:flex;align-items:center;justify-content:center;flex:0 0 64rpx;width:64rpx;height:64rpx;background:rgba(255,255,255,.6);border-radius:50%}.competition-course-symbol image{width:34rpx;height:34rpx;opacity:.8}
+.competition-course-copy{flex:1;min-width:0}.competition-course-name{font-size:29rpx;font-weight:600;line-height:1.5;white-space:normal}.competition-course-summary{font-size:23rpx;font-weight:400;line-height:1.65;color:#7b8d73;margin-top:7rpx;white-space:normal}.competition-course-change{display:flex;align-items:center;gap:10rpx;flex-shrink:0;font-size:24rpx;font-weight:400;color:#688461}.competition-course-change text{font-size:34rpx}
+
+.competition-page.has-start-dock{padding-bottom:calc(220rpx + env(safe-area-inset-bottom))}
+.page .competition-tabs-button{width:auto;min-height:80rpx;line-height:1.4;padding:20rpx 8rpx;font-size:25rpx}
+.page .competition-actions-button,.page .competition-groups-button{width:auto;line-height:1.5;min-height:76rpx;margin:0;white-space:normal}
+.page .competition-mini{width:auto;flex-shrink:0;min-width:96rpx;margin:0;line-height:1.4}
+.page .competition-wide{width:100%;line-height:1.5;padding:24rpx 16rpx}
+.competition-route-pickers{display:flex;gap:16rpx}.competition-route-pickers picker{flex:1;min-width:0}.competition-route-pickers .competition-picker{height:100%;font-size:27rpx;line-height:1.55;white-space:normal}
+.competition-scorer-card{margin:24rpx 0;padding:12rpx 22rpx 22rpx;background:#eaf1e3;border-radius:22rpx}.competition-scorer-card .competition-row{border-bottom:0}.competition-scorer-name{font-size:30rpx;font-weight:600;line-height:1.6}.competition-scorer-name text{font-size:25rpx;font-weight:400}
+.competition-text-action{font-size:25rpx;color:#507859;padding:14rpx 0 14rpx 16rpx;flex-shrink:0;line-height:1.5}
+.page .competition-link-button{width:100%;background:none;box-shadow:none;font-weight:500;margin:12rpx 0 0;padding:14rpx 0;min-height:64rpx;text-align:left;line-height:1.6;font-size:25rpx}
+.competition-start-checks{margin-top:28rpx;padding-top:24rpx;border-top:1rpx solid #dbe4d4}.competition-check-title{font-size:30rpx;font-weight:600;line-height:1.6;color:#705b38}.is-ready .competition-check-title{color:#356841}
+.page .competition-start-issue{display:flex;justify-content:space-between;align-items:center;gap:20rpx;width:100%;min-height:80rpx;margin:0;padding:24rpx 0;background:none;box-shadow:none;border-radius:0;border-bottom:1rpx solid #e2e6d9;font-size:26rpx;font-weight:400;line-height:1.6;color:#6e654b;white-space:normal;text-align:left}
+.page .competition-arrange-button{width:100%;margin:20rpx 0 4rpx;min-height:80rpx;padding:18rpx;line-height:1.6;font-size:25rpx;color:#3c6949;background:#e1ebd8;box-shadow:none}
+.competition-start-dock{position:fixed;bottom:0;left:0;right:0;z-index:20;padding:18rpx 30rpx calc(18rpx + env(safe-area-inset-bottom));background:rgba(245,248,239,.97);border-top:1rpx solid #dce5d3;box-shadow:0 -8rpx 32rpx rgba(35,62,43,.05)}
+.competition-dock-copy{font-size:23rpx;line-height:1.5;text-align:center;color:#7b8b71;margin-bottom:12rpx}
+.competition-start-dock .competition-start-button{display:block;width:100%;max-width:none;margin:0;min-height:94rpx;line-height:1.4;padding:25rpx 20rpx;font-size:32rpx;white-space:nowrap;border-radius:24rpx}
+.competition-ranking-board{margin-top:28rpx}.competition-ranking-title{font-size:29rpx;font-weight:600;line-height:1.6}
+
+.competition-scorer-picker{flex:0 0 108rpx;width:108rpx}
+@import "../../services/flow.wxss";
+.competition-group-selector{margin:12rpx 0 22rpx;padding:0 4rpx}.competition-selector-heading{display:flex;justify-content:space-between;align-items:center;font-size:23rpx;color:#7b8c72;min-height:68rpx}.competition-group-select{display:flex;align-items:center;justify-content:space-between;padding:23rpx 24rpx;border-radius:18rpx;border:1rpx solid #cfdcc5;background:rgba(255,255,247,.55);font-size:29rpx;font-weight:600;color:#30563b;min-height:96rpx}.competition-event-share{margin-top:20rpx;min-height:72rpx;display:flex;align-items:center;justify-content:flex-end;color:#6f8765;font-size:24rpx}.competition-roster-empty{padding:30rpx 0;color:#5d7957;font-size:28rpx;line-height:1.8}.competition-bottom-links{display:flex;justify-content:space-between;padding:24rpx 4rpx;gap:24rpx;color:#6d8462;font-size:25rpx}.competition-bottom-links text{min-height:84rpx;display:flex;align-items:center}.competition-seat{display:flex;align-items:center;justify-content:space-between;gap:16rpx;min-height:100rpx;padding:22rpx;border:2rpx solid #e0e7d8;border-radius:18rpx;color:#4d6b47;font-size:28rpx}.competition-seat.selected{border-color:#729067;background:#e8f0df}.competition-seat>text:last-child{font-size:24rpx}.competition-people{margin:26rpx 0;padding:0 22rpx;background:#edf2e6;border-radius:20rpx}.competition-people-heading,.competition-manage-row{display:flex;align-items:center;justify-content:space-between;gap:20rpx;min-height:94rpx;padding:20rpx 0;font-size:27rpx}.competition-people-heading{font-weight:600}.competition-people-heading text:last-child,.competition-manage-row text:last-child{font-size:24rpx;font-weight:400;color:#6a835f}.competition-manage-row{border-bottom:1rpx solid #dce5d3}.competition-late-note{padding:18rpx;background:#edf2e6;border-radius:18rpx;font-size:26rpx;line-height:1.6}.competition-late-note switch{flex-shrink:0;transform:scale(.8)}

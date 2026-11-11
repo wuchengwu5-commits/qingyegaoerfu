@@ -1,0 +1,56 @@
+{
+  "courseId": "cn_bg_579",
+  "name": "协和",
+  "atlas": {
+    "width": 4096,
+    "height": 2301,
+    "extent": {
+      "xmin": 13492674.285148544,
+      "ymin": 3694266.620413453,
+      "xmax": 13495373.883134088,
+      "ymax": 3695783.1670357026,
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "northUp": true,
+    "crs": "EPSG:3857",
+    "sourceUrl": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=13492674.285148544%2C3694266.6767806425%2C13495373.883134088%2C3695783.110668512&bboxSR=3857&imageSR=3857&size=4096%2C2301&format=jpg&f=json",
+    "source": "Esri World Imagery / Vantor / GIS User Community",
+    "retrievedOn": "2026-11-06",
+    "imageryDate": null,
+    "image": "satellite.jpg"
+  },
+  "photo": "/packages/xiehe-map/atlas-1001f2bdb6488977.jpg",
+  "surround": {
+    "src": "/packages/xiehe-map/surround-1001f2bdb6488977.jpg",
+    "bounds": [
+      0,
+      0,
+      4096,
+      2301
+    ]
+  },
+  "groups": [
+    {
+      "id": "cn_bg_579_s1",
+      "name": "前九",
+      "short": "",
+      "color": "#204c37"
+    },
+    {
+      "id": "cn_bg_579_s2",
+      "name": "后九",
+      "short": "",
+      "color": "#265570"
+    }
+  ],
+  "par3MaxScale": 1.2226440151917168,
+  "referenceRoute": "",
+  "databaseGps": false,
+  "overviewOnly": true,
+  "mapNote": "协和卫星全览已开放，18 洞身份与现有影像尚未建立可靠对应。当前不显示猜测的洞位、路线或测距。可拖动、缩放及定位查看当前位置。影像拍摄日期未知，位置精度未经现场确认。",
+  "revision": "six-atlas-20261106.1",
+  "pendingTeeCount": 0
+}

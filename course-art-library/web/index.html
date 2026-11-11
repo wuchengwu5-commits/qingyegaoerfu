@@ -1,0 +1,38 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>青野 · 球道图库</title><link rel="stylesheet" href="/style.css">
+<body><aside><div class="brand">青野<span>球道图库</span></div><p class="muted">按球场归档，按球洞修订</p><input id="search" type="search" placeholder="搜索球场 / 省份" aria-label="搜索球场"><label class="check"><input id="withFiles" type="checkbox" checked> 只看已有图或资料</label><nav id="courses"></nav><button id="backup" class="quiet">备份整个图库</button><small id="stats"></small></aside>
+<main><header><div><p class="eyebrow">COURSE ART LIBRARY</p><h1 id="courseTitle">球道图库</h1><p id="courseInfo" class="muted"></p></div><span class="pill">本地保存 · 保留历史</span></header><div class="tabs" id="libraryModes"><button class="active" data-mode="inventory">球场总表</button><button data-mode="gps">GPS 地图</button><button data-mode="art">精修球道图</button><button data-mode="resources">参考资料</button></div>
+<section id="inventoryPanel" class="hidden" aria-label="球场总表">
+  <div id="inventorySummary" class="inventory-summary"></div>
+  <div class="inventory-filters">
+    <label>球场搜索<input id="inventorySearch" type="search" placeholder="名称、别名或球场 ID"></label>
+    <label>省份<select id="inventoryProvince"><option value="">全部省份</option></select></label>
+    <label>资料覆盖<select id="inventoryStatus">
+      <option value="">全部状态</option><option value="hasData">已有图或资料</option>
+      <option value="missingGps">缺逐洞 GPS</option><option value="overviewOnly">仅有 GPS 总览</option>
+      <option value="missingOverview">缺 GPS 总览</option><option value="missingArt">缺精修图</option>
+      <option value="missingGuide">缺球道导览参考</option><option value="pendingTee">发球点待核对</option>
+    </select></label>
+  </div>
+  <p id="inventoryCount" class="muted" aria-live="polite"></p>
+  <div class="inventory-scroll" tabindex="0" aria-label="球场档案表，可横向滚动"><table class="inventory-table">
+    <thead><tr><th scope="col">球场</th><th scope="col">地区</th><th scope="col">洞数</th><th scope="col">GPS 总览</th><th scope="col">逐洞 GPS</th><th scope="col">精修图</th><th scope="col">参考图</th><th scope="col">待补资料</th></tr></thead>
+    <tbody id="inventoryRows"></tbody></table></div>
+  <div class="inventory-pager"><button class="quiet" id="inventoryPrev">上一页</button><span id="inventoryPage"></span><button class="quiet" id="inventoryNext">下一页</button></div>
+</section>
+<section id="resourcePanel" class="hidden" aria-label="球场参考资料">
+  <p id="resourceStatus" class="muted" aria-live="polite"></p>
+  <div id="resourceBody" class="hidden">
+    <details id="resourceSources"><summary id="sourceSummary">网页来源</summary><p class="muted">保留制作时记录的链接，部分网页可能已变更。</p><ul id="sourceLinks"></ul></details>
+
+    <div class="inventory-filters">
+      <label>资料类型<select id="resourceGroup"></select></label>
+      <label>搜索档案<input id="resourceSearch" type="search" placeholder="洞号、文件名或来源"></label>
+    </div>
+    <p id="resourceCount" class="muted"></p><div id="resourceGrid" class="resource-grid"></div>
+    <button class="quiet hidden" id="resourceMore">显示更多资料</button>
+    <details><summary>逐洞资料覆盖</summary><div class="inventory-scroll"><table class="hole-coverage"><thead><tr><th>球洞</th><th>标准杆</th><th>GPS 测距</th><th>精修图</th><th>已绑定的参考文件</th></tr></thead><tbody id="holeCoverage"></tbody></table></div></details>
+    <details><summary>球场目录数据</summary><p id="catalogSummary"></p><pre id="catalogData"></pre></details>
+  </div>
+</section>
+<section id="gpsPanel" class="hidden"><p id="gpsEmpty" class="muted"></p><div id="gpsBody" class="hidden"><div class="gps-toolbar"><label>GPS 版本<select id="gpsVersions"></select></label><a class="button" id="gpsExport">导出整场 GPS 数据与图片</a><button id="gpsSelect">设为当前 GPS 版本</button></div><p id="gpsInfo" class="muted"></p><img id="gpsOverview" class="gps-overview hidden" alt="GPS 总览"><div id="gpsHoles"></div></div></section><div id="segments" class="tabs"></div><section id="grid"></section></main>
+<dialog id="detail"><div class="dialog-head"><div><p class="eyebrow" id="detailCourse"></p><h2 id="holeTitle"></h2></div><button id="close" class="quiet">关闭</button></div><div class="detail-body"><div class="preview"><img id="art" alt="球道图"><p id="emptyPreview">此球洞尚无高精图</p></div><section class="details"><label>查看版本<select id="versions"></select></label><p id="versionMeta" class="muted"></p><div class="actions"><a id="download" class="button" download>下载 PNG</a><button id="selectCurrent">设为当前版本</button></div><p id="note"></p><details><summary>绘制提示与布局记录</summary><pre id="prompt"></pre><pre id="metadata"></pre></details><h3>参考资料</h3><div id="references"></div><details><summary>添加修改版本</summary><form id="upload"><p class="muted">上传修改后的 PNG，旧图会保留。相同图片不会重复入库。</p><label>图片<input id="file" type="file" accept="image/png" required></label><label>版本名称<input id="newTitle" placeholder="例如：调整果岭旁沙坑" required></label><label>修改说明<textarea id="newNote" rows="3" placeholder="记录本次改了哪里"></textarea></label><label>绘制提示（选填）<textarea id="newPrompt" rows="3"></textarea></label><button type="submit">保存为新版本</button></form></details><details><summary>修改历史</summary><ol id="history"></ol></details></section></div></dialog><output id="toast" role="status"></output><script src="/app.js"></script><script src="/inventory.js"></script></body></html>

@@ -4,7 +4,7 @@ function setup(t){
  const paths=['../miniprogram/services/store','../miniprogram/services/cloud-sync','../miniprogram/services/cloud-client'].map(require.resolve);
  const old=paths.map(p=>require.cache[p]),oldAccount=require.cache[accountPath],oldWx=global.wx;
  const data={profile:{name:'旧昵称',accountUid:'u1'},rounds:[{id:'r1',scores:{1:4}}],pendingHandicapInputs:{},pendingRounds:{r1:{strokes:4}}};
- const calls=[];let exchange=async(action)=>({uid:'u1',name:'微信昵称',phoneVerified:true,phoneMasked:'138****0000'});
+ const calls=[];let exchange=async(action)=>({uid:'u1',name:'微信昵称',wechatVerified:true,phoneVerified:true});
  const stubs=[{read:()=>structuredClone(data),mutate:fn=>fn(data)},{flush:async()=>{}},{init(){}}];
  paths.forEach((p,i)=>require.cache[p]={id:p,filename:p,loaded:true,exports:stubs[i]});
  global.wx={cloud:{callFunction:async q=>{calls.push(q.data.action);return {result:{ok:true,data:await exchange(q.data.action,q.data)}};}}};
@@ -13,15 +13,15 @@ function setup(t){
  return {account,data,calls,exchange:fn=>exchange=fn};
 }
 function deferred(){let resolve;const promise=new Promise(r=>resolve=r);return {promise,resolve};}
-const user={uid:'u1',name:'微信昵称',phoneVerified:true};
+const user={uid:'u1',name:'微信昵称',wechatVerified:true,phoneVerified:true};
 test('logout preserves local scores and pending data, blocks cloud access, and permits fresh authorization',async t=>{
  const x=setup(t);await x.account.loginWithPhone('first');const before=structuredClone(x.data);
  x.account.logout();A.equal(x.account.user(),null);A.deepEqual(x.data,before);
- const count=x.calls.length;await A.rejects(x.account.login(),e=>e.code==='PHONE_REQUIRED');
- await A.rejects(x.account.call('list'),e=>e.code==='PHONE_REQUIRED');A.equal(x.calls.length,count);
+ const count=x.calls.length;await A.rejects(x.account.login(),e=>e.code==='AUTH_REQUIRED');
+ await A.rejects(x.account.call('list'),e=>e.code==='AUTH_REQUIRED');A.equal(x.calls.length,count);
  await x.account.loginWithPhone('second');A.equal(x.account.user().uid,'u1');A.deepEqual(x.data.rounds,before.rounds);
 });
-test('a late phone grant cannot log back in or clear a newer in-flight authorization',async t=>{
+test('a late phone authorization cannot log back in or clear a newer in-flight authorization',async t=>{
  const x=setup(t),first=deferred(),second=deferred();let n=0;
  x.exchange(()=>++n===1?first.promise:second.promise);
  const a=x.account.loginWithPhone('old'),check=A.rejects(a,e=>e.code==='SESSION_ENDED');

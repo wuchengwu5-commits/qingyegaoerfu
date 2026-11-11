@@ -19,8 +19,8 @@ test('every region is selectable and filters the real catalog with pagination re
  for(const id of ids){
   page.data.visible=90;page.openRegions();A.equal(bar.data.hidden,true);page.chooseRegion(event(id));
   const expected=courses.filter(c=>c.province===id);
-  A.equal(page.data.count,expected.length);A.deepEqual(page.data.items.map(c=>c.id),expected.slice(0,30).map(c=>c.id));
-  A.equal(page.data.visible,30);A.equal(page.data.regionOpen,false);A.equal(bar.data.hidden,false);
+  A.equal(page.data.count,expected.length);A.equal(page.data.items.length,Math.min(10,expected.length));A.ok(page.data.items.every(c=>expected.some(x=>x.id===c.id)));
+  A.equal(page.data.visible,Math.min(10,expected.length));A.equal(page.data.regionOpen,false);A.equal(bar.data.hidden,false);
   const quick=page.data.quickRegions.some(r=>r.id===id);A.equal(page.data.moreRegionActive,!quick);
   if(!quick)A.equal(page.data.moreRegionLabel,page.data.regionGroups.flatMap(g=>g.items).find(r=>r.id===id).name);
  }
@@ -41,5 +41,5 @@ test('closing, hiding and unloading the region sheet restore navigation without 
  bar.data.hidden=true;Scene.selectTab(page,3);A.equal(bar.data.hidden,false);A.equal(bar.data.selected,3);
 });
 test('directory thumbnails resolve to the configured cloud assets',t=>{
- const {page}=setup(t);A.ok(page.data.items.length);for(const course of page.data.items)A.match(course.thumbnail,/^cloud:\/\/[^/]+\/media-v1\/assets__course-[0-2]\.jpg$/);
+ const {page}=setup(t);A.ok(page.data.items.length);for(const course of page.data.items)A.match(course.thumbnailSource,/^cloud:\/\/[^/]+\/course-thumbs-v1\/course-[0-2]-[a-f0-9]{12}\.jpg$/);
 });

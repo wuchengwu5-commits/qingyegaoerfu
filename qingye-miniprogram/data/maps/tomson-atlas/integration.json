@@ -1,0 +1,56 @@
+{
+  "courseId": "cn_bg_575",
+  "name": "汤臣",
+  "atlas": {
+    "width": 3275,
+    "height": 4096,
+    "extent": {
+      "xmin": 13533200.90265322,
+      "ymin": 3660753.4448945583,
+      "xmax": 13534480.533750828,
+      "ymax": 3662353.862902439,
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "northUp": true,
+    "crs": "EPSG:3857",
+    "sourceUrl": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=13533200.953956487%2C3660753.4448945588%2C13534480.482447563%2C3662353.8629024397&bboxSR=3857&imageSR=3857&size=3275%2C4096&format=jpg&f=json",
+    "source": "Esri World Imagery / Vantor / GIS User Community",
+    "retrievedOn": "2026-11-06",
+    "imageryDate": null,
+    "image": "satellite.jpg"
+  },
+  "photo": "/packages/tomson-map/atlas-127e2efabe8d0930.jpg",
+  "surround": {
+    "src": "/packages/tomson-map/surround-127e2efabe8d0930.jpg",
+    "bounds": [
+      0,
+      0,
+      3275,
+      4096
+    ]
+  },
+  "groups": [
+    {
+      "id": "cn_bg_575_s1",
+      "name": "前九",
+      "short": "",
+      "color": "#204c37"
+    },
+    {
+      "id": "cn_bg_575_s2",
+      "name": "后九",
+      "short": "",
+      "color": "#265570"
+    }
+  ],
+  "par3MaxScale": 0.7248269963224901,
+  "referenceRoute": "",
+  "databaseGps": false,
+  "overviewOnly": false,
+  "mapNote": "参考发球台和果岭按卫星影像判读，未现场验证。红旗是果岭参考中心，不是当日旗位。拖动白点设起点，点击地图或拖动金色十字设落点。金色洞号表示参考台面待核对。\n后九按现有固定目录与旧版码书对应：14→规划17，15→规划18，16→16，17→14，18→15。\n2025年有改造报道，影像拍摄日期未知，尚无现场版本确认。",
+  "revision": "six-atlas-20261106.1",
+  "pendingTeeCount": 1
+}

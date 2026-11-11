@@ -7,5 +7,10 @@ Page({
  },
  article(e){const id=e.currentTarget.dataset.id;if(K.find(id))wx.navigateTo({url:'/packages/knowledge/index?id='+id});},
  source(e){const s=this.data.article?.sources[Number(e.currentTarget.dataset.index)];if(s)wx.setClipboardData({data:s.url});},
- library(){wx.switchTab({url:'/pages/knowledge/index'});}
+ library(){
+  const stack=typeof getCurrentPages==='function'?getCurrentPages():[];
+  const previous=stack.slice(0,-1).map(p=>p.route).lastIndexOf('pages/knowledge/index');
+  if(previous>=0)wx.navigateBack({delta:stack.length-1-previous});
+  else wx.redirectTo({url:'/pages/knowledge/index'});
+ }
 });

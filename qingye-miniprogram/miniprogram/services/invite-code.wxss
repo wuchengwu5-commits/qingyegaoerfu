@@ -1,0 +1,19 @@
+.invite-code-layer{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px 20px;box-sizing:border-box}
+.invite-code-mask{position:absolute;inset:0;background:rgba(17,37,27,.48)}
+.invite-code-dialog{position:relative;width:100%;max-width:360px;max-height:88vh;background:#f8faf3;border-radius:24px;box-shadow:0 16px 54px #102a2526}
+.invite-code-content{padding:32px 22px 16px;box-sizing:border-box;text-align:center;position:relative}
+.invite-code-title{font-size:20px;line-height:1.4;font-weight:600;color:#214b35;padding:0 14px}
+.invite-code-subtitle{font-size:13px;line-height:1.65;color:#6c7d6c;margin:10px 0 18px}
+.invite-code-content .invite-code-close{position:absolute;right:6px;top:4px;width:40px;height:40px;min-height:40px;line-height:40px;padding:0;margin:0;background:transparent;border:0;box-shadow:none;color:#627761;font-size:26px}
+.invite-code-close::after{border:0}
+.invite-code-frame{width:230px;height:230px;max-width:100%;margin:0 auto;background:white;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.invite-code-image{display:block;width:100%;height:100%}
+.invite-code-status{padding:18px;display:flex;flex-direction:column;align-items:center;gap:16px;color:#667e67;font-size:14px;line-height:1.6}
+.invite-code-status button{font-size:14px;min-height:44px;line-height:44px;padding:0 16px;border-radius:12px}
+.invite-code-spinner{width:28px;height:28px;border:3px solid #e0ead9;border-top-color:#4a7653;border-radius:50%;animation:invite-code-spin .9s linear infinite}
+@keyframes invite-code-spin{to{transform:rotate(360deg)}}
+.invite-code-version{font-size:12px;color:#83907b;margin:12px 0 18px}
+.invite-code-content .invite-code-share{width:100%;min-height:46px;line-height:46px;font-size:16px;padding:0 10px;border-radius:14px}
+.invite-code-actions{display:flex;justify-content:space-between;gap:16px;font-size:13px;color:#6c7d6c;margin-top:8px}
+.invite-code-actions text{min-height:44px;display:flex;align-items:center;justify-content:center}
+@media(max-width:340px){.invite-code-content{padding:30px 16px 12px}.invite-code-frame{width:210px;height:210px}.invite-code-title{font-size:18px}}

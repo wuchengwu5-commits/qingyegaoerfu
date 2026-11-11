@@ -1,4 +1,6 @@
 module.exports={
+ // Temporary local four-player roster for scoring tests.
+ testPlayersEnabled:false,
  apiBase:'',
  cloudEnv:'cloud1-d7gketoi570d17f80',
  mediaEnv:'cloud1-d7gketoi570d17f80',
