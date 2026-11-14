@@ -1,20 +1,48 @@
 <view class="page create-page"><scene-backdrop/>
  <view class="title create-title">创建新球局</view>
+ <view wx:if="{{loadError}}" class="card"><view class="flow-title">暂时无法创建球局</view><view class="flow-caption">{{loadError}}</view><button class="primary space" bindtap="retryLoad">重新载入</button></view>
+ <block wx:if="{{ready}}">
  <view class="flow-progress" aria-label="创建球局，共三步">
   <view wx:for="{{steps}}" wx:key="id" class="flow-step {{step===item.id?'is-current':step>item.id?'is-done':''}}" data-id="{{item.id}}" bindtap="setStep" role="button" aria-label="第{{item.id}}步，{{item.name}}"><view class="flow-dot">{{step>item.id?'✓':item.id}}</view><view class="flow-label">{{item.name}}</view></view>
  </view>
  <block wx:if="{{step===1}}">
-  <view class="card"><view class="flow-kicker">第 1 步 · 球场与路线</view><view class="flow-title">{{course.name}}</view><view class="flow-caption">{{course.city}} · {{course.holes}} 洞</view></view>
+  <view class="card"><view class="flow-kicker">第 1 步 · 球场与路线</view>
+   <button class="create-course-select {{course?'has-course':''}}" bindtap="openCoursePicker" disabled="{{onlineGroup}}" aria-label="{{course?'更换球场，当前为'+course.name:'选择本轮球场'}}">
+    <image class="create-course-icon" src="/assets/pin-active.png" mode="aspectFit"/>
+    <view class="grow"><view class="flow-title">{{course?course.name:'选择本轮球场'}}</view><view class="flow-caption">{{course?(course.city+' · '+course.holes+' 洞'):'先选球场，再安排球友与规则'}}</view></view>
+    <text wx:if="{{!onlineGroup}}" class="create-course-action">{{course?'更换':'选择'}} ›</text>
+   </button>
+  </view>
+  <view wx:if="{{showCourseShortcuts}}" class="course-shortcuts">
+   <view class="shortcut-heading"><view><view class="shortcut-title">附近球场</view><view class="shortcut-caption">{{shortcutLocationCaption||'定位后推荐最近的两个球场'}}</view></view><button class="shortcut-location" bindtap="locateShortcuts" disabled="{{shortcutLocation.refreshing}}"><image src="/assets/pin-active.png" mode="aspectFit"/>{{shortcutLocation.refreshing?'定位中':shortcutLocation.fix?'刷新位置':shortcutLocation.status==='denied'?'开启定位':'定位'}}</button></view>
+   <view wx:if="{{nearbyCourses.length}}" class="shortcut-grid">
+    <button wx:for="{{nearbyCourses}}" wx:key="id" class="card shortcut-course" data-id="{{item.id}}" bindtap="selectSuggestedCourse" aria-label="选择{{item.name}}，{{item.distanceText}}">
+     <view class="shortcut-card-top"><text class="shortcut-distance">{{item.distanceText}}</text><text wx:if="{{item.favorite}}" class="shortcut-star" aria-label="已收藏">☆</text></view>
+     <view class="shortcut-name">{{item.name}}</view><view class="shortcut-card-bottom"><text>{{item.city}} · {{item.holes}} 洞</text><text class="shortcut-chevron">›</text></view>
+    </button>
+   </view>
+   <view wx:else class="card shortcut-empty"><view>{{shortcutLocation.refreshing?'正在寻找附近球场…':shortcutLocation.fix?'附近暂无资料完整的球场':shortcutLocation.status==='unavailable'?'暂时无法定位，可重试或选择收藏球场':'开启定位，即可一键选择附近球场'}}</view></view>
+   <view class="shortcut-heading favorite-heading"><view><view class="shortcut-title">收藏球场</view><view class="shortcut-caption">{{shortcutLocation.fix?'优先展示距离最近的收藏':'开启定位后按距离排序'}}</view></view><text class="shortcut-hint">点选即可</text></view>
+   <view wx:if="{{favoriteCourses.length}}" class="shortcut-grid">
+    <button wx:for="{{favoriteCourses}}" wx:key="id" class="card shortcut-course" data-id="{{item.id}}" bindtap="selectSuggestedCourse" aria-label="选择收藏球场{{item.name}}，{{item.distanceText}}">
+     <view class="shortcut-card-top"><text class="shortcut-distance">{{item.distanceText||'已收藏'}}</text><text class="shortcut-star" aria-hidden="true">☆</text></view>
+     <view class="shortcut-name">{{item.name}}</view><view class="shortcut-card-bottom"><text>{{item.city}} · {{item.holes}} 洞</text><text class="shortcut-chevron">›</text></view>
+    </button>
+   </view>
+   <view wx:else class="card shortcut-empty"><view>{{favoriteCourseCount?'最近的收藏球场已在上方展示':'暂无可选的收藏球场'}}</view><text wx:if="{{!favoriteCourseCount}}">收藏常打的球场，下次在这里直接选择。</text></view>
+  </view>
+  <block wx:if="{{course}}">
   <view class="section">按实际打球顺序选择</view>
-  <picker wx:if="{{segments.length>1}}" class="choice-picker" range="{{segments}}" range-key="name" value="{{first}}" data-which="first" bindchange="segment"><view class="select-field"><view class="select-copy"><view class="select-label">先打</view><view class="select-value">{{segments[first].name}}</view></view><image class="select-chevron" src="/assets/chevron.png"/></view></picker>
+  <qy-picker title="先打哪个场" wx:if="{{segments.length>1}}" class="choice-picker" range="{{segments}}" range-key="name" value="{{first}}" data-which="first" bindchange="segment"><view class="select-field"><view class="select-copy"><view class="select-label">先打</view><view class="select-value">{{segments[first].name}}</view></view><image class="select-chevron" src="/assets/chevron.png"/></view></qy-picker>
   <view wx:else class="select-field"><view class="select-copy"><view class="select-label">本轮洞段</view><view class="select-value">{{segments[first].name}}</view></view></view>
-  <picker wx:if="{{segments.length>1}}" class="choice-picker" range="{{secondOptions}}" range-key="name" value="{{secondIndex}}" data-which="second" bindchange="segment"><view class="select-field"><view class="select-copy"><view class="select-label">再打</view><view class="select-value">{{secondOptions[secondIndex].name}}</view></view><image class="select-chevron" src="/assets/chevron.png"/></view></picker>
+  <qy-picker title="再打哪个场" wx:if="{{segments.length>1}}" class="choice-picker" range="{{secondOptions}}" range-key="name" value="{{secondIndex}}" data-which="second" bindchange="segment"><view class="select-field"><view class="select-copy"><view class="select-label">再打</view><view class="select-value">{{secondOptions[secondIndex].name}}</view></view><image class="select-chevron" src="/assets/chevron.png"/></view></qy-picker>
   <view class="route-start"><text>从 {{openingHole}} 开球</text><text class="route-length">共 {{roundLength}} 洞</text></view>
+  </block>
  </block>
  <block wx:elif="{{step===2}}">
   <view class="card"><view class="flow-kicker">第 2 步 · 同组球员</view><view class="row"><view class="flow-title">本组 {{draft.players.length}} / {{maxPlayers}} 人</view><text wx:if="{{!onlineGroup&&draft.players.length<maxPlayers}}" class="flow-quiet-action" bindtap="addPlayer" role="button">＋ 添加球员</text></view>
    <view class="flow-caption">可以先开局，再邀请好友加入。</view>
-   <view wx:for="{{teePlayers}}" wx:key="id" class="create-player"><view class="grow"><view class="create-player-name">{{item.id==='me'?'我':item.name}}</view><view class="note">{{item.id==='me'||item.accountUid?'微信球员 · 可共同记分':'手动球员 · 由同组代记'}}</view></view><picker range="{{course.tees}}" value="{{item.teeIndex}}" data-pid="{{item.id}}" bindchange="tee"><view class="create-tee">{{item.tee}} ›</view></picker><text wx:if="{{item.id!=='me'&&!onlineGroup}}" class="create-remove" data-id="{{item.id}}" bindtap="remove" role="button">移除</text></view>
+   <view wx:for="{{teePlayers}}" wx:key="id" class="create-player"><view class="grow"><view class="create-player-name">{{item.id==='me'?'我':item.name}}</view><view class="note">{{item.id==='me'||item.accountUid?'微信球员 · 可共同记分':'手动球员 · 由同组代记'}}</view></view><tee-picker class="tee-selector" range="{{course.tees}}" value="{{item.teeIndex}}" data-pid="{{item.id}}" bindchange="tee"/><text wx:if="{{item.id!=='me'&&!onlineGroup}}" class="create-remove" data-id="{{item.id}}" bindtap="remove" role="button">移除</text></view>
    <view wx:if="{{!onlineGroup}}" class="create-invite"><view class="grow"><view>开局后出示入组码</view><view class="note">确认规则后，邀请好友进入这张记分牌</view></view><switch checked="{{inviteAfterStart}}" bindchange="inviteToggle" color="#376849"/></view>
   </view>
   <view wx:if="{{showFriends&&!onlineGroup}}" class="card space"><view class="section">常用球友</view><view wx:if="{{friends.length}}"><view wx:for="{{friends}}" wx:key="accountUid" class="create-friend" data-id="{{item.accountUid}}" bindtap="add"><text>{{item.name}}</text><text>{{item.selected?'已添加':'添加 ＋'}}</text></view></view><view wx:elif="{{signedIn}}" class="note">球友扫码加入后，下次可以在这里选择。</view><text wx:else class="link" bindtap="loginForFriends">微信登录，选择球友 ›</text><view wx:if="{{friendError}}" class="note" bindtap="loadFriends">{{friendError}} · 重试</view></view>
@@ -23,11 +51,13 @@
  <block wx:else>
   <view class="card"><view class="flow-kicker">第 3 步 · 规则确认</view><view class="flow-title">准备好，出发。</view><view class="flow-caption">{{course.name}}</view><view class="create-summary">{{segments[first].name}}{{secondIndex?' → '+secondOptions[secondIndex].name:''}} · {{roundLength}} 洞 · {{draft.players.length}} 人</view>
    <view class="section">记分规则</view><view class="choices scoring-policy-row"><button wx:for="{{policies}}" wx:key="id" class="choice {{draft.ruleSnapshot.penaltyPolicy.mode===item.id?'active':''}}" data-id="{{item.id}}" bindtap="selectPolicy">{{item.name}}</button></view><view class="note space">{{policyText}}</view>
-   <picker range="{{templates}}" range-key="name" value="{{templateIndex}}" bindchange="templatePick"><view class="create-setting"><text>球局玩法</text><text>{{templates[templateIndex].name}} ›</text></view></picker>
-   <picker range="{{['码 · yd','米 · m']}}" value="{{draft.distanceUnit==='m'?1:0}}" bindchange="unitPick"><view class="create-setting"><text>距离单位</text><text>{{draft.distanceUnit==='m'?'米 · m':'码 · yd'}} ›</text></view></picker>
+   <qy-picker title="选择球局玩法" range="{{templates}}" range-key="name" value="{{templateIndex}}" bindchange="templatePick"><view class="create-setting"><text>球局玩法</text><text>{{templates[templateIndex].name}} ›</text></view></qy-picker>
+   <qy-picker title="选择距离单位" range="{{['码 · yd','米 · m']}}" value="{{draft.distanceUnit==='m'?1:0}}" bindchange="unitPick"><view class="create-setting"><text>距离单位</text><text>{{draft.distanceUnit==='m'?'米 · m':'码 · yd'}} ›</text></view></qy-picker>
    <view class="create-setting" bindtap="rules" role="button"><text>更多玩法设置</text><text>让杆、分队 ›</text></view>
    <view class="note space">{{inviteAfterStart?'开始后将展示本组入组码。':'开始后仍可添加球员、邀请记分员。'}}</view>
   </view>
  </block>
+ </block>
 </view>
-<view class="flow-footer"><button wx:if="{{step>1}}" class="flow-back" bindtap="previous">上一步</button><button class="primary flow-next" bindtap="next" disabled="{{starting}}">{{step===1?'下一步 · 同组球员':step===2?'下一步 · 规则确认':inviteAfterStart?'开始记分并邀请':'开始记分'}}</button></view><privacy-panel/>
+<view wx:if="{{ready}}" class="flow-footer"><button wx:if="{{step>1}}" class="flow-back" bindtap="previous">上一步</button><button class="primary flow-next" bindtap="next" disabled="{{starting}}">{{!course?'选择球场':step===1?'下一步 · 同组球员':step===2?'下一步 · 规则确认':inviteAfterStart?'开始记分并邀请':'开始记分'}}</button></view><privacy-panel/>
+<qy-dialog class="page-dialog"/>

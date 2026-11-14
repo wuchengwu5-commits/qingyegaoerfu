@@ -1,0 +1,17 @@
+<view class="page players-page"><scene-backdrop/>
+ <view class="title">组员资料</view><view class="sub">{{courseName||'本轮球员与发球台'}}</view>
+ <view wx:if="{{ready}}" class="players-note">{{canManage?'调整本轮称呼与发球台，已记杆数保持不变。':'本轮资料由发起人调整，你可以修改自己的账号昵称。'}}</view>
+ <button class="card account-entry" bindtap="account" disabled="{{saving}}"><view><view>我的账号资料</view><view class="note">修改头像、昵称</view></view><text>›</text></button>
+ <view wx:if="{{loading&&!ready}}" class="empty">正在载入组员资料…</view>
+ <view wx:for="{{rows}}" wx:key="id" class="card member-card">
+  <button class="member-heading" data-id="{{item.id}}" bindtap="editPlayer" disabled="{{!canManage||saving}}" aria-label="编辑第{{item.seat}}位球员{{item.name}}，{{item.tee}}发球台">
+   <view class="member-seat">{{item.seat}}</view><view class="grow"><view class="member-name">{{item.name}}</view><view class="member-meta">{{item.isMine?'本人':item.accountUid?'微信球员':'手动球员'}}<view class="member-tee-dot" style="background:{{item.teeColor}}"></view>{{item.tee}}</view></view><text wx:if="{{canManage}}" class="member-edit">编辑 ›</text>
+  </button>
+  <view wx:if="{{editor.id===item.id}}" class="member-editor">
+   <button class="member-field" bindtap="editName" disabled="{{saving}}"><text>本轮称呼</text><text>{{editor.name||'填写称呼'}} ›</text></button>
+   <view class="member-field"><text>发球台 Tee</text><tee-picker class="member-tee-picker" wx:if="{{!saving}}" range="{{tees}}" value="{{editor.teeIndex}}" bindchange="changeTee"/><text wx:else>{{editor.tee}}</text></view>
+   <view class="member-actions"><button bindtap="cancelEdit" disabled="{{saving}}">取消</button><button class="primary" bindtap="save" loading="{{saving}}" disabled="{{saving}}">保存修改</button></view>
+  </view>
+ </view>
+ <view wx:if="{{error}}" class="card member-error"><view>{{error}}</view><button bindtap="load" disabled="{{saving}}">重新载入</button></view>
+</view><privacy-panel/><qy-dialog class="page-dialog"/>

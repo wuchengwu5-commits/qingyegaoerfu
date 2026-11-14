@@ -27,7 +27,16 @@ function acknowledge(key, request, version) {
   }
   save(key,entries);
 }
-function reject(key,request,all) {
-  save(key,read(key).filter(e=>!all && !sameCell(e.request,request)));
+function conflicts(key){return wx.getStorageSync(key+'.conflicts')||[];}
+function resolve(key,id){wx.setStorageSync(key+'.conflicts',conflicts(key).filter(x=>x.id!==id));}
+function reject(key,request,all,reason='组内成绩已变化') {
+  const removed=read(key).filter(e=>all||sameCell(e.request,request));
+  if(removed.length){
+    const existing=conflicts(key),groups=new Map();
+    for(const entry of removed){const q=entry.request,id=[q.roundId,q.playerId,q.hole,q.routeRevision,q.physicalHoleId].join(':');const item=groups.get(id)||{id,reason,entries:[],at:Date.now()};item.entries.push(entry);groups.set(id,item);}
+    for(const item of groups.values()){const old=existing.find(x=>x.id===item.id);if(old)old.entries.push(...item.entries.filter(e=>!old.entries.some(x=>x.request.mutationId===e.request.mutationId)));else existing.push(item);}
+    wx.setStorageSync(key+'.conflicts',existing);
+  }
+  save(key,read(key).filter(e=>!all&&!sameCell(e.request,request)));
 }
-module.exports={read,save,overlay,sameCell,acknowledge,reject};
+module.exports={read,save,overlay,sameCell,acknowledge,reject,conflicts,resolve};

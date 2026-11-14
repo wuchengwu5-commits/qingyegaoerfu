@@ -96,6 +96,12 @@ def course_inventory(lib):
         row = by_id[entry['id']]
         payload = json.loads(entry['payload'])
         doc = json.loads(entry['document']) if entry['document'] else {}
+        # Retain historical hole records without counting them as playable holes.
+        archived = set(doc.get('archivedInactiveHoles') or [])
+        known = {h['id'] for h in lib.rows('SELECT id FROM holes WHERE course_id=?', (entry['id'],))}
+        row['archived_hole_count'] = len(archived & known)
+        row['archive_hole_count'] = row['hole_count']
+        row['hole_count'] -= row['archived_hole_count']
         pending = set(doc.get('pendingTeeHoles') or [])
         pending.update(h.get('_id') or h.get('id') for h in doc.get('holes', [])
                        if h.get('status') == 'draft_tee_uncertain')

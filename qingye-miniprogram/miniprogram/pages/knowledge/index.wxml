@@ -17,3 +17,4 @@
  </view>
  <view wx:else class="card empty"><view>没有找到相关内容</view><view class="sub">试试“抛球”“果岭”或“礼仪”。</view><button class="space" bindtap="clear">查看全部文章</button></view>
 </block></view><privacy-panel/>
+<qy-dialog class="page-dialog"/>

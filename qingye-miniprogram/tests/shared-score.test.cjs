@@ -120,8 +120,9 @@ test('shared scorecards expose only group member avatars, including updates with
  await api('guest','profile',{name:'球友',avatarUrl:'cloud://test/profiles/guest/avatar-one.png'});
  await api('guest','join',{token,seatId:'+'});
  const b=await api('host','readBoard',ref);assert.equal(b.round.players.find(p=>p.accountUid==='guest').avatarUrl,'cloud://test/profiles/guest/avatar-one.png');
- await api('guest','profile',{name:'球友',avatarUrl:'cloud://test/profiles/guest/avatar-two.png'});
+ await api('guest','profile',{name:'更新后的球友',avatarUrl:'cloud://test/profiles/guest/avatar-two.png'});
  const refreshed=await api('host','readBoard',{...ref,version:b.version,includeProfiles:true});assert.equal(refreshed.round,undefined);assert.equal(refreshed.profiles.find(p=>p.uid==='guest').avatarUrl,'cloud://test/profiles/guest/avatar-two.png');
+ assert.equal(refreshed.profiles.find(p=>p.uid==='guest').name,'更新后的球友');assert.equal(refreshed.version,b.version);
  assert.equal((await api('host','readBoard',{...ref,version:b.version})).profiles,undefined);
  await assert.rejects(api('watcher','readBoard',{...ref,includeProfiles:true}),{code:'FORBIDDEN'});
 });
@@ -194,7 +195,7 @@ test('an owner can explicitly end an accidental empty group; other groups, score
  const b=await api('host','readBoard',ref);
  await assert.rejects(api('guest','finishBoard',{...ref,version:b.version,allowEmpty:true}),{code:'FORBIDDEN'});
  const finished=await api('host','finishBoard',{...ref,version:b.version,allowEmpty:true});
- assert.equal(finished.round.status,'finished_incomplete');assert.deepEqual(finished.round.scores.me,{});
+ assert.equal(finished.round.status,'cancelled');assert.deepEqual(finished.round.scores.me,{});
  assert.equal((await api('host','finishBoard',{...ref,version:b.version,allowEmpty:true})).version,finished.version);
  assert.equal((await api('host','readBoard',other.ref)).round.status,'active');
  await assert.rejects(api('third','join',{token,seatId:'+'}),{code:'CLOSED'});

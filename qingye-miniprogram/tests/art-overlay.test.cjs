@@ -36,7 +36,7 @@ test('toggle preserves camera, manual GPS origin, target and distance, and overv
  const gps=await page({hole:2,layer:'gps'});A.equal(gps.preferArt,false);gps.onUnload();
 });
 test('late artwork load and failure cannot replace another hole, unloaded view or explicit GPS mode',async()=>{
- global.wx={__preview:true,showToast(){}};const p=await page(),images=[];p.paint=()=>{};p.canvas={createImage(){const i={};images.push(i);return i}};
+ global.wx={__preview:true,showToast(){}};const p=await page({hole:2,layer:'art'}),images=[];p.paint=()=>{};p.canvas={createImage(){const i={};images.push(i);return i}};
  p.syncArt();await flush();const stale=images[0];p.activate(3,false);await flush();A.equal(images.length,2);stale.onload();await flush();A.equal(p.artEntry.image,null);images[1].onload();await flush();A.equal(p.artEntry.image,images[1]);p.perform('gps');A.equal(p.preferArt,false);p.activate(4,false);await flush();A.equal(p.artEntry,null);p.perform('art');await flush();images[2].onerror();await flush();A.equal(p.artEntry,null);A.equal(p.preferArt,false);p.perform('art');await flush();A.equal(images.length,4);p.onUnload();images[3].onload();await flush();A.equal(p.artEntry,null);
 });
 test('GPS registration geometry is byte-for-byte unchanged by overlay integration',()=>{

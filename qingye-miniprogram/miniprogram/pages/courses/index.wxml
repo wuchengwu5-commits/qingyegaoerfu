@@ -12,3 +12,4 @@
   </scroll-view>
  </view>
 </view><privacy-panel/>
+<qy-dialog class="page-dialog"/>

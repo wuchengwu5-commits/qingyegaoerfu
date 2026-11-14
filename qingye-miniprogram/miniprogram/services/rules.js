@@ -149,10 +149,14 @@
       return {contestId,holes,lead,provisionalLead,processed,...(decided?{...decided,status:'decided'}:blocked?{status:'incomplete',result:'未决'}:processed===holes.length?{status:'tied',result:'平局'}:{status:'in_progress',result:lead===0?'AS':`${cs[lead>0?0:1].name} ${Math.abs(lead)} UP`}),explanation:blocked?'存在更早的未决洞；后续只作暂算':'按出发顺序累计赢洞，领先洞数大于剩余洞数时结束'};
     }
     const rows=cs.map(c=>{const entries=ns.map(n=>c.team?deriveTeamHole(r,c.team,n,sc,contestId):derivePlayerHole(r,c.id,n,sc,contestId));const valid=entries.filter(x=>x.status==='processed'&&x.value!==null);return {...c,total:valid.reduce((a,x)=>a+x.value,0),played:valid.length,set:valid.map(x=>x.holeNumber??ns[entries.indexOf(x)]),disqualified:dq.includes(c.id),entries};});
-    const comparable=rows.every(x=>!x.disqualified&&x.played>0&&JSON.stringify(x.set)===JSON.stringify(rows[0].set)), complete=rows.every(x=>x.played===ns.length);
-    const sorted=[...rows];if(comparable)sorted.sort((a,b)=>sc.type==='points'?b.total-a.total:a.total-b.total);
+    const eligible=rows.filter(x=>!x.disqualified);
+    const comparable=eligible.length>0&&eligible.every(x=>x.played>0&&JSON.stringify(x.set)===JSON.stringify(eligible[0].set)),complete=eligible.length>0&&eligible.every(x=>x.played===ns.length);
+    const sorted=[...eligible];if(comparable)sorted.sort((a,b)=>sc.type==='points'?b.total-a.total:a.total-b.total);
     let rank=0;sorted.forEach((x,i)=>{if(!i||x.total!==sorted[i-1].total)rank=i+1;x.rank=comparable?rank:null;});
-    return {contestId,status:complete?(sorted.length>1&&sorted[0].total===sorted[1].total?'tied':'decided'):rows.some(x=>x.played)?'in_progress':'pending',rows:sorted,comparable,final:complete,unit:sc.type==='points'?'分':'杆',holes,explanation:comparable?(complete?'本轮完整结算':'已记球洞相同，当前排序仅供参考'):'已记球洞或有效状态不同，不比较名次'};
+    const tied=complete&&sorted.length>1&&sorted[0].total===sorted[1].total;
+    sorted.push(...rows.filter(x=>x.disqualified).map(x=>({...x,rank:null})));
+    return {contestId,status:complete?(tied?'tied':'decided'):eligible.length?rows.some(x=>x.played)?'in_progress':'pending':'incomplete',rows:sorted,comparable,final:complete,unit:sc.type==='points'?'分':'杆',holes,explanation:!eligible.length?'没有可参与排名的有效参赛者':comparable?(complete?'本轮完整结算；退赛或取消资格者不参与排名':'有效参赛者已记球洞相同，当前排序仅供参考'):'已记球洞不同，不比较名次'};
+
   }
   function evaluateSideGame(r,g) {
     const ns=g.holeNumbers||order(r), sc=r.ruleSnapshot.scoring;
@@ -209,7 +213,7 @@
     if(!op.operationId)fail('INVALID_OPERATION','操作缺少唯一编号');
     if((round.operations||[]).includes(op.operationId))return clone(round);
     if(op.baseRevision!==round.revision)fail('STALE_REVISION','成绩已在其他操作中更新，请刷新后重试');
-    if(isFinished(round)&&!['correction','confirm_sources'].includes(op.type))fail('READ_ONLY','已结束球局请先进入更正模式');
+    if(round.status==='cancelled'||isFinished(round)&&!['correction','confirm_sources'].includes(op.type))fail('READ_ONLY','已结束球局请先进入更正模式');
     const r=clone(round),before={scores:clone(r.scores),events:clone(r.events||[]),awards:clone(r.awards||[]),ruleSnapshot:clone(r.ruleSnapshot),players:clone(r.players),holes:clone(r.holes)};
     if(op.type==='score'||op.type==='append_penalty') {
       if(!ids(r).includes(op.playerId)||!order(r).includes(op.holeNumber))fail('INVALID_SCORE','球友或球洞不存在');
@@ -233,7 +237,7 @@
       }
     } else if(op.type==='correction') {
       if(!op.reason?.trim())fail('REASON_REQUIRED','更正必须填写原因');
-      Object.assign(r,clone(op.changes));validateRound(r);r.status=r.players.every(p=>rawSummary(r,p.id).processed===r.holes.length)?'finished_complete':'finished_incomplete';
+      Object.assign(r,clone(op.changes));validateRound(r);r.status=r.players.every(p=>rawSummary(r,p.id).complete)?'finished_complete':'finished_incomplete';
     } else if(op.type==='rules') {
       if(!op.reason?.trim())fail('REASON_REQUIRED','整轮规则修订需要原因');
       r.ruleSnapshot=clone(op.rules);if(op.players)r.players=clone(op.players);if(op.holes)r.holes=clone(op.holes);validateRound(r);

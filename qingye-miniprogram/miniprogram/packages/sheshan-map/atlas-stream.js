@@ -20,11 +20,15 @@ function create({canvas,Raster,Geo,atlas,photo,levels,context,onChange,onError,o
  async function start(){
   try{
    if(levels.atlas!==photo||levels.sourceSurround!==context.src)throw Error('image level mismatch');
-   const [overview,surround]=await Promise.all([small(levels.overview,photo),small(levels.surround,context.src).catch(()=>null)]);
+   // Surroundings enhance the map, but must never hold its first frame hostage.
+   small(levels.surround,context.src).then(surround=>{
+    if(closed)return;area=surround.image;publish();
+   }).catch(()=>{});
+   const overview=await small(levels.overview,photo);
    if(closed)return;
    const preview=overview.image;
    base=preview.tiles?preview:{width:atlas.width,height:atlas.height,preview,previewWidth:overview.width,previewHeight:overview.height,tiles:[],revision:0};
-   area=surround?.image||null;publish();
+   publish();
   }catch(e){if(!closed)onError(e);}
  }
  function region(camera,width,height){

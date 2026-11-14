@@ -1,8 +1,9 @@
+const Dialog = require('../miniprogram/services/dialog');
 const {test,beforeEach}=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');const path=require('node:path');
 let memory={},toasts=[],routes=[];
-global.wx={__preview:true,getStorageSync:k=>memory[k]?structuredClone(memory[k]):'',setStorageSync:(k,v)=>memory[k]=structuredClone(v),showToast:o=>toasts.push(o.title),showModal:o=>o.success({confirm:true,content:'新昵称'}),navigateTo:o=>routes.push(o.url),redirectTo:o=>routes.push(o.url),switchTab:o=>routes.push(o.url),setClipboardData:o=>{global.clipboard=o.data;},env:{USER_DATA_PATH:'/tmp'},getFileSystemManager:()=>({writeFileSync:()=>{}})};
+Dialog.modal=o=>o.success({confirm:true,content:'新昵称'});global.wx={__preview:true,getStorageSync:k=>memory[k]?structuredClone(memory[k]):'',setStorageSync:(k,v)=>memory[k]=structuredClone(v),showToast:o=>toasts.push(o.title),navigateTo:o=>routes.push(o.url),redirectTo:o=>routes.push(o.url),switchTab:o=>routes.push(o.url),setClipboardData:o=>{global.clipboard=o.data;},env:{USER_DATA_PATH:'/tmp'},getFileSystemManager:()=>({writeFileSync:()=>{}})};
 const S=require('../miniprogram/services/store');const E=require('../miniprogram/services/engine');
 function create(mode='all',friendIds=[]){return S.create({courseId:S.courses[0].id,mode,friendIds,ruleSnapshot:E.defaultRules('stroke_play')});}
 function score(r,pid,n,strokes=4,extra={}){return S.saveScore(r.id,pid,n,Object.assign({strokes,putts:2,penalties:0,fairway:null,green:null},extra));}
@@ -39,7 +40,7 @@ test('Yintao course and source A1 score page enter the native map; returning pre
   p.guide();assert.equal(routes.pop(),'/packages/hole-map/atlas?course=cn_bg_585&round='+encodeURIComponent(r.id)+'&hole=1');
   let def;global.Page=d=>def=d;const f=require.resolve('../miniprogram/packages/hole-map/index');delete require.cache[f];require("./helpers/legacy-map.cjs").load(f);
   const map={...def,data:structuredClone(def.data),setData(d){require('../miniprogram/services/view-patch').apply(this.data,d);}};map.onLoad({round:r.id});map.toggleLayer();map.toggleLayer();map.reset();map.onUnload();p.onShow();
-  assert.equal(JSON.stringify(S.getRound(r.id)),before);assert.equal(p.data.displayScore,5);assert.equal(p.data.h.number,1);
+  assert.equal(JSON.stringify(S.getRound(r.id)),before);assert.equal(p.data.displayScore,5);assert.equal(p.data.s.grossStrokes,5);assert.equal(p.data.h.number,1);
   p.jump(2);p.guide();assert.match(routes.pop(),/hole-map\/atlas.*hole=2$/);
 });
 test('back-nine current hole 1 and other courses cannot open the A1 sample by mistake',()=>{

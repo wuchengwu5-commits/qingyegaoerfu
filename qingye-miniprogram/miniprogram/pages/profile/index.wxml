@@ -21,3 +21,4 @@
  </view>
  <button wx:if="{{loggedIn}}" class="logout-button" bindtap="logout">退出登录</button>
 </view><privacy-panel/>
+<qy-dialog class="page-dialog"/>

@@ -1,3 +1,4 @@
+const Dialog = require('../../services/dialog');
 const Geo = require('./map-core');
 const Raster = require('./raster-image');
 const {acceptOverviewFix} = require('./location-policy');
@@ -21,8 +22,8 @@ const midpoint = (a,b) => [(a[0]+b[0])/2,(a[1]+b[1])/2];
 Page({
  data:{selected:1,holeNumber:1,sectionName:'老球场',par:4,mode:'overview',unit:'码',front:'—',center:'—',back:'—',pickerOpen:false,actions:[],groups:[],loading:true,error:''},
  onLoad(options={}){
-   this.disposed=false;this.fixRevision=0;this.memories={};this.holes=[];this.preferArt=options.layer!=='gps';
-   this.round=options.round?Store.getRound(options.round):null;
+   this.disposed=false;this.fixRevision=0;this.memories={};this.holes=[];this.preferArt=require('../../services/map-layer').artRequested(options);
+   this.round=options.round?require('../../services/map-round').get(options.round):null;
    if(this.round?.courseId!=='cn_bg_577')this.round=null;
    this.unit=this.round?.distanceUnit==='m'?'m':'yd';
    const course=Store.courses.find(c=>c.id==='cn_bg_577');
@@ -123,7 +124,7 @@ Page({
  },
  syncArt(){
    const src=artCatalog[this.hole?.id]?.src;
-   if(this.artEntry&&this.artEntry.src!==src){this.artLoader.close();this.artEntry=null;}
+   if(this.artEntry&&(this.artEntry.src!==src||!this.preferArt||this.data.mode!=='focus')){this.artEntry=null;this.artLoader?.close();this.artLoader=null;}
    if(!src||!this.preferArt||this.data.mode!=='focus'||!this.canvas||this.artEntry)return;
    const entry={src,image:null};this.artEntry=entry;
    this.artLoader=Raster.createLoader(this.canvas);
@@ -248,5 +249,5 @@ Page({
      },fail:()=>fail('可在场内用微信定位，或拖动起点')});};
    if(wx.requirePrivacyAuthorize)wx.requirePrivacyAuthorize({success:get,fail:()=>fail('可拖动起点测距')});else get();
  },
- info(){wx.showModal({title:'上海天马 · GPS 球道图',content:'老球场、天马场、新球场各 9 洞。单洞页面可切换 GPS 卫星图与精修图。精修图依据逐洞导览及卫星影像绘制，障碍物边缘为美术示意，距离按 GPS 坐标计算。场外遮罩沿卫星影像与 © OpenStreetMap contributors 的场界绘制。全场总览正北向上；本洞测距按发球区至果岭的方向旋转。洞序对照球会导览，发球区和果岭按卫星影像判读，待现场校准。旗杆标记取果岭中心作为参考位置，距离为水平估算。拖动白点设起点，点图或拖动金色十字设落点；拖到相邻球道仍测当前洞。',showCancel:false});}
+ info(){Dialog.modal({title:'上海天马 · GPS 球道图',content:'老球场、天马场、新球场各 9 洞。单洞页面可切换 GPS 卫星图与精修图。精修图依据逐洞导览及卫星影像绘制，障碍物边缘为美术示意，距离按 GPS 坐标计算。场外遮罩沿卫星影像与 © OpenStreetMap contributors 的场界绘制。全场总览正北向上；本洞测距按发球区至果岭的方向旋转。洞序对照球会导览，发球区和果岭按卫星影像判读，待现场校准。旗杆标记取果岭中心作为参考位置，距离为水平估算。拖动白点设起点，点图或拖动金色十字设落点；拖到相邻球道仍测当前洞。',showCancel:false});}
 });

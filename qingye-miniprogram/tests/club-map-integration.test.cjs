@@ -8,7 +8,7 @@ test('completed course maps open continuous GPS directly from details and score,
  p.showOverview();A.equal(p.data.mode,'overview');p.onUnload();}
 });
 test('Yintao keeps art and GPS on one physical-hole atlas and redirects legacy reference bookmarks',async()=>{
- let url;global.wx={redirectTo:o=>url=o.url};const p=page('hole-map','atlas',{hole:12});await new Promise(r=>setImmediate(r));A.equal(p.preferArt,true);const hole=p.hole,origin=p.origin.slice(),target=p.target.slice(),center=p.data.center;p.perform('gps');A.equal(p.preferArt,false);p.perform('reference');A.equal(p.preferArt,true);A.equal(url,undefined);A.equal(p.hole,hole);A.deepEqual(p.origin,origin);A.deepEqual(p.target,target);A.equal(p.data.center,center);p.onUnload();
+ let url;global.wx={redirectTo:o=>url=o.url};const p=page('hole-map','atlas',{hole:12});await new Promise(r=>setImmediate(r));A.equal(p.preferArt,false);const hole=p.hole,origin=p.origin.slice(),target=p.target.slice(),center=p.data.center;p.perform('gps');A.equal(p.preferArt,false);p.perform('reference');A.equal(p.preferArt,true);A.equal(url,undefined);A.equal(p.hole,hole);A.deepEqual(p.origin,origin);A.deepEqual(p.target,target);A.equal(p.data.center,center);p.onUnload();
  const ref=page('hole-map','index',{course:'cn_bg_585',hole:12,mode:'reference'});A.equal(ref.redirected,true);A.match(url,/hole-map\/atlas/);A.match(url,/hole=12/);A.match(url,/layer=art/);A.match(url,/view=focus/);
  page('hole-map','index',{course:'cn_bg_585',hole:12,mode:'gps'});A.match(url,/layer=gps/);
 });

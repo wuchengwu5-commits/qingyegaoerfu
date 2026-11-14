@@ -1,3 +1,4 @@
+const Dialog = require('../miniprogram/services/dialog');
 const {test}=require('node:test'),A=require('node:assert/strict');
 const accountPath=require.resolve('../miniprogram/services/account');
 function setup(t){
@@ -45,7 +46,7 @@ test('logout stops the remaining handicap sync queue without deleting pending va
 test('logout confirmation can be cancelled and confirmed logout returns to the signed-out profile',async t=>{
  const x=setup(t);await x.account.loginWithPhone('first');const uiPath=require.resolve('../miniprogram/services/ui'),saved=require.cache[uiPath];
  delete require.cache[uiPath];const ui=require(uiPath);t.after(()=>saved?require.cache[uiPath]=saved:delete require.cache[uiPath]);
- let modal,refresh=0,route='',toast='';Object.assign(wx,{showModal:q=>modal=q,switchTab:q=>route=q.url,showToast:q=>toast=q.title});
+ let modal,refresh=0,route='',toast='';Dialog.modal=q=>modal=q;Object.assign(wx,{switchTab:q=>route=q.url,showToast:q=>toast=q.title});
  ui.logout(()=>refresh++);modal.success({confirm:false});A.ok(x.account.user());A.equal(refresh,0);
  modal.success({confirm:true});A.equal(x.account.user(),null);A.equal(refresh,1);A.equal(route,'/pages/profile/index');A.equal(toast,'已退出登录');
 });

@@ -11,7 +11,13 @@ function createLoader(canvas){
   entry.promise=new Promise((resolve,reject)=>{entry.reject=reject;queue.push(async()=>{
    if(closed){reject(new Error('closed'));return;}
    try{const path=await Media.local(src);if(closed)throw Error('closed');entry.image=canvas.createImage();
-    await new Promise((done,fail)=>{entry.image.onload=done;entry.image.onerror=()=>fail(new Error('image load failed'));entry.image.src=path;});
+    await new Promise((done,fail)=>{
+     const timer=setTimeout(()=>finish(fail,new Error('图片解码超时，请重试')),8000);
+     function finish(fn,value){clearTimeout(timer);entry.image.onload=()=>{};entry.image.onerror=()=>{};entry.cancelDecode=null;fn(value);}
+     entry.cancelDecode=()=>finish(fail,new Error('closed'));
+     entry.image.onload=()=>finish(done);entry.image.onerror=()=>finish(fail,new Error('image load failed'));
+     try{entry.image.src=path;}catch(error){finish(fail,error);}
+    });
     if(closed)throw Error('closed');entry.ready=true;entry.pixels=(entry.image.width||1024)*(entry.image.height||1024);resolve(entry.image);
    }catch(error){cache.delete(src);if(!closed)Media.forget(src);reject(error);}
   });pump();});return entry;
@@ -28,7 +34,7 @@ function createLoader(canvas){
   let pixels=Array.from(cache.values()).reduce((n,e)=>n+e.pixels,0);
   for(const [src,e] of [...cache].sort((a,b)=>a[1].used-b[1].used)){if(pixels<=12*1024*1024)break;if(!e.ready||keep.has(src))continue;cache.delete(src);pixels-=e.pixels;}
  }
- return {load,ready,specs,trim,stats(){return{entries:cache.size,decodedPixels:Array.from(cache.values()).reduce((n,e)=>n+e.pixels,0),active,peakActive}},close(){closed=true;queue.length=0;for(const e of cache.values())if(!e.ready)e.reject(new Error('closed'));cache.clear();}};
+ return {load,ready,specs,trim,stats(){return{entries:cache.size,decodedPixels:Array.from(cache.values()).reduce((n,e)=>n+e.pixels,0),active,peakActive}},close(){closed=true;queue.length=0;for(const e of cache.values())if(!e.ready){e.cancelDecode?.();e.reject(new Error('closed'));}cache.clear();}};
 }
 function draw(ctx,image,sx,sy,sw,sh,dx,dy,dw,dh){
  if(!image)return;if(!image.tiles){ctx.drawImage(image,sx,sy,sw,sh,dx,dy,dw,dh);return;}

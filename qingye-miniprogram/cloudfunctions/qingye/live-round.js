@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const rules = require('./lib/rules');
+const Audit=require('./board-audit');
 
 function fail(code, message) {
   throw Object.assign(new Error(message), {code});
@@ -15,12 +16,13 @@ function publicRound(round) {
   return result;
 }
 
-function lockedPlayers(group){return Object.keys(group.cards||{}).filter(id=>group.cards[id].state!=='open');}
+function correcting(group){return Object.values(group.cards||{}).some(c=>c.state==='open'&&c.correcting);}
+function lockedPlayers(group,activity){return Object.keys(group.cards||{}).filter(id=>group.cards[id].state!=='open'||activity.status!=='active'&&!group.cards[id].correcting);}
 function board(activity, group) {
   const competition=activity.kind==='competition';
   return {activityId: activity.id, groupId: group.id, ownerUid: group.ownerUid,primaryScorerUid:group.primaryScorerUid||group.ownerUid,
-    round: group.round, version: group.version, cells: group.cells || {}, scorerUids:group.scorerUids||[], rosterEditingSupported:!competition, routeEditingSupported:!competition,
-    ...(competition?{competition:true,lockedPlayers:lockedPlayers(group)}:{})};
+    round: group.round, version: group.version, cells: group.cells || {}, scorerUids:group.scorerUids||[], rosterEditingSupported:!competition, playerRemovalSupported:!competition, routeEditingSupported:!competition,
+    ...(competition?{competition:true,correctionOpen:correcting(group),lockedPlayers:lockedPlayers(group,activity)}:{})};
 }
 function openRound(round) {
   return round && ['active','paused'].includes(round.status);
@@ -118,7 +120,7 @@ function liveActions(repo, uid, now) {
         activity = {id,kind:'practice',title:round.courseName+' · 同组记分',courseId:round.courseId,courseName:round.courseName,
           ownerUid:uid,viewerUids:[],groups:[group],createdAt:now(),updatedAt:now()};
         for (const profile of profiles) {
-          profile.activityIds = Array.from(new Set([...profile.activityIds, id])).slice(-50);
+          profile.activityIds = Array.from(new Set([...profile.activityIds, id]));
           await tx.set('qy_users', profile.uid, profile);
         }
       }
@@ -140,26 +142,28 @@ function liveActions(repo, uid, now) {
         .map(p=>({uid:p.uid,name:p.name,avatarUrl:p.avatarUrl || ''})) : null;
     return {...(input.version === group.version ? {version:group.version} : board(activity,group)),
       ...(profiles?{profiles}:{}),scorerUids:group.scorerUids||[],ownerUid:group.ownerUid,primaryScorerUid:group.primaryScorerUid||group.ownerUid,
-      rosterEditingSupported:!competition,routeEditingSupported:!competition,
-      ...(competition?{competition:true,readOnly:!member||activity.status!=='active',lockedPlayers:lockedPlayers(group)}:{})};
+      rosterEditingSupported:!competition,playerRemovalSupported:!competition,routeEditingSupported:!competition,
+      ...(competition?{competition:true,readOnly:!member||activity.status!=='active'&&!correcting(group),correctionOpen:correcting(group),lockedPlayers:lockedPlayers(group,activity)}:{})};
   }
   async function score(input) {
     return repo.transaction(async tx => {
       const {activity,group,competition} = await load(tx,input);
       const round = group.round;
-      if (!group.live || !openRound(round)) fail('CLOSED','这场球已结束，不能继续录入');
+      const correction=competition&&['ended','revising'].includes(activity.status)&&group.cards?.[input.playerId]?.state==='open'&&group.cards[input.playerId].correcting===true;
+      if (!group.live || !openRound(round)&&!correction) fail('CLOSED','这场球已结束，不能继续录入');
       if (round.id !== input.roundId || !round.players.some(p=>p.id===input.playerId) || !round.holes.some(h=>h.number===input.hole)) fail('INVALID','球友或球洞无效');
       if (typeof input.mutationId !== 'string' || !/^[\w-]{1,80}$/.test(input.mutationId)) fail('INVALID','请重新提交本洞成绩');
       const cell = input.playerId + ':' + input.hole;
       const last = group.cells[cell];
       if (last?.actor === uid && last.id === input.mutationId) return board(activity,group);
-      if (competition && (activity.status!=='active'||group.cards[input.playerId]?.state!=='open')) fail('CLOSED','该记分卡已交卡或锁定');
+      if (competition && (activity.status!=='active'&&!correction||group.cards[input.playerId]?.state!=='open')) fail('CLOSED','该记分卡已交卡或锁定');
       if ((last?.version || 0) !== input.cellVersion) fail('CELL_CONFLICT','同组球友刚改了这一格，请核对最新成绩后再记');
       if (input.routeRevision !== undefined && input.routeRevision !== (round.courseSnapshot?.routeRevision || 0)) fail('CELL_CONFLICT','本轮路线已调整，请核对球洞后再记');
       if (input.physicalHoleId && input.physicalHoleId !== round.holes.find(h=>h.number===input.hole)?.id) fail('CELL_CONFLICT','球洞顺序已调整，请核对后再记');
       if (input.score !== null && (typeof input.score !== 'object' || JSON.stringify(input.score).length > 3000)) fail('INVALID','本洞成绩无效');
-      const updated = rules.applyOperation(round,{type:'score',playerId:input.playerId,holeNumber:input.hole,score:input.score,
+      const updated = rules.applyOperation(correction?{...round,status:'active'}:round,{type:'score',playerId:input.playerId,holeNumber:input.hole,score:input.score,
         operationId:input.mutationId,baseRevision:round.revision,time:now(),actorId:uid});
+      if(correction)updated.status=updated.players.every(p=>rules.rawSummary(updated,p.id).complete)?'finished_complete':'finished_incomplete';
       group.version++;
       group.cells[cell] = {version:group.version, actor:uid, id:input.mutationId};
       if(competition){
@@ -168,11 +172,10 @@ function liveActions(repo, uid, now) {
         if(before){
           const change={kind:'score-audit',activityId:activity.id,groupId:group.id,playerId:input.playerId,
             hole:input.hole,actor:uid,before,after:updated.scores[input.playerId][input.hole]||null,at:now()};
-          const auditId='score-'+crypto.createHash('sha256').update(JSON.stringify([activity.id,group.id,group.version])).digest('hex').slice(0,40);
-          await tx.set('qy_activities',auditId,change);
           group.recentChanges=[...(group.recentChanges||[]),{...change,before:before.grossStrokes,after:change.after?.grossStrokes??null}].slice(-20);
         }
       }
+      await Audit.write(tx,activity,group,round,updated,uid,now(),group.cards?.[input.playerId]?.reason||'逐洞记分');
       group.round = publicRound(updated);
       activity.updatedAt = now();
       await tx.set('qy_activities',activity.id,activity);
@@ -197,6 +200,34 @@ function liveActions(repo, uid, now) {
       await tx.set('qy_activities',activity.id,activity);return board(activity,group);
     });
   }
+  async function removePlayer(input){
+    if(typeof input.mutationId!=='string'||!/^[\w-]{1,80}$/.test(input.mutationId))fail('INVALID','请重新选择要移除的球员');
+    return repo.transaction(async tx=>{
+      const {activity,group}=await load(tx,input,true);
+      const receiptId='roster-'+crypto.createHash('sha256').update(JSON.stringify([activity.id,group.id,uid,input.mutationId])).digest('hex');
+      const fingerprint=JSON.stringify([input.roundId,input.playerId,input.version]);
+      const receipt=await tx.get('qy_activities',receiptId);
+      if(receipt){if(receipt.fingerprint!==fingerprint)fail('INVALID','移除请求不一致，请重新选择');return board(activity,group);}
+      const before=group.round;
+      if(!group.live||!openRound(before))fail('CLOSED','本轮已结束');
+      if(input.roundId!==before.id||input.version!==group.version)fail('CONFLICT','组内记录已有更新，请刷新后重新确认');
+      const player=before.players.find(p=>p.id===input.playerId);
+      try{group.round=publicRound(require('./lib/score-roster').remove(before,input.playerId,{ownerUid:group.ownerUid,time:now(),operationId:input.mutationId}));}
+      catch(e){fail('INVALID',e.message);}
+      if(player.accountUid){
+        group.memberUids=group.memberUids.filter(id=>id!==player.accountUid);
+        group.scorerUids=(group.scorerUids||[]).filter(id=>id!==player.accountUid);
+        if(group.primaryScorerUid===player.accountUid)group.primaryScorerUid=group.ownerUid;
+      }
+      group.version++;activity.updatedAt=now();
+      // Retain tombstone stamps so an old offline edit cannot target a rejoined seat.
+      for(const h of before.holes)(group.cells ||= {})[input.playerId+':'+h.number]={version:group.version};
+      await Audit.write(tx,activity,group,before,group.round,uid,now(),'移除球员：'+player.name);
+      await tx.set('qy_activities',activity.id,activity);
+      await tx.set('qy_activities',receiptId,{kind:'roster-receipt',fingerprint,at:now()});
+      return board(activity,group);
+    });
+  }
   async function primaryScorer(input){return repo.transaction(async tx=>{
     const {activity,group}=await load(tx,input,true);
     if(!group.live||!openRound(group.round))fail('CLOSED','本轮已结束');
@@ -209,11 +240,12 @@ function liveActions(repo, uid, now) {
     if(!group.live)fail('INVALID','尚未开启共同记分');
     if(!openRound(group.round))return board(activity,group);
     if(group.version!==input.version)fail('CONFLICT','组内成绩已更新，请刷新核对后再结束');
-    group.round=publicRound(require('./lib/service').finishRound(group.round,now(),{allowEmpty:input.allowEmpty===true}));
-    group.version++;activity.updatedAt=now();await tx.set('qy_activities',activity.id,activity);
+    const previous=group.round;group.round=publicRound(require('./lib/service').finishRound(group.round,now(),{allowEmpty:true}));
+    group.version++;await Audit.write(tx,activity,group,previous,group.round,uid,now(),'结束球局');activity.updatedAt=now();await tx.set('qy_activities',activity.id,activity);
     return board(activity,group);
   });}
-  return {enable,read,score,addVirtual,removeScorer,primaryScorer,finish};
+  async function history(input){const {activity,group}=await load(repo,input,false,true);return Audit.read(repo,activity,group,input.cursor);}
+  return {enable,read,score,addVirtual,removePlayer,removeScorer,primaryScorer,finish,history};
 }
 
 // A legacy owner-only whole-round save is still version-checked. Advance each

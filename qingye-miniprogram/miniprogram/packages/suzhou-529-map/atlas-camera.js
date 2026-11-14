@@ -10,10 +10,11 @@ function fit(width,height,holes,hole,origin,target,overview,safe=0,artFrame,hasR
  const angle=overview?0:Math.atan2(hole.tee[0]-hole.green[0],hole.tee[1]-hole.green[1]);
  const projection={scale:1,x:0,y:0,angle};
  const points=overview?(holes.length?holes.flatMap(h=>[...h.route,...h.outline]):Boundary.outer):[...hole.route,...hole.outline,origin,target];
+ if(overview&&Config.fitOverviewToBoundary&&holes.length)points.push(...Boundary.outer);
  const rotated=points.map(p=>Geo.screen(p,projection,atlas));
  const xs=rotated.map(p=>p[0]),ys=rotated.map(p=>p[1]);
  const xmin=Math.min(...xs),xmax=Math.max(...xs),ymin=Math.min(...ys),ymax=Math.max(...ys);
- const left=overview?22:Math.min(104,width*.27),right=width-(overview?22:34);
+ const left=overview?22:(Config.focusContentLeft||Math.min(104,width*.27)),right=width-(overview?22:(Config.focusContentRight||34));
  const top=overview?82:92,bottom=height-safe-(overview?82:99);
  // A short par 3 can fit at more than 2 screen pixels per satellite pixel.
  // Limit its opening view while leaving pinch and button zoom independent.
@@ -43,9 +44,9 @@ function fit(width,height,holes,hole,origin,target,overview,safe=0,artFrame,hasR
  const dockTop=Math.min(...dock.map(control=>control.y));
  const dockRight=Math.max(...dock.map(control=>control.x+control.w));
  const preferredX=()=>clamp(
-   width*.57-teeX*scale,
-   8-xlo*scale,
-   width-8-xhi*scale
+   width*(Config.focusAnchorRatio||.57)-teeX*scale,
+   Math.max(8-xlo*scale,Config.focusContentLeft?left-xmin*scale:-Infinity),
+   (Config.focusContentRight?right:width-8)-xhi*scale
  );
  let x=preferredX(),y=centeredY();
  const markerGap=14;

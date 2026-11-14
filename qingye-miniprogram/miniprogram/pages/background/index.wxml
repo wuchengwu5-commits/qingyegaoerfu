@@ -9,3 +9,4 @@
  <view class="note background-note">雨雪风景可自己选择；自动模式不会把意境图当作实时天气。选择保存在本机。</view>
  <view class="background-save"><view class="save-copy">{{mode==='auto'?'自动 · '+previewName:previewName}}</view><button class="primary" bindtap="save" loading="{{saving}}" disabled="{{saving}}">保存并查看首页 →</button></view>
 </view><privacy-panel/>
+<qy-dialog class="page-dialog"/>

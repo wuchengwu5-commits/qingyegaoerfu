@@ -1,7 +1,8 @@
+const Dialog = require('../miniprogram/services/dialog');
 const {test,beforeEach}=require('node:test'),assert=require('node:assert/strict');
 const S=require('../miniprogram/services/store'),R=require('../miniprogram/services/rules'),Roster=require('../miniprogram/services/score-roster'),Patch=require('../miniprogram/services/view-patch');
 let memory,routes,toasts;
-beforeEach(()=>{memory={};routes=[];toasts=[];global.wx={__preview:true,getStorageSync:k=>structuredClone(memory[k]||''),setStorageSync:(k,v)=>memory[k]=structuredClone(v),navigateTo:o=>routes.push(o.url),showToast:o=>toasts.push(o.title),showModal:o=>o.success({confirm:true,content:'新球友'})};S.init();});
+beforeEach(()=>{require('../miniprogram/services/score-entry').consume();memory={};routes=[];toasts=[];Dialog.modal=o=>o.success({confirm:true,content:'新球友'});global.wx={__preview:true,getStorageSync:k=>structuredClone(memory[k]||''),setStorageSync:(k,v)=>memory[k]=structuredClone(v),navigateTo:o=>routes.push(o.url),switchTab:o=>routes.push(o.url),showToast:o=>toasts.push(o.title)};S.init();});
 function create(){return S.create({courseId:'cn_bg_585',players:[{id:'me',name:'我',tee:'Blue'}]});}
 function page(name,o={}){let def;global.Page=x=>def=x;const f=require.resolve('../miniprogram/pages/'+name+'/index');delete require.cache[f];require(f);const p={...def,data:structuredClone(def.data||{}),setData(x){Patch.apply(this.data,x)}};p.onLoad?.(o);p.onShow?.();return p;}
 test('multiple active groups, course start and history resume never pause or overwrite another group',()=>{
@@ -13,9 +14,9 @@ test('multiple active groups, course start and history resume never pause or ove
  ]);
  for(const group of hub.data.activeRounds){
   hub.continueRound({currentTarget:{dataset:{id:group.id}}});
-  assert.equal(routes.pop(),'/pages/score/index?id='+group.id);
+  assert.equal(hub.data.scoreTargets[0].options.id,group.id);
  }
- const course=page('course',{id:'cn_bg_585'});course.start();assert.equal(routes.pop(),'/pages/create/index?course=cn_bg_585');
+ const course=page('course',{id:'cn_bg_585'});course.start();assert.equal(routes.pop(),'/pages/play/index');assert.deepEqual(require('../miniprogram/services/score-entry').consume(),{kind:'create',course:'cn_bg_585'});
  const paused=S.getRound(one.id);paused.status='paused';S.replace(paused);page('history').resume(one.id);
  assert.equal(S.getRound(two.id).status,'active');assert.equal(S.getRound(one.id).scores.me[1].strokes,5);assert.equal(S.getRound(two.id).scores.me[1].strokes,7);
  S.finish(one.id);

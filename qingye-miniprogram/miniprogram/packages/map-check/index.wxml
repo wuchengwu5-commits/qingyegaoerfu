@@ -1,0 +1,2 @@
+<view class="page"><view class="title">GPS 地图连接检查</view><view class="note">{{message}}</view><button class="primary" loading="{{busy}}" disabled="{{busy}}" bindtap="check">{{busy?'正在检查…':done?'重新检查':'开始检查'}}</button><view wx:for="{{rows}}" wx:key="title" class="card"><view class="name">{{item.title}}</view><view class="result">图片下载：{{item.direct}}</view><view class="result">备用服务：{{item.backup}}</view></view><button wx:if="{{done}}" class="primary" bindtap="copy">复制检查结果</button><view class="footer">仅检查公开地图资源，不读取手机号、定位或记分记录。</view></view>
+<qy-dialog class="page-dialog"/>

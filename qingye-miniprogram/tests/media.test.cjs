@@ -53,3 +53,11 @@ test('reference artwork uses immutable cloud IDs, shared caching and retry witho
  const p=m.local(src);A.equal(s.requests[0].fileID,src);s.requests[0].success({tempFilePath:'/temp/reference.png'});const saved=await p;
  A.equal(await m.local(src),saved);A.equal(s.requests.length,1);m.forget(src);const retry=m.local(src);A.equal(s.requests.length,2);s.requests[1].success({tempFilePath:'/temp/reference-retry.png'});await retry;
 });
+test('reference PNG download failure uses the public artwork fallback and caches complete chunks',async t=>{
+ const s=setup(t),m=s.load(),name='cn_bg_577/cn_bg_577_s3_h04-5c9193969f855c8f.png',src='cloud://test-env.test-bucket/hole-reference-v1/'+name,calls=[];
+ wx.cloud.callFunction=async o=>{calls.push(o.data);return {result:{ok:true,index:o.data.index,chunks:2,data:o.data.index?'AA==':'iVBORw0KGgoA'}};};
+ s.fs.writeFile=o=>{A.equal(o.data,'iVBORw0KGgoAAA==');s.files.add(o.filePath);o.success();};
+ const read=m.local(src);s.requests[0].fail(Error('access denied'));const cached=await read;
+ A.deepEqual(calls,[0,1].map(index=>({action:'referenceImage',name,index})));
+ A.equal(await m.local(src),cached);A.equal(s.requests.length,1);
+});

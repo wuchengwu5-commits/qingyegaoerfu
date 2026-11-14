@@ -1,8 +1,9 @@
 const A=require('../../services/account');
 const tabs=['pages/home/index','pages/courses/index','pages/play/index','pages/profile/index'];
 Page({
- data:{name:'',avatarUrl:'',busy:false,loggedIn:false,phoneVerified:false,phoneMasked:'',error:'',notice:'',returnLabel:'先逛逛球场'},
- onLoad(){
+ data:{name:'',avatarUrl:'',busy:false,loggedIn:false,phoneVerified:false,phoneMasked:'',completingProfile:false,error:'',notice:'',returnLabel:'先逛逛球场'},
+ onLoad(options={}){
+  this.continueAfterSave=options.profile==='1';
   this.offAccount=A.subscribe(()=>{if(this.visible&&!this.data.busy)this.onShow();});
   const stack=typeof getCurrentPages==='function'?getCurrentPages():[],previous=stack[stack.length-2];
   if(previous&&/^(pages|packages)\/[a-z-]+\/index$/.test(previous.route||'')&&previous.route!=='pages/account/index'){
@@ -14,10 +15,12 @@ Page({
  onShow(){
   this.visible=true;
   const p=A.user();
-  if(wx.setNavigationBarTitle)wx.setNavigationBarTitle({title:p?'账号资料':'手机号授权登录'});
+  const completingProfile=!!p&&!A.profileReady(p);
+  if(completingProfile)this.continueAfterSave=true;
+  if(wx.setNavigationBarTitle)wx.setNavigationBarTitle({title:p?(completingProfile?'完善球友名片':'账号资料'):'手机号授权登录'});
   if(!p){this.dirty=false;this.avatarFile='';this.uploadedAvatar='';this.setData({name:'',avatarUrl:'',error:'',notice:''});}
-  this.setData({loggedIn:!!p,phoneVerified:!!p?.phoneVerified,phoneMasked:p?.phoneMasked||''});
-  if(!this.dirty)this.setData({name:p?.profileCompleted?p.name:'',avatarUrl:p?.avatarUrl||''});
+  this.setData({loggedIn:!!p,phoneVerified:!!p?.phoneVerified,phoneMasked:p?.phoneMasked||'',completingProfile});
+  if(!this.dirty)this.setData({name:A.validName(p?.name)?p.name:'',avatarUrl:p?.avatarUrl||''});
  },
  onHide(){this.visible=false;},
  onUnload(){this.visible=false;this.unloaded=true;if(this.offAccount)this.offAccount();},
@@ -32,8 +35,11 @@ Page({
   try{
    const p=await A.loginWithPhone(detail.code);
    if(this.visible===false)return;
-   this.setData({loggedIn:true,phoneVerified:!!p.phoneVerified,phoneMasked:p.phoneMasked||'',name:p.profileCompleted?p.name:'',avatarUrl:p.avatarUrl||'',notice:'登录成功'});
-   this.returnToSource(true);
+   const ready=A.profileReady(p);
+   this.continueAfterSave=!ready;this.dirty=false;
+   this.setData({loggedIn:true,phoneVerified:!!p.phoneVerified,phoneMasked:p.phoneMasked||'',name:A.validName(p.name)?p.name:'',avatarUrl:p.avatarUrl||'',completingProfile:!ready,notice:''});
+   if(ready)this.returnToSource(true);
+   else if(wx.setNavigationBarTitle)wx.setNavigationBarTitle({title:'完善球友名片'});
   }catch(err){if(this.visible!==false)this.setData({loggedIn:false,error:err.message||'手机号验证未完成，请重试'});}
   finally{if(!this.unloaded)this.setData({busy:false});}
  },
@@ -54,16 +60,19 @@ Page({
   if(this.data.busy||!this.data.loggedIn)return;
   // Read the form after WeChat nickname validation, not a stale input event.
   const name=typeof e.detail?.value?.nickname==='string'?e.detail.value.nickname.trim():'';
-  if(!name||name.length>16)return this.setData({error:'请填写 1–16 个字的昵称'});
+  if(!A.validName(name))return this.setData({error:'请填写自己的昵称（1–16 个字），方便球友认出你'});
   this.setData({busy:true,error:'',notice:''});
   try{
    if(this.avatarFile&&!this.uploadedAvatar)this.uploadedAvatar=await A.uploadAvatar(this.avatarFile);
+   if(this.visible===false)return;
    const p=await A.updateProfile(name,this.uploadedAvatar||undefined);
    this.avatarFile='';this.uploadedAvatar='';this.dirty=false;
-   this.setData({name:p.name,avatarUrl:p.avatarUrl||'',notice:'头像和昵称已保存'});
-   wx.showToast({title:'资料已保存',icon:'success'});
-  }catch(err){this.setData({error:err.message||'保存失败，请重试'});}
-  finally{this.setData({busy:false});}
+   if(this.visible===false)return;
+   this.setData({name:p.name,avatarUrl:p.avatarUrl||'',completingProfile:false,notice:'头像和昵称已保存'});
+   if(this.continueAfterSave)this.returnToSource(true);
+   else wx.showToast({title:'资料已保存',icon:'success'});
+  }catch(err){if(this.visible!==false)this.setData({error:err.message||'保存失败，请重试'});}
+  finally{if(!this.unloaded)this.setData({busy:false});}
  },
  logout(){if(this.data.busy)return;require('../../services/ui').logout(()=>this.onShow());},
  policy(){wx.openPrivacyContract({fail(){wx.showToast({title:'隐私保护指引暂不可用',icon:'none'});}});},

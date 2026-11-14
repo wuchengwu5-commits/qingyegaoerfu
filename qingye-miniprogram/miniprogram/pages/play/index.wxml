@@ -1,19 +1,21 @@
+<view wx:if="{{scoreTargets.length}}" class="live-tab" style="padding-top:{{liveTopInset}}px"><view class="live-tab-heading"><button class="live-hub-button" bindtap="showHub" aria-label="打开球局列表，切换或新建球局"><text class="live-hub-symbol" aria-hidden="true">☷</text><text>球局列表</text></button><text>实时记分</text></view><live-score wx:for="{{scoreTargets}}" wx:key="key" class="live-score" target="{{item.options}}" bindhub="showHub" bindclosed="boardClosed"/></view>
+<block wx:else>
 <view class="page tab-page score-hub" style="padding-top:{{topInset}}px"><scene-backdrop/>
  <view class="hub-heading"><view class="title hub-title">青野记分</view><view class="sub hub-subtitle">专注当下，享受每一洞。</view></view>
  <view wx:if="{{activeRounds.length}}" class="hub-active">
-  <view class="hub-active-heading">进行中的记分组 · {{activeRounds.length}}</view>
+  <view class="hub-active-heading">正在进行<text class="hub-count">{{activeRounds.length}} 组</text></view>
   <view wx:for="{{activeRounds}}" wx:key="id" class="card hub-round hub-active-round">
    <view class="hub-active-status">
     <text class="hub-group-label">{{item.label}}</text>
-    <text class="hub-current-hole">进行中<text wx:if="{{item.hole}}"> · {{item.hole}}</text></text>
+    <text class="hub-current-hole">进行中</text>
+    <button wx:if="{{item.canFinish}}" class="hub-end" data-id="{{item.id}}" bindtap="endRound" loading="{{endingId===item.id}}" disabled="{{!!endingId}}" aria-label="结束{{item.label}}，{{item.name}}">结束本组</button>
    </view>
    <view class="hub-name">{{item.name}}</view>
-   <view class="muted">{{item.holes}} 洞 · {{item.players}} 位球友</view>
+   <view class="muted"><text wx:if="{{item.hole}}">{{item.hole}} · </text>{{item.holes}} 洞 · {{item.players}} 位球友</view>
    <view class="hub-round-actions">
-   <button class="primary hub-start" data-id="{{item.id}}" bindtap="continueRound" disabled="{{endingId===item.id}}" aria-label="{{item.label}}，{{item.name}}，继续记分">
-    <image class="hub-start-icon" src="/assets/flag-white.png" mode="aspectFit"/>继续记分
+   <button class="{{index===0?'primary':'hub-continue-secondary'}} hub-start" data-id="{{item.id}}" bindtap="continueRound" disabled="{{endingId===item.id}}" aria-label="{{item.label}}，{{item.name}}，继续记分">
+    <image class="hub-start-icon" src="{{index===0?'/assets/flag-white.png':'/assets/flag.png'}}" mode="aspectFit"/>继续记分
    </button>
-   <button wx:if="{{item.canFinish}}" class="hub-end" data-id="{{item.id}}" bindtap="endRound" loading="{{endingId===item.id}}" disabled="{{!!endingId}}" aria-label="结束{{item.label}}，{{item.name}}">结束本组</button>
    </view>
   </view>
  </view>
@@ -21,12 +23,13 @@
   <view class="row hub-group-heading"><view class="hub-name">小组记分</view><view class="link hub-my-groups" bindtap="groups" role="button">我的球局 ›</view></view>
   <view class="note">1–16 人 · 一组一张记分卡</view>
   <view class="hub-group-actions">
-   <button class="primary hub-create" bindtap="choose">创建新球局</button>
-   <button class="hub-scan" bindtap="scan">扫码加入</button>
+   <button class="{{!activeRounds.length&&!activeEvents.length?'primary':''}} hub-create" bindtap="choose"><text class="hub-action-icon">＋</text>创建新球局</button>
+   <button class="hub-scan" bindtap="scan"><view class="hub-scan-icon" aria-hidden="true"><view/></view>扫码加入</button>
   </view>
   <view wx:if="{{draft}}" class="hub-draft" bindtap="resumeDraft" role="button">
    <view class="grow"><view class="hub-status">未完成的开局设置</view><view class="hub-draft-course">{{draft.name}}</view></view><text class="link">继续 ›</text>
   </view>
+  <view class="hub-competition-row" bindtap="competition" role="button"><image src="/assets/flag.png" mode="aspectFit"/><view class="grow"><view>比赛记分</view><view class="note">分组比赛 · 同路线分别排名</view></view><text class="hub-chevron">›</text></view>
  </view>
  <view wx:if="{{activeEvents.length}}" class="hub-active">
   <view class="hub-active-heading">进行中的比赛 · {{activeEvents.length}}</view>
@@ -34,12 +37,9 @@
    <view class="hub-active-status"><text class="hub-group-label">比赛中</text><text>{{item.groupCount}} 个参赛组</text></view>
    <view class="hub-name">{{item.title}}</view>
    <view class="muted">{{item.courseName}}<text wx:if="{{item.groupName}}"> · {{item.groupName}}</text></view>
-   <button wx:if="{{item.myGroupId}}" class="primary hub-start" data-id="{{item.id}}" data-group="{{item.myGroupId}}" bindtap="competitionBoard">继续本组记分</button>
-   <button class="hub-start" data-id="{{item.id}}" bindtap="competitionRank">赛事排行榜</button>
+   <button wx:if="{{item.myGroupId}}" class="{{!activeRounds.length&&index===0?'primary':'hub-continue-secondary'}} hub-start" data-id="{{item.id}}" data-group="{{item.myGroupId}}" bindtap="competitionBoard">继续本组记分</button>
+   <button class="hub-rank-link" data-id="{{item.id}}" bindtap="competitionRank">赛事排行榜 ›</button>
   </view>
- </view>
- <view class="card hub-menu">
-  <view class="menu row" bindtap="competition" role="button"><image src="/assets/flag.png"/><view class="grow">比赛记分<view class="note">分组比赛 · 同路线分别排名</view></view><text class="link">进入 ›</text></view>
  </view>
  <view class="hub-recent-heading row"><view>最近记分卡</view><view class="link hub-all" bindtap="history" role="button">查看全部 ›</view></view>
  <view wx:if="{{recent.length}}" class="card hub-recent-list">
@@ -50,3 +50,6 @@
  </view>
  <view wx:else class="card hub-recent-empty"><view>下一场好球，会留在这里。</view><text>完成记分后，就能回看你的球场时光。</text></view>
 </view><privacy-panel/>
+<qy-dialog class="page-dialog"/>
+
+</block>

@@ -150,7 +150,8 @@ class Library:
   holes=document.get('holes')
   if not isinstance(holes,list):raise ValueError('GPS 球洞清单格式无效')
   known={r[0] for r in self.db.execute('SELECT id FROM holes WHERE course_id=?',(cid,))}
-  if not known:raise ValueError('未找到球场档案')
+  if not self.db.execute('SELECT 1 FROM courses WHERE id=?',(cid,)).fetchone():
+   raise ValueError('未找到球场档案')
   seen=set()
   for hole in holes:
    if not isinstance(hole,dict):raise ValueError('GPS 球洞记录格式无效')

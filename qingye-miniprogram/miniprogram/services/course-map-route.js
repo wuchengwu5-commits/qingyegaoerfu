@@ -2,18 +2,20 @@ const routes={cn_bg_1379:'/packages/anying-forest-map/atlas',cn_bg_24212:'/packa
 const suzhou=require('./suzhou-gps-maps');
 for(const [id,map] of Object.entries(suzhou))routes[id]='/packages/'+map.package+'/atlas';
 function route(id){return routes[id]||'/packages/hole-map/index';}
-function openFromPage(page,courseId,roundId,hole){
+function openFromPage(page,courseId,roundId,hole,round){
  if(page.openingCourseMap)return;
+ const context=require('./map-round');
+ context.prepare(round&&round.id===roundId&&round.courseId===courseId?round:null);
  page.openingCourseMap=true;
  const url=route(courseId)+'?course='+encodeURIComponent(courseId)
   +(roundId?'&round='+encodeURIComponent(roundId)+'&hole='+encodeURIComponent(hole):'')
   +(!gpsAvailable(courseId)?'&view=overview':'');
- wx.navigateTo({url,fail(){page.openingCourseMap=false;}});
+ wx.navigateTo({url,fail(){page.openingCourseMap=false;context.prepare(null);}});
 }
 function available(id){return !!routes[id];}
 function gpsCount(id){return suzhou[id]?.gpsHoles||({cn_bg_1379:18,cn_bg_24212:18,cn_bg_579:18,cn_bg_9127:18,cn_bg_569:18,cn_bg_581:27,cn_bg_583:36,cn_bg_2529:18,cn_bg_575:18,cn_bg_587:18,cn_bg_3981:18,cn_bg_2533:18,cn_bg_565:18,cn_bg_567:18,cn_bg_611:27,cn_bg_585:18,cn_bg_2525:18,cn_bg_571:18,cn_bg_577:27})[id]||0;}
 function gpsAvailable(id){return gpsCount(id)>0;}
-function referenceCount(id){return ({cn_bg_577:27,cn_bg_585:18,cn_bg_611:27})[id]||0;}
+function referenceCount(id){return ({cn_bg_577:27,cn_bg_585:18,cn_bg_611:27,cn_bg_2525:18})[id]||0;}
 // Single public vocabulary for directory badges, course details and future map entries.
 function overviewAvailable(id){return !!suzhou[id]||gpsAvailable(id)||['cn_bg_569','cn_bg_9127','cn_bg_579'].includes(id);}
 function mapInfo(id){

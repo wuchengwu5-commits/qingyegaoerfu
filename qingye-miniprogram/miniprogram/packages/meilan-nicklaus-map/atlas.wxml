@@ -13,3 +13,4 @@
  </view>
  <view class="sr" aria-live="polite">{{notice}}。{{sectionName}}第 {{holeNumber}} 洞，果岭中心 {{center}} {{unit}}</view>
 </view><privacy-panel/>
+<qy-dialog class="page-dialog"/>

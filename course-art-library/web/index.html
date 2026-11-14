@@ -2,6 +2,11 @@
 <body><aside><div class="brand">青野<span>球道图库</span></div><p class="muted">按球场归档，按球洞修订</p><input id="search" type="search" placeholder="搜索球场 / 省份" aria-label="搜索球场"><label class="check"><input id="withFiles" type="checkbox" checked> 只看已有图或资料</label><nav id="courses"></nav><button id="backup" class="quiet">备份整个图库</button><small id="stats"></small></aside>
 <main><header><div><p class="eyebrow">COURSE ART LIBRARY</p><h1 id="courseTitle">球道图库</h1><p id="courseInfo" class="muted"></p></div><span class="pill">本地保存 · 保留历史</span></header><div class="tabs" id="libraryModes"><button class="active" data-mode="inventory">球场总表</button><button data-mode="gps">GPS 地图</button><button data-mode="art">精修球道图</button><button data-mode="resources">参考资料</button></div>
 <section id="inventoryPanel" class="hidden" aria-label="球场总表">
+  <details id="provinceBrowser" class="province-browser" open>
+    <summary><span>按省份查询</span><span id="provinceSelection" class="province-selection">正在读取省份…</span></summary>
+    <p class="muted">点击省份查看球场名单和资料进度。数量按图库已收录的球场及分场统计。</p>
+    <div id="provinceGrid" class="province-grid" role="group" aria-label="选择省份"></div>
+  </details>
   <div id="inventorySummary" class="inventory-summary"></div>
   <div class="inventory-filters">
     <label>球场搜索<input id="inventorySearch" type="search" placeholder="名称、别名或球场 ID"></label>
@@ -14,6 +19,7 @@
     </select></label>
   </div>
   <p id="inventoryCount" class="muted" aria-live="polite"></p>
+  <p id="inventoryEmpty" class="inventory-empty hidden">没有符合条件的球场。可以清空搜索词或切换资料覆盖条件。</p>
   <div class="inventory-scroll" tabindex="0" aria-label="球场档案表，可横向滚动"><table class="inventory-table">
     <thead><tr><th scope="col">球场</th><th scope="col">地区</th><th scope="col">洞数</th><th scope="col">GPS 总览</th><th scope="col">逐洞 GPS</th><th scope="col">精修图</th><th scope="col">参考图</th><th scope="col">待补资料</th></tr></thead>
     <tbody id="inventoryRows"></tbody></table></div>

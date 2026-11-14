@@ -1,6 +1,7 @@
 'use strict';
 
 let inventoryRows = [], inventoryPage = 0, inventoryRequest = 0;
+let initialProvince = new URLSearchParams(location.search).get('province') || '';
 let resourceData = null, resourceLimit = 30, resourceRequest = 0;
 const inventoryPageSize = 35;
 const groupLabels = {
@@ -16,10 +17,32 @@ async function showInventory() {
   const rows = await api('/api/inventory');
   if (request !== inventoryRequest || libraryMode !== 'inventory') return;
   inventoryRows = rows;
-  const province = $('#inventoryProvince').value;
-  const provinces = [...new Set(rows.map(row => row.province).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
-  $('#inventoryProvince').replaceChildren(new Option('全部省份', ''), ...provinces.map(name => new Option(name, name)));
-  $('#inventoryProvince').value = province;
+  const province = $('#inventoryProvince').value || initialProvince;
+  initialProvince = '';
+  const counts = new Map();
+  for (const row of rows) {
+    const name = row.province || '省份待补充';
+    counts.set(name, (counts.get(name) || 0) + 1);
+  }
+  const provinces = [...counts.keys()].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+  $('#inventoryProvince').replaceChildren(new Option('全部省份', ''), ...provinces.map(name => new Option(`${name}（${counts.get(name)}）`, name)));
+  $('#inventoryProvince').value = counts.has(province) ? province : '';
+  $('#provinceGrid').replaceChildren(...[['', rows.length], ...provinces.map(name => [name, counts.get(name)])].map(([name, count]) => {
+    const button = el('button', 'province-card');
+    button.type = 'button';
+    button.dataset.province = name;
+    button.append(el('span', 'province-name', name || '全部省份'), el('span', 'province-count', `${count} 个`));
+    button.onclick = () => {
+      $('#inventoryProvince').value = name;
+      inventoryPage = 0;
+      renderInventory();
+      if (window.matchMedia('(max-width:600px)').matches) {
+        $('#provinceBrowser').open = false;
+        $('#provinceBrowser summary').focus();
+      }
+    };
+    return button;
+  }));
   renderInventory();
 }
 
@@ -36,7 +59,20 @@ function renderInventory() {
   const province = $('#inventoryProvince').value;
   const query = $('#inventorySearch').value.trim().toLowerCase();
   const status = $('#inventoryStatus').value;
-  const scoped = inventoryRows.filter(row => !province || row.province === province);
+  const scoped = inventoryRows.filter(row => !province || (row.province || '省份待补充') === province);
+  $('#courseTitle').textContent = province ? `${province} · 球场总表` : '球场总表';
+  $('#courseInfo').textContent = province ? `查看${province}已收录球场的地图进度、参考图与待补资料。` : '按省份查询球场，查看地图进度、参考图与待补资料。';
+  $('#provinceSelection').textContent = `${province || '全部省份'} · ${scoped.length} 个球场及分场`;
+  for (const button of $('#provinceGrid').children) {
+    const selected = button.dataset.province === province;
+    button.classList.toggle('active', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  }
+  const url = new URL(location.href);
+  if (province) url.searchParams.set('province', province);
+  else url.searchParams.delete('province');
+  url.searchParams.delete('course');
+  if (url.href !== location.href) history.replaceState(null, '', url);
   const hasFullGps = row => row.hole_count > 0 && row.gps_count === row.hole_count;
   const filters = {
     hasData: row => row.gps_available || row.art_count || row.reference_count || row.reference_images,
@@ -63,7 +99,8 @@ function renderInventory() {
   const pages = Math.max(1, Math.ceil(rows.length / inventoryPageSize));
   inventoryPage = Math.min(inventoryPage, pages - 1);
   const start = inventoryPage * inventoryPageSize;
-  $('#inventoryCount').textContent = `符合条件 ${rows.length} 个 · 参考图按文件内容去重，包含导览、卫星与样板`;
+  $('#inventoryCount').textContent = `${province || '全部省份'} · 符合条件 ${rows.length} / ${scoped.length} 个 · 参考图按文件内容去重`;
+  $('#inventoryEmpty').classList.toggle('hidden', rows.length > 0);
   $('#inventoryRows').replaceChildren(...rows.slice(start, start + inventoryPageSize).map(row => {
     const tr = el('tr');
     const name = el('th', 'inventory-name');
@@ -78,7 +115,8 @@ function renderInventory() {
       return td;
     };
     cell(row.province || row.city || '—');
-    cell(String(row.hole_count || '—'));
+    const holeCount = cell(String(row.hole_count || '—'));
+    if (row.archived_hole_count) holeCount.append(el('small', '', `另存历史 ${row.archived_hole_count} 洞`));
     cell(row.has_overview ? courseButton('已有', row, 'gps', 'good') : '缺', row.has_overview ? '' : 'missing');
     const gps = cell(row.gps_count ? courseButton(`${row.gps_count}/${row.hole_count} 洞`, row, 'gps', hasFullGps(row) ? 'good' : 'partial') : '缺', row.gps_count ? '' : 'missing');
     if (row.gps_versions) gps.append(el('small', '', `当前 v${row.gps_version} · 共 ${row.gps_versions} 版`));

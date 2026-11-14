@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "创建对局"
+  "navigationBarTitleText": "创建球局",
+  "usingComponents": {
+    "tee-picker": "/components/tee-picker/index"
+  }
 }

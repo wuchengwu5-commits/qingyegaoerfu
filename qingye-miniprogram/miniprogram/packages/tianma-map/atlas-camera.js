@@ -41,8 +41,8 @@ function fit(width,height,holes,hole,origin,target,overview,safe=0,artFrame,hasR
  const dockTop=Math.min(...dock.map(control=>control.y));
  const dockRight=Math.max(...dock.map(control=>control.x+control.w));
  const preferredX=()=>clamp(
-   width*.57-teeX*scale,
-   8-xlo*scale,
+   width*(.57||.57)-teeX*scale,
+   Math.max(8-xlo*scale,0?left-xmin*scale:-Infinity),
    width-8-xhi*scale
  );
  let x=preferredX(),y=centeredY();

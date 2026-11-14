@@ -1,1 +1,1 @@
-{"navigationBarTitleText":"记分","navigationStyle":"custom"}
+{"navigationBarTitleText":"记分","navigationStyle":"custom","usingComponents":{"live-score":"/components/live-score/index"}}

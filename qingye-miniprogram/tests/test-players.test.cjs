@@ -1,3 +1,4 @@
+const Dialog = require('../miniprogram/services/dialog');
 const {test,beforeEach}=require('node:test'),assert=require('node:assert/strict');
 const S=require('../miniprogram/services/store'),R=require('../miniprogram/services/rules'),A=require('../miniprogram/services/account'),config=require('../miniprogram/config');
 let memory,toasts;
@@ -10,7 +11,7 @@ function page(name,options={}){
 const event=dataset=>({currentTarget:{dataset}});
 beforeEach(()=>{
  memory={};toasts=[];config.testPlayersEnabled=true;
- global.wx={__preview:true,getStorageSync:k=>memory[k]?structuredClone(memory[k]):'',setStorageSync:(k,v)=>memory[k]=structuredClone(v),showToast:o=>toasts.push(o.title),showModal:o=>o.success({confirm:true}),navigateTo(){},redirectTo(){},switchTab(){}};
+ Dialog.modal=o=>o.success({confirm:true});global.wx={__preview:true,getStorageSync:k=>memory[k]?structuredClone(memory[k]):'',setStorageSync:(k,v)=>memory[k]=structuredClone(v),showToast:o=>toasts.push(o.title),navigateTo(){},redirectTo(){},switchTab(){}};
  S.init();
 });
 test('local setup has four blank independent scorecards, restored on page reload',()=>{
@@ -20,7 +21,7 @@ test('local setup has four blank independent scorecards, restored on page reload
  for(const player of round.players){assert.deepEqual(round.scores[player.id],{});assert.equal(player.accountUid,undefined);}
  const score=page('score',{id:round.id});
  round.players.forEach((player,i)=>{score.selectPlayer(event({id:player.id}));score.quick(event({value:4+i}));});
- let restored=page('score',{id:round.id});assert.deepEqual(restored.data.tablePlayers.map(p=>p.cells[0].value),[4,5,6,7]);
+ let restored=page('score',{id:round.id});assert.deepEqual(restored.data.tablePlayers.map(p=>p.cells[0].value),["0","+1","+2","+3"]);
  restored.selectPlayer(event({id:round.players[1].id}));restored.step(event({delta:1}));restored.undo();
  restored.hole(event({pid:round.players[2].id,number:10}));restored.quick(event({value:3}));
  restored=page('score',{id:round.id});assert.equal(restored.data.h.number,10);assert.equal(restored.data.p.id,round.players[2].id);

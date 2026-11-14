@@ -4,6 +4,56 @@ const {createService} = require('../cloudfunctions/qingye/domain');
 const Catalog = require('../miniprogram/services/catalog');
 const course = require('../miniprogram/services/courses-data').courses.find(c=>c.id==='cn_bg_2525');
 
+test('draft cancellation is owner-only, version checked, repeatable, retained and closes all old invitation roles',async()=>{
+ const f=await fixture(),{api,activityId,invite,get,manual}=f;
+ const invites=await Promise.all(['player','scorer','watch'].map(role=>invite('a',role)));
+ let snapshot=await get('host');
+ await A.rejects(api('stranger','competitionCancel',{activityId,closeVersion:snapshot.closeVersion}),{code:'FORBIDDEN'});
+ await manual('a','new');
+ await A.rejects(api('host','competitionCancel',{activityId,closeVersion:snapshot.closeVersion}),{code:'CONFLICT'});
+ snapshot=await get('host');const input={activityId,closeVersion:snapshot.closeVersion};
+ const cancelled=await api('host','competitionCancel',input);A.equal(cancelled.status,'cancelled');A.equal(cancelled.groups[0].count,1);
+ A.equal((await api('host','competitionCancel',input)).status,'cancelled');
+ A.equal((await api('host','competitionList'))[0].status,'cancelled');
+ for(const inv of invites){A.equal((await api('a1','invitation',inv)).closed,true);await A.rejects(api('a1','join',{...inv,name:'A',tee:f.tee}),{code:'CLOSED'});}
+ await A.rejects(api('host','competitionStart',{activityId}),{code:'CLOSED'});
+ await A.rejects(invite('a','watch'),{code:'CLOSED'});
+});
+
+test('ending an active event preserves every score, closes all groups and does not affect another event',async()=>{
+ const f=await fixture(),{api,activityId,ctx,get,manual,schedule,invite}=f;
+ await manual('a','first');await manual('b','second');await schedule('a',1);await schedule('b',2);
+ const scorer=await invite('a','scorer'),player=await invite('a','player');await api('marker','join',scorer);
+ await api('host','competitionStart',{activityId});
+ let snapshot=await get('host'),board=await api('host','readBoard',ctx('a'));
+ await api('marker','scoreCell',{...ctx('a'),roundId:board.round.id,playerId:'manual-first',hole:1,score:{strokes:5},cellVersion:0,mutationId:'before-end'});
+ await A.rejects(api('host','competitionEnd',{activityId,closeVersion:snapshot.closeVersion}),{code:'CONFLICT'});
+ snapshot=await get('host');
+ const other=await api('host','competitionCreate',{requestId:'unaffected',title:'另一场',courseId:course.id,date:'2026-11-11',segmentIds:[Catalog.sections(course)[0].id]});
+ await A.rejects(api('marker','competitionEnd',{activityId,closeVersion:snapshot.closeVersion}),{code:'FORBIDDEN'});
+ const ended=await api('host','competitionEnd',{activityId,closeVersion:snapshot.closeVersion});A.equal(ended.status,'ended');
+ for(const id of ['a','b']){const read=await api('host','readBoard',ctx(id));A.equal(read.readOnly,true);A.equal(read.round.status,'finished_incomplete');}
+ board=await api('host','readBoard',ctx('a'));A.equal(board.round.scores['manual-first'][1].grossStrokes,5);A.equal(ended.groups[0].cards[0].state,'incomplete');
+ await A.rejects(api('marker','scoreCell',{...ctx('a'),roundId:board.round.id,playerId:'manual-first',hole:2,score:{strokes:4},cellVersion:0,mutationId:'after-end'}),{code:'CLOSED'});
+ for(const inv of [scorer,player])await A.rejects(api('stranger','join',{...inv,name:'later',tee:f.tee}),{code:'CLOSED'});
+ A.equal((await api('host','competitionGet',other)).status,'draft');
+ A.equal((await api('host','competitionEnd',{activityId})).status,'ended');
+ A.equal((await api('host','competitionPublish',{activityId})).status,'published');
+});
+
+test('a completed card can still be confirmed and formally published after recording has ended',async()=>{
+ const f=await fixture(),{api,activityId,ctx,manual,schedule,get}=f;
+ await manual('a','complete');await schedule('a',1);await api('host','competitionStart',{activityId});
+ let board=await api('host','readBoard',ctx('a'));
+ for(const h of board.round.holes)await api('host','scoreCell',{...ctx('a'),roundId:board.round.id,playerId:'manual-complete',hole:h.number,score:{strokes:h.par},cellVersion:0,mutationId:'hole-'+h.number});
+ const snapshot=await get('host');await api('host','competitionEnd',{activityId,closeVersion:snapshot.closeVersion});
+ let event=await get('host');A.equal(event.groups[0].cards[0].state,'open');A.equal(event.groups[0].cards[0].canRecordOffline,true);
+ await A.rejects(api('host','competitionPublish',{activityId}),/未交卡/);
+ await api('host','competitionConfirm',{...ctx('a'),playerId:'manual-complete',offline:true,version:event.groups[0].version});
+ event=await get('host');await api('host','competitionConfirm',{...ctx('a'),playerId:'manual-complete',version:event.groups[0].version});
+ event=await api('host','competitionPublish',{activityId});A.equal(event.status,'published');A.equal(event.rows[0].rank,1);
+});
+
 async function fixture() {
   let serial=0, sequence=Promise.resolve(), records={};
   const adapter = storage => ({
@@ -98,7 +148,7 @@ test('same-group editing, frozen submission, audit history, and final ranking ar
   await A.rejects(score('host','a','a1',1,4),{code:'FORBIDDEN'});
   const first=await score('a2','a','a1',1,4);
   await score('a1','a','a1',1,5,first.cells['a1:1'].version);
-  A.equal(Object.values(f.records()).filter(x=>x.kind==='score-audit').length,1);
+  A.equal(Object.values(f.records()).filter(x=>x.kind==='score-audit').length,2);
   A.equal((await get('a1')).groups[0].changes[0].actor,'a1');
   A.equal((await get('spectator')).groups[0].changes,undefined);
   for(let hole=2;hole<=9;hole++)await score('a2','a','a1',hole,4);
@@ -167,7 +217,7 @@ test('competition page resolves start prerequisites and opens a writable scoreca
   let page,navigation;
   vm.runInNewContext(fs.readFileSync(require.resolve('../miniprogram/packages/competition/index.js'),'utf8'),{
     Page:p=>page=p,setTimeout:()=>0,clearTimeout(){},wx:{showToast(){}},
-    require(name){
+    require(name){if(name.endsWith('/dialog'))return {}; 
       if(name.endsWith('/account'))return {user:()=>({uid:'host'}),needLogin:()=>true,call:(action,input)=>api('host',action,input)};
       if(name.endsWith('/catalog'))return Catalog;
       if(name.endsWith('/invite-code'))return {};
@@ -204,7 +254,7 @@ test('accepting the displayed default departure saves it before moving to review
   let page;
   vm.runInNewContext(fs.readFileSync(require.resolve('../miniprogram/packages/competition/index.js'),'utf8'),{
     Page:p=>page=p,setTimeout:()=>0,clearTimeout(){},wx:{showToast(){}},
-    require(name){
+    require(name){if(name.endsWith('/dialog'))return {}; 
       if(name.endsWith('/account'))return {user:()=>({uid:'host'}),needLogin:()=>true,call:(action,input)=>f.api('host',action,input)};
       if(name.endsWith('/catalog'))return Catalog;
       if(name.endsWith('/invite-code'))return {};

@@ -8,12 +8,12 @@ function fixture(){
  const wx={hideKeyboard(){},showToast(){},navigateTo:o=>{routes.push(o.url);navigation=o;},navigateBack:()=>back++};
  vm.runInNewContext(fs.readFileSync(require.resolve('../miniprogram/packages/competition/index.js'),'utf8'),{
   Page:d=>form=instance(d),wx,clearTimeout(){},setTimeout:()=>0,
-  require(name){if(name.endsWith('/account'))return {user:()=>({uid:'test'}),needLogin:()=>true,call:async()=>[]};if(name.endsWith('/catalog'))return C;if(name.endsWith('/invite-code'))return {};if(name.endsWith('/ui'))return {S};throw Error(name);}
+  require(name){if(name.endsWith('/dialog'))return {}; if(name.endsWith('/account'))return {user:()=>({uid:'test'}),needLogin:()=>true,call:async()=>[]};if(name.endsWith('/catalog'))return C;if(name.endsWith('/invite-code'))return {};if(name.endsWith('/ui'))return {S};throw Error(name);}
  });
  form.onLoad();form.beginSetup();form.setData({title:'我们的周末赛',date:'2026-11-15',localRules:'以当日球场公告为准'});
  const module={exports:{}};
  vm.runInNewContext(fs.readFileSync(require.resolve('../miniprogram/services/course-directory-page'),'utf8'),{module,wx,
-  require(name){if(name==='./ui')return {S,run:fn=>fn(),go:(...args)=>routes.push(args)};if(name==='./catalog')return C;
+  require(name){if(name.endsWith('/dialog'))return {}; if(name==='./ui')return {S,run:fn=>fn(),go:(...args)=>routes.push(args)};if(name==='./catalog')return C;
    if(name==='./location')return {state:()=>({status:'denied'}),locateCourse:c=>c,subscribe:()=>()=>{}};
    if(name==='./remote')return {sync:async()=>{}};if(name==='./course-map-route')return {mapInfo:()=>({types:[]})};
    if(name==='./media')return {local:async()=>''};if(name==='./scene')return {topInset:()=>30,selectTab(){},setTabHidden(){},courseThumbnail:()=>''};

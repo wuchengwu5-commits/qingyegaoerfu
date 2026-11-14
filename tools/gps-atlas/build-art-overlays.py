@@ -6,6 +6,14 @@ root=Path(__file__).resolve().parents[2]
 for source in (root/'qingye-miniprogram/data/maps').glob('*-art-overlay.json'):
     registration=json.loads(source.read_text())
     package=root/'qingye-miniprogram/miniprogram/packages'/registration['package']
+    # Reviewed display derivatives already have anchors in their own pixel space.
+    # Keep these separate from the immutable, unwarped library originals.
+    if registration.get('registeredArt'):
+        (package/'atlas-art-data.js').write_text('module.exports='+json.dumps(registration['registeredArt'],ensure_ascii=False,separators=(',',':'))+';\n')
+        marker='// Registered artwork over the GPS canvas.'
+        p=package/'atlas-config.js';s=p.read_text().split(marker)[0].rstrip()
+        p.write_text(s+'\n'+marker+'\nObject.assign(module.exports,{art:require("./atlas-art-data"),artDisplayRevision:'+json.dumps(registration['revision'])+'});\n')
+        continue
     references=json.loads((package/'reference-holes.js').read_text().removeprefix('module.exports=').strip().removesuffix(';'))
     manifest={}
     for entry in registration['holes']:

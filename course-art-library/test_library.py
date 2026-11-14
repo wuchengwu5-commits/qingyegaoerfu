@@ -70,5 +70,20 @@ class GpsArchiveTests(unittest.TestCase):
   bad=json.loads(json.dumps(self.document));bad['holes'][0]['_id']='h2'
   with self.assertRaises(ValueError):self.lib.save_gps('c',bad,{},'错误')
   self.assertEqual(self.lib.gps('c')['versions'],[])
+ def test_overview_without_confirmed_holes_preserves_unknown_identity(self):
+  self.lib.catalog({'courses':[{'id':'empty','name':'洞序待核对','segments':[]}]})
+  doc={'courseId':'empty','kind':'overview','holes':[]}
+  vid,_=self.lib.save_gps('empty',doc,{'overview.jpg':self.file},'仅全览')
+  self.assertEqual(self.lib.gps('empty')['current'],vid)
+  self.assertEqual(self.lib.course('empty')['holes'],[])
+  with self.assertRaises(ValueError):self.lib.save_gps('absent',{'courseId':'absent','kind':'overview','holes':[]},{},'不存在')
+  with self.assertRaises(ValueError):self.lib.save_gps('empty',{**doc,'kind':'gps'},{},'错误')
+ def test_inventory_excludes_archived_holes_without_deleting_history(self):
+  from inventory import course_inventory
+  self.lib.catalog({'courses':[{'id':'c','name':'测试球场','segments':[{'id':'s','name':'A','holes':[{'id':'h1','label':'1','par':4},{'id':'old','label':'旧2','par':3}]}]}]})
+  self.save({**self.document,'scope':'partial','archivedInactiveHoles':['old','nonexistent']})
+  row=next(r for r in course_inventory(self.lib) if r['id']=='c')
+  self.assertEqual((row['hole_count'],row['gps_count'],row['archived_hole_count']),(1,1,1))
+  self.assertEqual(len(self.lib.course('c')['holes']),2)
 
 if __name__=='__main__':unittest.main(verbosity=2)

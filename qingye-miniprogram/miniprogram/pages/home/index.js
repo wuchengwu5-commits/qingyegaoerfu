@@ -11,9 +11,9 @@ Page({
  onReady(){if(L.state().status==='idle')L.request();},
  onHide(){this.shown=false;clearTimeout(this.weatherTimer);this.weatherTimer=null;},
  onUnload(){this.onHide();if(this.offWeather)this.offWeather();if(wx.offNetworkStatusChange)wx.offNetworkStatusChange(this.network);if(this.offBackground)this.offBackground();if(this.off)this.off();},
- onShow(){if(wx.showShareMenu)wx.showShareMenu({menus:['shareAppMessage','shareTimeline']});this.shown=true;B.apply();this.setData({slogan:Slogans.get('home')});Scene.selectTab(this,0);this.refresh();this.scheduleWeather(W.state());if(L.state().status==='ready')L.request();Remote.sync().then(()=>this.refresh()).catch(()=>{});},
- onShareAppMessage(){return {title:SHARE_TITLE,path:'/pages/home/index',imageUrl:'/assets/retreat.jpg'};},
- onShareTimeline(){return {title:SHARE_TITLE,query:''};},
+ onShow(){if(require('../../services/score-entry').handleAppEntry())return;if(wx.showShareMenu)wx.showShareMenu({menus:['shareAppMessage','shareTimeline']});this.shown=true;B.apply();this.setData({slogan:Slogans.get('home')});Scene.selectTab(this,0);this.refresh();this.scheduleWeather(W.state());if(L.state().status==='ready')L.request();Remote.sync().then(()=>this.refresh()).catch(()=>{});},
+ onShareAppMessage(){return {title:SHARE_TITLE,path:'/pages/home/index',imageUrl:this.data.sceneSrc||B.FALLBACK};},
+ onShareTimeline(){return {title:SHARE_TITLE,query:'',imageUrl:this.data.sceneSrc||B.FALLBACK};},
  updateWeather(){return W.updateCourse(this.weatherCourse);},
  scheduleWeather(s){clearTimeout(this.weatherTimer);this.weatherTimer=null;if(!this.shown)return;this.weatherTimer=setTimeout(()=>{if(this.shown)this.updateWeather();},W.refreshDelay(s));if(this.weatherTimer&&this.weatherTimer.unref)this.weatherTimer.unref();},
  refresh(){run(()=>{
@@ -26,8 +26,8 @@ Page({
   this.weatherCourse=c;if(this.shown)this.updateWeather();
  });},
  locate(){if(L.state().status==='denied')L.settings();else L.request(true);},
- start(){const a=S.active();if(a)go('score','?id='+a.id);else if(this.data.featured.id){const c=S.courses.find(c=>c.id===this.data.featured.id);go(C.canScore(c)?'create':'course',(C.canScore(c)?'?course=':'?id=')+c.id);}else tab('courses');},
+ start(){require('../../services/score-entry').resume();},
  courses(){tab('courses');},
  course(e){const id=e.currentTarget.dataset.id;if(id)go('course','?id='+id);else if(!L.state().fix)this.locate();else tab('courses');},
- sceneError(){B.imageFailed();},history(){go('history');},about(){go('about');},play(){tab('courses');}
+ sceneError(){B.imageFailed();},history(){go('history');},about(){go('about');},play(){require('../../services/score-entry').resume();}
 });

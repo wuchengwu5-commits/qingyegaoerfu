@@ -1,0 +1,29 @@
+<root-portal wx:if="{{open}}">
+ <view class="dialog-layer" catchtouchmove="stop">
+  <view class="dialog-mask" bindtap="mask"></view>
+  <view class="dialog-sheet" style="bottom:{{keyboard}}px;max-height:calc(88vh - {{keyboard}}px)" role="dialog" aria-label="{{title}}">
+   <view class="dialog-grip"></view>
+   <view class="dialog-heading"><text class="dialog-title">{{title}}</text><button wx:if="{{showCancel}}" class="dialog-button dialog-close" bindtap="close" aria-label="关闭弹出框">×</button></view>
+   <scroll-view wx:if="{{kind==='modal'}}" scroll-y class="dialog-copy">
+    <text wx:if="{{content}}" class="dialog-message">{{content}}</text><text wx:if="{{message}}" class="dialog-message">{{message}}</text>
+    <input wx:if="{{editable}}" class="dialog-input" value="{{inputValue}}" type="{{inputType}}" maxlength="{{maxLength}}" placeholder="{{placeholder}}" placeholder-class="dialog-placeholder" bindinput="input" bindkeyboardheightchange="keyboard" adjust-position="{{false}}" confirm-type="done" bindconfirm="confirm" aria-label="{{title}}"/>
+   </scroll-view>
+   <scroll-view wx:elif="{{kind==='select'||kind==='actions'}}" scroll-y class="dialog-options" scroll-into-view="{{scrollTo}}">
+    <view wx:for="{{options}}" wx:key="index" id="option-{{index}}" class="dialog-option {{kind==='select'&&selected===index?'is-selected':''}} {{item.disabled?'is-disabled':''}}" data-index="{{index}}" bindtap="choose" role="button" aria-label="{{item.label}}" aria-disabled="{{item.disabled}}">
+     <view wx:if="{{item.color}}" class="dialog-swatch" style="background:{{item.color}}"></view>
+     <text class="dialog-option-label">{{item.label}}</text><text class="dialog-check">{{kind==='actions'?'›':selected===index?'✓':''}}</text>
+    </view>
+   </scroll-view>
+   <view wx:elif="{{kind==='date'}}" class="dialog-calendar">
+    <view class="calendar-heading"><button class="dialog-button calendar-nav" data-delta="-12" bindtap="changeMonth" aria-label="上一年">«</button><button class="dialog-button calendar-nav" data-delta="-1" bindtap="changeMonth" aria-label="上个月">‹</button><text class="calendar-month">{{year}} 年 {{month}} 月</text><button class="dialog-button calendar-nav" data-delta="1" bindtap="changeMonth" aria-label="下个月">›</button><button class="dialog-button calendar-nav" data-delta="12" bindtap="changeMonth" aria-label="下一年">»</button></view>
+    <view class="calendar-grid"><text wx:for="{{weekdays}}" wx:key="*this" class="calendar-weekday">{{item}}</text><view wx:for="{{days}}" wx:key="key" class="calendar-day {{date===item.value?'is-selected':''}} {{item.disabled?'is-disabled':''}}" data-value="{{item.value}}" bindtap="chooseDate" role="button" aria-label="{{item.value}}" aria-disabled="{{item.disabled}}">{{item.label}}</view></view>
+   </view>
+   <view wx:elif="{{kind==='time'}}" class="dialog-time">
+    <view class="time-column"><view class="time-label">时 · {{hour}}</view><scroll-view scroll-y class="time-list" scroll-into-view="{{hourScroll}}"><view wx:for="{{hours}}" wx:key="*this" id="hour-{{item}}" class="time-option {{hour===item?'is-selected':''}}" data-part="hour" data-value="{{item}}" bindtap="chooseTime">{{item}}</view></scroll-view></view>
+    <text class="time-colon">:</text>
+    <view class="time-column"><view class="time-label">分 · {{minute}}</view><scroll-view scroll-y class="time-list" scroll-into-view="{{minuteScroll}}"><view wx:for="{{minutes}}" wx:key="*this" id="minute-{{item}}" class="time-option {{minute===item?'is-selected':''}}" data-part="minute" data-value="{{item}}" bindtap="chooseTime">{{item}}</view></scroll-view></view>
+   </view>
+   <view class="dialog-actions"><button wx:if="{{showCancel}}" class="dialog-button dialog-cancel" bindtap="close">{{cancelText}}</button><button wx:if="{{kind!=='actions'}}" class="dialog-button dialog-confirm" bindtap="confirm">{{confirmText}}</button></view>
+  </view>
+ </view>
+</root-portal>

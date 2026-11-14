@@ -1,3 +1,4 @@
+const Dialog = require('./dialog');
 const Account = require('./account');
 const Store = require('./store');
 const Sync = require('./cloud-sync');
@@ -8,6 +9,7 @@ const Rules = require('./rules');
 function message(error) { return error.message || '连接失败，请重试'; }
 
 module.exports = {
+  ...require('./score-roster-page'),
   setupBoard(options) {
     if (options.activity && options.group) this.remoteRef = {activityId:options.activity,groupId:options.group};
     this.setData({remoteBoard:!!this.remoteRef});
@@ -19,9 +21,10 @@ module.exports = {
     return ref && Account.user() && !Store.isEditing(this.rid) ? Queue.overlay(r,Queue.read(Shared.pendingKey(ref))) : r;
   },
   pendingCells() {const ref=this.ref();return ref && Account.user()?Queue.read(Shared.pendingKey(ref)):[];},
-  updatePending() {if(this.boardVisible)this.setData({pendingCellCount:this.pendingCells().length,cellBusy:!!this.writing});},
+  updatePending() {if(this.boardVisible)this.setData({conflictCellCount:this.ref()&&Account.user()?Queue.conflicts(Shared.pendingKey(this.ref())).length:0,pendingCellCount:this.pendingCells().length,cellBusy:!!this.writing});},
   showBoard() {
     this.boardVisible = true;
+    this.profilesCheckedAt = 0;
     this.setData({joiningBusy:!!this.opening,cellBusy:!!this.writing});
     this.updatePending();
     if(this.remoteRef && (!Account.user() || this.remoteUid!==Account.user().uid)){
@@ -107,7 +110,7 @@ module.exports = {
   },
   boardSettled(){
     if(!this.data.liveBoard&&!this.opening)return true;
-    if(this.opening||this.writing||!Account.user()||wx.getStorageSync(Shared.pendingKey(this.ref()))||wx.getStorageSync(this.virtualKey(this.ref()))){
+    if(this.opening||this.writing||!Account.user()||Sync.pending(this.rid)||Queue.conflicts(Shared.pendingKey(this.ref())).length||wx.getStorageSync(Shared.pendingKey(this.ref()))||wx.getStorageSync(this.virtualKey(this.ref()))||wx.getStorageSync(this.removalKey(this.ref()))){
       wx.showToast({title:'请先完成当前记分同步',icon:'none'});
       return false;
     }
@@ -115,27 +118,29 @@ module.exports = {
   },
   boardLogin(){Account.needLogin();},
   showSnapshot(board) {
+    if(board?.round||board?.version!==undefined)this.boardReadOnly=!!board.readOnly;
     if(board?.ownerUid)this.boardOwnerUid=board.ownerUid;
     if(board?.primaryScorerUid)this.primaryScorerUid=board.primaryScorerUid;
     if(board?.competition){
-      this.competitionBoard=true;
+      this.competitionBoard=true;this.correctionOpen=!!board.correctionOpen;
       if(board.readOnly!==undefined)this.boardReadOnly=board.readOnly;
       this.lockedPlayers=board.lockedPlayers||[];
     }
     if(board?.routeEditingSupported)this.routeEditingSupported=true;
-    if(board?.profiles)this.boardProfiles=board.profiles;
+    if(board?.profiles){this.boardProfiles=board.profiles;this.profilesCheckedAt=Date.now();}
     if(board?.scorerUids)this.boardScorerUids=board.scorerUids;
     if(board?.rosterEditingSupported)this.rosterEditingSupported=true;
+    if(board?.playerRemovalSupported!==undefined)this.playerRemovalSupported=!!board.playerRemovalSupported;
     if(!board?.round || !this.boardVisible)return;
     if(this.remoteRef){
       if(this.boardVersion>board.version)return;
-      const prior=this.remoteRound;
+      const prior=this.remoteRound||require('./score-entry').restoreCursor({activity:this.remoteRef.activityId,group:this.remoteRef.groupId},board.round);
       const mine=board.round.players.find(p=>p.accountUid===Account.user()?.uid);
       const physicalHole=prior?.holes.find(h=>h.number===prior.currentHole)?.id;
       const cursor=physicalHole?board.round.holes.find(h=>h.id===physicalHole)?.number:null;
       if(prior && prior.courseSnapshot?.routeRevision!==board.round.courseSnapshot?.routeRevision)this.lastCell=null;
       this.remoteRound={...board.round,currentHole:cursor||board.round.currentHole,
-        currentPlayer:prior?.currentPlayer||mine?.id||board.round.currentPlayer};
+        currentPlayer:board.round.players.some(p=>p.id===prior?.currentPlayer)?prior.currentPlayer:mine?.id||board.round.currentPlayer};
       this.remoteUid=Account.user()?.uid;
       this.cellStamps=board.cells;
       this.boardVersion=board.version;
@@ -144,12 +149,13 @@ module.exports = {
     this.refresh();
   },
   async pollBoard() {
-    if(!this.boardVisible || this.pulling || this.writing || (!this.remoteRef && Store.isEditing(this.rid)))return;
+    if(!this.boardVisible || this.pulling || this.writing || this.opening || (!this.remoteRef && Store.isEditing(this.rid)))return;
     const ref=this.ref();
     if(!ref)return;
     const user=Account.user();
     this.setData({boardLoginNeeded:!user});
     if(!user)return;
+    if(wx.getStorageSync(this.removalKey(ref))){await this.submitRemoval(ref);return;}
     if(wx.getStorageSync(this.virtualKey(ref))){await this.submitVirtual(ref);return;}
     this.pulling=true;
     try{
@@ -167,13 +173,18 @@ module.exports = {
       // A whole-round route save advances the version; fetch its new cell stamps
       // before accepting more scores, even when the server data is already local.
       const version=this.remoteRef?this.boardVersion:localRound?.cloud?.serverVersion;
-      const board=await Account.call('readBoard',{...Shared.context(ref),version,includeProfiles:!this.boardProfiles});
+      const board=await Account.call('readBoard',{...Shared.context(ref),version,includeProfiles:!this.boardProfiles||Date.now()-(this.profilesCheckedAt||0)>=30000});
       if(this.boardVisible && Account.user()?.uid===user.uid){
         this.showSnapshot(board);
         if((board.profiles||board.scorerUids)&&!board.round)this.refresh();
         this.setData({boardError:'',boardConflict:false});
       }
-    }catch(e){if(this.boardVisible)this.setData({boardError:message(e)});}
+    }catch(e){
+      if(Account.user()?.uid!==user.uid)return;
+      if(['FORBIDDEN','NOT_FOUND','CLOSED'].includes(e.code))require('./score-entry').forget(this.rid);
+      if(e.code==='FORBIDDEN')this.boardReadOnly=true;
+      if(this.boardVisible)this.setData({boardError:message(e),...(e.code==='FORBIDDEN'?{scoreLocked:true}:{})});
+    }
     finally{this.pulling=false;}
   },
   cellTarget(){
@@ -183,10 +194,10 @@ module.exports = {
       routeRevision:r.courseSnapshot?.routeRevision||0,physicalHoleId:r.holes.find(h=>h.number===hole)?.id};
   },
   async writeCell(score,target) {
-    if(this.boardReadOnly||this.lockedPlayers?.includes(target.playerId))return;
-    if(this.opening||!Account.needLogin())return;
+    if(this.boardReadOnly||this.lockedPlayers?.includes(target.playerId))return false;
+    if(this.opening||!Account.needLogin())return false;
     const ref=this.ref(),key=Shared.pendingKey(ref);
-    if(!this.remoteRef && Sync.pending(this.rid))return wx.showToast({title:'请先同步上一笔球局修改',icon:'none'});
+    if(!this.remoteRef && Sync.pending(this.rid)){wx.showToast({title:'请先同步上一笔球局修改',icon:'none'});return false;}
     try {
       Rules.validateScore(score);
       const r=this.viewedRound();
@@ -198,8 +209,8 @@ module.exports = {
       Queue.save(key,entries);
       this.refresh(Queue.overlay(r,[entries[entries.length-1]]));
       this.updatePending();
-    }catch(e){this.setData({boardError:message(e)});return;}
-    return this.submitCell(ref);
+    }catch(e){this.setData({boardError:message(e)});return false;}
+    await this.submitCell(ref);return true;
   },
   async submitCell(ref){
     if(this.writing||!Account.user())return;
@@ -224,7 +235,8 @@ module.exports = {
         }catch(e){
           if(Account.user()?.uid!==uid)break;
           const definitive=['CELL_CONFLICT','CLOSED','FORBIDDEN','INVALID','INVALID_SCORE','CONCESSION_SCOPE'].includes(e.code);
-          if(definitive)Queue.reject(key,req,['CLOSED','FORBIDDEN'].includes(e.code));
+          if(e.code==='FORBIDDEN'){this.boardReadOnly=true;if(this.boardVisible)this.setData({scoreLocked:true});}
+          if(definitive)Queue.reject(key,req,['CLOSED','FORBIDDEN'].includes(e.code),message(e));
           if(this.boardVisible){
             this.setData({boardError:definitive?message(e):'本机已记，联网后继续同步'});
             if(definitive){
@@ -238,6 +250,30 @@ module.exports = {
         }
       }
     }finally{this.writing=false;this.updatePending();}
+  },
+  async resolveCellConflict(){
+    if(this.resolvingConflict||!Account.user())return;
+    const uid=Account.user().uid,ref=this.ref(),key=Shared.pendingKey(ref),conflict=Queue.conflicts(key)[0];if(!conflict)return;
+    this.resolvingConflict=true;
+    try{
+      const board=await Account.call('readBoard',Shared.context(ref));if(Account.user()?.uid!==uid)return;this.showSnapshot(board);
+      const last=conflict.entries[conflict.entries.length-1].request,round=board.round,player=round.players.find(p=>p.id===last.playerId),hole=round.holes.find(h=>h.number===last.hole&&(!last.physicalHoleId||h.id===last.physicalHoleId));
+      const value=s=>s?.grossStrokes??s?.strokes??(s?'特殊记录':'空白');
+      const local=value(last.score),remote=value(round.scores[last.playerId]?.[last.hole]);
+      const canApply=player&&hole&&(last.routeRevision||0)===(round.courseSnapshot?.routeRevision||0)&&(!Rules.isFinished(round)||board.correctionOpen)&&round.status!=='cancelled'&&!board.lockedPlayers?.includes(last.playerId)&&!board.readOnly;
+      const choice=await new Promise(resolve=>Dialog.actionSheet({title:(player?.name||'球友')+' · '+(hole?.label||last.hole)+'洞：本机 '+local+' / 组内 '+remote,itemList:canApply?['采用组内最新成绩','核对后提交本机成绩']:['采用组内最新成绩（保留修改历史）'],success:r=>resolve(r.tapIndex),fail:()=>resolve(-1)}));
+      if(choice<0||Account.user()?.uid!==uid)return;
+      if(choice===1&&canApply){
+        const saved=await this.writeCell(last.score,{...last,cellVersion:board.cells[last.playerId+':'+last.hole]?.version||0});
+        if(!saved)return;
+        // If another conflict occurred, keep the new intent and history available.
+        const newer=Queue.conflicts(key).find(x=>x.id===conflict.id);
+        if(newer?.entries.length!==conflict.entries.length)return;
+      }
+      // Preserve the compared values and resolution for later inspection.
+      const history=wx.getStorageSync(key+'.resolved')||[];wx.setStorageSync(key+'.resolved',[...history,{...conflict,resolution:choice===1?'local':'remote',remoteValue:remote,resolvedAt:Date.now()}]);
+      Queue.resolve(key,conflict.id);this.updatePending();
+    }catch(e){this.setData({boardError:message(e)});}finally{this.resolvingConflict=false;}
   },
   undoCell(){
     const ref=this.ref(),entries=this.pendingCells(),last=entries[entries.length-1];
@@ -262,7 +298,7 @@ module.exports = {
     const r=this.viewedRound(),Roster=require('./score-roster');
     if(r.cloud&&!r.cloud.live)return wx.showToast({title:'请先联网开启共同记分，再添加球友',icon:'none'});
     if(!Roster.canAdd(r))return wx.showToast({title:r.players.length>=Rules.GROUP_MAX_PLAYERS?'每组最多 16 人，请新建另一组':'本场玩法人数固定，请新建另一组',icon:'none'});
-    wx.showModal({title:'添加手动球员',editable:true,placeholderText:'输入昵称',content:'球友'+(r.players.length+1),success:result=>{
+    Dialog.modal({title:'添加手动球员',editable:true,placeholderText:'输入昵称',content:'球友'+(r.players.length+1),success:result=>{
       if(!result.confirm)return;
       try{
         const name=(result.content||'').trim(),current=this.viewedRound(),id='virtual-'+Store.id();
@@ -294,19 +330,15 @@ module.exports = {
     try{if(!this.ref()?.live&&!this.remoteRef)await this.enableSharing(false);const ref=this.ref();if(ref)this.showSnapshot(await Account.call('primaryScorer',{...Shared.context(ref),scorerId}));}
     catch(error){this.setData({boardError:message(error)});}
   },
-  finishRemote(){
-    if(!this.data.canFinishRemote||!this.boardSettled())return;
-    const version=this.boardVersion;
-    wx.showModal({title:'检查并结束本轮',content:'未记球洞会保留空白。结束后，全组停止录入。',success:async result=>{
-      if(!result.confirm)return;
-      try{this.showSnapshot(await Account.call('finishBoard',{...Shared.context(this.ref()),version}));}
-      catch(error){this.setData({boardError:message(error)});}
-    }});
+  async finishRemote(){
+    if(this.finishing||!this.data.canFinishRemote||!this.boardSettled())return;
+    this.finishing=true;try{if(await require('./end-round')({id:this.rid,...Shared.context(this.ref())})){this.showSnapshot(await Account.call('readBoard',Shared.context(this.ref())));this.result();}}
+    catch(e){this.setData({boardError:message(e)});}finally{this.finishing=false;}
   },
   removeScorer(e){
     if(!this.data.canInvite)return;
     const uid=e.currentTarget.dataset.uid;
-    wx.showModal({title:'移除记分员',content:'移除后，对方将不能继续编辑本组成绩。',success:async result=>{
+    Dialog.modal({title:'移除记分员',content:'移除后，对方将不能继续编辑本组成绩。',success:async result=>{
       if(!result.confirm)return;
       try{this.showSnapshot(await Account.call('removeScorer',{...Shared.context(this.ref()),uid}));}
       catch(error){this.setData({boardError:message(error)});}
@@ -318,12 +350,12 @@ module.exports = {
       wx.navigateTo({url:'/packages/competition/index?id='+encodeURIComponent(activity)+'&group='+encodeURIComponent(this.remoteRef?.groupId||'')});
       return;
     }
-    wx.switchTab({url:'/pages/play/index'});
+    require('./score-entry').hub();
   },
   resolveBoard(){
     const item=Sync.pending(this.rid);
     if(!item || item.errorCode!=='CONFLICT')return this.pollBoard();
-    wx.showModal({title:'同步同组成绩',content:'将当前记录另存为本机副本，然后载入组内最新记分牌。',confirmText:'保留并刷新',success:async res=>{
+    Dialog.modal({title:'同步同组成绩',content:'将当前记录另存为本机副本，然后载入组内最新记分牌。',confirmText:'保留并刷新',success:async res=>{
       if(!res.confirm)return;
       try{
         const board=await Account.call('readBoard',Shared.context(this.ref()));

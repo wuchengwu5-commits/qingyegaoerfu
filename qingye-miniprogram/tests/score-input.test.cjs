@@ -77,3 +77,10 @@ test('pending virtual-seat retries keep the original ID after a lost response',a
  const round=structuredClone(x.p.remoteRound);round.players.push({id:'v1',name:'虚拟球友'});round.scores.v1={};x.waiting.shift().resolve({round,cells:{},version:1});await retry;
  assert.equal(wx.getStorageSync(key),null);assert.equal(x.p.remoteRound.players.length,3);
 });
+test('unchanged boards refresh names and avatars periodically without another score mutation',async()=>{
+ const x=setup(),requests=[];let refreshes=0;x.p.boardVersion=7;x.p.refresh=()=>refreshes++;
+ x.account.call=async(action,request)=>{requests.push({action,request});return {version:7,...(request.includeProfiles?{profiles:[{uid:'u1',name:'已更新球友',avatarUrl:'cloud://avatar'}]}:{})};};
+ await x.p.pollBoard();assert.equal(requests[0].request.includeProfiles,true);assert.equal(x.p.boardProfiles[0].name,'已更新球友');assert.equal(refreshes,1);
+ await x.p.pollBoard();assert.equal(requests[1].request.includeProfiles,false);
+ x.p.profilesCheckedAt=Date.now()-31000;await x.p.pollBoard();assert.equal(requests[2].request.includeProfiles,true);assert.equal(refreshes,2);assert.equal(x.p.boardVersion,7);assert.ok(requests.every(r=>r.action==='readBoard'));
+});

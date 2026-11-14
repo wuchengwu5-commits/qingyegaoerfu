@@ -1,0 +1,1 @@
+<view bindtap="open" role="button" aria-label="{{title}}" aria-disabled="{{disabled}}"><slot/></view>

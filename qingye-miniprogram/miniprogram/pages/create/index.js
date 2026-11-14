@@ -1,5 +1,7 @@
+const Dialog = require('../../services/dialog');
 const {S,run,go}=require('../../services/ui'),R=require('../../services/rules'),C=require('../../services/catalog'),A=require('../../services/account');
 const Policies=require('../../services/scoring-policies');
+const Location=require('../../services/location'),Shortcuts=require('../../services/course-shortcuts');
 function fillTestPlayers(draft){
  for(let n=1;n<=3&&draft.players.length<4;n++){
   const id='local-test-'+n;
@@ -7,14 +9,14 @@ function fillTestPlayers(draft){
  }
  draft.testPlayersInitialized=true;
 }
-Page({data:{policies:Policies.options,maxPlayers:R.GROUP_MAX_PLAYERS,step:1,steps:[{id:1,name:'球场路线'},{id:2,name:'同组球员'},{id:3,name:'规则确认'}],showFriends:false},onLoad(o){this.testing=o.demo==='1'&&(!!wx.__preview||wx.getAccountInfoSync?.().miniProgram?.envVersion==='develop');this.courseId=o.course;this.activityId=o.activity;this.groupId=o.group;},onShow(){this.visible=true;run(()=>{
+Page({data:{policies:Policies.options,maxPlayers:R.GROUP_MAX_PLAYERS,step:1,steps:[{id:1,name:'球场路线'},{id:2,name:'同组球员'},{id:3,name:'规则确认'}],showFriends:false,ready:false,loadError:'',showCourseShortcuts:false,nearbyCourses:[],favoriteCourses:[],favoriteCourseCount:0,shortcutLocation:{status:'idle'},shortcutLocationCaption:''},onLoad(o={}){this.destroyed=false;this.fresh=o.fresh==='1';this.testing=o.demo==='1'&&(!!wx.__preview||wx.getAccountInfoSync?.().miniProgram?.envVersion==='develop');this.courseId=o.course;this.activityId=o.activity;this.groupId=o.group;this.offShortcutLocation=Location.subscribe(()=>{if(this.visible&&!this.destroyed&&!this.courseId&&!this.activityId)this.refreshCourseShortcuts();});},onReady(){this.shortcutsReady=true;this.requestShortcutLocation();},onShow(){this.visible=true;this.openingCoursePicker=false;if(!this.courseId){this.setData({ready:true,loadError:'',course:null,draft:null,step:1,showCourseShortcuts:!this.activityId});this.refreshCourseShortcuts();if(this.shortcutsReady)this.requestShortcutLocation();return;}const loaded=run(()=>{
  const d=S.read(),c=S.courses.find(c=>c.id===this.courseId);
- if(!c)throw Error('球场不存在');
+ if(!c?.tees?.length||!C.canScore(c))throw Error('请选择资料完整的球场');
  const activityId=this.activityId||null,groupId=this.groupId||null;
  const changedGroup=d.draft&&((d.draft.activityId||null)!==activityId||(d.draft.groupId||null)!==groupId);
  const legacyGroup=d.draft&&!d.draft.selectedFriends&&!activityId&&d.draft.players.some(p=>p.id!=='me'&&p.accountUid);
- if(!d.draft||d.draft.courseId!==c.id||changedGroup||legacyGroup){
-  S.mutate(x=>x.draft={courseId:c.id,activityId,groupId,distanceUnit:d.settings.unit==='m'?'m':'yd',segmentIds:C.sections(c).slice(0,2).map(s=>s.id),players:[{id:'me',name:d.profile.name,tee:c.tees[0]}],ruleSnapshot:R.defaultRules('record_only')});
+ if(this.fresh||!d.draft||d.draft.courseId!==c.id||changedGroup||legacyGroup){
+  S.mutate(x=>x.draft={courseId:c.id,activityId,groupId,distanceUnit:d.settings.unit==='m'?'m':'yd',segmentIds:C.sections(c).filter(s=>s.holes.length===9&&s.holes.every(h=>[3,4,5,6].includes(h.par))).slice(0,2).map(s=>s.id),players:[{id:'me',name:d.profile.name,tee:c.tees[0]}],ruleSnapshot:R.defaultRules('record_only')});
  }else if(!['yd','m'].includes(d.draft.distanceUnit)||'start' in d.draft){
   S.mutate(x=>{
    if(!['yd','m'].includes(x.draft.distanceUnit))x.draft.distanceUnit=d.settings.unit==='m'?'m':'yd';
@@ -24,7 +26,7 @@ Page({data:{policies:Policies.options,maxPlayers:R.GROUP_MAX_PLAYERS,step:1,step
  }
  if(!activityId)S.mutate(x=>{
   const draft=x.draft,me=draft.players.find(p=>p.id==='me');
-  if(me)me.name=x.profile.name;
+  if(me){me.name=x.profile.name;me.avatarUrl=x.profile.avatarUrl||'';if(x.profile.accountUid)me.accountUid=x.profile.accountUid;}
   if(this.testing){
    if(!draft.testPlayersInitialized)fillTestPlayers(draft);
   }else if(draft.players.some(p=>p.isTest)){
@@ -33,16 +35,60 @@ Page({data:{policies:Policies.options,maxPlayers:R.GROUP_MAX_PLAYERS,step:1,step
    delete draft.testPlayersInitialized;
   }
  });
+ this.fresh=false;
  this.refresh();
  if(!activityId&&A.user())this.loadFriends();
  if(activityId&&A.user()){this.groupReady=false;this.loadGroup();}
-});},onHide(){this.visible=false;},onUnload(){this.visible=false;},
+ return true;
+});this.setData({ready:!!loaded,loadError:loaded?'':'球局资料未能载入，请重试。已有球局和成绩仍保留。'});},retryLoad(){this.onShow();},onHide(){this.visible=false;},onUnload(){this.visible=false;this.destroyed=true;this.offShortcutLocation?.();},
+refreshCourseShortcuts(){
+ if(this.destroyed||this.courseId||this.activityId)return;
+ const loc=Location.state(),cached=loc.fix&&(!!loc.error||Date.now()-loc.fix.time>Location.CACHE_MS);
+ this.setData({...Shortcuts.build(S.courses,S.read().favorites||[],loc.fix),shortcutLocation:loc,shortcutLocationCaption:loc.fix?(cached?'按上次位置排序':'按距离由近到远'):''});
+},
+requestShortcutLocation(){
+ if(!this.visible||this.destroyed||this.courseId||this.activityId)return;
+ return Location.request().then(()=>{if(this.visible&&!this.destroyed&&!this.courseId)this.refreshCourseShortcuts();});
+},
+locateShortcuts(){
+ if(this.destroyed||this.courseId||this.activityId||Location.state().refreshing)return;
+ return Location.state().status==='denied'?Location.settings():Location.request(true);
+},
+selectSuggestedCourse(e){
+ if(!this.visible||this.destroyed||this.activityId||this.courseId)return;
+ const id=e.currentTarget.dataset.id;
+ if(![...this.data.nearbyCourses,...this.data.favoriteCourses].some(c=>c.id===id))return;
+ this.chooseCourse(id);
+ if(this.courseId===id)this.scrollTop();
+},
+openCoursePicker(){
+ if(this.openingCoursePicker||this.activityId)return;
+ this.openingCoursePicker=true;
+ wx.navigateTo({url:'/packages/competition/course-picker?context=round&selected='+encodeURIComponent(this.courseId||''),events:{courseSelected:selection=>{
+  if(!this.destroyed)this.chooseCourse(selection.id);
+ }},fail:()=>{this.openingCoursePicker=false;wx.showToast({title:'球场页暂未打开，请重试',icon:'none'});}});
+},
+chooseCourse(id){
+ const c=S.courses.find(c=>c.id===id);
+ if(!c?.tees?.length||!C.canScore(c)||id===this.courseId)return;
+ const changed=run(()=>{
+  // A course change keeps the roster and general rules; hole-specific settings need a new route.
+  if(this.data.draft&&!this.fresh)S.mutate(d=>{
+   if(d.draft?.courseId!==this.courseId)throw Error('开局设置已变化，请返回记分页重新进入');
+   d.draft.courseId=id;d.draft.segmentIds=C.sections(c).filter(s=>s.holes.length===9&&s.holes.every(h=>[3,4,5,6].includes(h.par))).slice(0,2).map(s=>s.id);
+   d.draft.players.forEach(p=>{if(!c.tees.includes(p.tee))p.tee=c.tees[0];});
+   d.draft.ruleSnapshot.handicap={mode:'none'};d.draft.ruleSnapshot.sideGames=[];d.draft.setupStep=1;delete d.draft.start;
+  });
+  return true;
+ });
+ if(changed){this.courseId=id;this.onShow();}
+},
 scrollTop(){if(wx.pageScrollTo)wx.pageScrollTo({scrollTop:0,duration:180});},
-setStep(e){const step=Number(e.currentTarget.dataset.id);if(step>=1&&step<=3){this.change(d=>d.setupStep=step);this.scrollTop();}},
-next(){if(this.data.step<3){this.change(d=>d.setupStep=Math.min(3,(d.setupStep||1)+1));this.scrollTop();}else this.start();},
+setStep(e){const step=Number(e.currentTarget.dataset.id);if(step>1&&!this.data.course)return wx.showToast({title:'请先选择球场',icon:'none'});if(step>=1&&step<=3&&this.data.course){this.change(d=>d.setupStep=step);this.scrollTop();}},
+next(){if(!this.data.ready)return;if(!this.data.course)return this.openCoursePicker();if(this.data.step<3){this.change(d=>d.setupStep=Math.min(3,(d.setupStep||1)+1));this.scrollTop();}else this.start();},
 previous(){this.change(d=>d.setupStep=Math.max(1,(d.setupStep||1)-1));this.scrollTop();},
 inviteToggle(e){this.change(d=>d.inviteAfterStart=!!e.detail.value);},
-addPlayer(){wx.showActionSheet({itemList:['手动填写球员','从常用球友选择'],success:r=>{if(r.tapIndex===0)this.temp();else{this.setData({showFriends:true});if(!A.user())this.loginForFriends();}}});},
+addPlayer(){Dialog.actionSheet({title:'添加球员',itemList:['手动填写球员','从常用球友选择'],success:r=>{if(r.tapIndex===0)this.temp();else{this.setData({showFriends:true});if(!A.user())this.loginForFriends();}}});},
 templatePick(e){const item=this.data.templates[Number(e.detail.value)];if(item)this.template({currentTarget:{dataset:{id:item.id}}});},
 unitPick(e){this.distanceUnit({currentTarget:{dataset:{unit:Number(e.detail.value)?'m':'yd'}}});},
 async loadFriends(){
@@ -51,13 +97,13 @@ async loadFriends(){
  catch(e){if(this.visible&&request===this.friendRequest)this.setData({friendError:e.message||'暂时无法更新球友列表'});}
 },
 loginForFriends(){A.needLogin();},
-refresh(){const d=S.read(),draft=d.draft,c=S.courses.find(c=>c.id===draft.courseId),ss=C.sections(c);
+refresh(){const d=S.read(),draft=d.draft,c=S.courses.find(c=>c.id===draft.courseId),ss=C.sections(c).filter(s=>s.holes.length===9&&s.holes.every(h=>[3,4,5,6].includes(h.par)));
  const options=ss.map(s=>({id:s.id,name:C.sectionTitle(s.name)}));
  const first=ss.findIndex(s=>s.id===draft.segmentIds[0]),firstSection=ss[first];
  const secondOptions=[{id:'',name:'只打 9 洞'},...options.filter(s=>s.id!==firstSection?.id)];
  const firstHole=firstSection?.holes[0];
  const openingHole=firstHole?C.courseHoleTitle({...firstHole,sectionName:firstSection.name,number:1}):'';
- this.setData({draft,teePlayers:draft.players.map(p=>({...p,teeIndex:Math.max(0,c.tees.indexOf(p.tee))})),course:c,segments:options,first,secondOptions,secondIndex:Math.max(0,secondOptions.findIndex(s=>s.id===draft.segmentIds[1])),openingHole,roundLength:draft.segmentIds.length*9,onlineGroup:!!this.activityId,testPlayersEnabled:!!this.testing,step:draft.setupStep||1,inviteAfterStart:!!draft.inviteAfterStart,preview:!!wx.__preview,signedIn:!!A.user(),friends:A.user()?d.friends.filter(f=>f.accountUid).map(f=>({...f,selected:draft.players.some(p=>p.accountUid===f.accountUid)})):[],policyText:draft.ruleSnapshot.penaltyPolicy.summary||(draft.ruleSnapshot.penaltyPolicy.mode==='official'?Policies.options[0].summary:'已保存的旧版约定可在详细设置中查看。'),rulesName:R.names[draft.ruleSnapshot.scoring.type],templateIndex:['record_only','stroke_play','match_play','four_ball','points'].indexOf(draft.ruleSnapshot.grouping.type==='four_ball'?'four_ball':draft.ruleSnapshot.scoring.type),selectedTemplate:draft.ruleSnapshot.grouping.type==='four_ball'?'four_ball':draft.ruleSnapshot.scoring.type,templates:[{id:'record_only',name:'仅记分'},{id:'stroke_play',name:'个人比杆'},{id:'match_play',name:'两人比洞'},{id:'four_ball',name:'四人两队比洞'},{id:'points',name:'8421'}]});},change(fn){run(()=>{S.mutate(d=>fn(d.draft));this.refresh();});},segment(e){
+ this.setData({showCourseShortcuts:false,draft,teePlayers:draft.players.map(p=>({...p,teeIndex:Math.max(0,c.tees.indexOf(p.tee))})),course:c,segments:options,first,secondOptions,secondIndex:Math.max(0,secondOptions.findIndex(s=>s.id===draft.segmentIds[1])),openingHole,roundLength:draft.segmentIds.length*9,onlineGroup:!!this.activityId,testPlayersEnabled:!!this.testing,step:draft.setupStep||1,inviteAfterStart:!!draft.inviteAfterStart,preview:!!wx.__preview,signedIn:!!A.user(),friends:A.user()?d.friends.filter(f=>f.accountUid).map(f=>({...f,selected:draft.players.some(p=>p.accountUid===f.accountUid)})):[],policyText:draft.ruleSnapshot.penaltyPolicy.summary||(draft.ruleSnapshot.penaltyPolicy.mode==='official'?Policies.options[0].summary:'已保存的旧版约定可在详细设置中查看。'),rulesName:R.names[draft.ruleSnapshot.scoring.type],templateIndex:['record_only','stroke_play','match_play','four_ball','points'].indexOf(draft.ruleSnapshot.grouping.type==='four_ball'?'four_ball':draft.ruleSnapshot.scoring.type),selectedTemplate:draft.ruleSnapshot.grouping.type==='four_ball'?'four_ball':draft.ruleSnapshot.scoring.type,templates:[{id:'record_only',name:'仅记分'},{id:'stroke_play',name:'个人比杆'},{id:'match_play',name:'两人比洞'},{id:'four_ball',name:'四人两队比洞'},{id:'points',name:'8421'}]});},change(fn){run(()=>{S.mutate(d=>fn(d.draft));this.refresh();});},segment(e){
  const index=Number(e.detail.value),current=this.data.draft.segmentIds;
  const isFirst=e.currentTarget.dataset.which==='first';
  const option=(isFirst?this.data.segments:this.data.secondOptions)[index];
@@ -79,7 +125,7 @@ refresh(){const d=S.read(),draft=d.draft,c=S.courses.find(c=>c.id===draft.course
   draft.ruleSnapshot.sideGames=[];
  });
  if(rules.handicap.mode==='none'&&!rules.sideGames.length)return apply();
- wx.showModal({title:'更换打球顺序',content:'原让杆与附加玩法按洞设置，更换后需重新核对。',success:r=>{if(r.confirm)apply();}});
+ Dialog.modal({title:'更换打球顺序',content:'原让杆与附加玩法按洞设置，更换后需重新核对。',success:r=>{if(r.confirm)apply();}});
 },
 distanceUnit(e){const unit=e.currentTarget.dataset.unit;if(['yd','m'].includes(unit))this.change(d=>d.distanceUnit=unit);},tee(e){this.change(d=>d.players.find(p=>p.id===e.currentTarget.dataset.pid).tee=this.data.course.tees[Number(e.detail.value)]);},add(e){
  const friend=this.data.friends.find(p=>p.accountUid===e.currentTarget.dataset.id);
@@ -92,10 +138,10 @@ distanceUnit(e){const unit=e.currentTarget.dataset.unit;if(['yd','m'].includes(u
   if(test)draft.players.splice(draft.players.indexOf(test),1,player);else draft.players.push(player);
   draft.selectedFriends=true;
  });
-},remove(e){this.change(d=>d.players=d.players.filter(p=>p.id!==e.currentTarget.dataset.id));},testPlayers(){if(this.activityId||!this.testing)return;this.change(fillTestPlayers);},temp(){wx.showModal({title:'手动球员姓名',editable:true,success:r=>{if(r.confirm)this.change(d=>{const name=(r.content||'').trim();if(!name||name.length>20)throw Error('昵称为1–20字');if(d.players.length>=R.GROUP_MAX_PLAYERS)throw Error('每组最多 16 人');d.players.push({id:S.id(),name,isVirtual:true,tee:d.players[0].tee});d.selectedFriends=true;});}});},selectPolicy(e){
+},remove(e){this.change(d=>d.players=d.players.filter(p=>p.id!==e.currentTarget.dataset.id));},testPlayers(){if(this.activityId||!this.testing)return;this.change(fillTestPlayers);},temp(){Dialog.modal({title:'手动球员姓名',editable:true,success:r=>{if(r.confirm)this.change(d=>{const name=(r.content||'').trim();if(!name||name.length>20)throw Error('昵称为1–20字');if(d.players.length>=R.GROUP_MAX_PLAYERS)throw Error('每组最多 16 人');d.players.push({id:S.id(),name,isVirtual:true,tee:d.players[0].tee});d.selectedFriends=true;});}});},selectPolicy(e){
  const mode=e.currentTarget.dataset.id;
  if(!Policies.options.some(item=>item.id===mode))return;
  const previous=this.data.draft.ruleSnapshot.penaltyPolicy;
  if(previous.mode===mode&&(mode==='official'||previous.preset))return;
  this.change(draft=>{draft.ruleSnapshot.penaltyPolicy=Policies.make(mode);});
-},template(e){const type=e.currentTarget.dataset.id;wx.showModal({title:'应用玩法模板',content:'应用后将更新玩法、分队与让杆设置。',success:r=>{if(r.confirm)this.change(d=>{const selectedPolicy=d.ruleSnapshot.penaltyPolicy;d.ruleSnapshot=R.defaultRules(type==='four_ball'?'match_play':type);d.ruleSnapshot.penaltyPolicy=selectedPolicy;if(type==='four_ball')d.ruleSnapshot.grouping={type:'four_ball',teams:[{teamId:'A',name:'A队',playerIds:d.players.slice(0,2).map(p=>p.id)},{teamId:'B',name:'B队',playerIds:d.players.slice(2,4).map(p=>p.id)}]};});}});},rules(){go('rules');},start(){if(this.beginning)return;if(!Policies.options.some(p=>p.id===this.data.draft.ruleSnapshot.penaltyPolicy.mode))return wx.showToast({title:'请为新球局选择记分规则',icon:'none'});if(!wx.__preview&&!A.needLogin())return;if(this.activityId){if(!this.groupReady||this.starting)return;this.starting=true;A.call('lock',{activityId:this.activityId,groupId:this.groupId}).then(members=>{const ids=members.map(m=>m.uid===A.user().uid?'me':m.uid).sort(),old=S.read().draft.players.map(p=>p.id).sort();if(JSON.stringify(ids)!==JSON.stringify(old)){this.loadGroup();throw Error('组员已变化，请核对成员和规则后再次开始');}this.begin();}).catch(e=>wx.showToast({title:e.message,icon:'none'})).finally(()=>this.starting=false);}else this.begin();},begin(){if(this.beginning)return;this.beginning=true;const result=run(()=>{const d=S.read().draft,r=S.create(d);if(this.activityId){r.cloud={activityId:this.activityId,groupId:this.groupId,ownerUid:A.user().uid,serverVersion:0};S.replace(r);}wx.redirectTo({url:'/pages/score/index?id='+r.id+(d.inviteAfterStart?'&invite=1':'')});return r;});if(!result)this.beginning=false;},group(){this.change(d=>{d.inviteAfterStart=true;d.setupStep=3;});this.scrollTop();},async loadGroup(){try{const a=await A.call('get',{activityId:this.activityId}),g=a.groups.find(g=>g.id===this.groupId);if(!g||!g.canScore||g.round)throw Error('请从小组页继续已有记分');S.mutate(d=>{const old=d.draft.players;d.draft.players=g.members.map(m=>{const id=m.uid===A.user().uid?'me':m.uid;return {id,accountUid:m.uid,name:m.name,tee:old.find(p=>p.id===id)?.tee||old[0].tee};});});this.groupReady=true;this.refresh();}catch(e){wx.showToast({title:e.message,icon:'none'});}}});
+},template(e){const type=e.currentTarget.dataset.id;Dialog.modal({title:'应用玩法模板',content:'应用后将更新玩法、分队与让杆设置。',success:r=>{if(r.confirm)this.change(d=>{const selectedPolicy=d.ruleSnapshot.penaltyPolicy;d.ruleSnapshot=R.defaultRules(type==='four_ball'?'match_play':type);d.ruleSnapshot.penaltyPolicy=selectedPolicy;if(type==='four_ball')d.ruleSnapshot.grouping={type:'four_ball',teams:[{teamId:'A',name:'A队',playerIds:d.players.slice(0,2).map(p=>p.id)},{teamId:'B',name:'B队',playerIds:d.players.slice(2,4).map(p=>p.id)}]};});}});},rules(){go('rules');},start(){if(this.beginning||!this.data.course||!this.data.draft)return;if(!Policies.options.some(p=>p.id===this.data.draft.ruleSnapshot.penaltyPolicy.mode))return wx.showToast({title:'请为新球局选择记分规则',icon:'none'});if(!wx.__preview&&!A.needLogin())return;if(this.activityId){if(!this.groupReady||this.starting)return;this.starting=true;A.call('lock',{activityId:this.activityId,groupId:this.groupId}).then(members=>{const ids=members.map(m=>m.uid===A.user().uid?'me':m.uid).sort(),old=S.read().draft.players.map(p=>p.id).sort();if(JSON.stringify(ids)!==JSON.stringify(old)){this.loadGroup();throw Error('组员已变化，请核对成员和规则后再次开始');}this.begin();}).catch(e=>wx.showToast({title:e.message,icon:'none'})).finally(()=>this.starting=false);}else this.begin();},begin(){if(this.beginning)return;this.beginning=true;const result=run(()=>{const d=S.read().draft,r=S.create(d);if(this.activityId){r.cloud={activityId:this.activityId,groupId:this.groupId,ownerUid:A.user().uid,serverVersion:0};S.replace(r);}require('../../services/score-entry').open({id:r.id,...(d.inviteAfterStart?{invite:'1'}:{})});return r;});if(!result)this.beginning=false;},group(){this.change(d=>{d.inviteAfterStart=true;d.setupStep=3;});this.scrollTop();},async loadGroup(){try{const a=await A.call('get',{activityId:this.activityId}),g=a.groups.find(g=>g.id===this.groupId);if(!g||!g.canScore||g.round)throw Error('请从小组页继续已有记分');S.mutate(d=>{const old=d.draft.players;d.draft.players=g.members.map(m=>{const id=m.uid===A.user().uid?'me':m.uid;return {id,accountUid:m.uid,name:m.name,tee:old.find(p=>p.id===id)?.tee||old[0].tee};});});this.groupReady=true;this.refresh();}catch(e){wx.showToast({title:e.message,icon:'none'});}}});

@@ -1,18 +1,19 @@
+const Dialog = require('../../services/dialog');
 const Config=require('./course-config'),D=Config.defaultMap,M=require('./map-core'),S=require('../../services/store'),{roundContext}=require('./round-context'),{holeContext}=require('./hole-context'),Overview=require('./overview-core'),Diagram=require('./diagram-core'),Location=require('./location-policy');
 const GpsMaps = require('./gps-maps');
 const Raster=require('./raster-image');
 const Hud=require('./atlas-hud');
 Page({
- data:{view:'hole',mapMode:'reference',referenceAvailable:false,gpsHoleAvailable:false,gpsFallback:false,pickerOpen:false,holes:[],groups:[],selected:1,h:null,courseName:'',courseCaption:'',mapAvailable:false,diagramMode:false,gpsAvailable:false,enhancedAvailable:false,hasOverview:false,layer:'satellite',unit:'码',teeLabel:'未开局',teeColor:'#a8b19a',hasRound:false,front:'—',center:'—',back:'—',error:'',loading:true,locationText:'参考起点 · 可拖动',previousHole:null,nextHole:null,scoringHole:null},
+ data:{view:'hole',mapMode:'gps',referenceAvailable:false,gpsHoleAvailable:false,gpsFallback:false,pickerOpen:false,holes:[],groups:[],selected:1,h:null,courseName:'',courseCaption:'',mapAvailable:false,diagramMode:false,gpsAvailable:false,enhancedAvailable:false,hasOverview:false,layer:'satellite',unit:'码',teeLabel:'未开局',teeColor:'#a8b19a',hasRound:false,front:'—',center:'—',back:'—',error:'',loading:true,locationText:'参考起点 · 可拖动',previousHole:null,nextHole:null,scoringHole:null},
  onLoad(o={}){
-  const candidate=o.round?S.getRound(o.round):(typeof wx.getStorageSync==='function'?S.active():null);
+  const candidate=o.round?require('../../services/map-round').get(o.round):(typeof wx.getStorageSync==='function'?S.active():null);
   this.cid=o.course||candidate?.courseId||Config.courseId;
   const route=require('../../services/course-map-route').route(this.cid);if(route!==Config.route&&route!==Config.atlasRoute){this.redirected=true;wx.redirectTo({url:route+'?course='+encodeURIComponent(this.cid)+(o.round?'&round='+encodeURIComponent(o.round):'')+(o.hole?'&hole='+encodeURIComponent(o.hole):'')});return;}this.round=candidate?.courseId===this.cid?candidate:null;this.rid=this.round?.id||null;
-  if(Config.atlasRoute&&(Config.artOverlay||!Config.references||o.mode==='gps'||o.view==='overview')){this.redirected=true;const query=Config.artOverlay?{...o,view:o.view==='overview'?'overview':'focus',layer:o.layer||(o.mode==='gps'?'gps':'art')}:o;wx.redirectTo({url:Config.atlasRoute+'?'+Object.keys(query).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(query[k])).join('&')});return;}
+  if(Config.atlasRoute&&(Config.artOverlay||!Config.references||o.mode!=='reference'&&o.layer!=='art'||o.view==='overview')){this.redirected=true;const query=Config.artOverlay?{...o,view:o.view==='overview'?'overview':'focus',layer:o.layer||(o.mode==='reference'?'art':'gps')}:o;wx.redirectTo({url:Config.atlasRoute+'?'+Object.keys(query).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(query[k])).join('&')});return;}
   const course=this.course=S.courses.find(c=>c.id===this.cid),context=holeContext(course,o.round||!o.hole?this.round:null,o.hole,Config),c=roundContext(this.round);
   this.courseMaps = Object.values(Config.holes);
   this.selectionVersion = 0;
-  this.preferredMode=o.mode==='gps'?'gps':'reference';this.locationRequest=0;this.origins={};this.state={origin:D.defaultOrigin.slice(),target:D.defaultTarget.slice(),originLabel:'图上起点',transparentBackground:true,layer:'satellite',unit:c.unit};
+  this.preferredMode=o.mode==='reference'?'reference':'gps';this.locationRequest=0;this.origins={};this.state={origin:D.defaultOrigin.slice(),target:D.defaultTarget.slice(),originLabel:'图上起点',transparentBackground:true,layer:'satellite',unit:c.unit};
   this.setData({overviewOnly:!!Config.overviewOnly,unit:c.unit==='m'?'米':'码',teeLabel:c.teeLabel,teeColor:c.teeColor,hasRound:c.hasRound,holes:context.holes,groups:context.groups,courseName:course?.name||'球道图',shortName:Config.shortName||(course?.name||'球道图').replace(/高尔夫(俱乐部|球场)?/g,''),scoringHole:this.round?holeContext(course,this.round,this.round.currentHole,Config).selected?.number:null,hasOverview:this.cid===Config.courseId&&!!Config.overview,availabilityNote:Config.availabilityNote,attribution:Config.attribution,assetRoot:Config.assetRoot,northLabel:Config.overview?.northUp?'N ↑':'N →',overviewAttribution:Config.overviewAttribution||Config.attribution});
   if(context.selected){this.selectHole(context.selected.number);if(Config.overviewOnly||o.view==='overview')this.overview();}else this.setData({loading:false,error:'旧球局洞号暂无法对应，请从左上角选择球洞'});
  },
@@ -165,5 +166,5 @@ Page({
  },
  wholeCourse(){this.manualCamera=true;if(!this.ctx||!Config.overview)return;this.state.camera=Overview.fit(this.width,this.height,{...Config.overview,fillViewport:false});this.draw();},
  overview(){if(!this.data.hasOverview)return;if(Config.atlasRoute){wx.navigateTo({url:Config.atlasRoute+'?view=overview&source='+encodeURIComponent(this.data.h.sourceId)+(this.rid?'&round='+encodeURIComponent(this.rid):'')});return;}this.selectionVersion++;this.locationRequest++;this.diagramRequest=(this.diagramRequest||0)+1;clearTimeout(this.gpsTimer);this.gesture=null;this.preferredMode='gps';this.setData({view:'overview',waitingForGps:false,mapMode:'gps',diagramMode:false,gpsAvailable:false,pickerOpen:false,loading:true,error:'',locationText:this.overviewFix?'我的位置 · 约 ±'+this.overviewFix.accuracy+' 米':'点击定位显示我的位置'});this.loadImages();this.fit();this.autoLocate();},
- info(){const reference=this.data.view==='hole'&&this.data.mapMode==='reference';wx.showModal({title:reference?'精修图':this.data.view==='overview'?'全场卫星总览':'球道地图说明',content:reference?Config.referenceNote:this.data.view==='overview'?Config.overviewNote:Config.mapNote,showCancel:false});}
+ info(){const reference=this.data.view==='hole'&&this.data.mapMode==='reference';Dialog.modal({title:reference?'精修图':this.data.view==='overview'?'全场卫星总览':'球道地图说明',content:reference?Config.referenceNote:this.data.view==='overview'?Config.overviewNote:Config.mapNote,showCancel:false});}
 });

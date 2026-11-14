@@ -92,13 +92,21 @@ function draw(ctx,model){
     bubble(ctx,distance(origin,direct?hole.green:target),(p[0]+q[0])/2+16,(p[1]+q[1])/2,width,height);
     if(!direct){bubble(ctx,distance(target,hole.green),(q[0]+g[0])/2+16,(q[1]+g[1])/2,width,height);disc(ctx,q[0],q[1],8,'#dfb65a','#fff9df',2);line(ctx,[[q[0]-12,q[1]],[q[0]+12,q[1]]],'#fff9df',1.5);line(ctx,[[q[0],q[1]-12],[q[0],q[1]+12]],'#fff9df',1.5);}
     disc(ctx,p[0],p[1],8,model.isFix?'#317fb8':'#f7faf3','#1d5138',3);disc(ctx,p[0],p[1],2.5,model.isFix?'white':'#1d5138');
-    bubble(ctx,model.isFix?'我的位置':model.originLabel==='手动起点'?'手动起点':'起点',p[0]+31,p[1]-13,width,height);
+    const originText=model.isFix?'我的位置':model.originLabel==='手动起点'?'手动起点':'起点';
+    ctx.font='bold 14px sans-serif';
+    const labelWidth=ctx.measureText(originText).width+22;
+    const labelX=Math.max(labelWidth/2+4,Math.min(width-labelWidth/2-4,p[0]+31));
+    const controls=Hud.items(width,height,mode,model.safe,!!model.hasArt,!!model.hasReference,model.controls);
+    const hitsControl=controls.some(a=>labelX+labelWidth/2>a.x&&labelX-labelWidth/2<a.x+a.w&&p[1]+1>a.y&&p[1]-27<a.y+a.h);
+    bubble(ctx,originText,hitsControl?p[0]-31:p[0]+31,p[1]-13,width,height);
   }
   const pins=[];
   const tees=mode==='overview'?holes.map(h=>screen(h.tee)).filter(([x,y])=>x>=0&&y>=0&&x<=width&&y<=height):[];
   for(const [x,y] of tees)Hud.teeIcon(ctx,x,y);
   const visible=mode==='overview'?(hole?[hole,...holes.filter(h=>h!==hole)]:holes):[hole];
   const labels=[];
+  const reserved=Hud.items(width,height,mode,model.safe,!!model.hasArt,!!model.hasReference,model.controls);
+  if(mode==='overview'&&model.showLegend!==false)reserved.push({x:12,y:height-model.safe-69,w:Math.min((model.groups||[]).length===2?176:224,width-116),h:31});
   for(const h of visible){
     const [gx,gy]=screen(h.green);
     if(gx<0||gy<0||gx>width||gy>height)continue;
@@ -108,15 +116,16 @@ function draw(ctx,model){
       continue;
     }
     const w=31,ht=20;
-    const offsets=[[0,-18],[0,17],[23,-9],[-23,-9],[25,12],[-25,12],[0,-37],[0,37],[-40,-25],[40,-25],[-43,22],[43,22]];
+    const offsets=[[0,-18],[0,17],[23,-9],[-23,-9],[25,12],[-25,12],[0,-37],[0,37],[-40,-25],[40,-25],[-43,22],[43,22],[-64,0],[64,0],[0,-60],[0,60]];
     let best=null;
     for(const [dx,dy] of offsets){
       const x=Math.max(w/2+1,Math.min(width-w/2-1,gx+dx)),y=Math.max(ht/2+1,Math.min(height-ht/2-1,gy+dy));
       const overlaps=pins.filter(v=>Math.abs(v.x-x)<w+2&&Math.abs(v.y-y)<ht+2).length;
       const coversTee=tees.some(([tx,ty])=>Math.abs(tx-x)<w/2+5&&Math.abs(ty-5-y)<ht/2+6);
-      const score=overlaps*1000+(coversTee?150:0)+Math.hypot(x-gx,y-gy);
+      const coversControl=reserved.some(a=>x+w/2+3>a.x&&x-w/2-3<a.x+a.w&&y+ht/2+3>a.y&&y-ht/2-3<a.y+a.h);
+      const score=(coversControl?10000:0)+overlaps*1000+(coversTee?150:0)+Math.hypot(x-gx,y-gy);
       if(!best||score<best.score)best={x,y,score};
-      if(!overlaps&&!coversTee)break;
+      if(!overlaps&&!coversTee&&!coversControl)break;
     }
     const {x,y}=best;
     labels.push({h,gx,gy,x,y,w,ht});

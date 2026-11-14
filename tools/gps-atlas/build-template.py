@@ -16,7 +16,13 @@ shutil.copy2(root/'templates/map-ui/atlas-hud.js',root/'qingye-miniprogram/minip
 tianma_camera=(root/'templates/gps-atlas/atlas-camera.js').read_text()
 tianma_camera=tianma_camera.replace("const Config=require('./atlas-config');\nconst atlas=Config.atlas;\nconst Boundary=require('./atlas-boundary');","const atlas=require('./overview-data');")
 tianma_camera=tianma_camera.replace("(holes.length?holes.flatMap(h=>[...h.route,...h.outline]):Boundary.outer)","holes.flatMap(h=>[...h.route,...h.outline])")
+tianma_camera=tianma_camera.replace(" if(overview&&Config.fitOverviewToBoundary&&holes.length)points.push(...Boundary.outer);\n","")
 tianma_camera=tianma_camera.replace('Config.par3MaxScale','1.28')
+tianma_camera=tianma_camera.replace('Config.focusAnchorRatio','.57')
+tianma_camera=tianma_camera.replace('Config.focusContentLeft','0')
+tianma_camera=tianma_camera.replace('Config.focusContentRight','0')
+if 'Config.' in tianma_camera:
+ raise RuntimeError('Tianma camera still contains a template-only Config reference')
 (root/'qingye-miniprogram/miniprogram/packages/tianma-map/atlas-camera.js').write_text(tianma_camera)
 registry=(root/'qingye-miniprogram/miniprogram/services/suzhou-gps-maps.js')
 suzhou={m['package']:m['title'] for m in json.loads(registry.read_text().split('=',1)[1].strip().removesuffix(';')).values()} if registry.exists() else {}
@@ -34,3 +40,12 @@ for name in ['xubao-map','tianhong-map','qizhong-map','jiulongshan-map','hole-ma
 
  if name in ["xubao-map","tianhong-map","anting-map","tomson-map","palmbeach-map","xiehe-map","dongzhuang-links-map","dongzhuang-garden-map"]:
   for ext in ["js","wxml","wxss","json"]:shutil.copy2(dest/("atlas."+ext),dest/("index."+ext))
+
+# A new artwork export must never silently change the initial layer.
+import os
+node=os.environ.get('QINGYE_NODE_BINARY') or shutil.which('node')
+if not node:
+ bundled=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node'
+ if bundled.is_file():node=str(bundled)
+if not node:raise RuntimeError('Node.js is required for the map default-layer check; set QINGYE_NODE_BINARY.')
+subprocess.run([node,str(root/'qingye-miniprogram/tools/check-map-defaults.cjs')],check=True)

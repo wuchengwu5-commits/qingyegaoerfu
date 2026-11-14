@@ -1,3 +1,4 @@
+const Dialog = require('./dialog');
 const S=require('./store'),A=require('./account'),Shared=require('./shared-round'),Sync=require('./cloud-sync');
 
 module.exports=async function endRound(item){
@@ -5,7 +6,7 @@ module.exports=async function endRound(item){
  const uid=A.user()?.uid;
  function settled(){
   if(S.isEditing(item.id)||Sync.pending(item.id)||ref&&uid&&(
-   wx.getStorageSync(Shared.pendingKey(ref))||wx.getStorageSync('qingye.virtualSeat.'+uid+'.'+ref.activityId+'.'+ref.groupId)))
+   require('./score-edit-queue').conflicts(Shared.pendingKey(ref)).length||wx.getStorageSync(Shared.pendingKey(ref))||wx.getStorageSync('qingye.virtualSeat.'+uid+'.'+ref.activityId+'.'+ref.groupId)))
    throw Error('请先进入本组完成待同步记分，再结束');
  }
  settled();
@@ -18,7 +19,9 @@ module.exports=async function endRound(item){
  }else if(!local)throw Error('球局已不存在，请刷新');
  const round=board?.round||local;
  if(!['active','paused'].includes(round.status)){if(board)Shared.adopt(board);return true;}
- const confirmed=await new Promise((resolve,reject)=>wx.showModal({title:'结束本组？',content:round.courseName+'\n结束后移出进行中列表，成绩保留在历史记录中；未记球洞留空。只影响本组。',confirmText:'结束本组',cancelText:'继续记分',success:r=>resolve(r.confirm),fail:reject}));
+ const blank=!round.players.some(p=>Object.keys(round.scores[p.id]||{}).length)&&!round.events.length&&!round.awards.length;
+ const progress=round.players.map(p=>p.name+' '+require('./rules').rawSummary(round,p.id).played+'/'+round.holes.length+' 洞').join('；');
+ const confirmed=await new Promise((resolve,reject)=>Dialog.modal({title:blank?'取消空白球局？':'核对并结束本组？',content:round.courseName+'\n'+progress+'\n'+(blank?'没有录入成绩，取消后保留取消记录，不计入完成轮数。':'未记球洞保留空白；结束后可授权更正。只影响本组。'),confirmText:blank?'取消球局':'结束本组',cancelText:'继续记分',success:r=>resolve(r.confirm),fail:reject}));
  if(!confirmed)return false;
  settled();
  if(ref){

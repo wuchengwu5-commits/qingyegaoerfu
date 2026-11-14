@@ -11,3 +11,4 @@
  <block wx:elif="{{category}}"><view class="eyebrow">QINGYE JOURNAL</view><view class="title">{{category.id==='rules'?'高尔夫规则':category.name}}</view><view class="sub category-intro">{{category.description}}<text class="category-count">{{items.length}} 篇入门阅读</text></view><view class="card category-list"><view wx:for="{{items}}" wx:key="id" class="category-article" data-id="{{item.id}}" bindtap="article" role="button" aria-label="{{item.title}}"><view class="grow"><view class="category-meta">{{item.number}} / 约 {{item.minutes}} 分钟</view><view class="category-title">{{item.title}}</view><view class="sub">{{item.summary}}</view></view><image src="/assets/chevron.png" mode="aspectFit"/></view></view><button bindtap="library">浏览全部知识</button></block>
  <view wx:else class="empty"><view>这篇文章暂未收录</view><button class="space" bindtap="library">查看知识目录</button></view>
 </view><privacy-panel/>
+<qy-dialog class="page-dialog"/>

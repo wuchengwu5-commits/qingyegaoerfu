@@ -45,7 +45,7 @@ test('course detail and in-round map buttons ignore repeated taps and reopen aft
  t.after(()=>{global.wx=before;global.Page=beforePage;});
  for(const [name,open] of [['course','maps'],['score','guide']]){
   let page;
-  global.Page=p=>{page={...p,cid:course.id,rid:'round one',data:{h:{number:7},r:{courseId:course.id}},refresh(){},showBoard(){}};};
+  global.Page=p=>{page={...p,cid:course.id,rid:'round one',data:{h:{number:7},r:{courseId:course.id}},setData(v){Object.assign(this.data,v);},refresh(){},showBoard(){}};};
   const file=require.resolve(base+'/pages/'+name+'/index');delete require.cache[file];require(file);
   const count=navigations.length;
   page.onShow();page[open]();page[open]();

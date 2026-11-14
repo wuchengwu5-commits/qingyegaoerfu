@@ -20,7 +20,7 @@ test('directory loads ten then ten more, preserves rows, and resets to ten when 
 });
 function share(t,home){
  const names=['../miniprogram/services/backgrounds','../miniprogram/services/media','../miniprogram/services/store','../miniprogram/pages/share/index'],paths=names.map(require.resolve),saved=paths.map(p=>require.cache[p]),old={Page:global.Page,wx:global.wx};const images=[];let definition;
- const mocks=[{items:()=>[...Array.from({length:8},(_,i)=>({id:'bg'+i,name:'景'+i,fileID:'cloud://bg'+i}))],apply:home},{local:src=>Promise.resolve('/cached/'+src)},{getRound:()=>({courseName:'球场',date:'2026-11-05'})}];
+ const mocks=[{items:()=>[...Array.from({length:8},(_,i)=>({id:'bg'+i,name:'景'+i,fileID:'cloud://bg'+i}))],apply:home},{local:src=>Promise.resolve('/cached/'+src)},{getRound:()=>({id:'r',courseName:'球场',date:'2026-11-05',players:[{id:'me'}],holes:[],scores:{me:{}}})}];
  mocks.forEach((exports,i)=>require.cache[paths[i]]={exports});global.wx={createSelectorQuery:()=>({in(){return this;},select(){return this;},fields(){return this;},exec(cb){cb([{node:{getContext:()=>({}),createImage(){const image={};images.push(image);return image;}}}]);}})};global.Page=p=>definition=p;delete require.cache[paths[3]];require(paths[3]);
  t.after(()=>{paths.forEach((p,i)=>saved[i]?require.cache[p]=saved[i]:delete require.cache[p]);Object.assign(global,old);});const page={...definition,data:structuredClone(definition.data),setData(d){Object.assign(this.data,d);}};page.onLoad({id:'r'});return {page,images};
 }

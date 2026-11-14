@@ -66,7 +66,7 @@ page{background:#e7f0ec;color:#173e34}
 .score-bottom{background:rgba(235,248,241,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 -4rpx 18rpx rgba(30,72,58,.04)}
 .score-bottom button:not(.primary){background:rgba(237,250,242,.4);color:#3c6454;box-shadow:inset 0 1rpx 0 rgba(255,255,255,.6)}
 
-/* Shared selection entrances; native picker keeps the platform selection sheet. */
+/* Shared selection entrances; custom pickers open the shared Qingye dialog. */
 .choice-picker{display:block;min-width:0;margin-bottom:18rpx}.choice-inline{display:inline-block;flex:none;margin:0}.choice-inset{margin:14rpx 0 0}.select-field{box-sizing:border-box;display:flex;align-items:center;gap:20rpx;min-height:96rpx;padding:22rpx 26rpx;border:2rpx solid rgba(255,255,255,.86);border-radius:24rpx;background:rgba(247,252,250,.72);box-shadow:0 4rpx 14rpx rgba(25,66,55,.04);color:#173e34;text-align:left}.select-copy{flex:1;min-width:0}.select-label{font-size:23rpx;line-height:1.5;color:#526f65;margin-bottom:6rpx}.select-value{font-size:30rpx;font-weight:500;line-height:1.5;white-space:normal;word-break:break-word}.select-chevron{width:24rpx;height:24rpx;flex:none;transform:rotate(90deg);opacity:.65}.select-disabled{background:rgba(236,243,239,.55);color:#60766e;box-shadow:none}.select-disabled .select-chevron{visibility:hidden}.choice-inset .select-field{background:rgba(255,255,255,.48)}
 
 .logout-button{margin:28rpx 0 12rpx;background:rgba(247,250,242,.8);color:#48634e;border:1rpx solid rgba(93,126,94,.25);border-radius:24rpx;font-size:28rpx;line-height:88rpx}.logout-button::after{border:0}
@@ -96,16 +96,16 @@ page{background:#e7ede2;color:#213d2e}
 /* Approved deep-green / thin glass material, shared by every app page. */
 .page .card,.page .quiet-card,.page .nearby-notice,.page .metric,.page .menu-list,.page .course-list,.page .article-list,.page .reader-body,.page .category-list{background:linear-gradient(130deg,rgba(253,255,249,.38),rgba(249,253,242,.22));border-color:rgba(255,255,255,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:inset 0 1rpx 1rpx rgba(255,255,255,.45),0 6rpx 22rpx rgba(30,56,34,.055)}
 .page button,.page .choice,.page .picker,.page .tee-picker,.page .select-field,.page .search-field,.page input,.page textarea{border-color:rgba(255,255,255,.3);box-shadow:inset 0 1rpx 1rpx rgba(255,255,255,.32),0 3rpx 9rpx rgba(37,72,41,.045);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.page button.primary,.page .choice.active,.score-bottom button.primary,.page .step-row button.step-plus,.page .region-sheet button.region-option.selected{background:linear-gradient(180deg,rgba(255,255,243,.07),rgba(255,255,243,0) 52%,rgba(15,49,25,.09)),linear-gradient(110deg,rgba(62,117,65,.96),rgba(31,83,46,.97));border:1rpx solid rgba(246,255,232,.23);color:#f5fff8;box-shadow:inset 0 2rpx 2rpx rgba(252,255,241,.2),inset 0 -2rpx 4rpx rgba(26,64,33,.19),0 6rpx 14rpx rgba(30,66,35,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-decoration:none}
-.page button.primary:active,.score-bottom button.primary:active,.page .step-row button.step-plus:active{box-shadow:inset 0 3rpx 6rpx rgba(25,60,30,.18),inset 0 1rpx 1rpx rgba(250,255,235,.18),0 2rpx 6rpx rgba(30,66,35,.1)}
-.page button[disabled],.score-bottom button[disabled]{box-shadow:none}
+.page button.primary,.page .choice.active,.score-bottom button.primary,.flow-footer button.primary,.page .step-row button.step-plus,.page .region-sheet button.region-option.selected{background:linear-gradient(180deg,rgba(255,255,243,.07),rgba(255,255,243,0) 52%,rgba(15,49,25,.09)),linear-gradient(110deg,rgba(62,117,65,.96),rgba(31,83,46,.97));border:1rpx solid rgba(246,255,232,.23);color:#f5fff8;box-shadow:inset 0 2rpx 2rpx rgba(252,255,241,.2),inset 0 -2rpx 4rpx rgba(26,64,33,.19),0 6rpx 14rpx rgba(30,66,35,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-decoration:none}
+.page button.primary:active,.score-bottom button.primary:active,.flow-footer button.primary:active,.page .step-row button.step-plus:active{box-shadow:inset 0 3rpx 6rpx rgba(25,60,30,.18),inset 0 1rpx 1rpx rgba(250,255,235,.18),0 2rpx 6rpx rgba(30,66,35,.1)}
+.page button[disabled],.score-bottom button[disabled],.flow-footer button[disabled]{box-shadow:none}
 .page .compact-stepper,.page .score-table{background:rgba(251,254,246,.88)}
 .page .table-head{background:#285b36}.page .table-head .current{background:#49794d}
 .page .search-field .search-input{background:transparent;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .page .region-sheet{border-color:rgba(255,255,255,.4)}
 .score-bottom{border-color:rgba(255,255,255,.35)}
 
-/* Map type labels: non-interactive, shared by list and detail. */
+/* Compact map type labels, shared by list and detail. */
 .course-map-badges{display:flex;flex-wrap:wrap;align-items:center;gap:8rpx}
 .course-map-badge{display:inline-flex;align-items:center;gap:10rpx;box-sizing:border-box;min-height:38rpx;padding:3rpx 12rpx;border-radius:11rpx;border:1rpx solid rgba(61,103,77,.15);background:rgba(223,238,223,.72);box-shadow:inset 0 1rpx 0 rgba(255,255,255,.58);color:#365e46;font-size:24rpx;font-weight:500;line-height:1.4;white-space:nowrap}
 .course-map-badge.art{background:rgba(235,235,216,.78);border-color:rgba(110,112,74,.14);color:#626b48}

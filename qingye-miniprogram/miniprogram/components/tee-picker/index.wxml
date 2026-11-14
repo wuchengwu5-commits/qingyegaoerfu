@@ -1,0 +1,1 @@
+<view class="tee-trigger" bindtap="show" role="button" aria-label="选择发球台，当前{{current.name}}"><view wx:if="{{current}}" class="tee-dot" style="background:{{current.color}}"></view><text>{{current.name||'请选择发球台'}}</text><text class="tee-chevron">›</text></view>

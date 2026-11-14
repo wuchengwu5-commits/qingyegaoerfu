@@ -47,7 +47,7 @@ test('native component code reaches cloud phone exchange and a fresh app restore
  const source=fs.readFileSync(path.resolve(__dirname,'../miniprogram/services/account.js'),'utf8');
  function restart(){
   const module={exports:{}},wx={getStorageSync:k=>structuredClone(disk[k]),setStorageSync:(k,v)=>disk[k]=structuredClone(v),cloud:{callFunction:async q=>{requests.push(q.data.action);return {result:await out.main(q.data)};}}};
-  vm.runInNewContext(source,{module,Date,wx,require:id=>id==='../config'?{cloudEnv:'env'}:id==='./store'?{read:()=>structuredClone(local),mutate:fn=>fn(local)}:id==='./cloud-client'?{init(){}}:id==='./cloud-sync'?{flush:async()=>{}}:null});
+  vm.runInNewContext(source,{module,Date,wx,require:id=>id==='../config'?{cloudEnv:'env'}:id==='./store'?{read:()=>structuredClone(local),mutate:fn=>fn(local)}:id==='./cloud-client'?{init(){}}:id==='./cloud-sync'?{flush:async()=>{}}:id==='./personal-sync'?{sync:async()=>{}}:null});
   return module.exports;
  }
  const first=restart();A.equal(first.user(),null);await first.loginWithPhone('real-component-code');A.equal(first.user().phoneVerified,true);A.equal(grants.length,1);A.equal(grants[0].openid,context.OPENID);A.equal(grants[0].code,'real-component-code');

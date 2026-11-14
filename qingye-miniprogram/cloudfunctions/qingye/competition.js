@@ -5,12 +5,13 @@ const {newRound} = require('./lib/service');
 const {publicRound} = require('./live-round');
 const {makeRoute,routeFor,routeKey,slotKey,arrangeStarts,timePattern} = require('./competition-routes');
 
+const Pages = require('./history-pages');
 const EVENTS = 'qy_activities';
 const USERS = 'qy_users';
 const INVITES = 'qy_invites';
 const CAPACITY = Rules.GROUP_MAX_PLAYERS;
 const INVITE_ROLES = ['competition-player','competition-watch','competition-scorer'];
-const statusText = {draft:'筹备中',active:'比赛中',published:'已公布'};
+const statusText = {draft:'筹备中',active:'比赛中',published:'已结束 · 已公布',ended:'已结束 · 待公布',cancelled:'已取消',revising:'结果修订中'};
 const courses = new Map(require('./lib/competition-courses.json').map(course => [course.id,course]));
 
 function fail(code, message) {
@@ -53,7 +54,7 @@ function seat(group, player) {
 }
 
 function remember(user, eventId) {
-  user.activityIds = Array.from(new Set([...(user.activityIds || []),eventId])).slice(-50);
+  user.activityIds = Array.from(new Set([...(user.activityIds || []),eventId]));
 }
 
 async function linkTeammates(tx, user, group) {
@@ -122,7 +123,7 @@ function leaderboard(event) {
     return players(group).map(player => {
       const summary = Rules.rawSummary(group.round,player.id), card = group.cards[player.id];
       const state = player.rankingEligible===false ? '仅记分 · 不排名' : card.state === 'withdrawn' ? '已退赛' : card.state === 'disqualified' ? '取消资格' : card.state === 'incomplete' ? '未完赛' :
-        card.state === 'submitted' ? '已交卡' : summary.complete ? '待核分' : '比赛中';
+        card.state === 'submitted' ? '已交卡' : summary.complete ? '待核分' : event.status==='active'?'比赛中':'未完赛';
       const route=routeFor(event,group);
       return {id:player.id,name:player.name,groupName:group.name,tee:player.tee,state,
         routeKey:routeKey(route),courseName:route.courseName,routeName:route.routeName,
@@ -148,20 +149,22 @@ function leaderboard(event) {
   });
 }
 
+function closeVersion(event){return crypto.createHash('sha256').update(JSON.stringify([event.status,event.groups])).digest('hex');}
+
 function view(event, uid) {
   if (!related(event,uid)) fail('FORBIDDEN','请通过赛事邀请加入');
   const isOwner=event.ownerUid===uid, mine=userGroup(event,uid);
-  const rows=leaderboard(event),buckets=new Map();
+  const rows=event.status==='revising'&&event.publishedRows?event.publishedRows:leaderboard(event),buckets=new Map();
   for(const row of rows){
     if(!buckets.has(row.routeKey))buckets.set(row.routeKey,{id:row.routeKey,courseName:row.courseName,routeName:row.routeName,holes:row.holes,rows:[]});
     buckets.get(row.routeKey).rows.push(row);
   }
   return {
     id:event.id,title:event.title,courseId:event.courseId,courseName:event.courseName,
-    date:event.date,status:event.status,statusText:statusText[event.status],isOwner,
+    date:event.date,status:event.status,statusText:statusText[event.status],isOwner,publicationVersion:event.publicationVersion||0,revisionReason:event.revisionReason||'',
     myGroupId:mine?.id||null,terms:event.terms,holes:event.holes,tees:event.tees,defaultRoute:routeFor(event),
     mixedRoutes:new Set(event.groups.filter(g=>players(g).length).map(g=>routeKey(routeFor(event,g)))).size>1,
-    ...(isOwner?gate(event):{}),publishedAt:event.publishedAt||null,
+    ...(isOwner?{...gate(event),closeVersion:closeVersion(event)}:{}),publishedAt:event.publishedAt||null,endedAt:event.endedAt||null,
     groups:event.groups.map(group => {
       const primary=designatedScorer(event,group),canEdit=editGroup(group,uid)||primary?.id===uid, canSee=isOwner||editGroup(group,uid)||group===mine,route=routeFor(event,group);
       return {id:group.id,name:group.name,count:players(group).length,capacity:CAPACITY,
@@ -178,11 +181,11 @@ function view(event, uid) {
           })),
           cards:group.round?players(group).map(p=>{
             const card=group.cards[p.id], summary=Rules.rawSummary(group.round,p.id);
-            return {playerId:p.id,name:p.name,state:card.state,played:summary.played,marker:card.marker.name,
+            return {playerId:p.id,name:p.name,state:card.state,correcting:!!card.correcting,played:summary.played,marker:card.marker.name,
               playerConfirmed:!!card.playerConfirmed,markerConfirmed:!!card.markerConfirmed,
-              canConfirm:canEdit&&event.status==='active'&&card.state==='open'&&summary.complete&&
+              canConfirm:canEdit&&['active','ended','revising'].includes(event.status)&&card.state==='open'&&summary.complete&&
                 (p.accountUid===uid||card.marker.uid===uid),
-              canRecordOffline:canEdit&&event.status==='active'&&card.state==='open'&&summary.complete&&
+              canRecordOffline:canEdit&&['active','ended','revising'].includes(event.status)&&card.state==='open'&&summary.complete&&
                 (!card.marker.uid||!p.accountUid&&(card.marker.uid===uid||group.scorerUids.includes(uid))),
               scores:group.round.holes.map(h=>({id:h.id,name:Catalog.courseHoleTitle(h),strokes:group.round.scores[p.id][h.number]?.grossStrokes??'—'})),
               reason:card.reason||''};
@@ -199,15 +202,15 @@ async function load(tx, id) {
   return event;
 }
 
-async function list(repo, me, uid) {
-  const items=await Promise.all((me.activityIds||[]).slice(-50).map(id=>repo.get(EVENTS,id)));
-  return items.filter(event=>event?.kind==='competition'&&related(event,uid)).reverse().map(event=>{
+async function list(repo, me, uid, input={}) {
+  const selection=Pages.page(me.activityIds,input,20),items=await Promise.all(selection.ids.map(id=>repo.get(EVENTS,id)));
+  const rows=items.filter(event=>event?.kind==='competition'&&related(event,uid)).map(event=>{
     const group=userGroup(event,uid);
     return {id:event.id,title:event.title,courseName:event.courseName,date:event.date,status:event.status,
       updatedAt:event.updatedAt,statusText:statusText[event.status],groupCount:event.groups.filter(g=>players(g).length).length,
       pending:!!group?.roster.some(p=>p.accountUid===uid&&p.pending),
       myGroupId:group&&editGroup(group,uid)&&group.round?group.id:null,groupName:group?.name||''};
-  });
+  });return Pages.result(rows,selection,input);
 }
 
 function claimableSeats(event,group){
@@ -217,15 +220,17 @@ function claimableSeats(event,group){
 async function invitation(repo, inv, uid) {
   const event=await load(repo,inv.activityId), group=roundGroup(event,inv.groupId);
   const joined=inv.kind==='competition-watch'?related(event,uid):inv.kind==='competition-player'?group.memberUids.includes(uid):editGroup(group,uid);
-  const seats=claimableSeats(event,group);
-  const canAdd=event.status==='draft'&&group.roster.length<CAPACITY;
+  const reserved=group.roster.find(p=>p.accountUid===uid&&p.pending);
+  const seats=reserved?[{id:reserved.id,name:reserved.name,tee:reserved.tee,played:0,reserved:true}]:claimableSeats(event,group);
+  const canAdd=!reserved&&event.status==='draft'&&group.roster.length<CAPACITY;
   return {competition:true,kind:inv.kind,title:event.title,courseName:routeFor(event,group).courseName,routeName:routeFor(event,group).routeName,
     groupName:group.name,tees:routeFor(event,group).tees,joined,seats,canAdd,active:event.status==='active',
-    closed:!joined&&(event.status==='published'&&inv.kind!=='competition-watch'||inv.kind==='competition-player'&&!canAdd&&!seats.length)};
+    closed:event.status==='cancelled'||!joined&&(['published','ended','revising'].includes(event.status)&&inv.kind!=='competition-watch'||inv.kind==='competition-player'&&!canAdd&&!seats.length)};
 }
 
 async function join(tx, inv, user, input, now) {
   const event=await load(tx,inv.activityId), group=roundGroup(event,inv.groupId);
+  if(event.status==='cancelled')fail('CLOSED','赛事已取消');
   if(inv.kind==='competition-watch') {
     if(!related(event,user.uid)){
       if(event.viewerUids.length>=80)fail('FULL','观看人数已达上限');
@@ -233,7 +238,7 @@ async function join(tx, inv, user, input, now) {
     }
   } else if(inv.kind==='competition-scorer') {
     if(!editGroup(group,user.uid)){
-      if(event.status==='published')fail('CLOSED','赛事已公布，不能新增记分员');
+      if(['published','ended','revising'].includes(event.status))fail('CLOSED','赛事已结束，不能新增记分员');
       if(event.status==='active'&&!group.round)fail('CLOSED','该组没有开赛');
       if(group.scorerUids.length>=4)fail('FULL','本组记分员人数已满');
       group.scorerUids.push(user.uid);
@@ -242,17 +247,18 @@ async function join(tx, inv, user, input, now) {
     }
   } else if(inv.kind==='competition-player') {
     if(!group.memberUids.includes(user.uid)){
-      if(event.status==='published')fail('CLOSED','赛事已公布');
+      if(['published','ended','revising'].includes(event.status))fail('CLOSED','赛事已结束');
       const assigned=event.groups.find(g=>g.roster.some(p=>p.accountUid===user.uid));
       if(assigned&&assigned!==group)fail('ALREADY_JOINED','你已在本赛事其他小组参赛');
       const reserved=group.roster.find(p=>p.accountUid===user.uid);
-      const claim=input.seatId&&input.seatId!=='+'?group.roster.find(p=>p.id===input.seatId&&!p.accountUid):null;
-      if(input.seatId&&input.seatId!=='+'&&!claim)fail('SEAT_TAKEN','该球位已被认领，请刷新选择');
+      if(reserved&&input.seatId&&input.seatId!==reserved.id&&input.seatId!=='+')fail('RESERVED_SEAT','已有为你预留的球位，请确认原球位');
+      const claim=!reserved&&input.seatId&&input.seatId!=='+'?group.roster.find(p=>p.id===input.seatId&&!p.accountUid):null;
+      if(!reserved&&input.seatId&&input.seatId!=='+'&&!claim)fail('SEAT_TAKEN','该球位已被认领，请刷新选择');
       if(event.status==='active'&&(!claim||group.cards?.[claim.id]?.state!=='open'))fail('CLOSED','开赛后请认领已有球位；新增参赛者需由发起人添加');
-      const name=claim?.name||clean(input.name,20);
+      const name=claim?.name||reserved?.name||clean(input.name,20);
       if(!name)fail('INVALID','请填写参赛姓名或昵称');
       const entry={id:claim?.id||reserved?.id||user.uid,accountUid:user.uid,name,
-        tee:claim?.tee||tee(routeFor(event,group),input.tee)};
+        tee:claim?.tee||reserved?.tee||tee(routeFor(event,group),input.tee)};
       if(claim||reserved)Object.assign(claim||reserved,entry,{pending:false});
       else seat(group,entry);
       if(group.round){
@@ -329,8 +335,15 @@ function addLatePlayer(event, group, input, now){
 }
 
 async function dispatch(repo, uid, me, action, input, now, random) {
-  if(action==='competitionList')return list(repo,me,uid);
+  if(action==='competitionList')return list(repo,me,uid,input);
   if(action==='competitionGet')return view(await load(repo,input.activityId),uid);
+  if(action==='competitionPublication'){
+    const event=await load(repo,input.activityId);if(event.ownerUid!==uid)fail('FORBIDDEN','只有发起人可以查看公布历史');
+    const version=Number(input.version);if(!Number.isInteger(version)||version<1||version>(event.publicationVersion||0))fail('INVALID','公布版本无效');
+    const doc=await repo.get(EVENTS,'publication-'+crypto.createHash('sha256').update(event.id+':'+version).digest('hex'));
+    if(!doc||doc.kind!=='competition-publication')fail('NOT_FOUND','这版公布记录尚未归档');
+    return {version:doc.version,at:doc.at,reason:doc.reason,rows:doc.rows};
+  }
   return repo.transaction(async tx=>{
     if(action==='competitionCreate'){
       const title=clean(input.title,40), date=clean(input.date,10), course=courses.get(input.courseId);
@@ -366,7 +379,7 @@ async function dispatch(repo, uid, me, action, input, now, random) {
     if(action==='competitionConfirm'){
       const g=roundGroup(event,input.groupId);
       if(!editGroup(g,uid))fail('FORBIDDEN','只能确认本组记分卡');
-      if(event.status!=='active')fail('CLOSED','赛事不在交卡阶段');
+      if(!['active','ended','revising'].includes(event.status))fail('CLOSED','赛事不在交卡阶段');
       const p=players(g).find(p=>p.id===input.playerId),card=p&&g.cards[p.id];
       if(card?.state==='submitted'&&(card.playerConfirmed?.uid===uid||card.markerConfirmed?.uid===uid))return view(event,uid);
       if(!card||card.state!=='open'||!Rules.rawSummary(g.round,p.id).complete)fail('INVALID','请先填完该球员的逐洞成绩');
@@ -381,29 +394,56 @@ async function dispatch(repo, uid, me, action, input, now, random) {
         if(card.marker.uid===uid){card.markerConfirmed={uid,at:now()};allowed=true;}
       }
       if(!allowed)fail('FORBIDDEN','需要球员或指定核分人确认');
-      if(card.playerConfirmed&&card.markerConfirmed){card.state='submitted';card.submittedAt=now();}
+      if(card.playerConfirmed&&card.markerConfirmed){card.state='submitted';card.correcting=false;card.submittedAt=now();}
       g.version++;
     } else {
       owner(event,uid);
-      if(action==='competitionStart'){
+      if(action==='competitionCancel'||action==='competitionEnd'){
+        const target=action==='competitionCancel'?'cancelled':'ended';
+        if(event.status===target)return view(event,uid);
+        if(event.status!==(target==='cancelled'?'draft':'active'))fail('CLOSED','赛事状态已变化，请刷新后操作');
+        if(input.closeVersion!==closeVersion(event))fail('CONFLICT','赛事人员或成绩已更新，请刷新核对后再结束');
+        if(target==='ended')for(const g of event.groups.filter(g=>g.round)){
+          for(const p of players(g))if(g.cards[p.id]?.state==='open'&&!Rules.rawSummary(g.round,p.id).complete){
+            g.cards[p.id].state='incomplete';g.cards[p.id].reason='赛事结束时未完成全部球洞';
+          }
+          g.round.status=players(g).every(p=>Rules.rawSummary(g.round,p.id).complete)?'finished_complete':'finished_incomplete';
+          g.round.completedAt=g.round.finishedAt=g.round.updatedAt=now();g.round.revision++;g.version++;
+        }
+        event.status=target;event.endedAt=now();event.closedBy=uid;
+      }else if(action==='competitionStart'){
         if(event.status==='draft')start(event,now);
+        else if(event.status!=='active')fail('CLOSED','赛事已结束，不能重新开赛');
       }else if(action==='competitionPublish'){
         if(event.status==='published')return view(event,uid);
-        if(event.status!=='active')fail('INVALID','请先开始比赛');
+        if(!['active','ended','revising'].includes(event.status))fail('INVALID','请先开始比赛');
         if(event.groups.some(g=>Object.entries(g.cards||{}).some(([id,c])=>c.state==='open'&&g.roster.find(p=>p.id===id)?.rankingEligible!==false)))fail('INVALID','还有球员未交卡，请核对或标记未完赛');
         for(const g of event.groups.filter(g=>g.round)){
           for(const p of g.roster.filter(p=>p.rankingEligible===false))if(g.cards[p.id]?.state==='open'){g.cards[p.id].state='incomplete';g.cards[p.id].reason='仅记分，不参与正式排名';}
           g.round.status=Object.values(g.cards).every(c=>c.state==='submitted')?'finished_complete':'finished_incomplete';
-          g.round.completedAt=g.round.finishedAt=now();g.version++;
+          g.round.completedAt=g.round.finishedAt=g.round.updatedAt=now();g.round.revision++;g.version++;
         }
-        event.status='published';event.publishedAt=now();
+        event.status='published';event.publishedAt=now();event.publicationVersion=(event.publicationVersion||0)+1;
+        event.publishedRows=leaderboard(event);
+        await tx.set(EVENTS,'publication-'+crypto.createHash('sha256').update(event.id+':'+event.publicationVersion).digest('hex'),{
+          kind:'competition-publication',activityId:event.id,version:event.publicationVersion,at:now(),reason:event.revisionReason||'首次公布',rows:event.publishedRows,
+          groups:event.groups.filter(g=>g.round).map(g=>({id:g.id,scores:g.round.scores,cards:g.cards}))});
+        event.revisionReason='';
       }else if(action==='competitionResolve'){
         const g=roundGroup(event,input.groupId), card=g.cards?.[input.playerId], reason=clean(input.reason,100);
-        if(event.status!=='active'||!card||!reason)fail('INVALID','请填写处理原因');
+        if(!['active','ended','published','revising'].includes(event.status)||!card)fail('CLOSED','当前赛事不能更正这张记分卡');
+        if(!reason)fail('INVALID','请填写处理原因');
+        if(input.version!==undefined&&input.version!==g.version)fail('CONFLICT','记分卡已有更新，请重新核对');
         if(!['open','withdrawn','disqualified','incomplete'].includes(input.state))fail('INVALID','成绩状态无效');
         if(card.state==='submitted'&&input.state!=='open')fail('INVALID','请先将该记分卡退回核对');
-        card.state=input.state;card.reason=reason;
+        if(event.status==='published'){
+          if(input.state!=='open')fail('INVALID','请先发起指定记分卡的更正');
+          event.status='revising';event.revisionReason=reason;
+        }
+        const before=JSON.parse(JSON.stringify(card));
+        card.state=input.state;card.reason=reason;card.correcting=input.state==='open'&&event.status!=='active';
         card.playerConfirmed=null;card.markerConfirmed=null;g.version++;
+        await tx.set(EVENTS,'card-audit-'+crypto.createHash('sha256').update(JSON.stringify([event.id,g.id,g.version])).digest('hex'),{kind:'score-audit',activityId:event.id,groupId:g.id,playerId:input.playerId,before,after:card,actor:uid,at:now(),reason});
       }else if(action==='competitionLatePlayer'){
         addLatePlayer(event,roundGroup(event,input.groupId),input,now);
       }else if(action==='competitionPrimaryScorer'&&event.status==='active'){
@@ -414,7 +454,7 @@ async function dispatch(repo, uid, me, action, input, now, random) {
         g.version++;
       }else if(action==='competitionInvite'){
         if(!INVITE_ROLES.includes(input.kind))fail('INVALID','邀请身份无效');
-        if(input.kind!=='competition-watch'&&event.status==='published')fail('CLOSED','赛事已公布');
+        if(event.status==='cancelled'||input.kind!=='competition-watch'&&['published','ended','revising'].includes(event.status))fail('CLOSED','赛事已结束');
         const g=roundGroup(event,input.groupId||event.groups[0].id);
         if(event.status==='active'&&input.kind!=='competition-watch'&&!g.round)fail('CLOSED','该组没有开赛');
         const token=random(),expiresAt=now()+7*86400000;

@@ -1,1 +1,47 @@
-<view class="page"><scene-backdrop/><view class="title"><view>把不好用的地方，</view><view>告诉我们。</view></view><view class="sub">建议、纠错与版权沟通，我们都会认真对待。</view><view class="segment"><view class="{{tab==='new'?'active':''}}" data-id="new" bindtap="tab">提交反馈</view><view class="{{tab==='history'?'active':''}}" data-id="history" bindtap="tab">我的反馈</view></view><view wx:if="{{tab==='new'}}"><view class="card"><view class="note">反馈类型</view><picker class="choice-picker choice-inset" data-title="反馈类型" value="{{categoryIndex}}" range="{{categories}}" bindchange="category"><view class="select-field "><view class="select-copy"><view class="select-value">{{draft.category}}</view></view><image class="select-chevron" src="/assets/chevron.png" aria-hidden="true"/></view></picker><view class="section">问题或建议</view><textarea maxlength="2000" value="{{draft.content}}" data-key="content" bindinput="input" placeholder="在哪个页面、做了什么操作、遇到了什么问题？也欢迎写下你想要的功能。"/><view class="section">联系方式 <text class="note">选填</text></view><input value="{{draft.contact}}" data-key="contact" bindinput="input" maxlength="120" placeholder="手机、微信或邮箱，仅用于回复反馈"/><view class="note spaced">草稿自动保存在本机。只提交填写的内容，不附带位置或球局记录。</view></view><view wx:if="{{!connected}}" class="quiet-card spaced"><view>草稿已保存在本机</view><view class="note">反馈后台尚未配置上线地址，暂未发送给我们。急需联系可致电吴先生。</view><view class="location-action" bindtap="contact">185 2159 7226 ›</view></view><view wx:if="{{error}}" class="danger spaced">{{error}}</view><button class="primary" disabled="{{busy}}" loading="{{busy}}" bindtap="submit">{{connected?'提交反馈':'保存反馈草稿'}}</button></view><view wx:else><view wx:if="{{!receipts.length}}" class="empty">这里会留下我们的交流。</view><view wx:for="{{receipts}}" wx:key="id" class="card"><view class="row"><text>{{item.category}}</text><text class="pill">{{item.status==='new'?'待查看':item.status==='reading'?'处理中':item.status==='replied'?'已回复':'已处理'}}</text></view><view class="spaced">{{item.content}}</view><view wx:if="{{item.reply}}" class="quiet-card"><view>青野回复</view><view class="sub">{{item.reply}}</view></view><view class="note">回执 {{item.id}}</view></view><button bindtap="status">刷新进度</button></view></view><privacy-panel/>
+<view class="page feedback-page"><scene-backdrop/>
+  <view class="title"><view>把不好用的地方，</view><view>告诉我们。</view></view>
+  <view class="sub">填写遇到的问题或建议，提交后我们会收到。</view>
+  <view class="segment"><view class="{{tab==='new'?'active':''}}" data-id="new" bindtap="tab">提交反馈</view><view class="{{tab==='history'?'active':''}}" data-id="history" bindtap="tab">我的反馈</view><view wx:if="{{loggedIn && isAdmin}}" class="{{tab==='admin'?'active':''}}" data-id="admin" bindtap="tab">反馈管理</view></view>
+  <view wx:if="{{error}}" class="danger spaced" role="alert">{{error}}</view>
+  <view wx:if="{{tab==='new'}}">
+    <view class="card"><view class="note">反馈类型</view><qy-picker title="反馈类型" disabled="{{busy}}" value="{{categoryIndex}}" range="{{categories}}" bindchange="category"><view class="select-field"><view class="select-copy"><view class="select-value">{{draft.category}}</view></view><image class="select-chevron" src="/assets/chevron.png"/></view></qy-picker>
+      <view class="section">问题或建议</view><textarea disabled="{{busy}}" maxlength="2000" value="{{draft.content}}" data-key="content" bindinput="input" placeholder="在哪个页面、做了什么操作、遇到了什么问题？也欢迎写下你想要的功能。"/>
+      <view class="section">联系方式 <text class="note">选填</text></view><input disabled="{{busy}}" value="{{draft.contact}}" data-key="contact" bindinput="input" maxlength="120" placeholder="手机、微信或邮箱，仅用于回复反馈"/>
+      <view class="note spaced">草稿自动保存在本机。提交后关联当前微信账号，方便查看进度和回复；不附带位置或球局记录。</view>
+    </view>
+    <view wx:if="{{checking}}" class="note spaced">正在确认登录状态…</view>
+    <view wx:elif="{{!loggedIn}}" class="quiet-card spaced"><view>登录后提交和查看反馈</view><view class="note">填写的草稿会保留，登录后可继续提交。</view></view>
+    <view wx:elif="{{!connected}}" class="quiet-card spaced"><view>草稿已保存，尚未发送</view><view class="note">反馈服务尚未连接，请重试。急需联系可致电吴先生。</view><button bindtap="connect">重试连接</button><view class="location-action" bindtap="contact">185 2159 7226 ›</view></view>
+    <button class="primary" disabled="{{busy || checking}}" loading="{{busy}}" bindtap="submit">{{!loggedIn?'登录后提交反馈':connected?'提交反馈':'保存反馈草稿'}}</button>
+    <view class="note spaced">提交后可在“我的反馈”查看已提交的内容。</view>
+    <view wx:if="{{connected}}" class="note spaced" bindlongpress="copyIdentity">青野会认真处理每一条反馈。</view>
+  </view>
+  <view wx:elif="{{tab==='history'}}">
+    <view wx:if="{{checking}}" class="note spaced">正在确认登录状态…</view>
+    <view wx:elif="{{!loggedIn}}" class="quiet-card spaced"><view>登录后查看我的反馈</view><view class="note">退出登录后，不显示已提交的反馈内容。</view><button bindtap="login">去登录</button></view>
+    <block wx:else>
+    <view wx:if="{{loading}}" class="note spaced">正在读取反馈…</view><view wx:elif="{{!receipts.length && !error}}" class="empty">这里会留下我们的交流。</view>
+    <view wx:for="{{receipts}}" wx:key="id" class="card"><view class="row"><text>{{item.category}}</text><text class="pill">{{item.statusLabel}}</text></view><view class="feedback-content spaced">{{item.content}}</view><view wx:if="{{item.reply}}" class="quiet-card"><view>青野回复</view><view class="sub feedback-content">{{item.reply}}</view></view><view wx:if="{{item.releaseVersion}}" class="note">修复版本 {{item.releaseVersion}}</view><view class="note feedback-id">{{item.date}} · {{item.id}}</view></view>
+    <button disabled="{{loading}}" bindtap="status">刷新进度</button>
+    </block>
+  </view>
+  <view wx:elif="{{tab==='admin' && loggedIn && isAdmin}}">
+    <view wx:if="{{!selected}}">
+      <view class="quiet-card feedback-admin-summary">
+        <view class="feedback-admin-title">客户反馈<text class="feedback-admin-count">{{adminCount}} 条</text></view>
+        <view class="note">这里汇总用户提交的问题、建议及选填的联系方式，仅管理员可查看。</view>
+        <view class="feedback-admin-actions">
+          <button class="feedback-refresh" disabled="{{loading}}" loading="{{loading}}" bindtap="loadAdmin">刷新反馈</button>
+          <button class="feedback-copy" disabled="{{loading}}" bindtap="exportFeedback">复制反馈清单</button>
+        </view>
+      </view>
+      <view wx:if="{{!adminCount && !loading && !error}}" class="empty">暂时没有收到客户反馈。</view>
+      <view wx:for="{{adminItems}}" wx:key="id" class="card" data-id="{{item.id}}" bindtap="selectFeedback"><view class="row"><text>{{item.category}}</text><text class="pill">{{item.statusLabel}}</text></view><view class="feedback-content spaced">{{item.content}}</view><view class="note">{{item.date}} · 查看详情 ›</view></view>
+    </view>
+    <view wx:else class="card"><view class="section">{{selected.category}}</view><view class="feedback-content">{{selected.content}}</view><view wx:if="{{selected.contact}}" class="sub spaced">联系方式：{{selected.contact}}</view><view class="note feedback-id">{{selected.id}}</view>
+      <view class="section">提交时间</view><view class="sub">{{selected.date}}</view>
+      <view wx:if="{{selected.reply}}" class="quiet-card"><view>已有回复</view><view class="feedback-content">{{selected.reply}}</view></view>
+      <button bindtap="backToList">返回反馈列表</button>
+    </view>
+  </view>
+</view><privacy-panel/><qy-dialog class="page-dialog"/>

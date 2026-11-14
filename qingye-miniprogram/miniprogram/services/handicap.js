@@ -17,9 +17,7 @@ function aggregate(values){
 }
 function format(v){return Number.isFinite(v)?v<0?'+'+Math.abs(v).toFixed(1):v.toFixed(1):'—';}
 function recordsFor(data,pid='me'){
- const combined=new Map();for(const r of data.rounds.filter(r=>r.players.some(p=>p.id===pid)))combined.set(r.id,{r,pid});
- if(pid==='me')for(const x of data.linkedRounds||[]){const old=combined.get(x.round.id);if(!old||old.r.revision<x.round.revision)combined.set(x.round.id,{r:x.round,pid:x.playerId});}
- const rounds=Array.from(combined.values()).filter(x=>R.isFinished(x.r)).sort((a,b)=>String(a.r.date).localeCompare(String(b.r.date))||(a.r.finishedAt||0)-(b.r.finishedAt||0));
+ const rounds=(pid==='me'?require('./service').personalRecords(data):data.rounds.filter(r=>r.players.some(p=>p.id===pid)&&R.isFinished(r)).map(r=>({r,pid}))).sort((a,b)=>String(a.r.date).localeCompare(String(b.r.date))||(a.r.finishedAt||0)-(b.r.finishedAt||0));
  return rounds;
 }
 function summary(data,pid='me'){

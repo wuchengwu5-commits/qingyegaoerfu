@@ -3,6 +3,19 @@
 .gps-toolbar{display:flex;gap:12px;align-items:end;flex-wrap:wrap}.gps-toolbar label{min-width:220px;margin:0}.gps-overview{max-width:420px;max-height:640px;object-fit:contain;border-radius:14px;margin:12px 0 24px}#gpsHoles{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}.gps-card{background:#fcfdf9;border:1px solid #dfe6d9;padding:16px;border-radius:16px}.gps-card img{width:100%;max-height:420px;object-fit:contain}.gps-card p{font-size:11px;overflow-wrap:anywhere;white-space:pre-wrap}
 
 .inventory-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.province-browser{margin:0 0 20px;padding:16px 18px;border:1px solid #dce5d9;border-radius:16px;background:#fdfef9}
+.province-browser summary{font-size:16px;line-height:1.6}
+.province-selection{font-size:12px;font-weight:400;color:#526b5a;margin-left:16px}
+.province-browser p{margin:10px 0 14px}
+.province-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(146px,1fr));gap:8px}
+.province-card{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:#f2f6ed;border:1px solid #e0e8da;color:#31543e;text-align:left;min-width:0;line-height:1.5}
+.province-card:hover{background:#e6efdf;border-color:#b8cbb1}
+.province-card.active{background:#315c44;border-color:#315c44;color:white}
+.province-name{font-size:13px;overflow-wrap:anywhere}
+.province-count{font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums;opacity:.85}
+.province-card:focus-visible,.province-browser summary:focus-visible{outline:3px solid #8fa86e;outline-offset:3px}
+.inventory-empty{padding:20px;border:1px dashed #c7d5bf;border-radius:12px;color:#65775d;text-align:center;font-size:14px}
+@media(max-width:600px){.province-browser{padding:13px}.province-selection{display:block;margin:5px 0 0 18px}.province-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.province-card{padding:9px 10px}}
 .inventory-stat{padding:14px 18px;background:#fdfef9;border:1px solid #dfe6d9;border-radius:14px;display:grid;gap:4px}
 .inventory-stat b{font-size:27px;line-height:1.2;font-variant-numeric:tabular-nums}
 .inventory-stat span{font-size:12px;color:#56705e}

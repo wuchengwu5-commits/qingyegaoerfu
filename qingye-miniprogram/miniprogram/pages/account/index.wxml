@@ -2,8 +2,8 @@
  <scene-backdrop/>
  <view class="account-hero">
   <image class="account-wordmark" src="/assets/wordmark.png" mode="aspectFit" aria-label="青野高尔夫"/>
-  <view class="account-title">{{loggedIn?'你的高球名片':'让每一轮，都属于你。'}}</view>
-  <view wx:if="{{loggedIn}}" class="account-caption">让同组球友认出你。</view>
+  <view class="account-title">{{loggedIn?(completingProfile?'让球友认出你。':'你的高球名片'):'让每一轮，都属于你。'}}</view>
+  <view wx:if="{{loggedIn}}" class="account-caption">{{completingProfile?'完善头像和昵称，方便同组球友认出你。':'让同组球友认出你。'}}</view>
  </view>
  <view wx:if="{{!loggedIn}}" class="card login-card">
   <view class="login-title">手机号授权登录</view>
@@ -11,21 +11,22 @@
   <button class="primary wechat-login-button" open-type="getPhoneNumber" bindgetphonenumber="phoneLogin" disabled="{{busy}}" loading="{{busy}}">{{busy?'正在验证…':'授权手机号并登录'}}</button>
  </view>
  <view wx:else>
-  <view class="verified spaced">已登录 · 手机号已验证</view>
+  <view wx:if="{{completingProfile}}" class="account-steps"><text class="account-step-done">✓ 手机号已验证</text><view class="account-step-line"></view><text class="account-step-current">2 完善名片</text></view>
+  <view wx:else class="verified spaced">已登录 · 手机号已验证</view>
   <form bindsubmit="save">
-   <view class="card spaced">
+   <view class="card spaced profile-card">
     <button class="avatar-picker" open-type="chooseAvatar" bindchooseavatar="chooseAvatar" disabled="{{busy}}" aria-label="选择头像">
      <image wx:if="{{avatarUrl}}" class="account-avatar" src="{{avatarUrl}}" mode="aspectFill"/>
      <view wx:else class="avatar-placeholder">＋</view>
-     <text class="avatar-label">{{avatarUrl?'更换头像':'选择头像'}}</text>
+     <view class="avatar-copy"><text class="avatar-label">{{avatarUrl?'更换头像':'选择微信头像'}}</text><view class="avatar-hint">点击选择你要使用的头像</view></view><text class="avatar-arrow">›</text>
     </button>
-    <view class="section space">球友看到的昵称</view>
-    <input name="nickname" type="nickname" maxlength="16" value="{{name}}" bindinput="name" placeholder="点击填写微信昵称" disabled="{{busy}}"/>
-    <view class="note space">加入活动后，同组成员可查看你的昵称和本次成绩。</view>
+    <view class="profile-name-label">球友昵称</view>
+    <input class="nickname-input" name="nickname" type="nickname" maxlength="16" value="{{name}}" bindinput="name" placeholder="点击使用微信昵称或填写姓名" disabled="{{busy}}"/>
+    <view class="profile-hint">点击输入框，可使用微信提供的昵称。</view>
    </view>
-   <button class="primary spaced" form-type="submit" disabled="{{busy}}" loading="{{busy}}">{{busy?'正在保存…':'保存资料'}}</button>
+   <button class="primary spaced profile-save" form-type="submit" disabled="{{busy}}" loading="{{busy}}">{{busy?'正在保存…':completingProfile?'保存并继续':'保存资料'}}</button>
   </form>
-  <view class="card spaced phone-binding">
+  <view wx:if="{{!completingProfile}}" class="card spaced phone-binding">
    <view class="section">已验证手机号</view>
    <view class="note space">{{phoneMasked}}</view>
   </view>
@@ -38,3 +39,4 @@
   <view class="account-back" bindtap="back" role="button">{{returnLabel}}<text class="account-back-arrow">›</text></view>
  </view>
 </view><privacy-panel/>
+<qy-dialog class="page-dialog"/>

@@ -1,1 +1,6 @@
-{"navigationBarTitleText":"比赛记分"}
+{
+  "navigationBarTitleText": "比赛记分",
+  "usingComponents": {
+    "tee-picker": "/components/tee-picker/index"
+  }
+}

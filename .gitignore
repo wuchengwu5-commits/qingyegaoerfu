@@ -18,3 +18,11 @@ project.private.config.json
 /qingye-miniprogram/backend/data/
 /course-art-library/*.sqlite*
 /course-art-library/backups/
+
+# Local run artifacts; existing fixed regression fixtures remain tracked.
+outputs/
+preview/qa/
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm

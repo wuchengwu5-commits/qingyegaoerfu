@@ -20,7 +20,9 @@
     "pages/account/index",
     "pages/groups/index",
     "pages/knowledge/index",
-    "pages/background/index"
+    "pages/background/index",
+    "pages/share-view/index",
+    "pages/players/index"
   ],
   "window": {
     "navigationBarTitleText": "青野 · GOLF",
@@ -73,7 +75,9 @@
   ],
   "usingComponents": {
     "privacy-panel": "/components/privacy-panel/index",
-    "scene-backdrop": "/components/scene-backdrop/index"
+    "scene-backdrop": "/components/scene-backdrop/index",
+    "qy-dialog": "/components/qy-dialog/index",
+    "qy-picker": "/components/qy-picker/index"
   },
   "subPackages": [
     {
@@ -280,6 +284,120 @@
     },
     {
       "root": "packages/suzhou-7743-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/jianshan-dragon-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/jianshan-phoenix-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/beijing-tianxing-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/map-check",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/nanjing-sunisland-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/beijing-country-old-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/beijing-country-new-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/beijing-orient-pearl-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/beijing-wanliu-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/beijing-cbd-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/beijing-double-eagle-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/jinshawan-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/beijing-ligong-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/beijing-orient-suncity-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/beichen-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/bayhood-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/golden-bear-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/huidu-map",
+      "pages": [
+        "atlas"
+      ]
+    },
+    {
+      "root": "packages/huabin-nicklaus-map",
       "pages": [
         "atlas"
       ]

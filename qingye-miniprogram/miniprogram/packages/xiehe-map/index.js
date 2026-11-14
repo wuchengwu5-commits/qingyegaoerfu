@@ -1,3 +1,4 @@
+const Dialog = require('../../services/dialog');
 const Geo = require('./map-core');
 const Raster = require('./atlas-raster');
 const {acceptOverviewFix} = require('./location-policy');
@@ -21,8 +22,8 @@ const midpoint = (a,b) => [(a[0]+b[0])/2,(a[1]+b[1])/2];
 Page({
  data:{selected:1,holeNumber:1,sectionName:'',par:4,mode:'overview',unit:'码',front:'—',center:'—',back:'—',pickerOpen:false,actions:[],groups:[],notice:'',loading:true,error:''},
  onLoad(options={}){
-   this.disposed=false;this.fixRevision=0;this.memories={};this.holes=[];this.preferArt=options.layer!=='gps'&&options.mode!=='gps';
-   this.round=options.round?Store.getRound(options.round):null;
+   this.disposed=false;this.fixRevision=0;this.memories={};this.holes=[];this.preferArt=require('../../services/map-layer').artRequested(options);
+   this.round=options.round?require('../../services/map-round').get(options.round):null;
    if(this.round?.courseId!==Config.courseId)this.round=null;
    this.unit=this.round?.distanceUnit==='m'?'m':'yd';
    const course=Store.courses.find(c=>c.id===Config.courseId);
@@ -135,7 +136,7 @@ Page({
  },
  syncArt(){
    const src=Config.art?.[this.hole?.id]?.src;
-   if(this.artEntry&&this.artEntry.src!==src){this.artLoader?.close();this.artEntry=null;}
+   if(this.artEntry&&(this.artEntry.src!==src||!this.preferArt||this.data.mode!=='focus')){this.artEntry=null;this.artLoader?.close();this.artLoader=null;}
    if(!src||!this.preferArt||this.data.mode!=='focus'||!this.canvas||this.artEntry)return;
    const entry={src,image:null};this.artEntry=entry;
    this.artLoader=Raster.createLoader(this.canvas);
@@ -200,7 +201,7 @@ Page({
    const meters=[5,10,20,50,100,200,500,1000].reduce((best,x)=>x/m<=72?x:best,5);
    const artSpec=Config.art?.[this.hole?.id],entry=this.data.mode==='focus'&&this.preferArt?this.artEntry:null;
    const index=this.holes.indexOf(this.hole),sectionSize=Config.groups[this.hole?.section]?.holeCount;
-   this.pins=draw(this.ctx,{width:this.width,height:this.height,pixelRatio:this.pixelRatio,atlas,image:this.image,surround:this.surround,camera:this.camera,holes:this.holes,hole:this.hole,origin:this.origin,target:this.target,isFix:this.isFix,fix:this.fix,unit:this.unit,mode:this.data.mode,safe:this.safe,measures:this.data,holeCountText:sectionSize?this.hole.local+' / '+sectionSize:undefined,previousAvailable:index>0,nextAvailable:index+1<this.holes.length,originLabel:this.data.originLabel,scaleText:meters+' 米',scaleWidth:meters/m,groups:Config.groups,notice:this.data.notice,hasArt:!!artSpec,art:entry?.image,artSpec,artLoading:!!entry&&!entry.image,hasReference:!!Config.referenceRoute&&!artSpec,controls:{hasOverview:!Config.overviewOnly},showLegend:!Config.overviewOnly,pickText:Config.overviewOnly?'卫星全览 · 待标注':undefined});
+   this.pins=draw(this.ctx,{width:this.width,height:this.height,pixelRatio:this.pixelRatio,atlas,image:this.image,surround:this.surround,camera:this.camera,holes:this.holes,hole:this.hole,origin:this.origin,target:this.target,isFix:this.isFix,fix:this.fix,unit:this.unit,mode:this.data.mode,safe:this.safe,measures:this.data,holeCountText:sectionSize?this.hole.local+' / '+sectionSize:undefined,previousAvailable:index>0,nextAvailable:index+1<this.holes.length,originLabel:this.data.originLabel,scaleText:meters+' 米',scaleWidth:meters/m,groups:Config.groups,footText:Config.footText,notice:this.data.notice,hasArt:!!artSpec,art:entry?.image,artSpec,artLoading:!!entry&&!entry.image,hasReference:!!Config.referenceRoute&&!artSpec,controls:{hasOverview:!Config.overviewOnly},showLegend:!Config.overviewOnly,pickText:Config.overviewOnly?'卫星全览 · 待标注':undefined});
  },
  toggleUnit(){this.unit=this.unit==='yd'?'m':'yd';this.setData({unit:this.unit==='yd'?'码':'米'});this.updateDistances();this.paint();},
  keepMapInView(){
@@ -270,5 +271,5 @@ Page({
      },fail:()=>fail('可在场内用微信定位，或拖动起点')});};
    if(wx.requirePrivacyAuthorize)wx.requirePrivacyAuthorize({success:get,fail:()=>fail('可拖动起点测距')});else get();
  },
- info(){wx.showModal({title:Config.name+(Config.overviewOnly?' · 卫星全览':' · GPS 球道图'),content:Config.mapNote||'洞序和障碍关系参考球道资料，发球区和果岭按卫星影像判读，待现场校准。全场正北向上，单洞发球区在下、旗杆在上。红旗取果岭中心作为参考位置，距离为水平估算。拖动白点设起点，点击地图或拖动金色十字设落点。场外灰绿区域为显示遮罩，随卫星地图缩放及旋转。',showCancel:false});}
+ info(){Dialog.modal({title:Config.name+(Config.overviewOnly?' · 卫星全览':' · GPS 球道图'),content:Config.mapNote||'洞序和障碍关系参考球道资料，发球区和果岭按卫星影像判读，待现场校准。全场正北向上，单洞发球区在下、旗杆在上。红旗取果岭中心作为参考位置，距离为水平估算。拖动白点设起点，点击地图或拖动金色十字设落点。场外灰绿区域为显示遮罩，随卫星地图缩放及旋转。',showCancel:false});}
 });

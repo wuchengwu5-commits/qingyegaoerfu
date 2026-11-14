@@ -1,0 +1,1 @@
+:host{display:block}.tee-trigger{display:flex;align-items:center;gap:14rpx;min-height:88rpx;padding:0 12rpx;font-size:28rpx;color:#355b43}.tee-dot{width:22rpx;height:22rpx;flex-shrink:0;border-radius:50%;border:2rpx solid rgba(67,85,69,.28);box-sizing:border-box}.tee-chevron{margin-left:8rpx;color:#7e907b}

@@ -2,7 +2,7 @@ const A=require('./account'),KEY='qingye.pendingRounds',VERSIONS='qingye.roundVe
 let running=null,rerun=false;
 function enqueue(round){
  if(!round.cloud||A.user()&&round.cloud.ownerUid!==A.user().uid)return;
- const clean=JSON.parse(JSON.stringify(round));delete clean.changeLog;delete clean.operations;delete clean.corrections;
+ const clean=JSON.parse(JSON.stringify(round));clean.auditReason=round.changeLog?.[round.changeLog.length-1]?.reason||'更新球局';delete clean.changeLog;delete clean.operations;delete clean.corrections;
  const q=wx.getStorageSync(KEY)||{},old=q[round.id];
  // Retain an in-flight request across new edits/restarts, including its original
  // version and ID: a lost response must not look like another device's change.
@@ -20,7 +20,7 @@ async function flush(){
     if(!item.sent){item.sent={round:item.round,stamp:item.stamp,expectedVersion:versions[id]??item.round.cloud.serverVersion??0};wx.setStorageSync(KEY,q);}
     const sent=item.sent;
     try{
-     const out=await A.call('saveRound',{activityId:sent.round.cloud.activityId,groupId:sent.round.cloud.groupId,expectedVersion:sent.expectedVersion,round:sent.round,mutationId:sent.stamp});
+     const out=await A.call('saveRound',{activityId:sent.round.cloud.activityId,groupId:sent.round.cloud.groupId,expectedVersion:sent.expectedVersion,round:sent.round,reason:sent.round.auditReason,mutationId:sent.stamp});
      const latestVersions=wx.getStorageSync(VERSIONS)||{};latestVersions[id]=out.version;wx.setStorageSync(VERSIONS,latestVersions);
      const latest=wx.getStorageSync(KEY)||{};
      if(latest[id]?.stamp===sent.stamp)delete latest[id];else if(latest[id]){delete latest[id].sent;delete latest[id].error;}

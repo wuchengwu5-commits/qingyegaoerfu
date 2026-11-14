@@ -22,7 +22,7 @@ test('same city first, each group ascending, missing coordinates at group end; n
 test('fresh GPS shared between pages, stale fix refreshed, forced relocation replaces old city',async t=>{
  const L=fresh();const original=Date.now;let now=original();t.mock.method(Date,'now',()=>now);
  await L.request();A.equal(L.state().fix.city,'上海市');await L.request();A.equal(apiCalls,1);
- now+=61000;gps={latitude:39.9,longitude:116.4};await L.request();A.equal(apiCalls,2);A.equal(L.state().fix.city,'北京市');
+ now+=L.CACHE_MS+1;gps={latitude:39.9,longitude:116.4};await L.request();A.equal(apiCalls,2);A.equal(L.state().fix.city,'北京市');
  gps={latitude:22.55,longitude:114.06};await L.request(true);A.equal(L.state().fix.city,'深圳市');
 });
 test('native city data loads once per attempt and never delays or overwrites a newer GPS fix',async()=>{
@@ -54,13 +54,13 @@ test('native city data loads once per attempt and never delays or overwrites a n
  A.equal(L.state().fix.city,'北京市');A.equal(L.state().fix.longitude,116.4);
 });
 
-test('rejected authorization is not repeatedly requested; settings recovery and invalid GPS clear old fix',async()=>{
+test('rejected authorization is not repeatedly requested; failed refresh retains a valid last-known fix',async()=>{
  const L=fresh();wx.getLocation=o=>o.fail({errMsg:'getLocation:fail auth deny'});
  await L.request();A.equal(L.state().status,'denied');let opened=0;
  wx.openSetting=o=>{opened++;o.success({authSetting:{'scope.userLocation':true}});};
  wx.getLocation=o=>{apiCalls++;o.success(point);};await L.request();A.equal(apiCalls,0);
  await L.settings();A.equal(opened,1);A.equal(L.state().status,'ready');
- wx.getLocation=o=>o.success({latitude:999,longitude:121});await L.request(true);A.equal(L.state().fix,null);A.equal(L.state().status,'unavailable');
+ wx.getLocation=o=>o.success({latitude:999,longitude:121});await L.request(true);A.equal(L.state().fix.city,'上海市');A.equal(L.state().status,'ready');A.match(L.state().error,/沿用上次位置/);
 });
 test('GPS timeout releases loading and a late result cannot replace a newer fix',async t=>{
  const L=fresh();let late;wx.getLocation=o=>late=o;
@@ -71,7 +71,7 @@ test('GPS timeout releases loading and a late result cannot replace a newer fix'
 function setupPages(t,L){
  const active={id:'active-elsewhere',courseId:'cn_bg_2525',courseName:'旧球局球场'},favorites=[],navigation=[];
  const S={courses:catalog,read:()=>({profile:{},favorites}),active:()=>active,stats:()=>({})};
- const replacements={'services/ui':{S,run:fn=>fn(),go:(name,query)=>navigation.push([name,query]),tab:name=>navigation.push([name])},'services/remote':{sync:()=>Promise.resolve()},'services/slogans':{get:()=>({title:'测试',subtitle:''})}};
+ const replacements={'services/ui':{S,run:fn=>fn(),go:(name,query)=>navigation.push([name,query]),tab:name=>navigation.push([name])},'services/score-entry':{resume:()=>navigation.push(['play'])},'services/remote':{sync:()=>Promise.resolve()},'services/slogans':{get:()=>({title:'测试',subtitle:''})}};
  const saved=[];
  for(const [name,exports] of Object.entries(replacements)){const id=require.resolve(base+name);saved.push([id,require.cache[id]]);require.cache[id]={id,filename:id,loaded:true,exports};}
  const pages=[];
@@ -82,13 +82,13 @@ function setupPages(t,L){
 test('home and current-location show the same nearest course, independent of active round, search or province filters',async t=>{
  const L=fresh();await L.request();const {home,directory,navigation,active}=setupPages(t,L),before=JSON.stringify(active);
  const nearest=L.nearest(catalog,L.state().fix);A.equal(home.data.featured.id,nearest.id);A.equal(home.data.featured.name,nearest.name);A.equal(directory.data.nearest.id,nearest.id);
- A.notEqual(home.data.featured.name,active.courseName);home.start();A.deepEqual(navigation.pop(),['score','?id='+active.id]);
+ A.notEqual(home.data.featured.name,active.courseName);home.start();A.deepEqual(navigation.pop(),['play']);
  directory.quickProvince({currentTarget:{dataset:{id:'北京市'}}});directory.search({detail:{value:'不存在的球场'}});A.equal(directory.data.items.length,0);A.equal(directory.data.nearest.id,nearest.id);
  gps={latitude:39.9,longitude:116.4};await L.request(true);A.equal(home.data.featured.id,directory.data.nearest.id);A.notEqual(home.data.featured.id,nearest.id);A.equal(directory.data.province,'北京市');A.equal(directory.data.query,'不存在的球场');A.equal(JSON.stringify(active),before);
- wx.getLocation=o=>o.fail({errMsg:'GPS unavailable'});await L.request(true);A.equal(home.data.featured.id,undefined);A.equal(directory.data.nearest,null);
+ wx.getLocation=o=>o.fail({errMsg:'GPS unavailable'});await L.request(true);A.equal(home.data.featured.id,directory.data.nearest.id);A.match(L.state().error,/沿用上次位置/);
 });
-test('without an active round, the home button opens setup for the displayed nearest course',async t=>{
- const L=fresh();await L.request();const {home,navigation}=setupPages(t,L);const ui=require(base+'services/ui');ui.S.active=()=>null;home.refresh();home.start();A.deepEqual(navigation.pop(),['create','?course='+home.data.featured.id]);
+test('without an active round, the home button enters the scoring hub',async t=>{
+ const L=fresh();await L.request();const {home,navigation}=setupPages(t,L);const ui=require(base+'services/ui');ui.S.active=()=>null;home.refresh();home.start();A.deepEqual(navigation.pop(),['play']);
 });
 test('all 442 catalog courses have real source coordinates; imported coordinates preserve provenance and scorecards',()=>{
  const fs=require('node:fs'),path=require('node:path');A.equal(catalog.length,442);

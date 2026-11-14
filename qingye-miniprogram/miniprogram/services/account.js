@@ -36,14 +36,19 @@ async function call(action,data={}){
  try{const result=await exchange(action,data,epoch);active(epoch);return result;}
  catch(e){if(epoch===session&&['AUTH','AUTH_REQUIRED','ACCOUNT_CHANGED'].includes(e.code))logout();throw e;}
 }
+async function withSession(operation){
+ const epoch=session,p=await login();active(epoch);
+ try{const result=await operation(p);active(epoch);return result;}
+ catch(e){active(epoch);throw e;}
+}
 function accept(p){
  if(p?.phoneVerified!==true||typeof p.uid!=='string'||!p.uid){const e=Error('请先授权手机号并完成验证');e.code='AUTH_REQUIRED';throw e;}
  const S=require('./store'),old=S.read().profile.accountUid;
  if(old&&old!==p.uid){const e=Error('本机记录属于另一个微信账号，请使用原账号继续');e.code='ACCOUNT_CHANGED';throw e;}
- S.mutate(d=>{d.profile.accountUid=p.uid;if(p.name)d.profile.name=p.name;d.profile.avatarUrl=p.avatarUrl||'';if(p.handicapSetting&&!d.profile.handicapPending)d.profile.handicapSetting=p.handicapSetting;if(p.handicapInputs)d.personalHandicapInputs={...d.personalHandicapInputs,...p.handicapInputs,...d.pendingHandicapInputs};});
+ S.mutate(d=>{d.unclaimedRoundIds=d.unclaimedRoundIds||[];for(const r of d.rounds||[]){if(!r.ownerUid&&!r.cloud){if(old===p.uid&&!d.unclaimedRoundIds.includes(r.id))r.ownerUid=p.uid;else if(!d.unclaimedRoundIds.includes(r.id))d.unclaimedRoundIds.push(r.id);}}d.profile.accountUid=p.uid;if(p.name)d.profile.name=p.name;d.profile.avatarUrl=p.avatarUrl||'';const me=d.draft?.players?.find(x=>x.id==='me');if(me){me.name=p.name;me.avatarUrl=p.avatarUrl||'';me.accountUid=p.uid;}if(p.handicapSetting&&!d.profile.handicapPending)d.profile.handicapSetting=p.handicapSetting;if(p.handicapInputs)d.personalHandicapInputs={...d.personalHandicapInputs,...p.handicapInputs,...d.pendingHandicapInputs};});
  current=p;verified=true;canRestore=true;save({version:1,profile:publicSession(p),savedAt:Date.now()});emit();return p;
 }
-function sync(){require('./cloud-sync').flush().catch(()=>{});syncRatings().catch(()=>{});}
+function sync(){require('./cloud-sync').flush().catch(()=>{});require('./personal-sync').sync().catch(()=>{});syncRatings().catch(()=>{});}
 function restore(){
  init();if(inflight)return inflight;if(verified)return Promise.resolve(current);if(restoring)return restoring;
  if(!canRestore)return Promise.resolve(null);
@@ -79,7 +84,7 @@ async function uploadAvatar(filePath){
  active(epoch);
  if(!r.fileID)throw Error('头像上传失败，请重试');return r.fileID;
 }
-async function friends(){await login();const list=await call('friends');require('./store').mutate(d=>{d.friends=[...d.friends.filter(f=>!f.accountUid),...list.map(p=>({id:p.uid,accountUid:p.uid,name:p.name,registered:true}))];});return list;}
+async function friends(){await login();const list=await call('friends');require('./store').mutate(d=>{d.friends=[...d.friends.filter(f=>!f.accountUid),...list.map(p=>({id:p.uid,accountUid:p.uid,name:p.name,avatarUrl:p.avatarUrl||'',registered:true}))];});return list;}
 async function syncRatings(){
  if(!current||!configured())return false;if(ratingsRunning)return ratingsRunning;
  const S=require('./store'),epoch=session,job=(async()=>{for(const [roundId,values] of Object.entries(S.read().pendingHandicapInputs||{})){
@@ -87,5 +92,12 @@ async function syncRatings(){
   try{await call('rating',{roundId,values});S.mutate(d=>{if(JSON.stringify(d.pendingHandicapInputs?.[roundId])===JSON.stringify(values))delete d.pendingHandicapInputs[roundId];});}catch{return false;}
  }return true;})().finally(()=>{if(ratingsRunning===job)ratingsRunning=null;});ratingsRunning=job;return job;
 }
-function needLogin(){if(user())return true;wx.navigateTo({url:'/pages/account/index'});return false;}
-module.exports={configured,init,user,subscribe,restore,call,login,loginWithWechat,loginWithPhone,logout,updateProfile,uploadAvatar,friends,needLogin,syncRatings};
+function validName(name){return typeof name==='string'&&name.trim().length>0&&name.trim().length<=16&&!['高球爱好者','微信用户'].includes(name.trim());}
+function profileReady(p){return !!p?.profileCompleted&&validName(p.name);}
+function needLogin(){
+ const p=user();if(p&&profileReady(p))return true;
+ const pages=typeof getCurrentPages==='function'?getCurrentPages():[];
+ if(pages[pages.length-1]?.route!=='pages/account/index')wx.navigateTo({url:'/pages/account/index'+(p?'?profile=1':'')});
+ return false;
+}
+module.exports={configured,init,user,subscribe,restore,call,withSession,login,loginWithWechat,loginWithPhone,logout,updateProfile,uploadAvatar,friends,needLogin,syncRatings,validName,profileReady};

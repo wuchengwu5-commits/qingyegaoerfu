@@ -3,9 +3,9 @@ const base=path.resolve(__dirname,'../miniprogram'),Maps=require(base+'/services
 function capture(name){let def;global.Page=x=>def=x;const file=base+'/pages/'+name+'/index';delete require.cache[require.resolve(file)];require(file);return {...def,data:structuredClone(def.data),setData(v){Object.assign(this.data,v)}};}
 test('map types use only the two public names, omit unavailable types, and include all Tianma art',()=>{
  A.deepEqual(Maps.mapInfo('unknown').types,[]);A.equal(Maps.mapInfo('unknown').available,false);
- for(const [id,pkg,artCount] of [['cn_bg_577','tianma-map',27],['cn_bg_585','hole-map',18],['cn_bg_611','jiulongshan-map',27]]){
- const actual=id==='cn_bg_577'?require(base+'/packages/'+pkg+'/atlas-art-data'):require(base+'/packages/'+pkg+'/reference-holes');A.equal(Object.keys(actual).length,artCount);const info=Maps.mapInfo(id);A.equal(info.artHoles,artCount);A.deepEqual(info.types.map(t=>t.label),['GPS 卫星图','精修图']);A.equal(info.types[1].coverage,artCount+' 洞');}
- A.deepEqual(Maps.mapInfo('cn_bg_2525').types.map(t=>t.label),['GPS 卫星图']);
+ for(const [id,pkg,artCount] of [['cn_bg_577','tianma-map',27],['cn_bg_585','hole-map',18],['cn_bg_611','jiulongshan-map',27],['cn_bg_2525','sheshan-map',18]]){
+ const actual=['cn_bg_577','cn_bg_2525'].includes(id)?require(base+'/packages/'+pkg+'/atlas-art-data'):require(base+'/packages/'+pkg+'/reference-holes');A.equal(Object.keys(actual).length,artCount);const info=Maps.mapInfo(id);A.equal(info.artHoles,artCount);A.deepEqual(info.types.map(t=>t.label),['GPS 卫星图','精修图']);A.equal(info.types[1].coverage,artCount+' 洞');}
+ A.deepEqual(Maps.mapInfo('cn_bg_2525').types.map(t=>t.label),['GPS 卫星图','精修图']);
  for(const id of ['cn_bg_569','cn_bg_9127','cn_bg_579']){const info=Maps.mapInfo(id),count=Maps.gpsCount(id);A.equal(info.overviewOnly,count===0);A.deepEqual(info.types.map(t=>t.label),['GPS 卫星图']);A.equal(info.types[0].coverage,count?count+' 洞':'仅全览');}
 });
 test('directory refresh and detail page use identical map types, including favorites and no-map courses',()=>{

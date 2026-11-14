@@ -33,7 +33,7 @@ test('every legacy course entry uses the exact same HUD, source template and nat
 });
 function legacy(slug='hole-map',o={}){let def;global.wx={};global.Page=p=>def=p;const f=path.resolve(__dirname,'../miniprogram/packages/'+slug+'/index');delete require.cache[require.resolve(f)];require('./helpers/legacy-map.cjs').load(f+'.js');const p={...def,data:structuredClone(def.data),setData(v){Object.assign(this.data,v)}};p.onLoad(o);p.width=390;p.height=758;p.safe=34;return p;}
 test('reference view shares the mobile layout without inventing GPS controls or measured distances',()=>{
- const p=legacy();p.updateHud();A.equal(p.data.diagramMode,true);A.ok(p.data.actions.some(x=>x.key==='gps'));A.ok(p.data.actions.some(x=>x.key==='art'));A.ok(p.data.actions.some(x=>x.key==='zoomIn'));A.equal(p.data.actions.find(x=>x.key==='prev').disabled,true);
+ const p=legacy('hole-map',{mode:'reference'});p.updateHud();A.equal(p.data.diagramMode,true);A.ok(p.data.actions.some(x=>x.key==='gps'));A.ok(p.data.actions.some(x=>x.key==='art'));A.ok(p.data.actions.some(x=>x.key==='zoomIn'));A.equal(p.data.actions.find(x=>x.key==='prev').disabled,true);
  for(const key of ['unit','location'])A.equal(p.data.actions.some(x=>x.key===key),false);
  const texts=[],ctx=new Proxy({measureText:()=>({width:20}),createLinearGradient:()=>({addColorStop(){}}),fillText(t){texts.push(String(t));}},{get:(o,k)=>k in o?o[k]:()=>{},set(o,k,v){o[k]=v;return true;}});p.ctx=ctx;p.drawHud();
  A.ok(texts.some(t=>t.includes('不用于 GPS 测距')));A.equal(texts.includes('果岭中心'),false);A.equal(texts.includes('定位'),false);A.equal(texts.includes('N'),false);

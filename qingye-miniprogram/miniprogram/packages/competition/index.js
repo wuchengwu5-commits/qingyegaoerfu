@@ -1,3 +1,4 @@
+const Dialog = require('../../services/dialog');
 const Account = require('../../services/account');
 const Catalog = require('../../services/catalog');
 const Code = require('../../services/invite-code');
@@ -52,14 +53,14 @@ Page({
         const invitation=await Account.call('invitation',{token:this.token});
         if(request!==this.request||!this.visible)return;
         if(!invitation.competition){wx.redirectTo({url:'/pages/groups/index?token='+this.token});return;}
-        this.setData({invitation,joinName:Account.user().name,joinTee:0,joinSeat:invitation.canAdd?'+':''});
+        this.setData({invitation,joinName:Account.user().name,joinTee:0,joinSeat:invitation.seats?.find(s=>s.reserved)?.id||(invitation.canAdd?'+':'')});
       }else if(this.activityId){
         const event=await Account.call('competitionGet',{activityId:this.activityId});
         if(request!==this.request||!this.visible)return;
         this.showEvent(event);
-        if(this.visible&&!this.data.entry&&event.status==='active')this.poll=setTimeout(()=>this.refresh(),10000);
+        if(this.visible&&!this.data.entry&&['active','ended','revising'].includes(event.status))this.poll=setTimeout(()=>this.refresh(),10000);
       }else{
-        const events=await Account.call('competitionList');
+        const events=await require('../../services/cloud-history').all('competitionList');
         if(request===this.request&&this.visible)this.setData({events});
       }
     }catch(error){if(request===this.request&&this.visible)this.setData({error:error.message});}
@@ -69,13 +70,13 @@ Page({
     const group=byId(event.groups,same?this.data.group?.id:this.requestedGroup||event.myGroupId)||
       (event.isOwner?event.groups[0]:null);
     const defaultRoute=event.defaultRoute||{courseId:event.courseId,courseName:event.courseName,segmentIds:event.terms.segmentIds,tees:event.tees,holes:event.holes};
-    const initialStep=event.status==='draft'?'groups':this.requestedStep||(group?'cards':'rank');
+    const initialStep=event.status==='draft'?'groups':this.requestedStep||(['ended','cancelled','published','revising'].includes(event.status)?'rank':group?'cards':'rank');
     this.requestedStep=null;
     const groups=event.groups.map(g=>{
       const route=g.route||defaultRoute;
       return {...g,rosterCount:g.roster?.length||0,holeCount:route.holes.length,route,teeOptions:['请选择发球台',...route.tees],
         roster:g.roster?.map(p=>({...p,teeIndex:Math.max(0,route.tees.indexOf(p.tee)+1)})),
-        scorerIndex:Math.max(0,(g.scorerChoices||[]).findIndex(p=>p.id===g.primaryScorerId)),canContinue:g.canEdit&&event.status==='active',
+        scorerIndex:Math.max(0,(g.scorerChoices||[]).findIndex(p=>p.id===g.primaryScorerId)),canContinue:g.canEdit&&(event.status==='active'||g.cards?.some(c=>c.correcting&&c.state==='open')),
         startName:route.holes.find(h=>h.number===g.startHole)?.name||'待选起始洞'};
     });
     const selected=byId(groups,group?.id)||null;
@@ -146,7 +147,7 @@ Page({
   previousStep(){return this.switchStep({currentTarget:{dataset:{id:this.data.step==='review'?'schedule':'groups'}}});},
   people(){this.setData({peopleOpen:!this.data.peopleOpen,entry:null});},
   addPlayerMenu(){
-    wx.showActionSheet({itemList:['手动填写球员','从常用球友选择','邀请球员扫码加入','我也参赛'],success:res=>{
+    Dialog.actionSheet({title:'添加球员',itemList:['手动填写球员','从常用球友选择','邀请球员扫码加入','我也参赛'],success:res=>{
       if(res.tapIndex===2)return this.inviteCode({currentTarget:{dataset:{kind:'competition-player'}}});
       this.openEntry({currentTarget:{dataset:{type:['manual','friend',null,'self'][res.tapIndex]}}});
     }});
@@ -176,7 +177,7 @@ Page({
     clearTimeout(this.poll);
     const event=await Account.call(action,{activityId:this.activityId,groupId:this.data.group?.id,...fields});
     this.showEvent(event);
-    if(this.visible&&event.status==='active')this.poll=setTimeout(()=>this.refresh(),10000);
+    if(this.visible&&['active','ended','revising'].includes(event.status))this.poll=setTimeout(()=>this.refresh(),10000);
   },
   addGroup(){return this.task(async()=>{
     this.groupRequest ||= S.id();
@@ -216,7 +217,7 @@ Page({
   });},
   removeMember(event){
     const playerId=data(event).id;
-    wx.showModal({title:'移除球员',content:'释放该组的一个球位。',success:r=>{
+    Dialog.modal({title:'移除球员',content:'释放该组的一个球位。',success:r=>{
       if(r.confirm)this.task(()=>this.change('competitionRemove',{playerId}));
     }});
   },
@@ -264,7 +265,7 @@ Page({
     wx.showToast({title:'出发安排已保存',icon:'success'});
   });},
   autoArrange(){
-    wx.showModal({title:'辅助安排出发时间',content:'保留无冲突的安排；未安排或冲突的小组，从 08:00 或已有时间起，按 10 分钟间隔错开。请按球场实际预约时间核对。',success:r=>{
+    Dialog.modal({title:'辅助安排出发时间',content:'保留无冲突的安排；未安排或冲突的小组，从 08:00 或已有时间起，按 10 分钟间隔错开。请按球场实际预约时间核对。',success:r=>{
       if(r.confirm)this.task(()=>this.change('competitionArrangeStarts',{startTime:'08:00',interval:10}));
     }});
   },
@@ -278,8 +279,17 @@ Page({
     }
     return this.task(async()=>{await this.change('competitionStart');this.setData({step:'cards'});this.scrollToSection();});
   },
+  closeEvent(){
+    const event=this.data.event;
+    if(this.data.busy||this.closingEvent||!event?.isOwner||!['draft','active'].includes(event.status))return;
+    const cancel=event.status==='draft',activityId=event.id;
+    this.closingEvent=true;
+    Dialog.modal({title:cancel?'取消这场赛事？':'结束整场赛事？',content:cancel?'取消后停止报名与邀请，赛事记录会保留。':'所有小组将停止记分，已记成绩保留；未完赛球员标记为未完赛。完赛记分卡仍可核对后公布正式结果。',confirmText:cancel?'取消赛事':'结束赛事',cancelText:'暂不结束',success:r=>{
+      if(r.confirm&&this.activityId===activityId)this.task(async()=>{await this.change(cancel?'competitionCancel':'competitionEnd',{closeVersion:event.closeVersion});this.setData({step:'rank',entry:null,peopleOpen:false});this.closeCode();});
+    },complete:()=>{this.closingEvent=false;}});
+  },
   publish(){
-    wx.showModal({title:'公布正式成绩',content:'公布后赛事记分卡锁定。',success:r=>{
+    Dialog.modal({title:'公布正式成绩',content:'公布后赛事记分卡锁定。',success:r=>{
       if(r.confirm)this.task(async()=>{await this.change('competitionPublish');this.setData({step:'rank'});});
     }});
   },
@@ -294,17 +304,17 @@ Page({
   confirmCard(event){
     const playerId=data(event).id,offline=!!data(event).offline;
     const {id:groupId,version}=this.data.group;
-    wx.showModal({title:offline?'记录现场确认':'确认逐洞成绩',content:offline?'请先当面核对已列出的逐洞成绩，再记录无微信球友的确认。':'请确认以上逐洞成绩准确。球员和核分人均确认后交卡并锁定。',success:r=>{
+    Dialog.modal({title:offline?'记录现场确认':'确认逐洞成绩',content:offline?'请先当面核对已列出的逐洞成绩，再记录无微信球友的确认。':'请确认以上逐洞成绩准确。球员和核分人均确认后交卡并锁定。',success:r=>{
       if(r.confirm)this.task(()=>this.change('competitionConfirm',{groupId,playerId,offline,version}));
     }});
   },
   resolveCard(event){
     const playerId=data(event).id,card=byId(this.data.cards.map(c=>({...c,id:c.playerId})),playerId);
     const choices=card?.state==='submitted'?resolutions.slice(0,1):resolutions;
-    wx.showActionSheet({itemList:choices.map(x=>x.name),success:result=>{
+    Dialog.actionSheet({title:'选择成绩处理方式',itemList:choices.map(x=>x.name),success:result=>{
       const chosen=choices[result.tapIndex];
-      wx.showModal({title:chosen.name,editable:true,placeholderText:'填写处理原因',success:r=>{
-        if(r.confirm)this.task(()=>this.change('competitionResolve',{playerId,state:chosen.id,reason:r.content}));
+      Dialog.modal({title:chosen.name,editable:true,placeholderText:'填写处理原因',success:r=>{
+        if(r.confirm)this.task(()=>this.change('competitionResolve',{playerId,state:chosen.id,reason:r.content,version:this.data.group.version}));
       }});
     }});
   },
@@ -361,7 +371,17 @@ Page({
   codeError(){this.setData({code:'',codeError:'小程序码图片加载失败，请重试'});},
   previewCode(){if(this.data.code)wx.previewImage({urls:[this.data.code]});},
   revokeCode(){return this.task(async()=>{await Account.call('revoke',{token:this.data.invite.token});this.closeCode();});},
-  onShareAppMessage(){
+  publicationHistory(){
+    const versions=Array.from({length:this.data.event.publicationVersion||0},(_,i)=>(this.data.event.publicationVersion-i));
+    Dialog.actionSheet({title:'查看正式公布历史',itemList:versions.map(v=>'第 '+v+' 版'),success:choice=>this.task(async()=>{
+      const record=await Account.call('competitionPublication',{activityId:this.activityId,version:versions[choice.tapIndex]});
+      Dialog.modal({title:'第 '+record.version+' 版正式成绩',content:new Date(record.at).toLocaleString()+'\n'+record.reason+'\n\n'+record.rows.map(p=>(p.rank?'第 '+p.rank+' 名':'—')+' · '+p.name+' · '+p.total+' 杆 · '+p.played+'/'+p.holes+' 洞 · '+p.state).join('\n'),showCancel:false});
+    })});
+  },
+  async prepareResultShare(){return this.task(async()=>{const resultShare=await Account.call('createScoreShare',{activityId:this.activityId,scope:'competition'});this.setData({resultShare});});},
+  async revokeResultShare(){return this.task(async()=>{await Account.call('revoke',{token:this.data.resultShare.token});this.setData({resultShare:null});});},
+  onShareAppMessage(e){
+    if(e?.target?.dataset?.kind==='results'&&this.data.resultShare)return {title:this.data.resultShare.title,path:'/pages/share-view/index?token='+this.data.resultShare.token};
     const invite=this.data.invite;
     return invite?{title:this.data.event.title+' · '+this.data.codeLabel,path:'/pages/groups/index?token='+invite.token}
       :{title:'青野高尔夫 · 比赛记分',path:'/packages/competition/index'};

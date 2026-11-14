@@ -1,3 +1,4 @@
+const Dialog = require('../miniprogram/services/dialog');
 const {test,beforeEach,afterEach}=require('node:test'),assert=require('node:assert/strict');
 const S=require('../miniprogram/services/store'),A=require('../miniprogram/services/account');
 const End=require('../miniprogram/services/end-round'),Sync=require('../miniprogram/services/cloud-sync');
@@ -8,7 +9,7 @@ function create(){return S.create({courseId:'cn_bg_585',players:[{id:'me',name:'
 function hub(){let def;global.Page=p=>def=p;const file=require.resolve('../miniprogram/pages/play/index');delete require.cache[file];require(file);const p={...def,data:structuredClone(def.data),setData(x){Object.assign(this.data,x);}};p.onShow();return p;}
 beforeEach(()=>{
  memory={};modals=[];toasts=[];confirm=true;uid=null;calls=[];
- global.wx={__preview:true,getStorageSync:k=>structuredClone(memory[k]||''),setStorageSync:(k,v)=>memory[k]=structuredClone(v),showToast:o=>toasts.push(o.title),showModal:o=>{modals.push(o);o.success({confirm});}};
+ Dialog.modal=o=>{modals.push(o);o.success({confirm});};global.wx={__preview:true,getStorageSync:k=>structuredClone(memory[k]||''),setStorageSync:(k,v)=>memory[k]=structuredClone(v),showToast:o=>toasts.push(o.title)};
  A.user=()=>uid?{uid}:null;A.call=async(action,input)=>{calls.push({action,input});return [];};S.init();
 });
 afterEach(()=>{A.user=originals.user;A.call=originals.call;});
@@ -21,10 +22,10 @@ test('hub ends only the selected partial group, retains scores and refreshes the
 });
 test('cancel leaves the group untouched; explicit confirmation may finish an accidental empty round without adding strokes',async()=>{
  const r=create(),p=hub();confirm=false;await p.endRound(event(r.id));assert.equal(S.getRound(r.id).status,'active');assert.deepEqual(toasts,[]);
- confirm=true;await p.endRound(event(r.id));const done=S.getRound(r.id);assert.equal(done.status,'finished_incomplete');assert.deepEqual(done.scores.me,{});assert.equal(S.stats().avg,'—');assert.equal(p.data.activeRounds.length,0);
+ confirm=true;await p.endRound(event(r.id));const done=S.getRound(r.id);assert.equal(done.status,'cancelled');assert.deepEqual(done.scores.me,{});assert.equal(S.stats().avg,'—');assert.equal(p.data.activeRounds.length,0);
 });
 test('a double tap opens one confirmation and changed local scores must be reviewed again',async()=>{
- const r=create(),p=hub();let dialog;wx.showModal=o=>dialog=o;
+ const r=create(),p=hub();let dialog;Dialog.modal=o=>dialog=o;
  const first=p.endRound(event(r.id));await p.endRound(event(r.id));assert.equal(p.data.endingId,r.id);
  S.saveScore(r.id,'me',1,{strokes:6});dialog.success({confirm:true});await first;
  assert.equal(S.getRound(r.id).status,'active');assert.match(toasts.at(-1),/成绩已更新/);
